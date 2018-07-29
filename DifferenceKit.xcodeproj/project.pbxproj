@@ -24,10 +24,18 @@
 		6B2DF8A8210E41A2004D2D40 /* SectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2DF8A0210E41A1004D2D40 /* SectionTest.swift */; };
 		6B2DF8A9210E41A2004D2D40 /* AnyDifferentiableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2DF8A1210E41A1004D2D40 /* AnyDifferentiableTest.swift */; };
 		6B2DF8AA210E41A2004D2D40 /* TestTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2DF8A2210E41A1004D2D40 /* TestTools.swift */; };
+		6B2DF8BD210E45D0004D2D40 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B2DF8BB210E45D0004D2D40 /* UIKitExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		6B2DF879210E2C12004D2D40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B2DF865210E2C12004D2D40 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B2DF86D210E2C12004D2D40;
+			remoteInfo = DifferenceKit;
+		};
+		6B2DF8B8210E454B004D2D40 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6B2DF865210E2C12004D2D40 /* Project object */;
 			proxyType = 1;
@@ -58,6 +66,9 @@
 		6B2DF8A0210E41A1004D2D40 /* SectionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTest.swift; sourceTree = "<group>"; };
 		6B2DF8A1210E41A1004D2D40 /* AnyDifferentiableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDifferentiableTest.swift; sourceTree = "<group>"; };
 		6B2DF8A2210E41A1004D2D40 /* TestTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTools.swift; sourceTree = "<group>"; };
+		6B2DF8B0210E44D1004D2D40 /* DifferenceKitUIExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DifferenceKitUIExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B2DF8BB210E45D0004D2D40 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		6B2DF8BC210E45D0004D2D40 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +87,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6B2DF8AC210E44D1004D2D40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -85,6 +103,7 @@
 				6B2DF870210E2C12004D2D40 /* DifferenceKit */,
 				6B2DF87B210E2C12004D2D40 /* DifferenceKitTests */,
 				6B2DF889210E39A8004D2D40 /* Configurations */,
+				6B2DF8BA210E45D0004D2D40 /* UIExtensions */,
 				6B2DF86F210E2C12004D2D40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,6 +113,7 @@
 			children = (
 				6B2DF86E210E2C12004D2D40 /* DifferenceKit.framework */,
 				6B2DF877210E2C12004D2D40 /* DifferenceKitTests.xctest */,
+				6B2DF8B0210E44D1004D2D40 /* DifferenceKitUIExtensions.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -138,10 +158,26 @@
 			path = Configurations;
 			sourceTree = "<group>";
 		};
+		6B2DF8BA210E45D0004D2D40 /* UIExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				6B2DF8BB210E45D0004D2D40 /* UIKitExtensions.swift */,
+				6B2DF8BC210E45D0004D2D40 /* Info.plist */,
+			);
+			path = UIExtensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
 		6B2DF86B210E2C12004D2D40 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B2DF8AD210E44D1004D2D40 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -187,6 +223,25 @@
 			productReference = 6B2DF877210E2C12004D2D40 /* DifferenceKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		6B2DF8AF210E44D1004D2D40 /* DifferenceKitUIExtensions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6B2DF8B5210E44D1004D2D40 /* Build configuration list for PBXNativeTarget "DifferenceKitUIExtensions" */;
+			buildPhases = (
+				6B2DF8AB210E44D1004D2D40 /* Sources */,
+				6B2DF8AC210E44D1004D2D40 /* Frameworks */,
+				6B2DF8AD210E44D1004D2D40 /* Headers */,
+				6B2DF8AE210E44D1004D2D40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6B2DF8B9210E454B004D2D40 /* PBXTargetDependency */,
+			);
+			name = DifferenceKitUIExtensions;
+			productName = DifferenceKitUIExtensions;
+			productReference = 6B2DF8B0210E44D1004D2D40 /* DifferenceKitUIExtensions.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -205,6 +260,9 @@
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
 					};
+					6B2DF8AF210E44D1004D2D40 = {
+						CreatedOnToolsVersion = 9.3;
+					};
 				};
 			};
 			buildConfigurationList = 6B2DF868210E2C12004D2D40 /* Build configuration list for PBXProject "DifferenceKit" */;
@@ -220,6 +278,7 @@
 			projectRoot = "";
 			targets = (
 				6B2DF86D210E2C12004D2D40 /* DifferenceKit */,
+				6B2DF8AF210E44D1004D2D40 /* DifferenceKitUIExtensions */,
 				6B2DF876210E2C12004D2D40 /* DifferenceKitTests */,
 			);
 		};
@@ -234,6 +293,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		6B2DF875210E2C12004D2D40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6B2DF8AE210E44D1004D2D40 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -273,6 +339,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6B2DF8AB210E44D1004D2D40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6B2DF8BD210E45D0004D2D40 /* UIKitExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -280,6 +354,11 @@
 			isa = PBXTargetDependency;
 			target = 6B2DF86D210E2C12004D2D40 /* DifferenceKit */;
 			targetProxy = 6B2DF879210E2C12004D2D40 /* PBXContainerItemProxy */;
+		};
+		6B2DF8B9210E454B004D2D40 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6B2DF86D210E2C12004D2D40 /* DifferenceKit */;
+			targetProxy = 6B2DF8B8210E454B004D2D40 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -342,6 +421,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -398,6 +478,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -506,6 +587,62 @@
 			};
 			name = Release;
 		};
+		6B2DF8B6210E44D1004D2D40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B2DF88A210E39A8004D2D40 /* DifferenceKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = NO;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UIExtensions/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKitUIExtensions;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "";
+			};
+			name = Debug;
+		};
+		6B2DF8B7210E44D1004D2D40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B2DF88A210E39A8004D2D40 /* DifferenceKit.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEFINES_MODULE = NO;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = UIExtensions/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKitUIExtensions;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -532,6 +669,15 @@
 			buildConfigurations = (
 				6B2DF886210E2C12004D2D40 /* Debug */,
 				6B2DF887210E2C12004D2D40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6B2DF8B5210E44D1004D2D40 /* Build configuration list for PBXNativeTarget "DifferenceKitUIExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6B2DF8B6210E44D1004D2D40 /* Debug */,
+				6B2DF8B7210E44D1004D2D40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
