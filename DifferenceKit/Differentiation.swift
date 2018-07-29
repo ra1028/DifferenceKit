@@ -4,7 +4,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     /// Calculate the differences between the collection before and after changed using
     /// the algorithm optimized based on the Paul Heckel's diff algorithm.
     ///
-    /// - Note: Possible to calculating the differences at high performance with O(n) complexity.
+    /// - Note: This algorithm can compute the differences at high performance with O(n) complexity.
     ///         However, not always calculates the shortest differences.
     ///
     /// - Note: If the elements with the same identifier duplicated, the algorithm calculates
@@ -24,7 +24,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     /// Calculate the differences between the collection before and after changed using
     /// the algorithm optimized based on the Paul Heckel's diff algorithm.
     ///
-    /// - Note: Possible to calculating the differences at high performance with O(n) complexity.
+    /// - Note: This algorithm can compute the differences at high performance with O(n) complexity.
     ///         However, not always calculates the shortest differences.
     ///
     /// - Note: If the elements with the same identifier duplicated, the algorithm calculates
@@ -105,7 +105,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     /// Calculate the differences between the collection before and after changed using
     /// the algorithm optimized based on the Paul Heckel's diff algorithm.
     ///
-    /// - Note: Possible to calculating the differences at high performance with O(n) complexity.
+    /// - Note: This algorithm can compute the differences at high performance with O(n) complexity.
     ///         However, not always calculates the shortest differences.
     ///
     /// - Note: If the elements with the same identifier duplicated, the algorithm calculates

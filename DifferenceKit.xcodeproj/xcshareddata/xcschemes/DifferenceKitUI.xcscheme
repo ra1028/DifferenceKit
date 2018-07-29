@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6B2DF8AF210E44D1004D2D40"
-               BuildableName = "DifferenceKitUIExtensions.framework"
-               BlueprintName = "DifferenceKitUIExtensions"
+               BuildableName = "DifferenceKitUI.framework"
+               BlueprintName = "DifferenceKitUI"
                ReferencedContainer = "container:DifferenceKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6B2DF8AF210E44D1004D2D40"
-            BuildableName = "DifferenceKitUIExtensions.framework"
-            BlueprintName = "DifferenceKitUIExtensions"
+            BuildableName = "DifferenceKitUI.framework"
+            BlueprintName = "DifferenceKitUI"
             ReferencedContainer = "container:DifferenceKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6B2DF8AF210E44D1004D2D40"
-            BuildableName = "DifferenceKitUIExtensions.framework"
-            BlueprintName = "DifferenceKitUIExtensions"
+            BuildableName = "DifferenceKitUI.framework"
+            BlueprintName = "DifferenceKitUI"
             ReferencedContainer = "container:DifferenceKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

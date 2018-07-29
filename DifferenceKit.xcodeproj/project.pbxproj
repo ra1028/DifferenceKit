@@ -66,7 +66,7 @@
 		6B2DF8A0210E41A1004D2D40 /* SectionTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTest.swift; sourceTree = "<group>"; };
 		6B2DF8A1210E41A1004D2D40 /* AnyDifferentiableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyDifferentiableTest.swift; sourceTree = "<group>"; };
 		6B2DF8A2210E41A1004D2D40 /* TestTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTools.swift; sourceTree = "<group>"; };
-		6B2DF8B0210E44D1004D2D40 /* DifferenceKitUIExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DifferenceKitUIExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B2DF8B0210E44D1004D2D40 /* DifferenceKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DifferenceKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2DF8BB210E45D0004D2D40 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		6B2DF8BC210E45D0004D2D40 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,9 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				6B2DF870210E2C12004D2D40 /* DifferenceKit */,
+				6B2DF8BA210E45D0004D2D40 /* UIExtensions */,
 				6B2DF87B210E2C12004D2D40 /* DifferenceKitTests */,
 				6B2DF889210E39A8004D2D40 /* Configurations */,
-				6B2DF8BA210E45D0004D2D40 /* UIExtensions */,
 				6B2DF86F210E2C12004D2D40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,7 +113,7 @@
 			children = (
 				6B2DF86E210E2C12004D2D40 /* DifferenceKit.framework */,
 				6B2DF877210E2C12004D2D40 /* DifferenceKitTests.xctest */,
-				6B2DF8B0210E44D1004D2D40 /* DifferenceKitUIExtensions.framework */,
+				6B2DF8B0210E44D1004D2D40 /* DifferenceKitUI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -223,9 +223,9 @@
 			productReference = 6B2DF877210E2C12004D2D40 /* DifferenceKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6B2DF8AF210E44D1004D2D40 /* DifferenceKitUIExtensions */ = {
+		6B2DF8AF210E44D1004D2D40 /* DifferenceKitUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6B2DF8B5210E44D1004D2D40 /* Build configuration list for PBXNativeTarget "DifferenceKitUIExtensions" */;
+			buildConfigurationList = 6B2DF8B5210E44D1004D2D40 /* Build configuration list for PBXNativeTarget "DifferenceKitUI" */;
 			buildPhases = (
 				6B2DF8AB210E44D1004D2D40 /* Sources */,
 				6B2DF8AC210E44D1004D2D40 /* Frameworks */,
@@ -237,9 +237,9 @@
 			dependencies = (
 				6B2DF8B9210E454B004D2D40 /* PBXTargetDependency */,
 			);
-			name = DifferenceKitUIExtensions;
+			name = DifferenceKitUI;
 			productName = DifferenceKitUIExtensions;
-			productReference = 6B2DF8B0210E44D1004D2D40 /* DifferenceKitUIExtensions.framework */;
+			productReference = 6B2DF8B0210E44D1004D2D40 /* DifferenceKitUI.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -278,7 +278,7 @@
 			projectRoot = "";
 			targets = (
 				6B2DF86D210E2C12004D2D40 /* DifferenceKit */,
-				6B2DF8AF210E44D1004D2D40 /* DifferenceKitUIExtensions */,
+				6B2DF8AF210E44D1004D2D40 /* DifferenceKitUI */,
 				6B2DF876210E2C12004D2D40 /* DifferenceKitTests */,
 			);
 		};
@@ -606,7 +606,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKitUIExtensions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKitUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -634,7 +634,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKitUIExtensions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKitUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -673,7 +673,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6B2DF8B5210E44D1004D2D40 /* Build configuration list for PBXNativeTarget "DifferenceKitUIExtensions" */ = {
+		6B2DF8B5210E44D1004D2D40 /* Build configuration list for PBXNativeTarget "DifferenceKitUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6B2DF8B6210E44D1004D2D40 /* Debug */,
