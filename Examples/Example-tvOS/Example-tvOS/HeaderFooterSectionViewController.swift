@@ -105,7 +105,7 @@ extension HeaderFooterSectionViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return data[section].model.hasFooter ? 44 : 0
+        return data[section].model.hasFooter ? 80 : 0
     }
 }
 
@@ -121,7 +121,7 @@ private final class HeaderFooterSectionFooterView: UITableViewHeaderFooterView {
         contentView.addSubview(moreButton)
         moreButton.setTitle("More", for: .normal)
         moreButton.translatesAutoresizingMaskIntoConstraints = false
-        moreButton.addTarget(self, action: #selector(morePressed), for: .touchUpInside)
+        moreButton.addTarget(self, action: #selector(morePressed), for: .primaryActionTriggered)
 
         let constraints = [
             moreButton.topAnchor.constraint(equalTo: contentView.topAnchor),
