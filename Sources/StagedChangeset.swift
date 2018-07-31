@@ -7,8 +7,7 @@
 /// The `StagedChangeset` created from the two collection is split at the minimal stages
 /// that can be perform batch-updates with no crashes.
 ///
-/// Linear collection and sectioned collection are both able to caluculate the changes.
-/// example:
+/// Example for calculating differences between the two linear collections.
 ///
 ///     extension String: Differentiable {}
 ///
@@ -18,10 +17,12 @@
 ///     let changeset1 = StagedChangeset(source: source, target: target)
 ///     print(changeset1.isEmpty)  // prints "false"
 ///
-///     let sectionedSource = [
+/// Example for calculating differences between the two sectioned collections.
+///
+///     let source = [
 ///         Section(model: "A", elements: ["😉"]),
 ///     ]
-///     let sectionedTarget = [
+///     let target = [
 ///         Section(model: "A", elements: ["😉, 😺"]),
 ///         Section(model: "B", elements: ["😪"])
 ///     ]

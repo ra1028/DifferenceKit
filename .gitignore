@@ -16,3 +16,8 @@ DerivedData
 *.hmap
 *.xccheckout
 *.xcuserstate
+build/
+
+## Documentation
+docs/docsets/
+docs/undocumented.json

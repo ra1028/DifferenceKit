@@ -1,0 +1,11 @@
+author: Ryo Aoyama
+author_url: https://github.com/ra1028
+github_url: https://github.com/ra1028/DifferenceKit
+module: DifferenceKit
+readme: README.md
+# podspec: DifferenceKit.podspec
+output: docs
+theme: fullwidth
+clean: true
+skip_undocumented: true
+xcodebuild_arguments: [-workspace, 'DifferenceKit.xcworkspace', -scheme, 'DifferenceKit']
