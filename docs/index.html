@@ -4,111 +4,197 @@
     <title>DifferenceKit  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
-    <script src="js/lunr.min.js" defer></script>
-    <script src="js/typeahead.jquery.js" defer></script>
-    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
-
-
     <a title="DifferenceKit  Reference"></a>
-
-    <header class="header">
-      <p class="header-col header-col--primary">
-        <a class="header-link" href="index.html">
-          DifferenceKit Docs
-        </a>
-         (100% documented)
-      </p>
-    
-      <p class="header-col--secondary">
-        <form role="search" action="search.json">
-          <input type="text" placeholder="Search documentation" data-typeahead>
-        </form>
-      </p>
-    
-        <p class="header-col header-col--secondary">
-          <a class="header-link" href="https://github.com/ra1028/DifferenceKit">
-            <img class="header-icon" src="img/gh.png"/>
-            View on GitHub
-          </a>
-        </p>
-    
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">DifferenceKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/ra1028/DifferenceKit"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
     </header>
-
-    <p class="breadcrumbs">
-      <a class="breadcrumb" href="index.html">DifferenceKit Reference</a>
-      <img class="carat" src="img/carat.png" />
-      DifferenceKit  Reference
-    </p>
-
     <div class="content-wrapper">
-      <nav class="navigation">
+      <p id="breadcrumbs">
+        <a href="index.html">DifferenceKit Reference</a>
+        <img id="carat" src="img/carat.png" />
+        DifferenceKit  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UICollectionView.html">UICollectionView</a>
+                <a href="Extensions/UICollectionView.html">UICollectionView</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Extensions/UITableView.html">UITableView</a>
+                <a href="Extensions/UITableView.html">UITableView</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/Differentiable.html">Differentiable</a>
+                <a href="Protocols/Differentiable.html">Differentiable</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Protocols/DifferentiableSection.html">DifferentiableSection</a>
+                <a href="Protocols/DifferentiableSection.html">DifferentiableSection</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+                <a href="Structs/AnyDifferentiable.html">AnyDifferentiable</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/Changeset.html">Changeset</a>
+                <a href="Structs/Changeset.html">Changeset</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/ElementPath.html">ElementPath</a>
+                <a href="Structs/ElementPath.html">ElementPath</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/Section.html">Section</a>
+                <a href="Structs/Section.html">Section</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Structs/StagedChangeset.html">StagedChangeset</a>
+                <a href="Structs/StagedChangeset.html">StagedChangeset</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 align="center">DifferenceKit</h1>
 
-        <section class="section">
-          <div class="section-content">
-            
-            
-          </div>
+<H4 align="center">
+A fast and flexible O(n) difference algorithm framework for Swift collection.</br>
+The algorithm is optimized based on the Paul Heckel&rsquo;s algorithm.
+</H4>
+
+<p align="center">
+<a href="https://developer.apple.com/swift"><img alt="Swift4" src="https://img.shields.io/badge/language-swift4-orange.svg?style=flat"/></a>
+<a href="https://developer.apple.com/swift/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20tvOS-green.svg"/></a>
+<a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/license-MIT-000000.svg?style=flat"/></a>
+</br>
+<a href="https://travis-ci.org/ra1028/DifferenceKit"><img alt="Build Status" src="https://travis-ci.org/ra1028/DifferenceKit.svg?branch=master"/></a>
+<a href="https://cocoapods.org/pods/DifferenceKit"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/DifferenceKit.svg"/></a>
+<a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat"/></a>
+</p>
+
+<hr>
+
+<div style="text-align:center">
+<img src="./assets/Sample.gif" width="250">
+</div>
+
+<hr>
+<h2 id='features' class='heading'>Features</h2>
+
+<p>Coming soon.</p>
+
+<hr>
+<h2 id='introduction' class='heading'>Introduction</h2>
+
+<p>Coming soon.</p>
+
+<hr>
+<h2 id='algorithm' class='heading'>Algorithm</h2>
+
+<p>Coming soon.</p>
+
+<hr>
+<h2 id='documentation' class='heading'>Documentation</h2>
+
+<p>Coming soon.<br>
+Documentation is generated by <a href="https://github.com/realm/jazzy">jazzy</a>.</p>
+
+<hr>
+<h2 id='getting-started' class='heading'>Getting Started</h2>
+
+<ul>
+<li><a href="./Examples">Example projects</a></li>
+<li>Example codes:<br>
+Coming soon.</li>
+</ul>
+
+<hr>
+<h2 id='comparison-with-other-frameworks' class='heading'>Comparison with Other Frameworks</h2>
+
+<p>Coming soon.</p>
+
+<hr>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>Swift4.1+</li>
+<li>OS X 10.9+</li>
+<li>tvOS 9.0+</li>
+</ul>
+
+<hr>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='a-href-https-cocoapods-org-cocoapods-a' class='heading'><a href="https://cocoapods.org/">CocoaPods</a></h3>
+
+<p>Add the following to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
+
+<span class="n">target</span> <span class="s1">'TargetName'</span> <span class="k">do</span>
+  <span class="n">pod</span> <span class="s1">'DifferenceKit'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>To use only algorithm without extensions for UI, add the following:</p>
+<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
+
+<span class="n">target</span> <span class="s1">'TargetName'</span> <span class="k">do</span>
+  <span class="n">pod</span> <span class="s1">'DifferenceKit/Core'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>And run</p>
+<pre class="highlight shell"><code>pod <span class="nb">install</span>
+</code></pre>
+<h3 id='a-href-https-github-com-carthage-carthage-carthage-a' class='heading'><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
+
+<p>Add the following to your <code>Cartfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"ra1028/DifferenceKit"</span>
+</code></pre>
+
+<p>And run</p>
+<pre class="highlight shell"><code>carthage update
+</code></pre>
+
+<hr>
+<h2 id='contribution' class='heading'>Contribution</h2>
+
+<p>Welcome to fork and submit pull requests.<br>
+Before submitting pull request, please ensure you have passed the included tests.<br>
+If your pull request including new function, please write test cases for it.  </p>
+
+<hr>
+<h2 id='license' class='heading'>License</h2>
+
+<p>DifferenceKit is released under the <a href="./LICENSE">MIT License</a>.</p>
+
+          </section>
         </section>
-
-
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-01)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
       </article>
     </div>
-    <section class="footer">
-      <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-01)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-    </section>
   </body>
 </div>
 </html>
