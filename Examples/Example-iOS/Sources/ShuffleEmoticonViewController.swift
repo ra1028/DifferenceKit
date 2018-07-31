@@ -1,6 +1,5 @@
 import UIKit
 import DifferenceKit
-import DifferenceKitUI
 
 private enum EmoticonSectionID: Differentiable {
     case first, second, third
@@ -74,9 +73,9 @@ final class ShuffleEmoticonViewController: UIViewController {
         title = "Shuffle Emoticons"
         view.backgroundColor = .white
 
-        let column: CGFloat = 12
-        let spacing: CGFloat = 8
-        let sectionSpacing: CGFloat = 12
+        let column: CGFloat = 6
+        let spacing: CGFloat = 4
+        let sectionSpacing: CGFloat = 6
         let screenWidth = UIScreen.main.bounds.size.width
         let itemWidth = (screenWidth - (sectionSpacing * 2) - (spacing * (column - 1))) / column
         let itemHeight = itemWidth * 0.55
@@ -84,10 +83,11 @@ final class ShuffleEmoticonViewController: UIViewController {
         flowLayout.minimumLineSpacing = spacing
         flowLayout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-        flowLayout.headerReferenceSize = CGSize(width: screenWidth, height: 44)
+        flowLayout.headerReferenceSize = CGSize(width: screenWidth, height: 30)
 
-        collectionView.backgroundColor = .clear
         collectionView.contentInset.top = sectionSpacing
+        collectionView.backgroundColor = .clear
+        collectionView.alwaysBounceVertical = true
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(EmoticonCollectionViewCell.self, forCellWithReuseIdentifier: EmoticonCollectionViewCell.reuseIdentifier)
@@ -97,33 +97,25 @@ final class ShuffleEmoticonViewController: UIViewController {
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
 
-        let buttonComponents: [(title: String, action: Selector)] = [
-            (title: "Shuffle All Emoticons", action: #selector(shuffleAllEmoticons)),
-            (title: "Shuffle Sections", action: #selector(shuffleSections))
+        let toolbar = UIToolbar()
+        toolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Shuffle All Emoticons", style: .plain, target: self, action: #selector(shuffleAllEmoticons)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+            UIBarButtonItem(title: "Shuffle Sections", style: .plain, target: self, action: #selector(shuffleSections)),
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         ]
-
-        let buttons: [UIButton] = buttonComponents.map { component in
-            let button = UIButton(type: .system)
-            button.setTitle(component.title, for: .normal)
-            button.addTarget(self, action: component.action, for: .primaryActionTriggered)
-            return button
-        }
-
-        let stackView = UIStackView(arrangedSubviews: buttons)
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 24
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stackView)
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(toolbar)
 
         let constraints = [
-            stackView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: stackView.bottomAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: toolbar.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
 
         NSLayoutConstraint.activate(constraints)
@@ -178,9 +170,9 @@ private final class EmoticonCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        contentView.backgroundColor = UIColor.black.withAlphaComponent(0.05)
         contentView.layer.cornerRadius = 8
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 7)
+
         contentView.addSubview(label)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -196,15 +188,6 @@ private final class EmoticonCollectionViewCell: UICollectionViewCell {
 
     override var isHighlighted: Bool {
         didSet { alpha = isHighlighted ? 0.2 : 1 }
-    }
-
-    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        coordinator.addCoordinatedAnimations({ [weak self] in
-            guard let `self` = self else { return }
-            self.contentView.layer.shadowOpacity = self.isFocused ? 0.3 : 0
-            self.contentView.layer.transform = self.isFocused ? CATransform3DMakeScale(1.1, 1.1, 1) : CATransform3DIdentity
-            self.layer.zPosition = self.isFocused ? 1 : 0
-        })
     }
 
     @available(*, unavailable)
@@ -232,8 +215,8 @@ private final class TextCollectionReusableView: UICollectionReusableView {
         let constraints = [
             label.topAnchor.constraint(equalTo: topAnchor),
             label.bottomAnchor.constraint(equalTo: bottomAnchor),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 24)
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16)
         ]
         NSLayoutConstraint.activate(constraints)
     }

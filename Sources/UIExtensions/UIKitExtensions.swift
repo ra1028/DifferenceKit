@@ -1,5 +1,4 @@
 #if canImport(UIKit)
-import DifferenceKit
 import UIKit
 
 public extension UITableView {

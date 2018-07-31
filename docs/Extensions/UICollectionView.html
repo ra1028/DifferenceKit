@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ElementPath Structure Reference</title>
+    <title>UICollectionView Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/swift/Struct/ElementPath" class="dashAnchor"></a>
+    <a name="//apple_ref/swift/Extension/UICollectionView" class="dashAnchor"></a>
 
-    <a title="ElementPath Structure Reference"></a>
+    <a title="UICollectionView Extension Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">DifferenceKit Reference</a>
       <img class="carat" src="../img/carat.png" />
-      ElementPath Structure Reference
+      UICollectionView Extension Reference
     </p>
 
     <div class="content-wrapper">
@@ -98,20 +98,14 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>ElementPath</h1>
+            <h1>UICollectionView</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ElementPath</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">UICollectionView</span> <span class="p">:</span> <span class="kt">UIScrollView</span><span class="p">,</span> <span class="kt">UIDataSourceTranslating</span></code></pre>
 
                 </div>
               </div>
-            <p>Represents the path to a specific element in a tree of nested collections.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <code>Foundation.IndexPath</code> is disadvantageous in performance.
-
-</div>
-
+            
           </div>
         </section>
 
@@ -122,9 +116,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13DifferenceKit11ElementPathV7elementSivp"></a>
-                    <a name="//apple_ref/swift/Property/element" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit11ElementPathV7elementSivp">element</a>
+                    <a name="/s:So16UICollectionViewC13DifferenceKitE6reloadyAC15StagedChangesetVyxG5using_SbAC0G0VyxGcSg9interruptyxc7setDatats10CollectionRzlF"></a>
+                    <a name="//apple_ref/swift/Method/reload(using:interrupt:setData:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So16UICollectionViewC13DifferenceKitE6reloadyAC15StagedChangesetVyxG5using_SbAC0G0VyxGcSg9interruptyxc7setDatats10CollectionRzlF">reload(using:interrupt:setData:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -132,68 +126,25 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The element index (or offset) of this path.</p>
+                        <p>Applies multiple animated updates in stages using <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code>.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>There are combination of changes that crash when applied simultaneously in <code>performBatchUpdates</code>.
+    Assumes that <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code> has a minimum staged changesets to avoid it.
+    The data of the dataSource needs to be updated before <code>performBatchUpdates</code> in every stages.</p>
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">element</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13DifferenceKit11ElementPathV7sectionSivp"></a>
-                    <a name="//apple_ref/swift/Property/section" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit11ElementPathV7sectionSivp">section</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The section index (or offset) of this path.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13DifferenceKit11ElementPathVACSi7element_Si7sectiontcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(element:section:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit11ElementPathVACSi7element_Si7sectiontcfc">init(element:section:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Creates a new <code>ElementPath</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">element</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">section</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">reload</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">using</span> <span class="nv">stagedChangeset</span><span class="p">:</span> <span class="kt"><a href="../Structs/StagedChangeset.html">StagedChangeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nv">interrupt</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/Changeset.html">Changeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">setData</span><span class="p">:</span> <span class="p">(</span><span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -204,59 +155,43 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>element</em>
+                                <em>stagedChangeset</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The element index (or offset).</p>
+                                  <p>A staged set of changes.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>section</em>
+                                <em>interrupt</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The section index (or offset).</p>
+                                  <p>A closure that takes an changeset as its argument and returns <code>true</code> if the animated
+       updates should be stopped and performed reloadData. Default is nil.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that takes the collection as a parameter.
+     The collection should be set to dataSource of UICollectionView.</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp"></a>
-                    <a name="//apple_ref/swift/Property/debugDescription" class="dashAnchor"></a>
-                    <a class="token" href="#/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp">debugDescription</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="nf">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>

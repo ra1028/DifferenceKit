@@ -1,6 +1,5 @@
 import UIKit
 import DifferenceKit
-import DifferenceKitUI
 
 extension String: Differentiable {}
 

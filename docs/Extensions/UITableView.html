@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>UITableView Extension Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Extension/UITableView" class="dashAnchor"></a>
+
+    <a title="UITableView Extension Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          DifferenceKit Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/ra1028/DifferenceKit">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">DifferenceKit Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      UITableView Extension Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UICollectionView.html">UICollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/UITableView.html">UITableView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/Differentiable.html">Differentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/DifferentiableSection.html">DifferentiableSection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Changeset.html">Changeset</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ElementPath.html">ElementPath</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Section.html">Section</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/StagedChangeset.html">StagedChangeset</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>UITableView</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">UITableView</span> <span class="p">:</span> <span class="kt">UIScrollView</span><span class="p">,</span> <span class="kt">NSCoding</span><span class="p">,</span> <span class="kt">UIDataSourceTranslating</span></code></pre>
+
+                </div>
+              </div>
+            
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So11UITableViewC13DifferenceKitE6reloadyAC15StagedChangesetVyxG5using_SC0aB12RowAnimationOyXK4withSbAC0G0VyxGcSg9interruptyxc7setDatats10CollectionRzlF"></a>
+                    <a name="//apple_ref/swift/Method/reload(using:with:interrupt:setData:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11UITableViewC13DifferenceKitE6reloadyAC15StagedChangesetVyxG5using_SC0aB12RowAnimationOyXK4withSbAC0G0VyxGcSg9interruptyxc7setDatats10CollectionRzlF">reload(using:with:interrupt:setData:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Applies multiple animated updates in stages using <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code>.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>There are combination of changes that crash when applied simultaneously in <code>performBatchUpdates</code>.
+    Assumes that <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code> has a minimum staged changesets to avoid it.
+    The data of the dataSource needs to be updated before <code>performBatchUpdates</code> in every stages.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">reload</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">using</span> <span class="nv">stagedChangeset</span><span class="p">:</span> <span class="kt"><a href="../Structs/StagedChangeset.html">StagedChangeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">with</span> <span class="nv">animation</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UITableViewRowAnimation</span><span class="p">,</span>
+    <span class="nv">interrupt</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/Changeset.html">Changeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">setData</span><span class="p">:</span> <span class="p">(</span><span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stagedChangeset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A staged set of changes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>animation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option to animate the updates.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>interrupt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that takes an changeset as its argument and returns <code>true</code> if the animated
+       updates should be stopped and performed reloadData. Default is nil.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that takes the collection as a parameter.
+     The collection should be set to dataSource of UITableView.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So11UITableViewC13DifferenceKitE6reloadyAC15StagedChangesetVyxG5using_SC0aB12RowAnimationOyXK014deleteSectionsJ0AJyXK06insertlJ0AJyXK0elJ0AJyXK0k4RowsJ0AJyXK0mnJ0AJyXK0enJ0SbAC0G0VyxGcSg9interruptyxc7setDatats10CollectionRzlF"></a>
+                    <a name="//apple_ref/swift/Method/reload(using:deleteSectionsAnimation:insertSectionsAnimation:reloadSectionsAnimation:deleteRowsAnimation:insertRowsAnimation:reloadRowsAnimation:interrupt:setData:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11UITableViewC13DifferenceKitE6reloadyAC15StagedChangesetVyxG5using_SC0aB12RowAnimationOyXK014deleteSectionsJ0AJyXK06insertlJ0AJyXK0elJ0AJyXK0k4RowsJ0AJyXK0mnJ0AJyXK0enJ0SbAC0G0VyxGcSg9interruptyxc7setDatats10CollectionRzlF">reload(using:deleteSectionsAnimation:insertSectionsAnimation:reloadSectionsAnimation:deleteRowsAnimation:insertRowsAnimation:reloadRowsAnimation:interrupt:setData:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Applies multiple animated updates in stages using <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code>.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>There are combination of changes that crash when applied simultaneously in <code>performBatchUpdates</code>.
+    Assumes that <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code> has a minimum staged changesets to avoid it.
+    The data of the dataSource needs to be updated before <code>performBatchUpdates</code> in every stages.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">reload</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="n">using</span> <span class="nv">stagedChangeset</span><span class="p">:</span> <span class="kt"><a href="../Structs/StagedChangeset.html">StagedChangeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nv">deleteSectionsAnimation</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UITableViewRowAnimation</span><span class="p">,</span>
+    <span class="nv">insertSectionsAnimation</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UITableViewRowAnimation</span><span class="p">,</span>
+    <span class="nv">reloadSectionsAnimation</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UITableViewRowAnimation</span><span class="p">,</span>
+    <span class="nv">deleteRowsAnimation</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UITableViewRowAnimation</span><span class="p">,</span>
+    <span class="nv">insertRowsAnimation</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UITableViewRowAnimation</span><span class="p">,</span>
+    <span class="nv">reloadRowsAnimation</span><span class="p">:</span> <span class="kd">@autoclosure</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">UITableViewRowAnimation</span><span class="p">,</span>
+    <span class="nv">interrupt</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/Changeset.html">Changeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">setData</span><span class="p">:</span> <span class="p">(</span><span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stagedChangeset</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A staged set of changes.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deleteSectionsAnimation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option to animate the section deletion.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>insertSectionsAnimation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option to animate the section insertion.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>reloadSectionsAnimation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option to animate the section reload.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deleteRowsAnimation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option to animate the row deletion.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>insertRowsAnimation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option to animate the row insertion.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>reloadRowsAnimation</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An option to animate the row reload.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>interrupt</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that takes an changeset as its argument and returns <code>true</code> if the animated
+       updates should be stopped and performed reloadData. Default is nil.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>setData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A closure that takes the collection as a parameter.
+     The collection should be set to dataSource of UITableView.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-01)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
