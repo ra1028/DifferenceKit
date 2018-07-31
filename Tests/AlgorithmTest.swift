@@ -1,10 +1,10 @@
 import XCTest
 import DifferenceKit
 
-final class DifferentiationTestCase: XCTestCase {}
+final class AlgorithmTestCase: XCTestCase {}
 
-/// Test linear collection differentiation
-extension DifferentiationTestCase {
+/// Test algorithm for linear collection.
+extension AlgorithmTestCase {
     func testDeleted() {
         let section = 1
 
@@ -225,8 +225,8 @@ extension DifferentiationTestCase {
     }
 }
 
-/// Test sectioned collection differentiation
-extension DifferentiationTestCase {
+/// Test algorithm for sectioned collection.
+extension AlgorithmTestCase {
     func testSectionInserted() {
         let source1 = [
             Section(model: D.a, elements: [0])
@@ -471,7 +471,7 @@ extension DifferentiationTestCase {
 }
 
 /// Repeatability test with sectioned collection differences
-extension DifferentiationTestCase {
+extension AlgorithmTestCase {
     func testDuplicatedSectionAndElement() {
         let source = [
             Section(model: 0, elements: [0, 1]),

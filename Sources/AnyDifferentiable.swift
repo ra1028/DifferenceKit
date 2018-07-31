@@ -25,7 +25,7 @@
 public struct AnyDifferentiable: Differentiable {
     /// The value wrapped by this instance.
     public let base: Any
-    /// A type-erased identifier value for differentiation.
+    /// A type-erased identifier value for difference calculation.
     public let differenceIdentifier: AnyHashable
 
     private let isUpdatedFrom: (AnyDifferentiable) -> Bool

@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6B2DF876210E2C12004D2D40"
-               BuildableName = "DifferenceKitTests.xctest"
-               BlueprintName = "DifferenceKitTests"
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
                ReferencedContainer = "container:DifferenceKit.xcodeproj">
             </BuildableReference>
          </TestableReference>

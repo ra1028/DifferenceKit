@@ -3,7 +3,7 @@ public protocol Differentiable {
     /// A type representing the identifier.
     associatedtype DifferenceIdentifier: Hashable
 
-    /// An identifier value for differentiation.
+    /// An identifier value for difference calculation.
     var differenceIdentifier: DifferenceIdentifier { get }
 
     /// Indicate whether `self` has updated from given source value.
@@ -29,7 +29,7 @@ public extension Differentiable where Self: Equatable {
 }
 
 public extension Differentiable where Self: Hashable {
-    /// The `self` value as an identifier for differentiation.
+    /// The `self` value as an identifier for difference calculation.
     var differenceIdentifier: Self {
         return self
     }

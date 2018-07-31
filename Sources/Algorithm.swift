@@ -1,7 +1,7 @@
 public extension StagedChangeset where Collection: RangeReplaceableCollection, Collection.Element: Differentiable {
-    /// Creates a new `StagedChangeset` from the collection before and after changed.
+    /// Creates a new `StagedChangeset` from the two collections.
     ///
-    /// Calculate the differences between the collection before and after changed using
+    /// Calculate the differences between the collections using
     /// the algorithm optimized based on the Paul Heckel's diff algorithm.
     ///
     /// - Note: This algorithm can compute the differences at high performance with O(n) complexity.
@@ -11,17 +11,17 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///         the moves at best effort, and rest of the duplicates as insertion or deletion.
     ///
     /// - Parameters:
-    ///   - source: The source collection that meaning before changed.
-    ///   - target: The target collection that meaning after changed.
+    ///   - source: A source collection to calculate differences.
+    ///   - target: A target collection to calculate differences.
     ///
     /// - Complexity: O(n)
     public init(source: Collection, target: Collection) {
         self.init(source: source, target: target, section: 0)
     }
 
-    /// Creates a new `StagedChangeset` from the collection before and after changed.
+    /// Creates a new `StagedChangeset` from the two collections.
     ///
-    /// Calculate the differences between the collection before and after changed using
+    /// Calculate the differences between the collections using
     /// the algorithm optimized based on the Paul Heckel's diff algorithm.
     ///
     /// - Note: This algorithm can compute the differences at high performance with O(n) complexity.
@@ -31,8 +31,8 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///         the moves at best effort, and rest of the duplicates as insertion or deletion.
     ///
     /// - Parameters:
-    ///   - source: The source collection that meaning before changed.
-    ///   - target: The target collection that meaning after changed.
+    ///   - source: A source collection to calculate differences.
+    ///   - target: A target collection to calculate differences.
     ///   - section: An Int value to use as section index (or offset) of element.
     ///
     /// - Complexity: O(n)
@@ -100,9 +100,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 }
 
 public extension StagedChangeset where Collection: RangeReplaceableCollection, Collection.Element: DifferentiableSection {
-    /// Creates a new `StagedChangeset` from the sectioned collection before and after changed.
+    /// Creates a new `StagedChangeset` from the two sectioned collections.
     ///
-    /// Calculate the differences between the collection before and after changed using
+    /// Calculate the differences between the collections using
     /// the algorithm optimized based on the Paul Heckel's diff algorithm.
     ///
     /// - Note: This algorithm can compute the differences at high performance with O(n) complexity.
@@ -112,8 +112,8 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///         the moves at best effort, and rest of the duplicates as insertion or deletion.
     ///
     /// - Parameters:
-    ///   - source: The source sectioned collection that meaning before changed.
-    ///   - target: The target sectioned collection that meaning after changed.
+    ///   - source: A source sectioned collection to calculate differences.
+    ///   - target: A target sectioned collection to calculate differences.
     ///
     /// - Complexity: O(n)
     public init(source: Collection, target: Collection) {
@@ -385,7 +385,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     }
 }
 
-/// The shared algorithm to differentiate linear collection before and after changed.
+/// The shared algorithm to calculate differences between two linear collections.
 @discardableResult
 private func differentiate<E, D: Differentiable, I>(
     source: ContiguousArray<E>,
@@ -509,7 +509,7 @@ private func differentiate<E, D: Differentiable, I>(
     )
 }
 
-/// A set of changes and metadata as a result of differentiation of linear collection.
+/// A set of changes and metadata as a result of calculating differences in linear collection.
 private struct DifferentiateResult<Index> {
     typealias Metadata = (sourceTraces: ContiguousArray<Trace<Int>>, targetReferences: ContiguousArray<Int?>)
 

@@ -2,7 +2,7 @@ import XCTest
 import DifferenceKit
 
 final class MeasurementTestCase: XCTestCase {
-    func testMeasureLinearCollectionDifferentiation() {
+    func testMeasureAlgorithmForLinearCollection() {
         let source = Array(1...10000)
         let target = source.mutated(removeAt: IndexSet(1000..<2000), insertAt: IndexSet(3000..<4000))
 
@@ -11,7 +11,7 @@ final class MeasurementTestCase: XCTestCase {
         }
     }
 
-    func testMeasureSectionedCollectionDifferentiation() {
+    func testMeasureAlgorithmForSectionedCollection() {
         let source: [Section<D, Int>] = D.allCases.enumerated().map { o, d in
             let lowerBound = o * 3000 + 1
             let upperBound = lowerBound + 2000

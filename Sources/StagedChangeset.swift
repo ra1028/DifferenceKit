@@ -4,7 +4,7 @@
 ///
 /// We know that there are combination of changes that crash when applied simultaneously
 /// in batch-updates of UI such as UITableView or UICollectionView.
-/// The `StagedChangeset` created from the collection before and after changed is split at the minimal stages
+/// The `StagedChangeset` created from the two collection is split at the minimal stages
 /// that can be perform batch-updates with no crashes.
 ///
 /// Linear collection and sectioned collection are both able to caluculate the changes.

@@ -2,7 +2,7 @@
 public protocol DifferentiableSection {
     /// A type representing the model for differentiated with other section.
     associatedtype Model: Differentiable
-    /// A type representing the section's elements.
+    /// A type representing the elements in section.
     associatedtype Collection: Swift.Collection where Collection.Element: Differentiable
 
     /// The model of section for differentiated with other section.
