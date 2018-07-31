@@ -3,7 +3,6 @@ author_url: https://github.com/ra1028
 github_url: https://github.com/ra1028/DifferenceKit
 module: DifferenceKit
 readme: README.md
-# podspec: DifferenceKit.podspec
 output: docs
 theme: fullwidth
 clean: true
