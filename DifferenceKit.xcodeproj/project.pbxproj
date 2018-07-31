@@ -591,6 +591,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B2DF88A210E39A8004D2D40 /* DifferenceKit.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = NO;
@@ -619,6 +620,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B2DF88A210E39A8004D2D40 /* DifferenceKit.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = NO;
