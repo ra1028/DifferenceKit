@@ -10,11 +10,11 @@
 ///     extension String: Differentiable {}
 ///     extension Int: Differentiable {}
 ///
-///     let source: [AnyDifferentiable] = [
+///     let source = [
 ///         AnyDifferentiable("ABC"),
 ///         AnyDifferentiable(100)
 ///     ]
-///     let target: [AnyDifferentiable] = [
+///     let target = [
 ///         AnyDifferentiable("ABC"),
 ///         AnyDifferentiable(100),
 ///         AnyDifferentiable(200)

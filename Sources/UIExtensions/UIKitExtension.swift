@@ -69,8 +69,8 @@ public extension UITableView {
         }
 
         for changeset in stagedChangeset {
-            if let interrupt = interrupt, interrupt(changeset) {
-                setData(stagedChangeset.last!.data)
+            if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
+                setData(data)
                 return reloadData()
             }
 
@@ -147,8 +147,8 @@ public extension UICollectionView {
         }
 
         for changeset in stagedChangeset {
-            if let interrupt = interrupt, interrupt(changeset) {
-                setData(stagedChangeset.last!.data)
+            if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
+                setData(data)
                 return reloadData()
             }
 

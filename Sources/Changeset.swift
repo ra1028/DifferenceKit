@@ -27,7 +27,7 @@ public struct Changeset<Collection: Swift.Collection> {
     public var elementMoved: [(source: ElementPath, target: ElementPath)]
 
     /// The number of all changes.
-    public var changesCount: Int {
+    public var changeCount: Int {
         return sectionDeleted.count
             + sectionInserted.count
             + sectionUpdated.count
@@ -40,7 +40,7 @@ public struct Changeset<Collection: Swift.Collection> {
 
     /// A Boolean value indicating whether has changes.
     public var hasChanges: Bool {
-        return changesCount > 0
+        return changeCount > 0
     }
 
     /// Creates a new `Changeset`.
