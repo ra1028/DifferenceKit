@@ -13,8 +13,8 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.default_subspecs = 'Core', 'UIExtensions'
 
-  spec.ios.deployment_target = '9.0'
-  spec.tvos.deployment_target = "9.0"
+  spec.ios.deployment_target = '10.0'
+  spec.tvos.deployment_target = "10.0"
 
   spec.subspec 'Core' do |subspec|
     subspec.source_files = 'Sources/*.swift'
