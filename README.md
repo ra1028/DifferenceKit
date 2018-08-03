@@ -28,6 +28,9 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 <p align="center">
 <img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/sample.gif" width="250">
 </p>
+<p align="right">
+Sample app is imitated from <a href="https://github.com/muukii/DataSources">DataSources</a> 💾
+</p>
 
 ---
 
