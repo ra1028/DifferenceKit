@@ -7,4 +7,4 @@ output: docs
 theme: apple
 clean: true
 skip_undocumented: true
-xcodebuild_arguments: [-workspace, 'DifferenceKit.xcworkspace', -scheme, 'DifferenceKit']
+xcodebuild_arguments: [-workspace, 'DifferenceKit.xcworkspace', -scheme, 'DifferenceKit', -sdk, 'iphonesimulator']
