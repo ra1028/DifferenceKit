@@ -193,7 +193,7 @@ The frameworks and its version that compared is below.
 |Dwifft       |✅    |✅     |❌  |❌    |
 
 ### Performance comparison
-Performance was measured using `XCTestCase.measure` with `-O -whole-module-optimization`.  
+Performance was measured using `XCTestCase.measure` on iPhoneX simulator with `-O -whole-module-optimization`.  
 Use `Foundation.UUID` as an element.  
 
 *DeepDiff may had increased the processing speed by misuse of Hashable in algorithm.*
@@ -235,8 +235,8 @@ Use `Foundation.UUID` as an element.
 
 ## Requirements
 - Swift4.1+
-- iOS 10.0+
-- tvOS 10.0+
+- iOS 9.0+
+- tvOS 9.0+
 
 ---
 
