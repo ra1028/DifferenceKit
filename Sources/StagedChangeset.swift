@@ -14,8 +14,8 @@
 ///     let source = ["A", "B", "C"]
 ///     let target = ["B", "C", "D"]
 ///
-///     let changeset1 = StagedChangeset(source: source, target: target)
-///     print(changeset1.isEmpty)  // prints "false"
+///     let changeset = StagedChangeset(source: source, target: target)
+///     print(changeset.isEmpty)  // prints "false"
 ///
 /// Example for calculating differences between the two sectioned collections.
 ///
@@ -27,8 +27,8 @@
 ///         Section(model: "B", elements: ["😪"])
 ///     ]
 ///
-///     let changeset2 = StagedChangeset(source: sectionedSource, target: sectionedTarget)
-///     print(changeset2.isEmpty)  // prints "false"
+///     let changeset = StagedChangeset(source: sectionedSource, target: sectionedTarget)
+///     print(changeset.isEmpty)  // prints "false"
 public struct StagedChangeset<Collection: Swift.Collection> {
     private var changesets: ContiguousArray<Changeset<Collection>>
 

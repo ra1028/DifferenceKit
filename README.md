@@ -6,12 +6,12 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 
 <p align="center">
 <a href="https://developer.apple.com/swift"><img alt="Swift4" src="https://img.shields.io/badge/language-swift4-orange.svg?style=flat"/></a>
-<a href="https://developer.apple.com/swift/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20tvOS-green.svg"/></a>
-<a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/license-MIT-000000.svg?style=flat"/></a>
-</br>
-<a href="https://travis-ci.org/ra1028/DifferenceKit"><img alt="Build Status" src="https://travis-ci.org/ra1028/DifferenceKit.svg?branch=master"/></a>
 <a href="https://cocoapods.org/pods/DifferenceKit"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/DifferenceKit.svg"/></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-yellow.svg?style=flat"/></a>
+</br>
+<a href="https://travis-ci.org/ra1028/DifferenceKit"><img alt="Build Status" src="https://travis-ci.org/ra1028/DifferenceKit.svg?branch=master"/></a>
+<a href="https://developer.apple.com/swift/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20OSX%20%7C%20tvOS%20%7C%20watchOS-green.svg"/></a>
+<a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/license-MIT-000000.svg?style=flat"/></a>
 </p>
 
 ---
@@ -147,7 +147,7 @@ collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { d
 Made a fair comparison as much as possible in features and performance with other **popular** and **awesome** frameworks.  
 The frameworks and its version that compared is below.  
 
-- [DifferenceKit](https://github.com/ra1028/DifferenceKit) - 0.1.0
+- [DifferenceKit](https://github.com/ra1028/DifferenceKit) - 0.2.0
 - [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) ([Differentiator](https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Sources/Differentiator)) - 3.0.2
 - [IGListKit](https://github.com/Instagram/IGListKit) - 3.4.0
 - [ListDiff](https://github.com/lxcid/ListDiff) - 0.1.0
@@ -237,6 +237,8 @@ Use `Foundation.UUID` as an element.
 - Swift4.1+
 - iOS 9.0+
 - tvOS 9.0+
+- OS X 10.9+ (only algorithm)
+- watchOS 2.0+ (only algorithm)
 
 ---
 
