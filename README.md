@@ -168,7 +168,7 @@ The frameworks and its version that compared is below.
 |Dwifft       |✅    |✅       |✅                        |
 
 `Linear` means 1-dimensional collection.  
-`Sectioned` means 1-dimensional collection.  
+`Sectioned` means 2-dimensional collection.  
 
 #### - Supported element differences
 |             |Delete|Insert|Move|Reload  |
@@ -196,7 +196,7 @@ The frameworks and its version that compared is below.
 Performance was measured using `XCTestCase.measure` on iPhoneX simulator with `-O -whole-module-optimization`.  
 Use `Foundation.UUID` as an element.  
 
-*DeepDiff may had increased the processing speed by misuse of Hashable in algorithm.*
+⚠️ *DeepDiff may had increased the processing speed by misuse of Hashable in algorithm.*
 
 #### - From 5,000 elements to 500 deleted and 500 inserted
 |             |Time(second)|
