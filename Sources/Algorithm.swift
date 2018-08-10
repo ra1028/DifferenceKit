@@ -294,7 +294,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 let sourceElement = contiguousSourceSections[sourceElementPath]
                 let targetElement = contiguousTargetSections[targetElementPath]
 
-                if targetElement.isUpdated(from: sourceElement) {
+                if !targetElement.isContentEqual(to: sourceElement) {
                     elementUpdated.append(sourceElementPath)
                 }
 
@@ -487,7 +487,7 @@ private func differentiate<E, D: Differentiable, I>(
             let sourceElement = source[sourceIndex]
             let targetElement = target[targetIndex]
 
-            if differentiable(targetElement).isUpdated(from: differentiable(sourceElement)) {
+            if !differentiable(targetElement).isContentEqual(to: differentiable(sourceElement)) {
                 updated.append(mapIndex(trackTargetIndexAsUpdated ? targetIndex : sourceIndex))
             }
 

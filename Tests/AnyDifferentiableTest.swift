@@ -10,7 +10,7 @@ final class AnyDifferentiableTestCase: XCTestCase {
 
         XCTAssertEqual(d1.identifier.hashValue, d2.identifier.hashValue)
         XCTAssertEqual(d1.identifier, d2.identifier)
-        XCTAssertFalse(d1.isUpdated(from: d2))
+        XCTAssertTrue(d1.isContentEqual(to: d2))
 
         let base2 = M(1, false)
 
@@ -19,7 +19,7 @@ final class AnyDifferentiableTestCase: XCTestCase {
 
         XCTAssertNotEqual(d3.identifier.hashValue, d4.identifier.hashValue)
         XCTAssertNotEqual(d3.identifier, d4.identifier)
-        XCTAssertTrue(d3.isUpdated(from: d4))
+        XCTAssertFalse(d3.isContentEqual(to: d4))
 
         let base3 = M(1, true)
 
@@ -28,6 +28,6 @@ final class AnyDifferentiableTestCase: XCTestCase {
 
         XCTAssertEqual(d5.identifier.hashValue, d6.identifier.hashValue)
         XCTAssertEqual(d5.identifier, d6.identifier)
-        XCTAssertTrue(d5.isUpdated(from: d6))
+        XCTAssertFalse(d5.isContentEqual(to: d6))
     }
 }

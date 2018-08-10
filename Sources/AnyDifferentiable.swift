@@ -28,7 +28,7 @@ public struct AnyDifferentiable: Differentiable {
     /// A type-erased identifier value for difference calculation.
     public let identifier: AnyHashable
 
-    private let isUpdatedFrom: (AnyDifferentiable) -> Bool
+    private let isContentEqualTo: (AnyDifferentiable) -> Bool
 
     /// Creates a type-erased differentiable value that wraps the given instance.
     ///
@@ -38,20 +38,21 @@ public struct AnyDifferentiable: Differentiable {
         self.base = base
         self.identifier = AnyHashable(base.identifier)
 
-        self.isUpdatedFrom = { source in
+        self.isContentEqualTo = { source in
             guard let sourceBase = source.base as? D else { return false }
-            return base.isUpdated(from: sourceBase)
+            return base.isContentEqual(to: sourceBase)
         }
     }
 
-    /// Indicate whether `base` has updated from given source value.
+    /// Indicate whether the content of `base` is equals to the content of the given source value.
     ///
     /// - Parameters:
     ///   - source: A source value to be compared.
     ///
-    /// - Returns: A Boolean value indicating whether `base` has updated from given source value.
-    public func isUpdated(from source: AnyDifferentiable) -> Bool {
-        return isUpdatedFrom(source)
+    /// - Returns: A Boolean value indicating whether the content of `base` is equals
+    ///            to the content of `base` of the given source value.
+    public func isContentEqual(to source: AnyDifferentiable) -> Bool {
+        return isContentEqualTo(source)
     }
 }
 

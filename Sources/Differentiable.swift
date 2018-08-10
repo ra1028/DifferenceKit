@@ -6,25 +6,28 @@ public protocol Differentiable {
     /// An identifier value for difference calculation.
     var identifier: Identifier { get }
 
-    /// Indicate whether `self` has updated from given source value.
+    /// Indicate whether the content of `self` is equals to the content of
+    /// the given source value.
     ///
     /// - Parameters:
     ///   - source: A source value to be compared.
     ///
-    /// - Returns: A Boolean value indicating whether `self` has updated from given source value.
-    func isUpdated(from source: Self) -> Bool
+    /// - Returns: A Boolean value indicating whether the content of `self` is equals
+    ///            to the content of the given source value.
+    func isContentEqual(to source: Self) -> Bool
 }
 
 public extension Differentiable where Self: Equatable {
-    /// Indicate whether `self` has updated from given source value.
-    /// Updates are compared using `!=` operator of `Equatable'.
+    /// Indicate whether the content of `self` is equals to the content of the given source value.
+    /// Updates are compared using `==` operator of `Equatable'.
     ///
     /// - Parameters:
     ///   - source: A source value to be compared.
     ///
-    /// - Returns: A Boolean value indicating whether `self` has updated from given source value.
-    func isUpdated(from source: Self) -> Bool {
-        return self != source
+    /// - Returns: A Boolean value indicating whether the content of `self` is equals
+    ///            to the content of the given source value.
+    func isContentEqual(to source: Self) -> Bool {
+        return self == source
     }
 }
 
