@@ -15,7 +15,6 @@
 		6B956B982110B4AA00DE3D29 /* String+Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B912110B4AA00DE3D29 /* String+Differentiable.swift */; };
 		6B956B992110B4AA00DE3D29 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B922110B4AA00DE3D29 /* HomeViewController.swift */; };
 		6B956B9A2110B4AA00DE3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B932110B4AA00DE3D29 /* AppDelegate.swift */; };
-		6B956B9B2110B4AA00DE3D29 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6B956B942110B4AA00DE3D29 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,7 +202,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B956B9B2110B4AA00DE3D29 /* Info.plist in Resources */,
 				6B956B972110B4AA00DE3D29 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
