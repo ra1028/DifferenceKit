@@ -8,26 +8,26 @@ final class AnyDifferentiableTestCase: XCTestCase {
         let d1 = AnyDifferentiable(base1)
         let d2 = AnyDifferentiable(base1)
 
-        XCTAssertEqual(d1.differenceIdentifier.hashValue, d2.differenceIdentifier.hashValue)
-        XCTAssertEqual(d1.differenceIdentifier, d2.differenceIdentifier)
-        XCTAssertFalse(d1.isUpdated(from: d2))
+        XCTAssertEqual(d1.identifier.hashValue, d2.identifier.hashValue)
+        XCTAssertEqual(d1.identifier, d2.identifier)
+        XCTAssertTrue(d1.isContentEqual(to: d2))
 
         let base2 = M(1, false)
 
         let d3 = AnyDifferentiable(base1)
         let d4 = AnyDifferentiable(base2)
 
-        XCTAssertNotEqual(d3.differenceIdentifier.hashValue, d4.differenceIdentifier.hashValue)
-        XCTAssertNotEqual(d3.differenceIdentifier, d4.differenceIdentifier)
-        XCTAssertTrue(d3.isUpdated(from: d4))
+        XCTAssertNotEqual(d3.identifier.hashValue, d4.identifier.hashValue)
+        XCTAssertNotEqual(d3.identifier, d4.identifier)
+        XCTAssertFalse(d3.isContentEqual(to: d4))
 
         let base3 = M(1, true)
 
         let d5 = AnyDifferentiable(base2)
         let d6 = AnyDifferentiable(base3)
 
-        XCTAssertEqual(d5.differenceIdentifier.hashValue, d6.differenceIdentifier.hashValue)
-        XCTAssertEqual(d5.differenceIdentifier, d6.differenceIdentifier)
-        XCTAssertTrue(d5.isUpdated(from: d6))
+        XCTAssertEqual(d5.identifier.hashValue, d6.identifier.hashValue)
+        XCTAssertEqual(d5.identifier, d6.identifier)
+        XCTAssertFalse(d5.isContentEqual(to: d6))
     }
 }

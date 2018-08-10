@@ -85,7 +85,7 @@
             <p>A type-erased differentiable value.</p>
 
 <p>The <code>AnyDifferentiable</code> type hides the specific underlying types.
-<code>DifferenceIdentifier</code> type is erased by <code>AnyHashable</code>.
+Associated type <code>Identifier</code> is erased by <code>AnyHashable</code>.
 The comparisons of whether has updated is forwards to an underlying differentiable value.</p>
 
 <p>You can store mixed-type elements in collection that require <code><a href="../Protocols/Differentiable.html">Differentiable</a></code> conformance by
@@ -141,9 +141,9 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13DifferenceKit17AnyDifferentiableV20differenceIdentifiers0C8HashableVvp"></a>
-                    <a name="//apple_ref/swift/Property/differenceIdentifier" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit17AnyDifferentiableV20differenceIdentifiers0C8HashableVvp">differenceIdentifier</a>
+                    <a name="/s:13DifferenceKit17AnyDifferentiableV10identifiers0C8HashableVvp"></a>
+                    <a name="//apple_ref/swift/Property/identifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit17AnyDifferentiableV10identifiers0C8HashableVvp">identifier</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -158,7 +158,7 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">differenceIdentifier</span><span class="p">:</span> <span class="kt">AnyHashable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">identifier</span><span class="p">:</span> <span class="kt">AnyHashable</span></code></pre>
 
                         </div>
                       </div>
@@ -214,9 +214,9 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13DifferenceKit17AnyDifferentiableV9isUpdatedSbAC4from_tF"></a>
-                    <a name="//apple_ref/swift/Method/isUpdated(from:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit17AnyDifferentiableV9isUpdatedSbAC4from_tF">isUpdated(from:)</a>
+                    <a name="/s:13DifferenceKit17AnyDifferentiableV14isContentEqualSbAC2to_tF"></a>
+                    <a name="//apple_ref/swift/Method/isContentEqual(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit17AnyDifferentiableV14isContentEqualSbAC2to_tF">isContentEqual(to:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -224,14 +224,14 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Indicate whether <code><a href="../Structs/AnyDifferentiable.html#/s:13DifferenceKit17AnyDifferentiableV4baseypvp">base</a></code> has updated from given source value.</p>
+                        <p>Indicate whether the content of <code><a href="../Structs/AnyDifferentiable.html#/s:13DifferenceKit17AnyDifferentiableV4baseypvp">base</a></code> is equals to the content of the given source value.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isUpdated</span><span class="p">(</span><span class="n">from</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">AnyDifferentiable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">AnyDifferentiable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -256,7 +256,8 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>A Boolean value indicating whether <code><a href="../Structs/AnyDifferentiable.html#/s:13DifferenceKit17AnyDifferentiableV4baseypvp">base</a></code> has updated from given source value.</p>
+                        <p>A Boolean value indicating whether the content of <code><a href="../Structs/AnyDifferentiable.html#/s:13DifferenceKit17AnyDifferentiableV4baseypvp">base</a></code> is equals
+       to the content of <code><a href="../Structs/AnyDifferentiable.html#/s:13DifferenceKit17AnyDifferentiableV4baseypvp">base</a></code> of the given source value.</p>
                       </div>
                     </section>
                   </div>
@@ -296,7 +297,7 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-06)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

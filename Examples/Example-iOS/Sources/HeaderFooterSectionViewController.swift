@@ -9,12 +9,12 @@ private struct HeaderFooterSectionModel: Differentiable {
         return "Section \(id)"
     }
 
-    var differenceIdentifier: Int {
+    var identifier: Int {
         return id
     }
 
-    func isUpdated(from source: HeaderFooterSectionModel) -> Bool {
-        return hasFooter != source.hasFooter
+    func isContentEqual(to source: HeaderFooterSectionModel) -> Bool {
+        return hasFooter == source.hasFooter
     }
 }
 
