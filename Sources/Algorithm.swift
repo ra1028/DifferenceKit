@@ -118,9 +118,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     /// - Complexity: O(n)
     public init(source: Collection, target: Collection) {
         typealias Section = Collection.Element
-        typealias SectionIdentifier = Collection.Element.Model.Identifier
+        typealias SectionIdentifier = Collection.Element.Model.DifferenceIdentifier
         typealias Element = Collection.Element.Collection.Element
-        typealias ElementIdentifier = Collection.Element.Collection.Element.Identifier
+        typealias ElementIdentifier = Collection.Element.Collection.Element.DifferenceIdentifier
 
         let sourceSections = ContiguousArray(source)
         let targetSections = ContiguousArray(target)
@@ -167,7 +167,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             for sourceElementIndex in contiguousSourceSections[sourceSectionIndex].indices {
                 let sourceElementPath = ElementPath(element: sourceElementIndex, section: sourceSectionIndex)
                 let sourceElement = contiguousSourceSections[sourceElementPath]
-                flattenSourceIdentifiers.append(sourceElement.identifier)
+                flattenSourceIdentifiers.append(sourceElement.differenceIdentifier)
                 flattenSourceElementPaths.append(sourceElementPath)
             }
         }
@@ -199,7 +199,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 let targetElements = contiguousTargetSections[targetSectionIndex]
 
                 for targetElementIndex in targetElements.indices {
-                    var targetIdentifier = targetElements[targetElementIndex].identifier
+                    var targetIdentifier = targetElements[targetElementIndex].differenceIdentifier
                     let key = TableKey(pointer: &targetIdentifier)
 
                     switch sourceOccurrencesTable[key] {
@@ -402,19 +402,19 @@ private func differentiate<E, D: Differentiable, I>(
 
     var sourceTraces = ContiguousArray<Trace<Int>>()
     var targetReferences = ContiguousArray<Int?>(repeating: nil, count: target.count)
-    var sourceIdentifiers = ContiguousArray<D.Identifier>()
+    var sourceIdentifiers = ContiguousArray<D.DifferenceIdentifier>()
 
     sourceIdentifiers.reserveCapacity(source.count)
     sourceTraces.reserveCapacity(source.count)
 
     for sourceElement in source {
         sourceTraces.append(Trace())
-        sourceIdentifiers.append(differentiable(sourceElement).identifier)
+        sourceIdentifiers.append(differentiable(sourceElement).differenceIdentifier)
     }
 
     sourceIdentifiers.withUnsafeBufferPointer { bufferPointer in
         // The pointer and the table key are for optimization.
-        var sourceOccurrencesTable = [TableKey<D.Identifier>: Occurrence](minimumCapacity: source.count * 2)
+        var sourceOccurrencesTable = [TableKey<D.DifferenceIdentifier>: Occurrence](minimumCapacity: source.count * 2)
 
         // Record the index where the element was found in source collection into occurrences table.
         for sourceIndex in sourceIdentifiers.indices {
@@ -436,7 +436,7 @@ private func differentiate<E, D: Differentiable, I>(
 
         // Record the target index and the source index that the element having the same identifier.
         for targetIndex in target.indices {
-            var targetIdentifier = differentiable(target[targetIndex]).identifier
+            var targetIdentifier = differentiable(target[targetIndex]).differenceIdentifier
             let key = TableKey(pointer: &targetIdentifier)
 
             switch sourceOccurrencesTable[key] {

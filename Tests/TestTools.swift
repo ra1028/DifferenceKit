@@ -21,7 +21,7 @@ struct M: Differentiable, Equatable {
         self.b = b
     }
 
-    var identifier: Int {
+    var differenceIdentifier: Int {
         return i
     }
 }
