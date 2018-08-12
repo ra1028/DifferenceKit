@@ -2,6 +2,7 @@ import XCTest
 import DifferenceKit
 
 extension Int: Differentiable {}
+extension String: Differentiable {}
 
 enum D: Differentiable {
     case a, b, c, d, e
@@ -21,7 +22,7 @@ struct M: Differentiable, Equatable {
         self.b = b
     }
 
-    var identifier: Int {
+    var differenceIdentifier: Int {
         return i
     }
 }

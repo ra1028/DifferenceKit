@@ -1,10 +1,10 @@
 /// Represents the value that identified and can be compared to whether has updated.
 public protocol Differentiable {
     /// A type representing the identifier.
-    associatedtype Identifier: Hashable
+    associatedtype DifferenceIdentifier: Hashable
 
     /// An identifier value for difference calculation.
-    var identifier: Identifier { get }
+    var differenceIdentifier: DifferenceIdentifier { get }
 
     /// Indicate whether the content of `self` is equals to the content of
     /// the given source value.
@@ -33,7 +33,7 @@ public extension Differentiable where Self: Equatable {
 
 public extension Differentiable where Self: Hashable {
     /// The `self` value as an identifier for difference calculation.
-    var identifier: Self {
+    var differenceIdentifier: Self {
         return self
     }
 }

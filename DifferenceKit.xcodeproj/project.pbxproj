@@ -143,8 +143,8 @@
 				6B5B4097211066BF00A931DB /* ElementPathTest.swift */,
 				6B5B4098211066BF00A931DB /* ChangesetTest.swift */,
 				6B5B4099211066BF00A931DB /* MeasurementTest.swift */,
-				6B5B409A211066BF00A931DB /* Info.plist */,
 				6B5B409B211066BF00A931DB /* TestTools.swift */,
+				6B5B409A211066BF00A931DB /* Info.plist */,
 			);
 			path = Tests;
 			sourceTree = "<group>";

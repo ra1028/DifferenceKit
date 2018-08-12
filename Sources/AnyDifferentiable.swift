@@ -1,7 +1,7 @@
 /// A type-erased differentiable value.
 ///
 /// The `AnyDifferentiable` type hides the specific underlying types.
-/// Associated type `Identifier` is erased by `AnyHashable`.
+/// Associated type `DifferenceIdentifier` is erased by `AnyHashable`.
 /// The comparisons of whether has updated is forwards to an underlying differentiable value.
 ///
 /// You can store mixed-type elements in collection that require `Differentiable` conformance by
@@ -26,7 +26,7 @@ public struct AnyDifferentiable: Differentiable {
     /// The value wrapped by this instance.
     public let base: Any
     /// A type-erased identifier value for difference calculation.
-    public let identifier: AnyHashable
+    public let differenceIdentifier: AnyHashable
 
     private let isContentEqualTo: (AnyDifferentiable) -> Bool
 
@@ -36,7 +36,7 @@ public struct AnyDifferentiable: Differentiable {
     ///   - base: A differentiable value to wrap.
     public init<D: Differentiable>(_ base: D) {
         self.base = base
-        self.identifier = AnyHashable(base.identifier)
+        self.differenceIdentifier = AnyHashable(base.differenceIdentifier)
 
         self.isContentEqualTo = { source in
             guard let sourceBase = source.base as? D else { return false }

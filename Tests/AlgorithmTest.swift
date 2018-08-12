@@ -647,4 +647,23 @@ extension AlgorithmTestCase {
 
         XCTAssertReproducible(source: source, target: target)
     }
+
+    func testComplicated11() {
+        let source = [
+            Section(model: 1, elements: ["A", "B", "C", "D"]),
+            Section(model: 2, elements: ["E", "F", "G", "H", "I"]),
+            Section(model: 3, elements: ["J", "K", "L", "M"]),
+            Section(model: 4, elements: ["N", "O", "P", "Q"])
+        ]
+
+        let target = [
+            Section(model: 1, elements: ["A", "B", "C", "D"]),
+            Section(model: 2, elements: ["G"]),
+            Section(model: 3, elements: ["E", "F", "H", "I"]),
+            Section(model: 3, elements: ["J", "K", "L", "M"]),
+            Section(model: 4, elements: ["N", "O", "P", "Q"])
+        ]
+
+        XCTAssertReproducible(source: source, target: target)
+    }
 }
