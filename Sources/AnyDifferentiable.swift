@@ -1,7 +1,7 @@
 /// A type-erased differentiable value.
 ///
 /// The `AnyDifferentiable` type hides the specific underlying types.
-/// `DifferenceIdentifier` type is erased by `AnyHashable`.
+/// Associated type `DifferenceIdentifier` is erased by `AnyHashable`.
 /// The comparisons of whether has updated is forwards to an underlying differentiable value.
 ///
 /// You can store mixed-type elements in collection that require `Differentiable` conformance by
