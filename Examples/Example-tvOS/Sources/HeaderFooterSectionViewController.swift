@@ -9,7 +9,8 @@ private struct HeaderFooterSectionModel: Differentiable {
         return "Section \(id)"
     }
 
-    var identifier: Int {
+    var differenceIdentifier:
+        Int {
         return id
     }
 
