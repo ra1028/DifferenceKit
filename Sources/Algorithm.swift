@@ -129,6 +129,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         let contiguousTargetSections = ContiguousArray(targetSections.map { ContiguousArray($0.elements) })
 
         var firstStageSections = ContiguousArray<Section>()
+        var secondStageSections = ContiguousArray<Section>()
         var thirdStageSections = ContiguousArray<Section>()
 
         var sourceElementTraces = contiguousSourceSections.map { section in
@@ -142,7 +143,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         var flattenSourceIdentifiers = ContiguousArray<ElementIdentifier>()
         var flattenSourceElementPaths = ContiguousArray<ElementPath>()
 
+        secondStageSections.reserveCapacity(contiguousTargetSections.count)
         thirdStageSections.reserveCapacity(contiguousTargetSections.count)
+
         flattenSourceIdentifiers.reserveCapacity(flattenSourceCount)
         flattenSourceElementPaths.reserveCapacity(flattenSourceCount)
 
@@ -254,7 +257,6 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 elementDeleted.append(sourceElementPath)
                 sourceElementTraces[sourceElementPath].isTracked = true
                 offsetByDelete += 1
-                continue
             }
 
             let section = Section(model: sourceSections[sourceSectionIndex].model, elements: firstStageElements)
@@ -265,6 +267,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         for targetSectionIndex in contiguousTargetSections.indices {
             // Should not calculate the element updates/moves/insertions in the inserted section.
             guard let sourceSectionIndex = sectionResult.metadata.targetReferences[targetSectionIndex] else {
+                secondStageSections.append(targetSections[targetSectionIndex])
                 thirdStageSections.append(targetSections[targetSectionIndex])
                 continue
             }
@@ -272,8 +275,13 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             var untrackedSourceIndex: Int? = 0
             let targetElements = contiguousTargetSections[targetSectionIndex]
 
-            let section = Section(model: sourceSections[sourceSectionIndex].model, elements: targetElements)
-            thirdStageSections.append(section)
+            let sectionDeleteOffset = sectionResult.metadata.sourceTraces[sourceSectionIndex].deleteOffset
+
+            let secondStageSection = firstStageSections[sourceSectionIndex - sectionDeleteOffset]
+            secondStageSections.append(secondStageSection)
+
+            let thirdStageSection = Section(model: secondStageSection.model, elements: targetElements)
+            thirdStageSections.append(thirdStageSection)
 
             for targetElementIndex in targetElements.indices {
                 untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
@@ -324,32 +332,6 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         // The 2nd stage changeset includes only the section insertions and moves and the collection
         // that its changes applied to 1st stage collection.
         if !sectionResult.inserted.isEmpty || !sectionResult.moved.isEmpty {
-            var secondStageSections = ContiguousArray<Section>()
-            secondStageSections.reserveCapacity(contiguousTargetSections.count)
-
-            for targetSectionIndex in contiguousTargetSections.indices {
-                guard let sourceSectionIndex = sectionResult.metadata.targetReferences[targetSectionIndex] else {
-                    secondStageSections.append(targetSections[targetSectionIndex])
-                    continue
-                }
-
-                let sourceElements = contiguousSourceSections[sourceSectionIndex]
-                var sectionChangedElements = ContiguousArray<Element>()
-                sectionChangedElements.reserveCapacity(sourceElements.count)
-
-                for sourceElementIndex in sourceElements.indices {
-                    guard let targetElementPath = sourceElementTraces[sourceSectionIndex][sourceElementIndex].reference else {
-                        continue
-                    }
-
-                    let targetElement = contiguousTargetSections[targetElementPath]
-                    sectionChangedElements.append(targetElement)
-                }
-
-                let section = Section(model: sourceSections[sourceSectionIndex].model, elements: sectionChangedElements)
-                secondStageSections.append(section)
-            }
-
             changesets.append(
                 Changeset(
                     data: Collection(secondStageSections),

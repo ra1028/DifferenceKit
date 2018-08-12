@@ -2,6 +2,7 @@ import XCTest
 import DifferenceKit
 
 extension Int: Differentiable {}
+extension String: Differentiable {}
 
 enum D: Differentiable {
     case a, b, c, d, e
