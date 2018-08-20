@@ -19,9 +19,13 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 
 ## Features
 ✅ Automate to calculate commands for batch-updates of UITableView and UICollectionView  
+
 ✅ **O(n)** difference algorithm optimized for performance in Swift  
+
 ✅ Supports both linear and sectioned collection  
+
 ✅ Supports calculating differences with best effort even if elements or section contains duplicates  
+
 ✅ Supports **all commands** for animating UI batch-updates including section reloads  
 
 ---
