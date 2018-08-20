@@ -5,6 +5,18 @@ final class AlgorithmTestCase: XCTestCase {}
 
 /// Test algorithm for linear collection.
 extension AlgorithmTestCase {
+    func testEmptyChangesets() {
+        let source = [Int]()
+        let target = [Int]()
+
+        XCTAssertExactDifferences(
+            source: source,
+            target: target,
+            section: 0,
+            expected: []
+        )
+    }
+
     func testDeleted() {
         let section = 1
 
@@ -227,6 +239,17 @@ extension AlgorithmTestCase {
 
 /// Test algorithm for sectioned collection.
 extension AlgorithmTestCase {
+    func testSectionedEmptyChangesets() {
+        let source = [Section<Int, Int>]()
+        let target = [Section<Int, Int>]()
+
+        XCTAssertExactDifferences(
+            source: source,
+            target: target,
+            expected: []
+        )
+    }
+
     func testSectionInserted() {
         let source1 = [
             Section(model: D.a, elements: [0])
