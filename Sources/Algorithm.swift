@@ -95,6 +95,12 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
+        // Set the target to `data` of the last stage.
+        if !changesets.isEmpty {
+            let index = changesets.index(before: changesets.endIndex)
+            changesets[index].data = target
+        }
+
         self.init(changesets)
     }
 }
@@ -361,6 +367,12 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                     sectionUpdated: sectionResult.updated
                 )
             )
+        }
+
+        // Set the target to `data` of the last stage.
+        if !changesets.isEmpty {
+            let index = changesets.index(before: changesets.endIndex)
+            changesets[index].data = target
         }
 
         self.init(changesets)
