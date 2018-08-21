@@ -214,31 +214,31 @@ Use `Foundation.UUID` as an element.
 #### - From 5,000 elements to 500 deleted and 500 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.00425     |
-|RxDataSources|0.00784     |
+|DifferenceKit|0.0032      |
+|RxDataSources|0.0078      |
 |FlexibleDiff |0.0168      |
 |IGListKit    |0.0412      |
 |ListDiff     |0.0388      |
-|DeepDiff     |0.015       |
-|Differ       |0.326       |
-|Dwifft       |33.6        |
+|DeepDiff     |0.0150      |
+|Differ       |0.3260      |
+|Dwifft       |33.600      |
 
 #### - From 10,000 elements to 1,000 deleted and 1,000 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.0079      |
+|DifferenceKit|0.0076      |
 |RxDataSources|0.0143      |
 |FlexibleDiff |0.0305      |
 |IGListKit    |0.0891      |
 |ListDiff     |0.0802      |
-|DeepDiff     |0.030       |
-|Differ       |1.345       |
+|DeepDiff     |0.0300      |
+|Differ       |1.3450      |
 |Dwifft       |❌          |
 
 #### - From 100,000 elements to 10,000 deleted and 10,000 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.098       |
+|DifferenceKit|0.087       |
 |RxDataSources|0.179       |
 |FlexibleDiff |0.356       |
 |IGListKit    |1.329       |
