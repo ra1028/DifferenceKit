@@ -13,7 +13,7 @@ public struct ArraySection<Model: Differentiable, Element: Differentiable>: Diff
         @inline(__always) get { return model.differenceIdentifier }
     }
 
-    /// Creates a section from the model and the elements.
+    /// Creates a section with the model and the elements.
     ///
     /// - Parameters:
     ///   - model: A differentiable model of section.
@@ -24,7 +24,7 @@ public struct ArraySection<Model: Differentiable, Element: Differentiable>: Diff
         self.elements = Array(elements)
     }
 
-    /// Creates a new section reproding the given source section with replacing the elements.
+    /// Creates a new section reproducing the given source section with replacing the elements.
     ///
     /// - Parameters:
     ///   - source: A source section to reproduce.
@@ -59,11 +59,11 @@ extension ArraySection: Equatable where Model: Equatable, Element: Equatable {
 extension ArraySection: CustomDebugStringConvertible {
     public var debugDescription: String {
         guard !elements.isEmpty else {
-            return "Section(model: \(model), elements: [])"
+            return "ArraySection(model: \(model), elements: [])"
         }
 
         return """
-        Section(
+        ArraySection(
             model: \(model),
             elements: \(elements)
         )

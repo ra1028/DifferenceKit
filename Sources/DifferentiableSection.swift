@@ -6,7 +6,7 @@ public protocol DifferentiableSection: Differentiable {
     /// The collection of element in the section.
     var elements: Collection { get }
 
-    /// Creates a new section reproding the given source section with replacing the elements.
+    /// Creates a new section reproducing the given source section with replacing the elements.
     ///
     /// - Parameters:
     ///   - source: A source section to reproduce.
