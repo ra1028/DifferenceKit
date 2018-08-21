@@ -240,8 +240,8 @@ extension AlgorithmTestCase {
 /// Test algorithm for sectioned collection.
 extension AlgorithmTestCase {
     func testSectionedEmptyChangesets() {
-        let source = [Section<Int, Int>]()
-        let target = [Section<Int, Int>]()
+        let source = [ArraySection<Int, Int>]()
+        let target = [ArraySection<Int, Int>]()
 
         XCTAssertExactDifferences(
             source: source,
@@ -252,12 +252,12 @@ extension AlgorithmTestCase {
 
     func testSectionInserted() {
         let source1 = [
-            Section(model: D.a, elements: [0])
+            ArraySection(model: D.a, elements: [0])
         ]
 
         let target1 = [
-            Section(model: D.a, elements: [0]),
-            Section(model: D.b, elements: [1])
+            ArraySection(model: D.a, elements: [0]),
+            ArraySection(model: D.b, elements: [1])
         ]
 
         XCTAssertExactDifferences(
@@ -271,10 +271,10 @@ extension AlgorithmTestCase {
             ]
         )
 
-        let source2 = [Section<D, Int>]()
+        let source2 = [ArraySection<D, Int>]()
 
         let target2 = [
-            Section(model: D.a, elements: [0]),
+            ArraySection(model: D.a, elements: [0]),
         ]
 
         XCTAssertExactDifferences(
@@ -291,12 +291,12 @@ extension AlgorithmTestCase {
 
     func testSectionDeleted() {
         let source1 = [
-            Section(model: D.a, elements: [0]),
-            Section(model: D.b, elements: [1])
+            ArraySection(model: D.a, elements: [0]),
+            ArraySection(model: D.b, elements: [1])
         ]
 
         let target1 = [
-            Section(model: D.b, elements: [1])
+            ArraySection(model: D.b, elements: [1])
         ]
 
         XCTAssertExactDifferences(
@@ -311,10 +311,10 @@ extension AlgorithmTestCase {
         )
 
         let source2 = [
-            Section(model: D.a, elements: [0])
+            ArraySection(model: D.a, elements: [0])
         ]
 
-        let target2 = [Section<D, Int>]()
+        let target2 = [ArraySection<D, Int>]()
 
         XCTAssertExactDifferences(
             source: source2,
@@ -330,11 +330,11 @@ extension AlgorithmTestCase {
 
     func testSectionUpdated() {
         let source = [
-            Section(model: M(0, false), elements: [0])
+            ArraySection(model: M(0, false), elements: [0])
         ]
 
         let target = [
-            Section(model: M(0, true), elements: [0])
+            ArraySection(model: M(0, true), elements: [0])
         ]
 
         XCTAssertExactDifferences(
@@ -351,15 +351,15 @@ extension AlgorithmTestCase {
 
     func testSectionMoved() {
         let source1 = [
-            Section(model: 0, elements: [0]),
-            Section(model: 1, elements: [1]),
-            Section(model: 2, elements: [2])
+            ArraySection(model: 0, elements: [0]),
+            ArraySection(model: 1, elements: [1]),
+            ArraySection(model: 2, elements: [2])
         ]
 
         let target1 = [
-            Section(model: 1, elements: [1]),
-            Section(model: 2, elements: [2]),
-            Section(model: 0, elements: [0])
+            ArraySection(model: 1, elements: [1]),
+            ArraySection(model: 2, elements: [2]),
+            ArraySection(model: 0, elements: [0])
         ]
 
         XCTAssertExactDifferences(
@@ -377,15 +377,15 @@ extension AlgorithmTestCase {
         )
 
         let source2 = [
-            Section(model: 0, elements: [0]),
-            Section(model: 1, elements: [1]),
-            Section(model: 2, elements: [2])
+            ArraySection(model: 0, elements: [0]),
+            ArraySection(model: 1, elements: [1]),
+            ArraySection(model: 2, elements: [2])
         ]
 
         let target2 = [
-            Section(model: 2, elements: [2]),
-            Section(model: 0, elements: [0]),
-            Section(model: 1, elements: [1])
+            ArraySection(model: 2, elements: [2]),
+            ArraySection(model: 0, elements: [0]),
+            ArraySection(model: 1, elements: [1])
         ]
 
         XCTAssertExactDifferences(
@@ -402,17 +402,17 @@ extension AlgorithmTestCase {
 
     func testMixedSectionChanges() {
         let source = [
-            Section(model: M(0, false), elements: [0]),
-            Section(model: M(1, false), elements: [1]),
-            Section(model: M(2, false), elements: [2]),
-            Section(model: M(3, false), elements: [3])
+            ArraySection(model: M(0, false), elements: [0]),
+            ArraySection(model: M(1, false), elements: [1]),
+            ArraySection(model: M(2, false), elements: [2]),
+            ArraySection(model: M(3, false), elements: [3])
         ]
 
         let target = [
-            Section(model: M(3, false), elements: [3]),
-            Section(model: M(4, false), elements: [4]),
-            Section(model: M(0, false), elements: [0]),
-            Section(model: M(2, true), elements: [2])
+            ArraySection(model: M(3, false), elements: [3]),
+            ArraySection(model: M(4, false), elements: [4]),
+            ArraySection(model: M(0, false), elements: [0]),
+            ArraySection(model: M(2, true), elements: [2])
         ]
 
         XCTAssertExactDifferences(
@@ -421,18 +421,18 @@ extension AlgorithmTestCase {
             expected: [
                 Changeset(
                     data: [
-                        Section(model: M(0, false), elements: [0]),
-                        Section(model: M(2, false), elements: [2]),
-                        Section(model: M(3, false), elements: [3])
+                        ArraySection(model: M(0, false), elements: [0]),
+                        ArraySection(model: M(2, false), elements: [2]),
+                        ArraySection(model: M(3, false), elements: [3])
                     ],
                     sectionDeleted: [1]
                 ),
                 Changeset(
                     data: [
-                        Section(model: M(3, false), elements: [3]),
-                        Section(model: M(4, false), elements: [4]),
-                        Section(model: M(0, false), elements: [0]),
-                        Section(model: M(2, false), elements: [2])
+                        ArraySection(model: M(3, false), elements: [3]),
+                        ArraySection(model: M(4, false), elements: [4]),
+                        ArraySection(model: M(0, false), elements: [0]),
+                        ArraySection(model: M(2, false), elements: [2])
                     ],
                     sectionInserted: [1],
                     sectionMoved: [(source: 2, target: 0)]
@@ -447,15 +447,15 @@ extension AlgorithmTestCase {
 
     func testDuplicatedSection() {
         let source = [
-            Section(model: 0, elements: [0]),
-            Section(model: 0, elements: [1]),
-            Section(model: 1, elements: [2])
+            ArraySection(model: 0, elements: [0]),
+            ArraySection(model: 0, elements: [1]),
+            ArraySection(model: 1, elements: [2])
         ]
 
         let target = [
-            Section(model: 1, elements: [2]),
-            Section(model: 0, elements: [0]),
-            Section(model: 0, elements: [1])
+            ArraySection(model: 1, elements: [2]),
+            ArraySection(model: 0, elements: [0]),
+            ArraySection(model: 0, elements: [1])
         ]
 
         XCTAssertExactDifferences(
@@ -472,11 +472,11 @@ extension AlgorithmTestCase {
 
     func testDuplicatedElement() {
         let source = [
-            Section(model: 0, elements: [0, 1, 2, 0])
+            ArraySection(model: 0, elements: [0, 1, 2, 0])
         ]
 
         let target = [
-            Section(model: 0, elements: [0, 4, 0, 1, 2])
+            ArraySection(model: 0, elements: [0, 4, 0, 1, 2])
         ]
 
         XCTAssertExactDifferences(
@@ -497,15 +497,15 @@ extension AlgorithmTestCase {
 extension AlgorithmTestCase {
     func testDuplicatedSectionAndElement() {
         let source = [
-            Section(model: 0, elements: [0, 1]),
-            Section(model: 0, elements: [2, 3]),
-            Section(model: 1, elements: [1, 2])
+            ArraySection(model: 0, elements: [0, 1]),
+            ArraySection(model: 0, elements: [2, 3]),
+            ArraySection(model: 1, elements: [1, 2])
         ]
 
         let target = [
-            Section(model: 0, elements: [3, 1]),
-            Section(model: 1, elements: [2, 2, 2]),
-            Section(model: 0, elements: [1, 0])
+            ArraySection(model: 0, elements: [3, 1]),
+            ArraySection(model: 1, elements: [2, 2, 2]),
+            ArraySection(model: 0, elements: [1, 0])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -513,16 +513,16 @@ extension AlgorithmTestCase {
 
     func testComplicated1() {
         let source = [
-            Section(model: 0, elements: [0, 1]),
-            Section(model: 1, elements: [2, 3]),
-            Section(model: 2, elements: [4, 5])
+            ArraySection(model: 0, elements: [0, 1]),
+            ArraySection(model: 1, elements: [2, 3]),
+            ArraySection(model: 2, elements: [4, 5])
         ]
 
         let target = [
-            Section(model: 0, elements: [0, 1]),
-            Section(model: 2, elements: [4, 6, 5]),
-            Section(model: 3, elements: [7, 8]),
-            Section(model: 3, elements: [9, 10])
+            ArraySection(model: 0, elements: [0, 1]),
+            ArraySection(model: 2, elements: [4, 6, 5]),
+            ArraySection(model: 3, elements: [7, 8]),
+            ArraySection(model: 3, elements: [9, 10])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -530,16 +530,16 @@ extension AlgorithmTestCase {
 
     func testComplicated2() {
         let source = [
-            Section(model: 0, elements: [0, 1]),
-            Section(model: 1, elements: [2, 3]),
-            Section(model: 2, elements: [4, 5])
+            ArraySection(model: 0, elements: [0, 1]),
+            ArraySection(model: 1, elements: [2, 3]),
+            ArraySection(model: 2, elements: [4, 5])
         ]
 
         let target = [
-            Section(model: 1, elements: [3, 5]),
-            Section(model: 3, elements: [6, 7, 8, 9]),
-            Section(model: 2, elements: [10, 4, 2]),
-            Section(model: 0, elements: [1])
+            ArraySection(model: 1, elements: [3, 5]),
+            ArraySection(model: 3, elements: [6, 7, 8, 9]),
+            ArraySection(model: 2, elements: [10, 4, 2]),
+            ArraySection(model: 0, elements: [1])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -547,18 +547,18 @@ extension AlgorithmTestCase {
 
     func testComplicated3() {
         let source = [
-            Section(model: M(0, false), elements: [0, 1]),
-            Section(model: M(1, false), elements: [2, 3]),
-            Section(model: M(2, false), elements: [4, 5])
+            ArraySection(model: M(0, false), elements: [0, 1]),
+            ArraySection(model: M(1, false), elements: [2, 3]),
+            ArraySection(model: M(2, false), elements: [4, 5])
         ]
 
         let target = [
-            Section(model: M(0, false), elements: []),
-            Section(model: M(4, false), elements: [8, 9]),
-            Section(model: M(0, true), elements: [10, 11]),
-            Section(model: M(2, false), elements: [4, 5, 12]),
-            Section(model: M(3, false), elements: [6, 7]),
-            Section(model: M(1, true), elements: [2, 13, 3])
+            ArraySection(model: M(0, false), elements: []),
+            ArraySection(model: M(4, false), elements: [8, 9]),
+            ArraySection(model: M(0, true), elements: [10, 11]),
+            ArraySection(model: M(2, false), elements: [4, 5, 12]),
+            ArraySection(model: M(3, false), elements: [6, 7]),
+            ArraySection(model: M(1, true), elements: [2, 13, 3])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -566,12 +566,12 @@ extension AlgorithmTestCase {
 
     func testComplicated4() {
         let source = [
-            Section(model: M(0, false), elements: [Int]())
+            ArraySection(model: M(0, false), elements: [Int]())
         ]
 
         let target = [
-            Section(model: M(0, true), elements: [0, 0, 0]),
-            Section(model: M(1, false), elements: [0, 0, 0])
+            ArraySection(model: M(0, true), elements: [0, 0, 0]),
+            ArraySection(model: M(1, false), elements: [0, 0, 0])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -579,16 +579,16 @@ extension AlgorithmTestCase {
 
     func testComplicated5() {
         let source = [
-            Section(model: M(0, false), elements: [0, 0, 0]),
-            Section(model: M(1, false), elements: [2, 3]),
-            Section(model: M(2, false), elements: [4, 5])
+            ArraySection(model: M(0, false), elements: [0, 0, 0]),
+            ArraySection(model: M(1, false), elements: [2, 3]),
+            ArraySection(model: M(2, false), elements: [4, 5])
         ]
 
         let target = [
-            Section(model: M(0, true), elements: [0, 4, 2]),
-            Section(model: M(1, false), elements: [0, 3, 5]),
-            Section(model: M(3, false), elements: []),
-            Section(model: M(2, true), elements: [0, 1, 6, 0, 0])
+            ArraySection(model: M(0, true), elements: [0, 4, 2]),
+            ArraySection(model: M(1, false), elements: [0, 3, 5]),
+            ArraySection(model: M(3, false), elements: []),
+            ArraySection(model: M(2, true), elements: [0, 1, 6, 0, 0])
 
         ]
 
@@ -597,13 +597,13 @@ extension AlgorithmTestCase {
 
     func testComplicated6() {
         let source = [
-            Section(model: M(0, false), elements: [M(0, false)]),
-            Section(model: M(1, false), elements: [M(1, false)])
+            ArraySection(model: M(0, false), elements: [M(0, false)]),
+            ArraySection(model: M(1, false), elements: [M(1, false)])
         ]
 
         let target = [
-            Section(model: M(1, true), elements: [M(2, false), M(1, true)]),
-            Section(model: M(0, false), elements: [M(0, true)])
+            ArraySection(model: M(1, true), elements: [M(2, false), M(1, true)]),
+            ArraySection(model: M(0, false), elements: [M(0, true)])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -611,15 +611,15 @@ extension AlgorithmTestCase {
 
     func testComplicated7() {
         let source = [
-            Section(model: M(0, false), elements: [M(0, false), M(1, false)]),
-            Section(model: M(1, false), elements: [M(2, false), M(3, false)]),
-            Section(model: M(2, false), elements: [M(1, false), M(2, false)])
+            ArraySection(model: M(0, false), elements: [M(0, false), M(1, false)]),
+            ArraySection(model: M(1, false), elements: [M(2, false), M(3, false)]),
+            ArraySection(model: M(2, false), elements: [M(1, false), M(2, false)])
         ]
 
         let target = [
-            Section(model: M(0, false), elements: [M(1, true), M(3, false)]),
-            Section(model: M(1, true), elements: [M(2, false), M(0, true)]),
-            Section(model: M(3, false), elements: [M(4, false), M(5, false)])
+            ArraySection(model: M(0, false), elements: [M(1, true), M(3, false)]),
+            ArraySection(model: M(1, true), elements: [M(2, false), M(0, true)]),
+            ArraySection(model: M(3, false), elements: [M(4, false), M(5, false)])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -627,13 +627,13 @@ extension AlgorithmTestCase {
 
     func testComplicated8() {
         let source = [
-            Section(model: M(0, false), elements: [M(0, false), M(1, false)]),
-            Section(model: M(1, false), elements: [M(2, false), M(3, false)]),
+            ArraySection(model: M(0, false), elements: [M(0, false), M(1, false)]),
+            ArraySection(model: M(1, false), elements: [M(2, false), M(3, false)]),
         ]
 
         let target = [
-            Section(model: M(0, false), elements: []),
-            Section(model: M(1, false), elements: [M(1, true), M(3, false)]),
+            ArraySection(model: M(0, false), elements: []),
+            ArraySection(model: M(1, false), elements: [M(1, true), M(3, false)]),
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -641,17 +641,17 @@ extension AlgorithmTestCase {
 
     func testComplicated9() {
         let source = [
-            Section(model: M(0, false), elements: [M(0, false), M(1, false)]),
-            Section(model: M(1, false), elements: [M(2, false), M(3, false)]),
-            Section(model: M(2, false), elements: [M(4, false), M(5, false)])
+            ArraySection(model: M(0, false), elements: [M(0, false), M(1, false)]),
+            ArraySection(model: M(1, false), elements: [M(2, false), M(3, false)]),
+            ArraySection(model: M(2, false), elements: [M(4, false), M(5, false)])
             ]
 
         let target = [
-            Section(model: M(4, false), elements: [M(8, false), M(9, false)]),
-            Section(model: M(0, false), elements: [M(0, false), M(1, false), M(2, false)]),
-            Section(model: M(3, false), elements: [M(6, false), M(7, false)]),
-            Section(model: M(1, true), elements: [M(3, false)]),
-            Section(model: M(2, false), elements: [M(5, true)])
+            ArraySection(model: M(4, false), elements: [M(8, false), M(9, false)]),
+            ArraySection(model: M(0, false), elements: [M(0, false), M(1, false), M(2, false)]),
+            ArraySection(model: M(3, false), elements: [M(6, false), M(7, false)]),
+            ArraySection(model: M(1, true), elements: [M(3, false)]),
+            ArraySection(model: M(2, false), elements: [M(5, true)])
             ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -659,13 +659,13 @@ extension AlgorithmTestCase {
 
     func testComplicated10() {
         let source = [
-            Section(model: 0, elements: [M(0, false), M(1, false)]),
-            Section(model: 1, elements: [M(2, false), M(3, false)])
+            ArraySection(model: 0, elements: [M(0, false), M(1, false)]),
+            ArraySection(model: 1, elements: [M(2, false), M(3, false)])
         ]
 
         let target = [
-            Section(model: 1, elements: [M(3, true), M(2, false)]),
-            Section(model: 0, elements: [M(1, false), M(0, true)])
+            ArraySection(model: 1, elements: [M(3, true), M(2, false)]),
+            ArraySection(model: 0, elements: [M(1, false), M(0, true)])
         ]
 
         XCTAssertReproducible(source: source, target: target)
@@ -673,18 +673,18 @@ extension AlgorithmTestCase {
 
     func testComplicated11() {
         let source = [
-            Section(model: 1, elements: ["A", "B", "C", "D"]),
-            Section(model: 2, elements: ["E", "F", "G", "H", "I"]),
-            Section(model: 3, elements: ["J", "K", "L", "M"]),
-            Section(model: 4, elements: ["N", "O", "P", "Q"])
+            ArraySection(model: 1, elements: ["A", "B", "C", "D"]),
+            ArraySection(model: 2, elements: ["E", "F", "G", "H", "I"]),
+            ArraySection(model: 3, elements: ["J", "K", "L", "M"]),
+            ArraySection(model: 4, elements: ["N", "O", "P", "Q"])
         ]
 
         let target = [
-            Section(model: 1, elements: ["A", "B", "C", "D"]),
-            Section(model: 2, elements: ["G"]),
-            Section(model: 3, elements: ["E", "F", "H", "I"]),
-            Section(model: 3, elements: ["J", "K", "L", "M"]),
-            Section(model: 4, elements: ["N", "O", "P", "Q"])
+            ArraySection(model: 1, elements: ["A", "B", "C", "D"]),
+            ArraySection(model: 2, elements: ["G"]),
+            ArraySection(model: 3, elements: ["E", "F", "H", "I"]),
+            ArraySection(model: 3, elements: ["J", "K", "L", "M"]),
+            ArraySection(model: 4, elements: ["N", "O", "P", "Q"])
         ]
 
         XCTAssertReproducible(source: source, target: target)

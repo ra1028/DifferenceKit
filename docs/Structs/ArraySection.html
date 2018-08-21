@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ArraySection Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/ArraySection" class="dashAnchor"></a>
+    <a title="ArraySection Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">DifferenceKit Docs</a> (100% documented)</p>
+        <p class="header-right"><a href="https://github.com/ra1028/DifferenceKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">DifferenceKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ArraySection Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/UICollectionView.html">UICollectionView</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UITableView.html">UITableView</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/Differentiable.html">Differentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/DifferentiableSection.html">DifferentiableSection</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ArraySection.html">ArraySection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Changeset.html">Changeset</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ElementPath.html">ElementPath</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StagedChangeset.html">StagedChangeset</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ArraySection</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ArraySection</span><span class="o">&lt;</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DifferentiableSection.html">DifferentiableSection</a></span> <span class="k">where</span> <span class="kt">Model</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Differentiable.html">Differentiable</a></span><span class="p">,</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Differentiable.html">Differentiable</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A differentiable section with model and array of elements.</p>
+
+<p>Arrays are can not be identify each one and comparing whether has updated from other one.
+ArraySection is a generic wrapper to hold a model to allow it.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit12ArraySectionV5modelxvp"></a>
+                    <a name="//apple_ref/swift/Property/model" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit12ArraySectionV5modelxvp">model</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The model of section for differentiated with other section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">Model</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit12ArraySectionV8elementsSayq_Gvp"></a>
+                    <a name="//apple_ref/swift/Property/elements" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit12ArraySectionV8elementsSayq_Gvp">elements</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The array of element in the section.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">[</span><span class="kt">Element</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit12ArraySectionV20differenceIdentifier0aF0Qzvp"></a>
+                    <a name="//apple_ref/swift/Property/differenceIdentifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit12ArraySectionV20differenceIdentifier0aF0Qzvp">differenceIdentifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An identifier value that of model for difference calculation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">differenceIdentifier</span><span class="p">:</span> <span class="kt">Model</span><span class="o">.</span><span class="nf">DifferenceIdentifier</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit12ArraySectionVACyxq_Gx5model_qd__8elementstc7ElementQyd__Rs_s10CollectionRd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(model:elements:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit12ArraySectionVACyxq_Gx5model_qd__8elementstc7ElementQyd__Rs_s10CollectionRd__lufc">init(model:elements:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a section with the model and the elements.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inline(__always)</span>
+<span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="kt">Model</span><span class="p">,</span> <span class="nv">elements</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="k">where</span> <span class="kt">Element</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A differentiable model of section.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>elements</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collection of element in the section.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit12ArraySectionVACyxq_GAD6source_qd__8elementstc7ElementQyd__Rs_s10CollectionRd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(source:elements:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit12ArraySectionVACyxq_GAD6source_qd__8elementstc7ElementQyd__Rs_s10CollectionRd__lufc">init(source:elements:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new section reproducing the given source section with replacing the elements.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inline(__always)</span>
+<span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="kt">ArraySection</span><span class="p">,</span> <span class="nv">elements</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="k">where</span> <span class="kt">Element</span> <span class="o">==</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Element</span><span class="p">,</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>source</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A source section to reproduce.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>elements</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The collection of elements for the new section.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit12ArraySectionV14isContentEqualSbACyxq_G2to_tF"></a>
+                    <a name="//apple_ref/swift/Method/isContentEqual(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit12ArraySectionV14isContentEqualSbACyxq_G2to_tF">isContentEqual(to:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Indicate whether the content of <code>self</code> is equals to the content of
+the given source section.</p>
+<div class="aside aside-note">
+    <p class="aside-title">Note</p>
+    <p>It&rsquo;s compared by the model of <code>self</code> and the specified section.</p>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">@inline(__always)</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">ArraySection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>source</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A source section to compare.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Boolean value indicating whether the content of <code>self</code> is equals
+       to the content of the given source section.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s9EquatableP2eeoiSbx_xtFZ"></a>
+                    <a name="//apple_ref/swift/Method/==(_:_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s9EquatableP2eeoiSbx_xtFZ">==(_:_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">==</span> <span class="p">(</span><span class="nv">lhs</span><span class="p">:</span> <span class="kt">ArraySection</span><span class="p">,</span> <span class="nv">rhs</span><span class="p">:</span> <span class="kt">ArraySection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/debugDescription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:s28CustomDebugStringConvertibleP16debugDescriptionSSvp">debugDescription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="nf">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-21)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

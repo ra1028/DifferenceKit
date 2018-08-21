@@ -57,13 +57,13 @@
                 <a href="Structs/AnyDifferentiable.html">AnyDifferentiable</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ArraySection.html">ArraySection</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Changeset.html">Changeset</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ElementPath.html">ElementPath</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/Section.html">Section</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/StagedChangeset.html">StagedChangeset</a>
@@ -202,6 +202,41 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:13DifferenceKit12ArraySectionV"></a>
+                    <a name="//apple_ref/swift/Struct/ArraySection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit12ArraySectionV">ArraySection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A differentiable section with model and array of elements.</p>
+
+<p>Arrays are can not be identify each one and comparing whether has updated from other one.
+ArraySection is a generic wrapper to hold a model to allow it.</p>
+
+                        <a href="Structs/ArraySection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ArraySection</span><span class="o">&lt;</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/DifferentiableSection.html">DifferentiableSection</a></span> <span class="k">where</span> <span class="kt">Model</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Differentiable.html">Differentiable</a></span><span class="p">,</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Differentiable.html">Differentiable</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:13DifferenceKit9ChangesetV"></a>
                     <a name="//apple_ref/swift/Struct/Changeset" class="dashAnchor"></a>
                     <a class="token" href="#/s:13DifferenceKit9ChangesetV">Changeset</a>
@@ -263,41 +298,6 @@ Since offsets are unordered, order is ignored when comparing two <code>Changeset
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ElementPath</span> <span class="p">:</span> <span class="kt">Hashable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13DifferenceKit7SectionV"></a>
-                    <a name="//apple_ref/swift/Struct/Section" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit7SectionV">Section</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A generic differentiable section.</p>
-
-<p>Arrays are can not be identify each one and comparing whether has updated from other one.
-Section is a generic wrapper to hold a model and elements to allow it.</p>
-
-                        <a href="Structs/Section.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Section</span><span class="o">&lt;</span><span class="kt">Model</span><span class="p">,</span> <span class="kt">Element</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt"><a href="Protocols/DifferentiableSection.html">DifferentiableSection</a></span> <span class="k">where</span> <span class="kt">Model</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Differentiable.html">Differentiable</a></span><span class="p">,</span> <span class="kt">Element</span> <span class="p">:</span> <span class="kt"><a href="Protocols/Differentiable.html">Differentiable</a></span></code></pre>
 
                         </div>
                       </div>

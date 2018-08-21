@@ -228,7 +228,7 @@ func XCTAssertReproducible<C: RangeReplaceableCollection & Equatable>(
             elements.insert(element, at: targetElementIndex)
         }
 
-        subject[targetSectionIndex] = Section(model: section.model, elements: elements)
+        subject[targetSectionIndex] = Section(source: section, elements: elements)
     }
 
     let reproduced = C(subject)

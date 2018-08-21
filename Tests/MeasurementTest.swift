@@ -12,13 +12,13 @@ final class MeasurementTestCase: XCTestCase {
     }
 
     func testMeasureAlgorithmForSectionedCollection() {
-        let source: [Section<D, Int>] = D.allCases.enumerated().map { o, d in
+        let source: [ArraySection<D, Int>] = D.allCases.enumerated().map { o, d in
             let lowerBound = o * 3000 + 1
             let upperBound = lowerBound + 2000
-            return Section(model: d, elements: Array(lowerBound...upperBound))
+            return ArraySection(model: d, elements: Array(lowerBound...upperBound))
         }
         let target = source.map { section in
-            Section(
+            ArraySection(
                 model: section.model,
                 elements: section.elements.mutated(removeAt: IndexSet(200..<500), insertAt: IndexSet(500..<800))
             )

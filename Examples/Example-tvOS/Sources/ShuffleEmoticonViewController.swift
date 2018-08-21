@@ -10,7 +10,7 @@ private enum EmoticonSectionID: Differentiable {
     }
 }
 
-private typealias EmoticonSection = Section<EmoticonSectionID, String>
+private typealias EmoticonSection = ArraySection<EmoticonSectionID, String>
 
 final class ShuffleEmoticonViewController: UIViewController {
     private let collectionView: UICollectionView
