@@ -18,7 +18,7 @@ private struct HeaderFooterSectionModel: Differentiable {
     }
 }
 
-private typealias HeaderFooterSection = Section<HeaderFooterSectionModel, String>
+private typealias HeaderFooterSection = ArraySection<HeaderFooterSectionModel, String>
 
 final class HeaderFooterSectionViewController: UITableViewController {
     private var data = [HeaderFooterSection]()
