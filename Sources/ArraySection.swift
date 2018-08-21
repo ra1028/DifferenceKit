@@ -10,7 +10,7 @@ public struct ArraySection<Model: Differentiable, Element: Differentiable>: Diff
 
     /// An identifier value that of model for difference calculation.
     public var differenceIdentifier: Model.DifferenceIdentifier {
-        return model.differenceIdentifier
+        @inline(__always) get { return model.differenceIdentifier }
     }
 
     /// Creates a section from the model and the elements.
@@ -18,6 +18,7 @@ public struct ArraySection<Model: Differentiable, Element: Differentiable>: Diff
     /// - Parameters:
     ///   - model: A differentiable model of section.
     ///   - elements: The collection of element in the section.
+    @inline(__always)
     public init<C: Collection>(model: Model, elements: C) where C.Element == Element {
         self.model = model
         self.elements = Array(elements)
@@ -28,6 +29,7 @@ public struct ArraySection<Model: Differentiable, Element: Differentiable>: Diff
     /// - Parameters:
     ///   - source: A source section to reproduce.
     ///   - elements: The collection of elements for the new section.
+    @inline(__always)
     public init<C: Collection>(source: ArraySection, elements: C) where C.Element == Element {
         self.init(model: source.model, elements: elements)
     }
@@ -42,6 +44,7 @@ public struct ArraySection<Model: Differentiable, Element: Differentiable>: Diff
     ///
     /// - Returns: A Boolean value indicating whether the content of `self` is equals
     ///            to the content of the given source section.
+    @inline(__always)
     public func isContentEqual(to source: ArraySection) -> Bool {
         return model.isContentEqual(to: source.model)
     }
