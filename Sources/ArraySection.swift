@@ -1,8 +1,8 @@
-/// A generic differentiable section.
+/// A differentiable section with model and array of elements.
 ///
 /// Arrays are can not be identify each one and comparing whether has updated from other one.
-/// Section is a generic wrapper to hold a model and elements to allow it.
-public struct Section<Model: Differentiable, Element: Differentiable>: DifferentiableSection {
+/// ArraySection is a generic wrapper to hold a model to allow it.
+public struct ArraySection<Model: Differentiable, Element: Differentiable>: DifferentiableSection {
     /// The model of section for differentiated with other section.
     public var model: Model
     /// The array of element in the section.
@@ -28,7 +28,7 @@ public struct Section<Model: Differentiable, Element: Differentiable>: Different
     /// - Parameters:
     ///   - source: A source section to reproduce.
     ///   - elements: The collection of elements for the new section.
-    public init<C: Collection>(source: Section, elements: C) where C.Element == Element {
+    public init<C: Collection>(source: ArraySection, elements: C) where C.Element == Element {
         self.init(model: source.model, elements: elements)
     }
 
@@ -42,18 +42,18 @@ public struct Section<Model: Differentiable, Element: Differentiable>: Different
     ///
     /// - Returns: A Boolean value indicating whether the content of `self` is equals
     ///            to the content of the given source section.
-    public func isContentEqual(to source: Section) -> Bool {
+    public func isContentEqual(to source: ArraySection) -> Bool {
         return model.isContentEqual(to: source.model)
     }
 }
 
-extension Section: Equatable where Model: Equatable, Element: Equatable {
-    public static func == (lhs: Section, rhs: Section) -> Bool {
+extension ArraySection: Equatable where Model: Equatable, Element: Equatable {
+    public static func == (lhs: ArraySection, rhs: ArraySection) -> Bool {
         return lhs.model == rhs.model && lhs.elements == rhs.elements
     }
 }
 
-extension Section: CustomDebugStringConvertible {
+extension ArraySection: CustomDebugStringConvertible {
     public var debugDescription: String {
         guard !elements.isEmpty else {
             return "Section(model: \(model), elements: [])"
