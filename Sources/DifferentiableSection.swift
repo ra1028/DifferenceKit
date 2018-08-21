@@ -1,4 +1,4 @@
-/// Represents the section of collection that has model and elements that identified and can be compared to whether has updated.
+/// Represents the section of collection that can be identified and compared to whether has updated.
 public protocol DifferentiableSection: Differentiable {
     /// A type representing the elements in section.
     associatedtype Collection: Swift.Collection where Collection.Element: Differentiable
