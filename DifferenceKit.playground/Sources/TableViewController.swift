@@ -6,7 +6,7 @@ extension String: Differentiable {}
 public final class TableViewController: UITableViewController {
     public var refreshAction: (() -> Void)?
 
-    public var dataInput: [Section<String, String>] {
+    public var dataInput: [ArraySection<String, String>] {
         get { return data }
         set {
             let changeset = StagedChangeset(source: data, target: newValue)
@@ -16,7 +16,7 @@ public final class TableViewController: UITableViewController {
         }
     }
 
-    private var data = [Section<String, String>]()
+    private var data = [ArraySection<String, String>]()
 
     public init() {
         super.init(style: .grouped)
