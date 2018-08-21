@@ -112,21 +112,21 @@ let source = [
 ```
 
 In the case of sectioned collection, the section itself must have a unique identifier and be able to compare whether there is an update.  
-So each section must conform to `DifferentiableSection` protocol, but in most cases you can use `Section` that general type conformed to it.  
-`Section` requires a model conforming to `Differentiable` for differentiate from other sections:
+So each section must conform to `DifferentiableSection` protocol, but in most cases you can use `ArraySection` that general type conformed to it.  
+`ArraySection` requires a model conforming to `Differentiable` for differentiate from other sections:
 ```swift
 enum Model: Differentiable {
     case a, b, c
 }
 
-let source: [Section<Model, String>] = [
-    Section(model: .a, elements: ["A", "B"]),
-    Section(model: .b, elements: ["C"])
+let source: [ArraySection<Model, String>] = [
+    ArraySection(model: .a, elements: ["A", "B"]),
+    ArraySection(model: .b, elements: ["C"])
 ]
-let target: [Section<Model, String>] = [
-    Section(model: .c, elements: ["D", "E"]),
-    Section(model: .a, elements: ["A"]),
-    Section(model: .b, elements: ["B", "C"])
+let target: [ArraySection<Model, String>] = [
+    ArraySection(model: .c, elements: ["D", "E"]),
+    ArraySection(model: .a, elements: ["A"]),
+    ArraySection(model: .b, elements: ["B", "C"])
 ]
 
 let changeset = StagedChangeset(source: source, target: target)
