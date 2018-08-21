@@ -65,7 +65,6 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             target: targetElements,
             trackTargetIndexAsUpdated: false,
             mapIndex: { ElementPath(element: $0, section: section) },
-            differentiable: { $0 },
             remainedInTarget: { firstStageElements.append($0) }
         )
 
@@ -124,7 +123,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     /// - Complexity: O(n)
     public init(source: Collection, target: Collection) {
         typealias Section = Collection.Element
-        typealias SectionIdentifier = Collection.Element.Model.DifferenceIdentifier
+        typealias SectionIdentifier = Collection.Element.DifferenceIdentifier
         typealias Element = Collection.Element.Collection.Element
         typealias ElementIdentifier = Collection.Element.Collection.Element.DifferenceIdentifier
 
@@ -161,8 +160,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             source: sourceSections,
             target: targetSections,
             trackTargetIndexAsUpdated: true,
-            mapIndex: { $0 },
-            differentiable: { $0.model }
+            mapIndex: { $0 }
         )
 
         // Calculate the element differences.
@@ -265,7 +263,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 offsetByDelete += 1
             }
 
-            let section = Section(model: sourceSections[sourceSectionIndex].model, elements: firstStageElements)
+            let section = Section(source: sourceSections[sourceSectionIndex], elements: firstStageElements)
             firstStageSections.append(section)
         }
 
@@ -286,7 +284,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             let secondStageSection = firstStageSections[sourceSectionIndex - sectionDeleteOffset]
             secondStageSections.append(secondStageSection)
 
-            let thirdStageSection = Section(model: secondStageSection.model, elements: targetElements)
+            let thirdStageSection = Section(source: secondStageSection, elements: targetElements)
             thirdStageSections.append(thirdStageSection)
 
             for targetElementIndex in targetElements.indices {
@@ -381,12 +379,11 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
 /// The shared algorithm to calculate differences between two linear collections.
 @discardableResult
-private func differentiate<E, D: Differentiable, I>(
+private func differentiate<E: Differentiable, I>(
     source: ContiguousArray<E>,
     target: ContiguousArray<E>,
     trackTargetIndexAsUpdated: Bool,
     mapIndex: (Int) -> I,
-    differentiable: (E) -> D,
     remainedInTarget: ((E) -> Void)? = nil
     ) -> DifferentiateResult<I> {
     var deleted = [I]()
@@ -396,19 +393,19 @@ private func differentiate<E, D: Differentiable, I>(
 
     var sourceTraces = ContiguousArray<Trace<Int>>()
     var targetReferences = ContiguousArray<Int?>(repeating: nil, count: target.count)
-    var sourceIdentifiers = ContiguousArray<D.DifferenceIdentifier>()
+    var sourceIdentifiers = ContiguousArray<E.DifferenceIdentifier>()
 
     sourceIdentifiers.reserveCapacity(source.count)
     sourceTraces.reserveCapacity(source.count)
 
     for sourceElement in source {
         sourceTraces.append(Trace())
-        sourceIdentifiers.append(differentiable(sourceElement).differenceIdentifier)
+        sourceIdentifiers.append(sourceElement.differenceIdentifier)
     }
 
     sourceIdentifiers.withUnsafeBufferPointer { bufferPointer in
         // The pointer and the table key are for optimization.
-        var sourceOccurrencesTable = [TableKey<D.DifferenceIdentifier>: Occurrence](minimumCapacity: source.count * 2)
+        var sourceOccurrencesTable = [TableKey<E.DifferenceIdentifier>: Occurrence](minimumCapacity: source.count * 2)
 
         // Record the index where the element was found in source collection into occurrences table.
         for sourceIndex in sourceIdentifiers.indices {
@@ -430,7 +427,7 @@ private func differentiate<E, D: Differentiable, I>(
 
         // Record the target index and the source index that the element having the same identifier.
         for targetIndex in target.indices {
-            var targetIdentifier = differentiable(target[targetIndex]).differenceIdentifier
+            var targetIdentifier = target[targetIndex].differenceIdentifier
             let key = TableKey(pointer: &targetIdentifier)
 
             switch sourceOccurrencesTable[key] {
@@ -481,7 +478,7 @@ private func differentiate<E, D: Differentiable, I>(
             let sourceElement = source[sourceIndex]
             let targetElement = target[targetIndex]
 
-            if !differentiable(targetElement).isContentEqual(to: differentiable(sourceElement)) {
+            if !targetElement.isContentEqual(to: sourceElement) {
                 updated.append(mapIndex(trackTargetIndexAsUpdated ? targetIndex : sourceIndex))
             }
 
