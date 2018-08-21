@@ -57,13 +57,13 @@
                 <a href="../Structs/AnyDifferentiable.html">AnyDifferentiable</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ArraySection.html">ArraySection</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Changeset.html">Changeset</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ElementPath.html">ElementPath</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Section.html">Section</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/StagedChangeset.html">StagedChangeset</a>
@@ -78,7 +78,7 @@
             <h1>DifferentiableSection</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DifferentiableSection</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">DifferentiableSection</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Differentiable.html">Differentiable</a></span></code></pre>
 
                 </div>
               </div>
@@ -88,33 +88,6 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13DifferenceKit21DifferentiableSectionP5Model"></a>
-                    <a name="//apple_ref/swift/Alias/Model" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit21DifferentiableSectionP5Model">Model</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A type representing the model for differentiated with other section.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">Model</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Differentiable.html">Differentiable</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -136,33 +109,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">associatedtype</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Collection</span> <span class="k">where</span> <span class="k">Self</span><span class="o">.</span><span class="kt">Collection</span><span class="o">.</span><span class="kt">Element</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Differentiable.html">Differentiable</a></span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:13DifferenceKit21DifferentiableSectionP5model5ModelQzvp"></a>
-                    <a name="//apple_ref/swift/Property/model" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit21DifferentiableSectionP5model5ModelQzvp">model</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The model of section for differentiated with other section.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">model</span><span class="p">:</span> <span class="nf">Model</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -199,9 +145,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13DifferenceKit21DifferentiableSectionPx5ModelQz5model_qd__8elementstcs10CollectionRd__AH_7ElementQZAIRtd__lufc"></a>
-                    <a name="//apple_ref/swift/Method/init(model:elements:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13DifferenceKit21DifferentiableSectionPx5ModelQz5model_qd__8elementstcs10CollectionRd__AH_7ElementQZAIRtd__lufc">init(model:elements:)</a>
+                    <a name="/s:13DifferenceKit21DifferentiableSectionPxx6source_qd__8elementstcs10CollectionRd__AF_7ElementQZAGRtd__lufc"></a>
+                    <a name="//apple_ref/swift/Method/init(source:elements:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit21DifferentiableSectionPxx6source_qd__8elementstcs10CollectionRd__AF_7ElementQZAGRtd__lufc">init(source:elements:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -209,14 +155,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a section from the model and the elements.</p>
+                        <p>Creates a new section reproding the given source section with replacing the elements.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="kt"><a href="../Protocols/DifferentiableSection.html#/s:13DifferenceKit21DifferentiableSectionP5Model">Model</a></span><span class="p">,</span> <span class="nv">elements</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="k">where</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DifferentiableSection.html#/s:13DifferenceKit21DifferentiableSectionP10Collection">Collection</a></span><span class="p">,</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/DifferentiableSection.html#/s:13DifferenceKit21DifferentiableSectionP10Collection">Collection</a></span><span class="o">.</span><span class="kt">Element</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">init</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="k">Self</span><span class="p">,</span> <span class="nv">elements</span><span class="p">:</span> <span class="kt">C</span><span class="p">)</span> <span class="k">where</span> <span class="kt">C</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/DifferentiableSection.html#/s:13DifferenceKit21DifferentiableSectionP10Collection">Collection</a></span><span class="p">,</span> <span class="kt">C</span><span class="o">.</span><span class="kt">Element</span> <span class="o">==</span> <span class="k">Self</span><span class="o">.</span><span class="kt"><a href="../Protocols/DifferentiableSection.html#/s:13DifferenceKit21DifferentiableSectionP10Collection">Collection</a></span><span class="o">.</span><span class="kt">Element</span></code></pre>
 
                         </div>
                       </div>
@@ -227,12 +173,12 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>model</em>
+                                <em>source</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A model of section.</p>
+                                  <p>A source section to reproduce.</p>
                                 </div>
                               </td>
                             </tr>
@@ -244,7 +190,7 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>The collection of element in the section.</p>
+                                  <p>The collection of elements for the new section.</p>
                                 </div>
                               </td>
                             </tr>
