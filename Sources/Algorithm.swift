@@ -70,8 +70,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
         var changesets = ContiguousArray<Changeset<Collection>>()
 
-        // The 1st stage changeset includes only the element deletions and updates and the collection
-        // that its changes applied to source collection.
+        // The 1st stage changeset.
+        // - Includes:
+        //   - element deletes
+        //   - element updates
         if !result.deleted.isEmpty || !result.updated.isEmpty {
             changesets.append(
                 Changeset(
@@ -82,8 +84,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 2nd stage changeset includes only the element insertions and moves and the collection
-        // that its changes applied to 1st stage collection.
+        // The 2st stage changeset.
+        // - Includes:
+        //   - element inserts
+        //   - element moves
         if !result.inserted.isEmpty || !result.moved.isEmpty {
             changesets.append(
                 Changeset(
@@ -100,6 +104,8 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             changesets[index].data = target
         }
 
+        // The data and changes each contains are represents the middle of whole the changes.
+        // Each changes are from the previous stage.
         self.init(changesets)
     }
 }
@@ -325,8 +331,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
         var changesets = ContiguousArray<Changeset<Collection>>()
 
-        // The 1st stage changeset includes only the section deletions and element deletions and the collection
-        // that its changes applied to source collection.
+        // The 1st stage changeset.
+        // - Includes:
+        //   - section deletes
+        //   - element deletes
         if !sectionResult.deleted.isEmpty || !elementDeleted.isEmpty {
             changesets.append(
                 Changeset(
@@ -337,8 +345,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 2nd stage changeset includes only the section insertions and moves and the collection
-        // that its changes applied to 1st stage collection.
+        // The 2st stage changeset.
+        // - Includes:
+        //   - section inserts
+        //   - section moves
         if !sectionResult.inserted.isEmpty || !sectionResult.moved.isEmpty {
             changesets.append(
                 Changeset(
@@ -349,8 +359,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 3rd stage changeset includes only the element insertions and moves and the collection
-        // that its changes applied to 2nd stage collection.
+        // The 3st stage changeset.
+        // - Includes:
+        //   - element inserts
+        //   - element moves
         if !elementInserted.isEmpty || !elementMoved.isEmpty {
             changesets.append(
                 Changeset(
@@ -361,7 +373,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 4th stage changeset includes only the section updates and the collection that its changes applied to 3rd stage collection.
+        // The 3st stage changeset.
+        // - Includes:
+        //   - section updates
+        //   - element updates
         if !sectionResult.updated.isEmpty || !elementUpdated.isEmpty {
             changesets.append(
                 Changeset(
@@ -378,6 +393,8 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             changesets[index].data = target
         }
 
+        // The data and changes each contains are represents the middle of whole the changes.
+        // Each changes are from the previous stage.
         self.init(changesets)
     }
 }
