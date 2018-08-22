@@ -10,6 +10,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     /// - Note: If the elements with the same identifier duplicated, the algorithm calculates
     ///         the moves at best effort, and rest of the duplicates as insertion or deletion.
     ///
+    /// - Note: The data and changes each changeset contains are represents the middle of whole the changes.
+    ///         Each changes are from the previous stage.
+    ///
     /// - Parameters:
     ///   - source: A source collection to calculate differences.
     ///   - target: A target collection to calculate differences.
@@ -29,6 +32,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Note: If the elements with the same identifier duplicated, the algorithm calculates
     ///         the moves at best effort, and rest of the duplicates as insertion or deletion.
+    ///
+    /// - Note: The data and changes each changeset contains are represents the middle of whole the changes.
+    ///         Each changes are from the previous stage.
     ///
     /// - Parameters:
     ///   - source: A source collection to calculate differences.
@@ -104,8 +110,6 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             changesets[index].data = target
         }
 
-        // The data and changes each contains are represents the middle of whole the changes.
-        // Each changes are from the previous stage.
         self.init(changesets)
     }
 }
@@ -121,6 +125,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Note: If the elements with the same identifier duplicated, the algorithm calculates
     ///         the moves at best effort, and rest of the duplicates as insertion or deletion.
+    ///
+    /// - Note: The data and changes each changeset contains are represents the middle of whole the changes.
+    ///         Each changes are from the previous stage.
     ///
     /// - Parameters:
     ///   - source: A source sectioned collection to calculate differences.
@@ -393,8 +400,6 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             changesets[index].data = target
         }
 
-        // The data and changes each contains are represents the middle of whole the changes.
-        // Each changes are from the previous stage.
         self.init(changesets)
     }
 }
