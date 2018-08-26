@@ -1,4 +1,6 @@
-<h1 align="center">DifferenceKit</h1>
+<p align="center">
+<img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/logo.gif" width="500">
+</p>
 <H4 align="center">
 A fast and flexible O(n) difference algorithm framework for Swift collection.</br>
 The algorithm is optimized based on the Paul Heckel's algorithm.
