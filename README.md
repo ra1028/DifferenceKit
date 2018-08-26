@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/logo.gif" width="500">
+<img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/logo.png" width="500">
 </p>
 <H4 align="center">
 A fast and flexible O(n) difference algorithm framework for Swift collection.</br>
