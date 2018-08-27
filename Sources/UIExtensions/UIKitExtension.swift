@@ -74,9 +74,9 @@ public extension UITableView {
                 return reloadData()
             }
 
-            setData(changeset.data)
-
             _performBatchUpdates {
+                setData(changeset.data)
+
                 if !changeset.sectionDeleted.isEmpty {
                     deleteSections(IndexSet(changeset.sectionDeleted), with: deleteSectionsAnimation())
                 }
@@ -152,9 +152,9 @@ public extension UICollectionView {
                 return reloadData()
             }
 
-            setData(changeset.data)
-
             performBatchUpdates({
+                setData(changeset.data)
+
                 if !changeset.sectionDeleted.isEmpty {
                     deleteSections(IndexSet(changeset.sectionDeleted))
                 }
