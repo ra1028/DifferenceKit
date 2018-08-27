@@ -235,6 +235,42 @@ extension AlgorithmTestCase {
             ]
         )
     }
+
+    func testSameHashValue() {
+        struct A: Hashable, Differentiable {
+            let hashValue = 0
+            let actualValue: Int
+
+            init(_ actualValue: Int) {
+                self.actualValue = actualValue
+            }
+
+            func isContentEqual(to source: A) -> Bool {
+                return actualValue == source.actualValue
+            }
+        }
+
+        let section = 0
+
+        let source = [A(0), A(1)]
+        let target = [A(0), A(2)]
+
+        XCTAssertExactDifferences(
+            source: source,
+            target: target,
+            section: section,
+            expected: [
+                Changeset(
+                    data: [A(0)],
+                    elementDeleted: [ElementPath(element: 1, section: section)]
+                ),
+                Changeset(
+                    data: target,
+                    elementInserted: [ElementPath(element: 1, section: section)]
+                )
+            ]
+        )
+    }
 }
 
 /// Test algorithm for sectioned collection.

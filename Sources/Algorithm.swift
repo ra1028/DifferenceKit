@@ -599,8 +599,7 @@ private struct TableKey<T: Hashable>: Hashable {
 
     static func == (lhs: TableKey, rhs: TableKey) -> Bool {
         return lhs.hashValue == rhs.hashValue
-            || lhs.pointer.distance(to: rhs.pointer) == 0
-            || lhs.pointer.pointee == rhs.pointer.pointee
+            && (lhs.pointer.distance(to: rhs.pointer) == 0 || lhs.pointer.pointee == rhs.pointer.pointee)
     }
 }
 
