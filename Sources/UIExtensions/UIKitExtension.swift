@@ -17,7 +17,7 @@ public extension UITableView {
     ///              The collection should be set to dataSource of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        with animation: @autoclosure () -> UITableViewRowAnimation,
+        with animation: @autoclosure () -> UITableView.RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -54,12 +54,12 @@ public extension UITableView {
     ///              The collection should be set to dataSource of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        deleteSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        insertSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        reloadSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        deleteRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        insertRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        reloadRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        deleteSectionsAnimation: @autoclosure () -> UITableView.RowAnimation,
+        insertSectionsAnimation: @autoclosure () -> UITableView.RowAnimation,
+        reloadSectionsAnimation: @autoclosure () -> UITableView.RowAnimation,
+        deleteRowsAnimation: @autoclosure () -> UITableView.RowAnimation,
+        insertRowsAnimation: @autoclosure () -> UITableView.RowAnimation,
+        reloadRowsAnimation: @autoclosure () -> UITableView.RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
