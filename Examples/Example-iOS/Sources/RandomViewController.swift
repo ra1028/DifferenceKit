@@ -40,12 +40,14 @@ final class RandomViewController: UIViewController {
         let defaultSourceElementCount = 20
 
         func randomSection(modelIdRange: Range<Int>) -> ArraySection<RandomModel, RandomModel> {
-            let modelId = Int.random(in: modelIdRange)
+            let sectionId = Int.random(in: modelIdRange)
             let elementCount = Int.random(in: 0..<defaultSourceElementCount)
-            var elementIds = Array(0..<elementCount)
+            let lowerBound = sectionId * defaultSourceElementCount
+            let upperBound = lowerBound + elementCount
+            var elementIds = Array(lowerBound..<upperBound)
             elementIds.shuffle()
             let elements = elementIds.map { RandomModel($0) }
-            return ArraySection(model: RandomModel(modelId), elements: elements)
+            return ArraySection(model: RandomModel(sectionId), elements: elements)
         }
 
         guard !data.isEmpty else {
@@ -74,6 +76,7 @@ final class RandomViewController: UIViewController {
         }
 
         for index in target.indices {
+            let sectionId = target[index].model.id
             let sourceCount = target[index].elements.count
             let deleteCount = Int.random(in: 0..<sourceCount / 4)
             let deletedSourceCount = sourceCount - deleteCount
@@ -99,7 +102,7 @@ final class RandomViewController: UIViewController {
             }
 
             for elementIndex in insertIndices {
-                let elementId = sourceCount + elementIndex
+                let elementId = sectionId * defaultSourceElementCount + target[index].elements.count
                 let element = RandomModel(elementId)
                 target[index].elements.insert(element, at: elementIndex)
             }
