@@ -2,14 +2,14 @@ import UIKit
 import DifferenceKit
 
 private struct RandomModel: Differentiable {
-    var id: Int
+    var id: UUID
     var isUpdated: Bool
 
-    var differenceIdentifier: Int {
+    var differenceIdentifier: UUID {
         return id
     }
 
-    init(_ id: Int, _ isUpdated: Bool = false) {
+    init(_ id: UUID = UUID(), _ isUpdated: Bool = false) {
         self.id = id
         self.isUpdated = isUpdated
     }
@@ -39,19 +39,13 @@ final class RandomViewController: UIViewController {
         let defaultSourceSectionCount = 20
         let defaultSourceElementCount = 20
 
-        func randomSection(modelIdRange: Range<Int>) -> ArraySection<RandomModel, RandomModel> {
-            let sectionId = Int.random(in: modelIdRange)
-            let elementCount = Int.random(in: 0..<defaultSourceElementCount)
-            let lowerBound = sectionId * defaultSourceElementCount
-            let upperBound = lowerBound + elementCount
-            var elementIds = Array(lowerBound..<upperBound)
-            elementIds.shuffle()
-            let elements = elementIds.map { RandomModel($0) }
-            return ArraySection(model: RandomModel(sectionId), elements: elements)
+        func randomSection() -> ArraySection<RandomModel, RandomModel> {
+            let elements = (0..<defaultSourceElementCount).map { _ in RandomModel() }
+            return ArraySection(model: RandomModel(), elements: elements)
         }
 
         guard !data.isEmpty else {
-            dataInput = (0..<defaultSourceSectionCount).map { _ in randomSection(modelIdRange: 0..<defaultSourceSectionCount) }
+            dataInput = (0..<defaultSourceSectionCount).map { _ in randomSection() }
             return
         }
 
@@ -65,10 +59,11 @@ final class RandomViewController: UIViewController {
         let moveSectionCount = Int.random(in: 0..<deletedSourceSectionCount / 4)
         let minInsertCount = defaultSourceSectionCount > sourceSectionCount ? deleteSectionCount : 0
         let insertSectionCount = Int.random(in: minInsertCount..<sourceSectionCount / 4)
+        let targetSectionCount = deletedSourceSectionCount + insertSectionCount
 
         let deleteSectionIndices = (0..<deleteSectionCount).map { i in Int.random(in: 0..<sourceSectionCount - i) }
-        let updateSectionIndices = (0..<updateSectionCount).map { i in Int.random(in: 0..<deletedSourceSectionCount) }
-        let moveSectionIndexPairs = (0..<moveSectionCount).map { i in (source: Int.random(in: 0..<deletedSourceSectionCount), target: Int.random(in: 0..<deletedSourceSectionCount)) }
+        let updateSectionIndices = (0..<updateSectionCount).map { _ in Int.random(in: 0..<deletedSourceSectionCount) }
+        let moveSectionIndexPairs = (0..<moveSectionCount).map { _ in (source: Int.random(in: 0..<deletedSourceSectionCount), target: Int.random(in: 0..<deletedSourceSectionCount)) }
         let insertSectionIndices = (0..<insertSectionCount).map { i in Int.random(in: 0..<deletedSourceSectionCount + i) }
 
         for index in deleteSectionIndices {
@@ -76,7 +71,6 @@ final class RandomViewController: UIViewController {
         }
 
         for index in target.indices {
-            let sectionId = target[index].model.id
             let sourceCount = target[index].elements.count
             let deleteCount = Int.random(in: 0..<sourceCount / 4)
             let deletedSourceCount = sourceCount - deleteCount
@@ -85,8 +79,8 @@ final class RandomViewController: UIViewController {
             let insertCount = Int.random(in: 0..<sourceCount / 4)
 
             let deleteIndices = (0..<deleteCount).map { i in Int.random(in: 0..<sourceCount - i) }
-            let updateIndices = (0..<updateCount).map { i in Int.random(in: 0..<deletedSourceCount) }
-            let moveIndexPairs = (0..<moveCount).map { i in (source: Int.random(in: 0..<deletedSourceCount), target: Int.random(in: 0..<deletedSourceCount)) }
+            let updateIndices = (0..<updateCount).map { _ in Int.random(in: 0..<deletedSourceCount) }
+            let moveIndexPairs = (0..<moveCount).map { _ in (source: Int.random(in: 0..<deletedSourceCount), target: Int.random(in: 0..<deletedSourceCount)) }
             let insertIndices = (0..<insertCount).map { i in Int.random(in: 0..<deletedSourceCount + i) }
 
             for elementIndex in deleteIndices {
@@ -102,9 +96,7 @@ final class RandomViewController: UIViewController {
             }
 
             for elementIndex in insertIndices {
-                let elementId = sectionId * defaultSourceElementCount + target[index].elements.count
-                let element = RandomModel(elementId)
-                target[index].elements.insert(element, at: elementIndex)
+                target[index].elements.insert(RandomModel(), at: elementIndex)
             }
         }
 
@@ -117,9 +109,20 @@ final class RandomViewController: UIViewController {
         }
 
         for index in insertSectionIndices {
-            let modelId = sourceSectionCount + index
-            let section = randomSection(modelIdRange: modelId..<modelId)
-            target.insert(section, at: index)
+            target.insert(randomSection(), at: index)
+        }
+
+        let elementMoveAcrossSectionCount = Int.random(in: 0..<targetSectionCount * 2)
+        for _ in (0..<elementMoveAcrossSectionCount) {
+            func randomIndexPath() -> IndexPath {
+                let sectionIndex = Int.random(in: 0..<targetSectionCount)
+                let elementIndex = Int.random(in: 0..<target[sectionIndex].elements.count)
+                return IndexPath(item: elementIndex, section: sectionIndex)
+            }
+            let sourceIndexPath = randomIndexPath()
+            let targetIndexPath = randomIndexPath()
+            target[sourceIndexPath.section].elements[sourceIndexPath.item] = target[targetIndexPath.section].elements[targetIndexPath.item]
+            target[targetIndexPath.section].elements[targetIndexPath.item] = target[sourceIndexPath.section].elements[sourceIndexPath.item]
         }
 
         dataInput = target

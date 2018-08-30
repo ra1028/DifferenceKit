@@ -22,6 +22,7 @@ final class HomeViewController: UITableViewController {
         title = "Home"
         view.backgroundColor = .white
         tableView.tableFooterView = UIView()
+        tableView.reloadData()
     }
 
     @available(*, unavailable)

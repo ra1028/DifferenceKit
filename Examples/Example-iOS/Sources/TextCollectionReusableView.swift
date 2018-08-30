@@ -20,7 +20,7 @@ final class TextCollectionReusableView: UICollectionReusableView {
             label.topAnchor.constraint(equalTo: topAnchor),
             label.bottomAnchor.constraint(equalTo: bottomAnchor),
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 16)
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ]
         NSLayoutConstraint.activate(constraints)
     }
