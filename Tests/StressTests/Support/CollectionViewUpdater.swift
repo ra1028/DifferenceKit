@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import UIKit
 import DifferenceKit
 import Foundation
@@ -165,3 +166,4 @@ extension Array where Element == IndexPath {
         }
     }
 }
+#endif

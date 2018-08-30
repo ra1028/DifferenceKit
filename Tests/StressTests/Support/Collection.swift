@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import DifferenceKit
 
 typealias Collection = [ArraySection<SectionData, CellData>]
@@ -11,3 +12,4 @@ extension Array where Element == ArraySection<SectionData, CellData> {
         return count
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import UIKit
 
 final class Cell: UICollectionViewCell {
@@ -5,3 +6,4 @@ final class Cell: UICollectionViewCell {
     
     static let reuseIdentifier = "Cell.reuseIdentifier"
 }
+#endif

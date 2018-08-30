@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import XCTest
 import UIKit
 
@@ -214,3 +215,4 @@ final class DifferenceKitStressTests: XCTestCase {
         }
     }
 }
+#endif

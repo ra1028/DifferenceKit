@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import DifferenceKit
 import XCTest
 
@@ -30,3 +31,4 @@ final class SectionData: Differentiable {
     // MARK: - Internal
 //    func isContentEqual(to source: SectionData, calledInDifferenceKitAlgorithm) -> Bool {
 }
+#endif

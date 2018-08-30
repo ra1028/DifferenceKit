@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 struct CollectionMutatation {
     let sectionDeletes: Int
     let sectionInserts: Int
@@ -12,3 +13,4 @@ struct CollectionMutatation {
     let from: Collection
     let to: Collection
 }
+#endif

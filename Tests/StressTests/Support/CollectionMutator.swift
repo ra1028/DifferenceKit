@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import DifferenceKit
 import XCTest
 
@@ -410,3 +411,4 @@ extension Range where Bound == Int {
         return lowerBound + (upperBound - lowerBound) / 4
     }
 }
+#endif

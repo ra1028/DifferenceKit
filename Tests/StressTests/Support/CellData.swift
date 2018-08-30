@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import DifferenceKit
 import XCTest
 
@@ -31,3 +32,4 @@ final class CellData: Differentiable {
             && self.subtitle == source.subtitle
     }
 }
+#endif

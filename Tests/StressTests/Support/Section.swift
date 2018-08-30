@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import UIKit
 
 final class Section: UICollectionReusableView {
@@ -6,3 +7,4 @@ final class Section: UICollectionReusableView {
     static let reuseIdentifier = "Section.reuseIdentifier"
     static let kind = UICollectionElementKindSectionHeader
 }
+#endif
