@@ -5,22 +5,22 @@ import Foundation
 enum CollectionViewUpdaterResult {
     case exception(NSException)
     case noUpdateRequired // diff is empty
-    case success(visibleSections: Sections, expectedSections: Sections)
+    case success(visibleCollection: Collection, expectedCollection: Collection)
 }
 
 final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
     // MARK: - State
-    private var sections = Sections() // for UICollectionViewDataSource
+    private var collection = Collection() // for UICollectionViewDataSource
     private var collectionView: UICollectionView?
     private var window: UIWindow?
     
     // MARK: - Internal
     func updateCollectionView(
-        from: Sections,
-        to: Sections,
+        from: Collection,
+        to: Collection,
         completion: @escaping (CollectionViewUpdaterResult) -> ())
     {
-        let collectionView = makeAndReloadCollectionViewWith(sections: from)
+        let collectionView = makeAndReloadCollectionViewWith(collection: from)
         
         let diff = StagedChangeset(
             source: from,
@@ -29,14 +29,14 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
         
         performBatchUpdates(
             of: collectionView,
-            sections: to,
+            collection: to,
             diff: diff,
             completion: completion
         )
     }
     
     func cleanUp() {
-        sections = []
+        collection = []
         collectionView?.dataSource = nil
         collectionView?.removeFromSuperview()
         collectionView = nil
@@ -45,7 +45,7 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
 
     // MARK: - Private
     private func makeAndReloadCollectionViewWith(
-        sections: Sections)
+        collection: Collection)
         -> UICollectionView
     {
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -63,7 +63,7 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
         self.collectionView = collectionView
         window.addSubview(collectionView)
         
-        self.sections = sections
+        self.collection = collection
         collectionView.dataSource = self
         collectionView.register(Cell.self, forCellWithReuseIdentifier: Cell.reuseIdentifier)
         collectionView.register(Section.self, forSupplementaryViewOfKind: Section.kind, withReuseIdentifier: Section.reuseIdentifier)
@@ -74,8 +74,8 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
     
     private func performBatchUpdates(
         of collectionView: UICollectionView,
-        sections: Sections,
-        diff: StagedChangeset<Sections>,
+        collection: Collection,
+        diff: StagedChangeset<Collection>,
         completion: @escaping (CollectionViewUpdaterResult) -> ())
     {
         guard !diff.isEmpty else {
@@ -90,8 +90,8 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
         
         ObjCExceptionCatcher.tryClosure(
             tryClosure: {
-                collectionView.reload(using: diff) { sections in 
-                    self.sections = sections
+                collectionView.reload(using: diff) { collection in 
+                    self.collection = collection
                 }
             },
             catchClosure: { exception in
@@ -104,25 +104,29 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
                     )
                 } else {
                     let visibleSectionIndexPaths = collectionView
-                        .indexPathsForVisibleSupplementaryElements(ofKind: Section.kind).sortedAscendingly()
+                        .indexPathsForVisibleSupplementaryElements(ofKind: Section.kind)
+                        .sortedAscendingly()
                     
-                    var visibleSections: Sections = visibleSectionIndexPaths.map {
-                        let section = collectionView.supplementaryView(forElementKind: Section.kind, at: $0) as! Section
+                    var visibleCollection: Collection = visibleSectionIndexPaths.map {
+                        let section = collectionView
+                            .supplementaryView(forElementKind: Section.kind, at: $0)
+                            as! Section
                         return ArraySection(model: section.sectionData!, elements: [])
                     }
                     
                     let visibleCellIndexPaths = collectionView
-                        .indexPathsForVisibleItems.sortedAscendingly()
+                        .indexPathsForVisibleItems
+                        .sortedAscendingly()
                     
                     visibleCellIndexPaths.forEach {
                         let cell = collectionView.cellForItem(at: $0) as! Cell
-                        visibleSections[$0.section].elements.append(cell.cellData!)
+                        visibleCollection[$0.section].elements.append(cell.cellData!)
                     }
                     
                     completion(
                         .success(
-                            visibleSections: visibleSections,
-                            expectedSections: sections
+                            visibleCollection: visibleCollection,
+                            expectedCollection: collection
                         )
                     )
                 }
@@ -132,22 +136,22 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
+        return collection.sectionsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section].elements.count
+        return collection[section].elements.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.reuseIdentifier, for: indexPath) as! Cell
-        cell.cellData = sections[indexPath.section].elements[indexPath.row]
+        cell.cellData = collection[indexPath.section].elements[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let section = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Section.reuseIdentifier, for: indexPath) as! Section
-        section.sectionData = sections[indexPath.section].model
+        section.sectionData = collection[indexPath.section].model
         return section
     }
 }

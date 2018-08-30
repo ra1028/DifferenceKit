@@ -1,4 +1,4 @@
-struct SectionsMutatation {
+struct CollectionMutatation {
     let sectionDeletes: Int
     let sectionInserts: Int
     let sectionMoves: Int
@@ -9,6 +9,6 @@ struct SectionsMutatation {
     let cellMoves: Int
     let cellUpdates: Int
     
-    let from: Sections
-    let to: Sections
+    let from: Collection
+    let to: Collection
 }

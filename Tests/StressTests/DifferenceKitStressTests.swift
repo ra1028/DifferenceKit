@@ -94,7 +94,7 @@ final class DifferenceKitStressTests: XCTestCase {
             expectations: expectations,
             sectionsCountRange: sectionsCountRange,
             cellsCountRange: cellsCountRange,
-            previousSections: []
+            previousCollection: []
         )
     }
     
@@ -104,60 +104,60 @@ final class DifferenceKitStressTests: XCTestCase {
         expectations: [XCTestExpectation],
         sectionsCountRange: Range<Int>,
         cellsCountRange: Range<Int>,
-        previousSections: Sections)
+        previousCollection: Collection)
     {
         guard iteration < iterationsCount, expectations.count == iterationsCount else { return }
         
         autoreleasepool {
             print("testing iteration \(iteration)")
             
-            let sectionsMutator = SectionsMutator()
+            let collectionMutator = CollectionMutator()
             
             // Given
-            let sectionsMutatation: SectionsMutatation
+            let collectionMutatation: CollectionMutatation
             if iteration == 0 {
-                sectionsMutatation = sectionsMutator
-                    .generate(
+                collectionMutatation = collectionMutator
+                    .generateCollection(
                         sectionsCount: sectionsCountRange.middle,
                         cellsCount: cellsCountRange.middle
                     )
             } else if iteration == iterationsCount / 2 {
                 // Special case: applying no changes to original data
-                sectionsMutatation = sectionsMutator
-                    .performNoActionsOnSections(
-                        previousSections
+                collectionMutatation = collectionMutator
+                    .performNoActionsOnCollection(
+                        previousCollection
                     )
             } else {
-                sectionsMutatation = sectionsMutator
-                    .performRandomActionsOnSections(
-                        previousSections,
+                collectionMutatation = collectionMutator
+                    .performRandomActionsOnCollection(
+                        previousCollection,
                         recommendedSectionsCountRange: sectionsCountRange,
                         recommendedTotalCellsCountRange: cellsCountRange
                     )
             }
             
-            print("  sections: from \(sectionsMutatation.from.count) "
-                + "to: \(sectionsMutatation.to.count).")
+            print("  sections: from \(collectionMutatation.from.count) "
+                + "to: \(collectionMutatation.to.count).")
             
-            print("  sections: deletes \(sectionsMutatation.sectionDeletes), "
-                + "inserts: \(sectionsMutatation.sectionInserts), "
-                + "moves \(sectionsMutatation.sectionMoves), "
-                + "updates: \(sectionsMutatation.sectionUpdates)")
+            print("  sections: deletes \(collectionMutatation.sectionDeletes), "
+                + "inserts: \(collectionMutatation.sectionInserts), "
+                + "moves \(collectionMutatation.sectionMoves), "
+                + "updates: \(collectionMutatation.sectionUpdates).")
             
-            print("  cells: from \(sectionsMutatation.from.totalCellDataCount) "
-                + "to: \(sectionsMutatation.to.totalCellDataCount).")
+            print("  cells:    from \(collectionMutatation.from.totalCellDataCount) "
+                + "to: \(collectionMutatation.to.totalCellDataCount).")
             
-            print("  cells: deletes \(sectionsMutatation.cellDeletes), "
-                + "inserts: \(sectionsMutatation.cellInserts), "
-                + "moves \(sectionsMutatation.cellMoves), "
-                + "updates: \(sectionsMutatation.cellUpdates)."
+            print("  cells:    deletes \(collectionMutatation.cellDeletes), "
+                + "inserts: \(collectionMutatation.cellInserts), "
+                + "moves \(collectionMutatation.cellMoves), "
+                + "updates: \(collectionMutatation.cellUpdates)."
             )
             
             // When
             let collectionViewUpdater = CollectionViewUpdater()
             collectionViewUpdater.updateCollectionView(
-                from: sectionsMutatation.from,
-                to: sectionsMutatation.to,
+                from: collectionMutatation.from,
+                to: collectionMutatation.to,
                 completion: { [weak self] result in
                     // Then
                     switch result {
@@ -165,14 +165,18 @@ final class DifferenceKitStressTests: XCTestCase {
                         XCTFail("Failed to update collection view using DifferenceKit. exception: \(exception)")
                     case .noUpdateRequired:
                         break
-                    case let .success(visibleSections, expectedSections):
+                    case let .success(visibleCollection, expectedCollection):
                         XCTAssert(
-                            visibleSections.totalCellDataCount == expectedSections.totalCellDataCount,
+                            visibleCollection.sectionsCount == expectedCollection.sectionsCount,
+                            "Update the layout to fit all sections in the screen"
+                        )
+                        XCTAssert(
+                            visibleCollection.totalCellDataCount == expectedCollection.totalCellDataCount,
                             "Update the layout to fit all cells in the screen"
                         )
                         
-                        let zippedSections = zip(visibleSections, expectedSections)
-                        for (sectionIndex, (visibleSection, expectedSection)) in zippedSections.enumerated() {
+                        let zippedCollections = zip(visibleCollection, expectedCollection)
+                        for (sectionIndex, (visibleSection, expectedSection)) in zippedCollections.enumerated() {
                             XCTAssert(
                                 visibleSection.model.isContentEqual(to: expectedSection.model),
                                 "visible section data and expected section data are not in sync at section index: \(sectionIndex)"
@@ -202,7 +206,7 @@ final class DifferenceKitStressTests: XCTestCase {
                             expectations: expectations,
                             sectionsCountRange: sectionsCountRange,
                             cellsCountRange: cellsCountRange,
-                            previousSections: sectionsMutatation.to
+                            previousCollection: collectionMutatation.to
                         )
                     }
                 }
