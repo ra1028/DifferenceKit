@@ -25,13 +25,16 @@
 		6B5B40AB211066EA00A931DB /* AnyDifferentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B408B211066B300A931DB /* AnyDifferentiable.swift */; };
 		6B5B40AC211066EA00A931DB /* ElementPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B408D211066B300A931DB /* ElementPath.swift */; };
 		6B956B762110B25300DE3D29 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B4088211066B300A931DB /* UIKitExtension.swift */; };
+		CC3258D72136A1FE0091DEF2 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3258D62136A1FE0091DEF2 /* Section.swift */; };
+		CC3258D92136AEDD0091DEF2 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3258D82136AEDD0091DEF2 /* Sections.swift */; };
 		CC98CBFA21357DBD000005F8 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF021357DBD000005F8 /* Cell.swift */; };
-		CC98CBFB21357DBD000005F8 /* CellDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF121357DBD000005F8 /* CellDataGenerator.swift */; };
+		CC98CBFB21357DBD000005F8 /* SectionsMutator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF121357DBD000005F8 /* SectionsMutator.swift */; };
 		CC98CBFC21357DBD000005F8 /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF221357DBD000005F8 /* CellData.swift */; };
-		CC98CBFD21357DBD000005F8 /* CellDataGeneratorResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF321357DBD000005F8 /* CellDataGeneratorResult.swift */; };
+		CC98CBFD21357DBD000005F8 /* SectionsMutatation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF321357DBD000005F8 /* SectionsMutatation.swift */; };
 		CC98CBFE21357DBD000005F8 /* CollectionViewUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF421357DBD000005F8 /* CollectionViewUpdater.swift */; };
 		CC98CBFF21357DBD000005F8 /* ObjCExceptionCatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF721357DBD000005F8 /* ObjCExceptionCatcher.swift */; };
 		CC98CC0121357DBD000005F8 /* DifferenceKitStressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC98CBF921357DBD000005F8 /* DifferenceKitStressTests.swift */; };
+		CCAD3C052135997B00A59554 /* SectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAD3C042135997B00A59554 /* SectionData.swift */; };
 		CCF87E8821358165000CB713 /* ObjCExceptionCatcherHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CCF87E8621358164000CB713 /* ObjCExceptionCatcherHelper.m */; };
 /* End PBXBuildFile section */
 
@@ -68,13 +71,16 @@
 		6B5B4099211066BF00A931DB /* MeasurementTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementTest.swift; sourceTree = "<group>"; };
 		6B5B409A211066BF00A931DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B5B409B211066BF00A931DB /* TestTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTools.swift; sourceTree = "<group>"; };
+		CC3258D62136A1FE0091DEF2 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		CC3258D82136AEDD0091DEF2 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		CC98CBF021357DBD000005F8 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
-		CC98CBF121357DBD000005F8 /* CellDataGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDataGenerator.swift; sourceTree = "<group>"; };
+		CC98CBF121357DBD000005F8 /* SectionsMutator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsMutator.swift; sourceTree = "<group>"; };
 		CC98CBF221357DBD000005F8 /* CellData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
-		CC98CBF321357DBD000005F8 /* CellDataGeneratorResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDataGeneratorResult.swift; sourceTree = "<group>"; };
+		CC98CBF321357DBD000005F8 /* SectionsMutatation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionsMutatation.swift; sourceTree = "<group>"; };
 		CC98CBF421357DBD000005F8 /* CollectionViewUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewUpdater.swift; sourceTree = "<group>"; };
 		CC98CBF721357DBD000005F8 /* ObjCExceptionCatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCExceptionCatcher.swift; sourceTree = "<group>"; };
 		CC98CBF921357DBD000005F8 /* DifferenceKitStressTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifferenceKitStressTests.swift; sourceTree = "<group>"; };
+		CCAD3C042135997B00A59554 /* SectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionData.swift; sourceTree = "<group>"; };
 		CCF87E8521358164000CB713 /* Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		CCF87E8621358164000CB713 /* ObjCExceptionCatcherHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCExceptionCatcherHelper.m; sourceTree = "<group>"; };
 		CCF87E8721358165000CB713 /* ObjCExceptionCatcherHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjCExceptionCatcherHelper.h; sourceTree = "<group>"; };
@@ -182,9 +188,12 @@
 			isa = PBXGroup;
 			children = (
 				CC98CBF021357DBD000005F8 /* Cell.swift */,
-				CC98CBF121357DBD000005F8 /* CellDataGenerator.swift */,
 				CC98CBF221357DBD000005F8 /* CellData.swift */,
-				CC98CBF321357DBD000005F8 /* CellDataGeneratorResult.swift */,
+				CCAD3C042135997B00A59554 /* SectionData.swift */,
+				CC3258D62136A1FE0091DEF2 /* Section.swift */,
+				CC3258D82136AEDD0091DEF2 /* Sections.swift */,
+				CC98CBF121357DBD000005F8 /* SectionsMutator.swift */,
+				CC98CBF321357DBD000005F8 /* SectionsMutatation.swift */,
 				CC98CBF421357DBD000005F8 /* CollectionViewUpdater.swift */,
 				CC98CBF521357DBD000005F8 /* ObjCExceptionCatcher */,
 			);
@@ -327,14 +336,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B5B40A1211066BF00A931DB /* ChangesetTest.swift in Sources */,
+				CCAD3C052135997B00A59554 /* SectionData.swift in Sources */,
 				CC98CBFE21357DBD000005F8 /* CollectionViewUpdater.swift in Sources */,
 				6B5B409C211066BF00A931DB /* AlgorithmTest.swift in Sources */,
 				CC98CC0121357DBD000005F8 /* DifferenceKitStressTests.swift in Sources */,
 				6B5B40A0211066BF00A931DB /* ElementPathTest.swift in Sources */,
 				6B5B40A4211066BF00A931DB /* TestTools.swift in Sources */,
-				CC98CBFD21357DBD000005F8 /* CellDataGeneratorResult.swift in Sources */,
+				CC98CBFD21357DBD000005F8 /* SectionsMutatation.swift in Sources */,
 				6B5B40A2211066BF00A931DB /* MeasurementTest.swift in Sources */,
-				CC98CBFB21357DBD000005F8 /* CellDataGenerator.swift in Sources */,
+				CC3258D72136A1FE0091DEF2 /* Section.swift in Sources */,
+				CC98CBFB21357DBD000005F8 /* SectionsMutator.swift in Sources */,
+				CC3258D92136AEDD0091DEF2 /* Sections.swift in Sources */,
 				CC98CBFF21357DBD000005F8 /* ObjCExceptionCatcher.swift in Sources */,
 				CC98CBFA21357DBD000005F8 /* Cell.swift in Sources */,
 				6B5B409D211066BF00A931DB /* ArraySectionTest.swift in Sources */,

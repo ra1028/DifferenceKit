@@ -1,4 +1,3 @@
-import XCTest
 import UIKit
 import DifferenceKit
 import Foundation
@@ -6,22 +5,22 @@ import Foundation
 enum CollectionViewUpdaterResult {
     case exception(NSException)
     case noUpdateRequired // diff is empty
-    case success(visibleCellDataList: [CellData], expectedCellDataList: [CellData])
+    case success(visibleSections: Sections, expectedSections: Sections)
 }
 
 final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
     // MARK: - State
-    private var cellData = [CellData]() // for UICollectionViewDataSource
+    private var sections = Sections() // for UICollectionViewDataSource
     private var collectionView: UICollectionView?
     private var window: UIWindow?
     
     // MARK: - Internal
     func updateCollectionView(
-        from: [CellData],
-        to: [CellData],
+        from: Sections,
+        to: Sections,
         completion: @escaping (CollectionViewUpdaterResult) -> ())
     {
-        let collectionView = makeAndReloadCollectionViewWith(cellData: from)
+        let collectionView = makeAndReloadCollectionViewWith(sections: from)
         
         let diff = StagedChangeset(
             source: from,
@@ -30,14 +29,14 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
         
         performBatchUpdates(
             of: collectionView,
-            cellDataList: to,
+            sections: to,
             diff: diff,
             completion: completion
         )
     }
     
     func cleanUp() {
-        cellData = []
+        sections = []
         collectionView?.dataSource = nil
         collectionView?.removeFromSuperview()
         collectionView = nil
@@ -46,7 +45,7 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
 
     // MARK: - Private
     private func makeAndReloadCollectionViewWith(
-        cellData: [CellData])
+        sections: Sections)
         -> UICollectionView
     {
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -58,14 +57,16 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
         layout.itemSize = CGSize(width: 1, height: 1) // To fit all cells in the screen 
         layout.minimumInteritemSpacing = 0.001
         layout.minimumLineSpacing = 0.001
+        layout.headerReferenceSize = CGSize(width: 1, height: 1) // To fit all headers in the screen 
         
         let collectionView = UICollectionView(frame: window.frame, collectionViewLayout: layout)
         self.collectionView = collectionView
         window.addSubview(collectionView)
         
-        self.cellData = cellData
+        self.sections = sections
         collectionView.dataSource = self
         collectionView.register(Cell.self, forCellWithReuseIdentifier: Cell.reuseIdentifier)
+        collectionView.register(Section.self, forSupplementaryViewOfKind: Section.kind, withReuseIdentifier: Section.reuseIdentifier)
         collectionView.reloadData()
         
         return collectionView
@@ -73,8 +74,8 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
     
     private func performBatchUpdates(
         of collectionView: UICollectionView,
-        cellDataList: [CellData],
-        diff: StagedChangeset<[CellData]>,
+        sections: Sections,
+        diff: StagedChangeset<Sections>,
         completion: @escaping (CollectionViewUpdaterResult) -> ())
     {
         guard !diff.isEmpty else {
@@ -89,8 +90,8 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
         
         ObjCExceptionCatcher.tryClosure(
             tryClosure: {
-                collectionView.reload(using: diff) { cellData in 
-                    self.cellData = cellData
+                collectionView.reload(using: diff) { sections in 
+                    self.sections = sections
                 }
             },
             catchClosure: { exception in
@@ -102,17 +103,26 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
                         .exception(catchedException)
                     )
                 } else {
-                    let visibleIndexPaths = collectionView.indexPathsForVisibleItems.sorted { $0.row < $1.row }
+                    let visibleSectionIndexPaths = collectionView
+                        .indexPathsForVisibleSupplementaryElements(ofKind: Section.kind).sortedAscendingly()
                     
-                    let visibleCellDataList: [CellData] = visibleIndexPaths.map {
+                    var visibleSections: Sections = visibleSectionIndexPaths.map {
+                        let section = collectionView.supplementaryView(forElementKind: Section.kind, at: $0) as! Section
+                        return ArraySection(model: section.sectionData!, elements: [])
+                    }
+                    
+                    let visibleCellIndexPaths = collectionView
+                        .indexPathsForVisibleItems.sortedAscendingly()
+                    
+                    visibleCellIndexPaths.forEach {
                         let cell = collectionView.cellForItem(at: $0) as! Cell
-                        return cell.cellData!
+                        visibleSections[$0.section].elements.append(cell.cellData!)
                     }
                     
                     completion(
                         .success(
-                            visibleCellDataList: visibleCellDataList,
-                            expectedCellDataList: cellDataList
+                            visibleSections: visibleSections,
+                            expectedSections: sections
                         )
                     )
                 }
@@ -122,16 +132,32 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
     
     // MARK: - UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellData.count
+        return sections[section].elements.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.reuseIdentifier, for: indexPath) as! Cell
-        cell.cellData = cellData[indexPath.row]
+        cell.cellData = sections[indexPath.section].elements[indexPath.row]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let section = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Section.reuseIdentifier, for: indexPath) as! Section
+        section.sectionData = sections[indexPath.section].model
+        return section
+    }
+}
+
+extension Array where Element == IndexPath {
+    func sortedAscendingly() -> [IndexPath] {
+        return sorted {
+            if $0.section < $1.section { return true }
+            if $0.section > $1.section { return false }
+            return $0.row < $1.row
+        }
     }
 }

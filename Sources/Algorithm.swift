@@ -90,7 +90,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 2st stage changeset.
+        // The 2nd stage changeset.
         // - Includes:
         //   - element inserts
         //   - element moves
@@ -352,7 +352,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 2st stage changeset.
+        // The 2nd stage changeset.
         // - Includes:
         //   - section inserts
         //   - section moves
@@ -366,7 +366,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 3st stage changeset.
+        // The 3rd stage changeset.
         // - Includes:
         //   - element inserts
         //   - element moves
@@ -380,7 +380,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 3st stage changeset.
+        // The 3rd stage changeset.
         // - Includes:
         //   - section updates
         //   - element updates
