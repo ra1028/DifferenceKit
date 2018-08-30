@@ -5,8 +5,9 @@ final class HomeViewController: UITableViewController {
 
     init() {
         let tableComponents: [(title: String, subtitle: String, initViewController: () -> UIViewController)] = [
-            (title: "Shuffle Emoticons", subtitle: "Diff of shuffled emoticons in UICollectionView", initViewController: ShuffleEmoticonViewController.init),
-            (title: "Header Footer Section", subtitle: "Diff including section header/footer in UITableView", initViewController: HeaderFooterSectionViewController.init)
+            (title: "Shuffle Emoticons", subtitle: "Shuffle sectioned emoticons in UICollectionView", initViewController: ShuffleEmoticonViewController.init),
+            (title: "Header Footer Section", subtitle: "Update header/footer by reload section in UITableView", initViewController: HeaderFooterSectionViewController.init),
+            (title: "Random", subtitle: "Random diff in UICollectionView", initViewController: RandomViewController.init)
         ]
 
         data = tableComponents.map { component in
@@ -21,6 +22,7 @@ final class HomeViewController: UITableViewController {
         title = "Home"
         view.backgroundColor = .white
         tableView.tableFooterView = UIView()
+        tableView.reloadData()
     }
 
     @available(*, unavailable)

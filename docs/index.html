@@ -98,7 +98,7 @@ The algorithm is optimized based on the Paul Heckel&rsquo;s algorithm.
 <hr>
 <h2 id='features' class='heading'>Features</h2>
 
-<p>✅ Automate to calculate commands for batch-updates of UITableView and UICollectionView  </p>
+<p>✅ Automate to calculate operations for batch-updates of UITableView and UICollectionView  </p>
 
 <p>✅ <strong>O(n)</strong> difference algorithm optimized for performance in Swift  </p>
 
@@ -106,7 +106,7 @@ The algorithm is optimized based on the Paul Heckel&rsquo;s algorithm.
 
 <p>✅ Supports calculating differences with best effort even if elements or section contains duplicates  </p>
 
-<p>✅ Supports <strong>all commands</strong> for animating UI batch-updates including section reloads  </p>
+<p>✅ Supports <strong>all operations</strong> for animated UI batch-updates including section reloads  </p>
 
 <hr>
 
@@ -126,7 +126,7 @@ See also his paper <a href="https://dl.acm.org/citation.cfm?id=359467"><q>A tech
 <a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> and <a href="https://github.com/Instagram/IGListKit">IGListKit</a> are also implemented based on his algorithm.<br>
 This allows all types of differences to be computed in linear time <strong>O(n)</strong>.  </p>
 
-<p>However, in <code>performBatchUpdates</code> of UITableView and UICollectionView, there are combinations of commands that cause crash when applied simultaneously.<br>
+<p>However, in <code>performBatchUpdates</code> of UITableView and UICollectionView, there are combinations of operations that cause crash when applied simultaneously.<br>
 To solve this problem, DifferenceKit takes an approach of split the set of differences at the minimal stages that can be perform batch-updates with no crashes.</p>
 
 <p>Implementation is <a href="https://github.com/ra1028/DifferenceKit/blob/master/Sources/Algorithm.swift">here</a>.</p>
@@ -166,10 +166,24 @@ The <code>differenceIdentifier</code>&lsquo;s type is determined generic by the 
 <p>In the case of definition above, <code>id</code> uniquely identifies the element and get to know the user updated by comparing equality of <code>name</code> of the elements in source and target.</p>
 
 <p>There are default implementations of <code><a href="Protocols/Differentiable.html">Differentiable</a></code> for the types that conformed to <code>Equatable</code> or <code>Hashable</code>：</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Differentiable</span> <span class="k">where</span> <span class="k">Self</span><span class="p">:</span> <span class="nf">Equatable</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nf">Bool</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span> <span class="o">==</span> <span class="n">source</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="kd">extension</span> <span class="kt">Differentiable</span> <span class="k">where</span> <span class="k">Self</span><span class="p">:</span> <span class="nf">Hashable</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">differenceIdentifier</span><span class="p">:</span> <span class="nf">Self</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>So, you can simply:</p>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">String</span><span class="p">:</span> <span class="nf">Differentiable</span> <span class="p">{}</span>
 </code></pre>
 
-<p>You can calculate the differences by creating <code><a href="Structs/StagedChangeset.html">StagedChangeset</a></code> from two collections of elements conforming to <code><a href="Protocols/Differentiable.html">Differentiable</a></code>:</p>
+<p>Calculates the differences by creating <code><a href="Structs/StagedChangeset.html">StagedChangeset</a></code> from two collections of elements conforming to <code><a href="Protocols/Differentiable.html">Differentiable</a></code>:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">source</span> <span class="o">=</span> <span class="p">[</span>
     <span class="nf">User</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Vincent"</span><span class="p">),</span>
     <span class="nf">User</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Jules"</span><span class="p">)</span>
@@ -211,7 +225,7 @@ So each section must conform to <code><a href="Protocols/DifferentiableSection.h
 </code></pre>
 
 <p>You can incremental updates UITableView and UICollectionView using the created <code><a href="Structs/StagedChangeset.html">StagedChangeset</a></code>.<br>
-<strong>Don&rsquo;t forget</strong> to update the data referenced by the dataSource in <code>setData</code> closure, as the differences is applied in stages:</p>
+<strong>Don&rsquo;t forget</strong> to update <strong>synchronously</strong> the data referenced by the data-source in <code>setData</code> closure, as the differences is applied in stages:</p>
 <pre class="highlight swift"><code><span class="n">tableView</span><span class="o">.</span><span class="nf">reload</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="n">changeset</span><span class="p">,</span> <span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="n">fade</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
     <span class="n">dataSource</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
 <span class="p">}</span>
@@ -639,7 +653,7 @@ If your pull request including new function, please write test cases for it.  </
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-27)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-08-30)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

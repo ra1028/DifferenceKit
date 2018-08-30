@@ -6,7 +6,7 @@ public extension UITableView {
     ///
     /// - Note: There are combination of changes that crash when applied simultaneously in `performBatchUpdates`.
     ///         Assumes that `StagedChangeset` has a minimum staged changesets to avoid it.
-    ///         The data of the dataSource needs to be updated before `performBatchUpdates` in every stages.
+    ///         The data of the data-source needs to be updated synchronously before `performBatchUpdates` in every stages.
     ///
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
@@ -14,7 +14,7 @@ public extension UITableView {
     ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
-    ///              The collection should be set to dataSource of UITableView.
+    ///              The collection should be set to data-source of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> UITableViewRowAnimation,
@@ -38,7 +38,7 @@ public extension UITableView {
     ///
     /// - Note: There are combination of changes that crash when applied simultaneously in `performBatchUpdates`.
     ///         Assumes that `StagedChangeset` has a minimum staged changesets to avoid it.
-    ///         The data of the dataSource needs to be updated before `performBatchUpdates` in every stages.
+    ///         The data of the data-source needs to be updated synchronously before `performBatchUpdates` in every stages.
     ///
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
@@ -51,7 +51,7 @@ public extension UITableView {
     ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
-    ///              The collection should be set to dataSource of UITableView.
+    ///              The collection should be set to data-source of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
@@ -74,9 +74,9 @@ public extension UITableView {
                 return reloadData()
             }
 
-            setData(changeset.data)
-
             _performBatchUpdates {
+                setData(changeset.data)
+
                 if !changeset.sectionDeleted.isEmpty {
                     deleteSections(IndexSet(changeset.sectionDeleted), with: deleteSectionsAnimation())
                 }
@@ -128,14 +128,14 @@ public extension UICollectionView {
     ///
     /// - Note: There are combination of changes that crash when applied simultaneously in `performBatchUpdates`.
     ///         Assumes that `StagedChangeset` has a minimum staged changesets to avoid it.
-    ///         The data of the dataSource needs to be updated before `performBatchUpdates` in every stages.
+    ///         The data of the data-source needs to be updated synchronously before `performBatchUpdates` in every stages.
     ///
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
     ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
-    ///              The collection should be set to dataSource of UICollectionView.
+    ///              The collection should be set to data-source of UICollectionView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
@@ -152,9 +152,9 @@ public extension UICollectionView {
                 return reloadData()
             }
 
-            setData(changeset.data)
-
             performBatchUpdates({
+                setData(changeset.data)
+
                 if !changeset.sectionDeleted.isEmpty {
                     deleteSections(IndexSet(changeset.sectionDeleted))
                 }
