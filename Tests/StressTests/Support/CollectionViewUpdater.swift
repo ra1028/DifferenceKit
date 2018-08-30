@@ -87,7 +87,7 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
             return completion(.noUpdateRequired)
         }
         
-        var catchedException: NSException?
+        var caughtException: NSException?
         
         ObjCExceptionCatcher.tryClosure(
             tryClosure: {
@@ -96,12 +96,12 @@ final class CollectionViewUpdater: NSObject, UICollectionViewDataSource {
                 }
             },
             catchClosure: { exception in
-                catchedException = exception
+                caughtException = exception
             },
             finallyClosure: {
-                if let catchedException = catchedException {
+                if let caughtException = caughtException {
                     completion(
-                        .exception(catchedException)
+                        .exception(caughtException)
                     )
                 } else {
                     let visibleSectionIndexPaths = collectionView
