@@ -27,8 +27,5 @@ final class SectionData: Differentiable {
         
         return self.title == source.title
     }
-    
-    // MARK: - Internal
-//    func isContentEqual(to source: SectionData, calledInDifferenceKitAlgorithm) -> Bool {
 }
 #endif
