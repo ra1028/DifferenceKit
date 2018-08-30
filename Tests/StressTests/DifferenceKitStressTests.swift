@@ -4,7 +4,7 @@ import UIKit
 
 final class DifferenceKitStressTests: XCTestCase {
     // MARK: - One dimentional collection
-    func test_differenceKit_doesNotCrashOneDimensionalUICollectionView_duringStressCollectionChanges_1() {
+    func test_differenceKit_doesNotCrashOneDimensionalUICollectionView_duringStressCollectionChanges1() {
         performTestForOneDimensionalCollection()
     }
     
@@ -25,23 +25,23 @@ final class DifferenceKitStressTests: XCTestCase {
     }
     
     // MARK: - Two dimentional collection
-    func test_differenceKit_doesNotCrashTwoDimensionalCollectionUICollectionView_duringStressCollectionChanges1() {
+    func test_differenceKit_doesNotCrashTwoDimensionalUICollectionView_duringStressCollectionChanges1() {
         performTestForTwoDimensionalCollection()
     }
     
-    func test_differenceKit_doesNotCrashTwoDimensionalCollectionUICollectionView_duringStressCollectionChanges2() {
+    func test_differenceKit_doesNotCrashTwoDimensionalUICollectionView_duringStressCollectionChanges2() {
         performTestForTwoDimensionalCollection()
     }
     
-    func test_differenceKit_doesNotCrashTwoDimensionalCollectionUICollectionView_duringStressCollectionChanges3() {
+    func test_differenceKit_doesNotCrashTwoDimensionalUICollectionView_duringStressCollectionChanges3() {
         performTestForTwoDimensionalCollection()
     }
     
-    func test_differenceKit_doesNotCrashTwoDimensionalCollectionUICollectionView_duringStressCollectionChanges4() {
+    func test_differenceKit_doesNotCrashTwoDimensionalUICollectionView_duringStressCollectionChanges4() {
         performTestForTwoDimensionalCollection()
     }
     
-    func test_differenceKit_doesNotCrashTwoDimensionalCollectionUICollectionView_duringStressCollectionChanges5() {
+    func test_differenceKit_doesNotCrashTwoDimensionalUICollectionView_duringStressCollectionChanges5() {
         performTestForTwoDimensionalCollection()
     }
     
