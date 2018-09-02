@@ -47,8 +47,8 @@ See also his paper ["A technique for isolating differences between files"](https
 [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) and [IGListKit](https://github.com/Instagram/IGListKit) are also implemented based on his algorithm.  
 This allows all types of differences to be computed in linear time **O(n)**.  
 
-However, in `performBatchUpdates` of UITableView and UICollectionView, there are combinations of operations that cause crash when applied simultaneously.  
-To solve this problem, DifferenceKit takes an approach of split the set of differences at the minimal stages that can be perform batch-updates with no crashes.
+However, in `performBatchUpdates` of `UITableView` and `UICollectionView`, there are combinations of operations that cause crash when applied simultaneously.  
+To solve this problem, `DifferenceKit` takes an approach of split the set of differences at the minimal stages that can be perform batch-updates with no crashes.
 
 Implementation is [here](https://github.com/ra1028/DifferenceKit/blob/master/Sources/Algorithm.swift).
 
