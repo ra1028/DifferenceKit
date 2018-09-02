@@ -150,7 +150,7 @@ let changeset = StagedChangeset(source: source, target: target)
 
 You can perform incremental updates on `UITableView` and `UICollectionView` using the created `StagedChangeset`.  
 
-**Note: *Don't forget* to *synchronously* update the data referenced by the data-source, with the data passed in the `setData` closure. The differences are applied in stages, and failing to do so is bound to create a crash:**
+⚠️ ***Don't forget* to *synchronously* update the data referenced by the data-source, with the data passed in the `setData` closure. The differences are applied in stages, and failing to do so is bound to create a crash:**
 
 ```swift
 tableView.reload(using: changeset, with: .fade) { data in
