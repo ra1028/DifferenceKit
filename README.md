@@ -148,8 +148,10 @@ let target: [ArraySection<Model, String>] = [
 let changeset = StagedChangeset(source: source, target: target)
 ```
 
-You can incremental updates UITableView and UICollectionView using the created `StagedChangeset`.  
-**Don't forget** to update **synchronously** the data referenced by the data-source in `setData` closure, as the differences is applied in stages:
+You can perform incremental updates on `UITableView` and `UICollectionView` using the created `StagedChangeset`.  
+
+⚠️ ***Don't forget* to *synchronously* update the data referenced by the data-source, with the data passed in the `setData` closure. The differences are applied in stages, and failing to do so is bound to create a crash:**
+
 ```swift
 tableView.reload(using: changeset, with: .fade) { data in
     dataSource.data = data
@@ -157,7 +159,7 @@ tableView.reload(using: changeset, with: .fade) { data in
 ```
 
 Batch-updates using too large amount of differences may adversely affect to performance.  
-Returning `true` with `interrupt` closure then falls back to `reloadDate`:
+Returning `true` with `interrupt` closure then falls back to `reloadData`:
 ```swift
 collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { data in
     dataSource.data = data
