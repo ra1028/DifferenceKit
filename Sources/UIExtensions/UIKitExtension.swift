@@ -1,7 +1,50 @@
 #if os(iOS) || os(tvOS)
 import UIKit
 
-public extension UITableView {
+/// Protocol to allow mocking the table view operated on by DifferenceKit
+public protocol TableView: class {
+    var window: UIWindow? { get }
+
+    func reloadData()
+
+    func insertSections(_ sections: IndexSet, with animation: UITableViewRowAnimation)
+
+    func deleteSections(_ sections: IndexSet, with animation: UITableViewRowAnimation)
+
+    func reloadSections(_ sections: IndexSet, with animation: UITableViewRowAnimation)
+
+    func moveSection(_ section: Int, toSection newSection: Int)
+
+    func insertRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation)
+
+    func deleteRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation)
+
+    func reloadRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation)
+
+    func moveRow(at indexPath: IndexPath, to newIndexPath: IndexPath)
+
+    /// Method with slightly different signature compared to
+    /// `UITableView.performBatchUpdates(_:completion):`, which has a default parameter for the
+    /// completion param and therefore cannot satisfy a protocol-defined function with the same
+    /// signature
+    func performBatchUpdates(_ updates: (() -> Swift.Void))
+}
+
+extension UITableView: TableView {
+    /// Uses `performBatchUpdates(_:completion:)` if possible and falls back to
+    /// `beginUpdates`/`endUpdates`
+    public func performBatchUpdates(_ updates: (() -> Swift.Void)) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+            performBatchUpdates(updates, completion: nil)
+        } else {
+            beginUpdates()
+            updates()
+            endUpdates()
+        }
+    }
+}
+
+public extension TableView {
     /// Applies multiple animated updates in stages using `StagedChangeset`.
     ///
     /// - Note: There are combination of changes that crash when applied simultaneously in `performBatchUpdates`.
@@ -74,7 +117,7 @@ public extension UITableView {
                 return reloadData()
             }
 
-            _performBatchUpdates {
+            performBatchUpdates {
                 setData(changeset.data)
 
                 if !changeset.sectionDeleted.isEmpty {
@@ -111,19 +154,44 @@ public extension UITableView {
             }
         }
     }
+}
 
-    private func _performBatchUpdates(_ updates: () -> Void) {
-        if #available(iOS 11.0, tvOS 11.0, *) {
-            performBatchUpdates(updates)
-        } else {
-            beginUpdates()
-            updates()
-            endUpdates()
-        }
+/// Protocol to allow mocking the collection view operated on by DifferenceKit
+public protocol CollectionView: class {
+    var window: UIWindow? { get }
+
+    func reloadData()
+
+    func insertSections(_ sections: IndexSet)
+
+    func deleteSections(_ sections: IndexSet)
+
+    func reloadSections(_ sections: IndexSet)
+
+    func moveSection(_ section: Int, toSection newSection: Int)
+
+    func insertItems(at indexPaths: [IndexPath])
+
+    func deleteItems(at indexPaths: [IndexPath])
+
+    func reloadItems(at indexPaths: [IndexPath])
+
+    func moveItem(at indexPath: IndexPath, to newIndexPath: IndexPath)
+
+    /// Method with slightly different signature compared to
+    /// `UICollectionView.performBatchUpdates(_:completion):`, which has a default parameter for the
+    /// completion param and therefore cannot satisfy a protocol-defined function with the same
+    /// signature
+    func performBatchUpdates(_ updates: (() -> Swift.Void))
+}
+
+extension UICollectionView: CollectionView {
+    public func performBatchUpdates(_ updates: (() -> Void)) {
+        performBatchUpdates(updates, completion: nil)
     }
 }
 
-public extension UICollectionView {
+public extension CollectionView {
     /// Applies multiple animated updates in stages using `StagedChangeset`.
     ///
     /// - Note: There are combination of changes that crash when applied simultaneously in `performBatchUpdates`.
