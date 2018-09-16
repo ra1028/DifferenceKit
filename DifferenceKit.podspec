@@ -14,6 +14,8 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.default_subspecs = 'Core', 'UIExtensions'
 
+  spec.swift_version = '4.1'
+
   spec.ios.deployment_target = '9.0'
   spec.tvos.deployment_target = '9.0'
   spec.osx.deployment_target = '10.9'
