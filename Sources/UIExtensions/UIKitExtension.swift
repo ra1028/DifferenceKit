@@ -2,6 +2,11 @@
 import UIKit
 
 public extension UITableView {
+    #if swift(>=4.2)
+    #else
+    typealias RowAnimation = UITableViewRowAnimation
+    #endif
+
     /// Applies multiple animated updates in stages using `StagedChangeset`.
     ///
     /// - Note: There are combination of changes that crash when applied simultaneously in `performBatchUpdates`.
@@ -17,7 +22,7 @@ public extension UITableView {
     ///              The collection should be set to data-source of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        with animation: @autoclosure () -> UITableViewRowAnimation,
+        with animation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -54,12 +59,12 @@ public extension UITableView {
     ///              The collection should be set to data-source of UITableView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
-        deleteSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        insertSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        reloadSectionsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        deleteRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        insertRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
-        reloadRowsAnimation: @autoclosure () -> UITableViewRowAnimation,
+        deleteSectionsAnimation: @autoclosure () -> RowAnimation,
+        insertSectionsAnimation: @autoclosure () -> RowAnimation,
+        reloadSectionsAnimation: @autoclosure () -> RowAnimation,
+        deleteRowsAnimation: @autoclosure () -> RowAnimation,
+        insertRowsAnimation: @autoclosure () -> RowAnimation,
+        reloadRowsAnimation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
