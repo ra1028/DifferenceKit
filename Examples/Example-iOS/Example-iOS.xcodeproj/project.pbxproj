@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3363C4F821502C45008EEDE4 /* String+Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363C4F721502C44008EEDE4 /* String+Differentiable.swift */; };
 		6B2DF92F210E522F004D2D40 /* DifferenceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DF916210E4AF0004D2D40 /* DifferenceKit.framework */; };
 		6B2DF930210E522F004D2D40 /* DifferenceKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DF916210E4AF0004D2D40 /* DifferenceKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6B956B832110B38700DE3D29 /* HeaderFooterSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7A2110B38700DE3D29 /* HeaderFooterSectionViewController.swift */; };
 		6B956B842110B38700DE3D29 /* ShuffleEmoticonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7B2110B38700DE3D29 /* ShuffleEmoticonViewController.swift */; };
 		6B956B852110B38700DE3D29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B956B7C2110B38700DE3D29 /* Assets.xcassets */; };
-		6B956B862110B38700DE3D29 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7D2110B38700DE3D29 /* Tools.swift */; };
 		6B956B872110B38700DE3D29 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7E2110B38700DE3D29 /* HomeViewController.swift */; };
 		6B956B882110B38700DE3D29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B956B7F2110B38700DE3D29 /* LaunchScreen.storyboard */; };
 		6B956B892110B38700DE3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B812110B38700DE3D29 /* AppDelegate.swift */; };
@@ -59,12 +59,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3363C4F721502C44008EEDE4 /* String+Differentiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Differentiable.swift"; sourceTree = "<group>"; };
 		6B2DF8FA210E4AE1004D2D40 /* Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2DF90F210E4AF0004D2D40 /* DifferenceKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DifferenceKit.xcodeproj; path = ../../DifferenceKit.xcodeproj; sourceTree = "<group>"; };
 		6B956B7A2110B38700DE3D29 /* HeaderFooterSectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterSectionViewController.swift; sourceTree = "<group>"; };
 		6B956B7B2110B38700DE3D29 /* ShuffleEmoticonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleEmoticonViewController.swift; sourceTree = "<group>"; };
 		6B956B7C2110B38700DE3D29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6B956B7D2110B38700DE3D29 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		6B956B7E2110B38700DE3D29 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6B956B802110B38700DE3D29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B956B812110B38700DE3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,9 +125,9 @@
 				6B956B7E2110B38700DE3D29 /* HomeViewController.swift */,
 				6B956B7B2110B38700DE3D29 /* ShuffleEmoticonViewController.swift */,
 				6B956B7A2110B38700DE3D29 /* HeaderFooterSectionViewController.swift */,
+				3363C4F721502C44008EEDE4 /* String+Differentiable.swift */,
 				6BD9445C2136EDC100093E7A /* RandomViewController.swift */,
 				6BD9445F2137062000093E7A /* TextCollectionReusableView.swift */,
-				6B956B7D2110B38700DE3D29 /* Tools.swift */,
 				6B956B812110B38700DE3D29 /* AppDelegate.swift */,
 				6B956B7C2110B38700DE3D29 /* Assets.xcassets */,
 				6B956B7F2110B38700DE3D29 /* LaunchScreen.storyboard */,
@@ -170,6 +170,7 @@
 				TargetAttributes = {
 					6B2DF8F9210E4AE1004D2D40 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -232,10 +233,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B956B842110B38700DE3D29 /* ShuffleEmoticonViewController.swift in Sources */,
-				6B956B862110B38700DE3D29 /* Tools.swift in Sources */,
 				6B956B832110B38700DE3D29 /* HeaderFooterSectionViewController.swift in Sources */,
 				6BD9445D2136EDC100093E7A /* RandomViewController.swift in Sources */,
 				6B956B892110B38700DE3D29 /* AppDelegate.swift in Sources */,
+				3363C4F821502C45008EEDE4 /* String+Differentiable.swift in Sources */,
 				6BD944602137062000093E7A /* TextCollectionReusableView.swift in Sources */,
 				6B956B872110B38700DE3D29 /* HomeViewController.swift in Sources */,
 			);
@@ -394,7 +395,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ryo.DifferenceKitExample-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -416,7 +417,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ryo.DifferenceKitExample-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

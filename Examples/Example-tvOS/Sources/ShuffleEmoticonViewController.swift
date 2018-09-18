@@ -1,13 +1,8 @@
 import UIKit
 import DifferenceKit
 
-private enum EmoticonSectionID: Differentiable {
+private enum EmoticonSectionID: Differentiable, CaseIterable {
     case first, second, third
-
-    // FIXME: This is not required after Swift 4.2. Use CaseIterable.
-    static var allCases: [EmoticonSectionID] {
-        return [.first, .second, .third]
-    }
 }
 
 private typealias EmoticonSection = ArraySection<EmoticonSectionID, String>
@@ -90,7 +85,7 @@ final class ShuffleEmoticonViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(EmoticonCollectionViewCell.self, forCellWithReuseIdentifier: EmoticonCollectionViewCell.reuseIdentifier)
-        collectionView.register(TextCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: TextCollectionReusableView.reuseIdentifier)
+        collectionView.register(TextCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TextCollectionReusableView.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
 
@@ -151,7 +146,7 @@ extension ShuffleEmoticonViewController: UICollectionViewDataSource, UICollectio
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard kind == UICollectionElementKindSectionHeader else {
+        guard kind == UICollectionView.elementKindSectionHeader else {
             return UICollectionReusableView()
         }
 
@@ -240,24 +235,5 @@ private final class TextCollectionReusableView: UICollectionReusableView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-// FIXME: This extension is not required after Swift 4.2
-// https://github.com/apple/swift/blob/master/stdlib/public/core/CollectionAlgorithms.swift
-private extension MutableCollection {
-    mutating func shuffle() {
-        let count = self.count
-        guard count > 1 else { return }
-
-        var amount = count
-        var currentIndex = startIndex
-
-        while amount > 1 {
-            let random = Int(arc4random_uniform(UInt32(amount)))
-            amount -= 1
-            swapAt(currentIndex, index(currentIndex, offsetBy: numericCast(random)))
-            formIndex(after: &currentIndex)
-        }
     }
 }
