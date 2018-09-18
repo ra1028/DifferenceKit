@@ -9,7 +9,6 @@
 #if os(macOS)
 import AppKit
 
-@available(OSXApplicationExtension 10.11, *)
 public extension NSCollectionView {
 
     /// Applies multiple animated updates in stages using `StagedChangeset`.
