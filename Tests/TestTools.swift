@@ -4,13 +4,8 @@ import DifferenceKit
 extension Int: Differentiable {}
 extension String: Differentiable {}
 
-enum D: Differentiable {
+enum D: Differentiable, CaseIterable {
     case a, b, c, d, e
-
-    // FIXME: This is not required after Swift 4.2. Use CaseIterable.
-    static var allCases: [D] {
-        return [.a, .b, .c, .d, .e]
-    }
 }
 
 struct M: Differentiable, Equatable {
