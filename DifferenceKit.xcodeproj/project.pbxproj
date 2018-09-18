@@ -24,10 +24,7 @@
 		6B5B40AA211066EA00A931DB /* ArraySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B408A211066B300A931DB /* ArraySection.swift */; };
 		6B5B40AB211066EA00A931DB /* AnyDifferentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B408B211066B300A931DB /* AnyDifferentiable.swift */; };
 		6B5B40AC211066EA00A931DB /* ElementPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B408D211066B300A931DB /* ElementPath.swift */; };
-		75C6E50A214D66F80016493B /* UITableView+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6E509214D66F80016493B /* UITableView+Reload.swift */; };
-		75C6E50C214D672F0016493B /* UICollectionView+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6E50B214D672F0016493B /* UICollectionView+Reload.swift */; };
-		75C6E50E214D675A0016493B /* NSCollectionView+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6E50D214D675A0016493B /* NSCollectionView+Reload.swift */; };
-		75C6E510214D688F0016493B /* NSTableView+Reload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C6E50F214D688F0016493B /* NSTableView+Reload.swift */; };
+		6B956B762110B25300DE3D29 /* UIKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B4088211066B300A931DB /* UIKitExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +42,7 @@
 		6B2DF877210E2C12004D2D40 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2DF88A210E39A8004D2D40 /* DifferenceKit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DifferenceKit.xcconfig; sourceTree = "<group>"; };
 		6B5B4086211066B300A931DB /* Algorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
+		6B5B4088211066B300A931DB /* UIKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
 		6B5B408A211066B300A931DB /* ArraySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArraySection.swift; sourceTree = "<group>"; };
 		6B5B408B211066B300A931DB /* AnyDifferentiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyDifferentiable.swift; sourceTree = "<group>"; };
 		6B5B408C211066B300A931DB /* StagedChangeset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagedChangeset.swift; sourceTree = "<group>"; };
@@ -62,10 +60,6 @@
 		6B5B4099211066BF00A931DB /* MeasurementTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementTest.swift; sourceTree = "<group>"; };
 		6B5B409A211066BF00A931DB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B5B409B211066BF00A931DB /* TestTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTools.swift; sourceTree = "<group>"; };
-		75C6E509214D66F80016493B /* UITableView+Reload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Reload.swift"; sourceTree = "<group>"; };
-		75C6E50B214D672F0016493B /* UICollectionView+Reload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Reload.swift"; sourceTree = "<group>"; };
-		75C6E50D214D675A0016493B /* NSCollectionView+Reload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSCollectionView+Reload.swift"; sourceTree = "<group>"; };
-		75C6E50F214D688F0016493B /* NSTableView+Reload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTableView+Reload.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +111,7 @@
 		6B5B4085211066B300A931DB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6B5B4087211066B300A931DB /* Extensions */,
+				6B5B4087211066B300A931DB /* UIExtensions */,
 				6B5B4086211066B300A931DB /* Algorithm.swift */,
 				6B5B408F211066B300A931DB /* Changeset.swift */,
 				6B5B408C211066B300A931DB /* StagedChangeset.swift */,
@@ -131,15 +125,12 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		6B5B4087211066B300A931DB /* Extensions */ = {
+		6B5B4087211066B300A931DB /* UIExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				75C6E509214D66F80016493B /* UITableView+Reload.swift */,
-				75C6E50B214D672F0016493B /* UICollectionView+Reload.swift */,
-				75C6E50D214D675A0016493B /* NSCollectionView+Reload.swift */,
-				75C6E50F214D688F0016493B /* NSTableView+Reload.swift */,
+				6B5B4088211066B300A931DB /* UIKitExtension.swift */,
 			);
-			path = Extensions;
+			path = UIExtensions;
 			sourceTree = "<group>";
 		};
 		6B5B4092211066BF00A931DB /* Tests */ = {
@@ -269,15 +260,12 @@
 			files = (
 				6B5B40A8211066EA00A931DB /* Changeset.swift in Sources */,
 				6B5B40AB211066EA00A931DB /* AnyDifferentiable.swift in Sources */,
+				6B956B762110B25300DE3D29 /* UIKitExtension.swift in Sources */,
 				6B5B40A5211066EA00A931DB /* Algorithm.swift in Sources */,
 				6B5B40AC211066EA00A931DB /* ElementPath.swift in Sources */,
 				6B5B40A6211066EA00A931DB /* Differentiable.swift in Sources */,
-				75C6E510214D688F0016493B /* NSTableView+Reload.swift in Sources */,
 				6B5B40AA211066EA00A931DB /* ArraySection.swift in Sources */,
-				75C6E50C214D672F0016493B /* UICollectionView+Reload.swift in Sources */,
 				6B5B40A9211066EA00A931DB /* StagedChangeset.swift in Sources */,
-				75C6E50A214D66F80016493B /* UITableView+Reload.swift in Sources */,
-				75C6E50E214D675A0016493B /* NSCollectionView+Reload.swift in Sources */,
 				6B5B40A7211066EA00A931DB /* DifferentiableSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,7 +438,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -481,7 +468,6 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryo.DifferenceKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
