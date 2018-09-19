@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.source = { :git => 'https://github.com/ra1028/DifferenceKit.git', :tag => spec.version.to_s }
   spec.license = { :type => 'MIT', :file => 'LICENSE' }
   spec.requires_arc = true
-  spec.default_subspecs = 'Core', 'UIExtensions'
+  spec.default_subspecs = 'Core', 'UIKitExtension'
 
   spec.ios.deployment_target = '9.0'
   spec.tvos.deployment_target = '9.0'
@@ -23,10 +23,10 @@ Pod::Spec.new do |spec|
     subspec.source_files = 'Sources/*.swift'
   end
 
-  spec.subspec 'UIExtensions' do |subspec|
+  spec.subspec 'UIKitExtension' do |subspec|
     subspec.dependency 'DifferenceKit/Core'
 
-    source_files = 'Sources/UIExtensions/*.swift'
+    source_files = 'Sources/Extensions/UIKitExtension.swift'
     frameworks = 'UIKit'
 
     subspec.ios.source_files = source_files
@@ -34,5 +34,12 @@ Pod::Spec.new do |spec|
 
     subspec.ios.frameworks = frameworks
     subspec.tvos.frameworks = frameworks
+  end
+
+  spec.subspec 'AppKitExtension' do |subspec|
+    subspec.dependency 'DifferenceKit/Core'
+
+    subspec.osx.source_files = 'Sources/Extensions/AppKitExtension.swift'
+    subspec.osx.frameworks = 'AppKit'
   end
 end
