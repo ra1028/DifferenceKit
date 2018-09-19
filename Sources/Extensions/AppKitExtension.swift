@@ -87,7 +87,7 @@ public extension NSTableView {
     }
 }
 
-@available(OSXApplicationExtension 10.11, *)
+@available(macOS 10.11, *)
 public extension NSCollectionView {
     /// Applies multiple animated updates in stages using `StagedChangeset`.
     ///
