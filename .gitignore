@@ -21,3 +21,7 @@ build/
 ## Documentation
 docs/docsets/
 docs/undocumented.json
+
+## Gems
+.bundle
+vendor/bundle
