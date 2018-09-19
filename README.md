@@ -20,7 +20,7 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 ---
 
 ## Features
-✅ Automate to calculate operations for batch-updates of UITableView and UICollectionView  
+✅ Automate to calculate operations for batch-updates of UITableView, UICollectionView, NSTableView and NSCollectionView  
 
 ✅ **O(n)** difference algorithm optimized for performance in Swift  
 
@@ -271,7 +271,7 @@ Use `Foundation.UUID` as an element.
 - Swift4.1+
 - iOS 9.0+
 - tvOS 9.0+
-- OS X 10.9+ (only algorithm)
+- OS X 10.9+
 - watchOS 2.0+ (only algorithm)
 
 ---
@@ -279,14 +279,6 @@ Use `Foundation.UUID` as an element.
 ## Installation
 
 ### [CocoaPods](https://cocoapods.org/)
-Add the following to your `Podfile`:
-```ruby
-use_frameworks!
-
-target 'TargetName' do
-  pod 'DifferenceKit'
-end
-```
 To use only algorithm without extensions for UI, add the following:
 ```ruby
 use_frameworks!
@@ -295,10 +287,32 @@ target 'TargetName' do
   pod 'DifferenceKit/Core'
 end
 ```
-And run
-```sh
-pod install
+
+#### iOS/tvOS
+To use DifferenceKit with UIKit extension, add the following to your `Podfile`:
+```ruby
+target 'TargetName' do
+  pod 'DifferenceKit'
+end
 ```
+or
+```ruby
+target 'TargetName' do
+  pod 'DifferenceKit/UIKitExtension'
+end
+```
+
+#### macOS
+To use DifferenceKit with AppKit extension, add the following to your `Podfile`:
+```ruby
+target 'TargetName' do
+  pod 'DifferenceKit/AppKitExtension'
+end
+```
+
+### watchOS
+There is no UI extension for watchOS.  
+You can use only the algorithm.  
 
 ### [Carthage](https://github.com/Carthage/Carthage)
 Add the following to your `Cartfile`:
