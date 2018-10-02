@@ -87,16 +87,14 @@ In the case of definition above, `id` uniquely identifies the element and get to
 
 There are default implementations of `Differentiable` for the types that conformed to `Equatable` or `Hashable`：
 ```swift
-public extension Differentiable where Self: Equatable {
-    func isContentEqual(to source: Self) -> Bool {
-        return self == source
-    }
+// If `Self` conform to `Hashable`.
+var differenceIdentifier: Self {
+    return self
 }
 
-public extension Differentiable where Self: Hashable {
-    var differenceIdentifier: Self {
-        return self
-    }
+// If `Self` conform to `Equatable`.
+func isContentEqual(to source: Self) -> Bool {
+    return self == source
 }
 ```
 So, you can simply:
@@ -170,7 +168,7 @@ collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { d
 
 ## Comparison with Other Frameworks
 Made a fair comparison as much as possible in features and performance with other **popular** and **awesome** frameworks.  
-⚠️ This does `NOT` determine superiority or inferiority of the frameworks. I know that each framework has different benefits.  
+This does **NOT** determine superiority or inferiority of the frameworks. I know that each framework has different benefits.  
 The frameworks and its version that compared is below.  
 
 - [DifferenceKit](https://github.com/ra1028/DifferenceKit) - master
@@ -232,7 +230,7 @@ Use `Foundation.UUID` as an element.
 #### - From 5,000 elements to 500 deleted and 500 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.0032      |
+|DifferenceKit|0.0022      |
 |RxDataSources|0.0078      |
 |FlexibleDiff |0.0168      |
 |IGListKit    |0.0412      |
@@ -244,7 +242,7 @@ Use `Foundation.UUID` as an element.
 #### - From 10,000 elements to 1,000 deleted and 1,000 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.0076      |
+|DifferenceKit|0.0049      |
 |RxDataSources|0.0143      |
 |FlexibleDiff |0.0305      |
 |IGListKit    |0.0891      |
@@ -256,7 +254,7 @@ Use `Foundation.UUID` as an element.
 #### - From 100,000 elements to 10,000 deleted and 10,000 inserted
 |             |Time(second)|
 |:------------|:-----------|
-|DifferenceKit|0.087       |
+|DifferenceKit|0.057       |
 |RxDataSources|0.179       |
 |FlexibleDiff |0.356       |
 |IGListKit    |1.329       |
@@ -268,7 +266,7 @@ Use `Foundation.UUID` as an element.
 ---
 
 ## Requirements
-- Swift4.1+
+- Swift4.2+
 - iOS 9.0+
 - tvOS 9.0+
 - OS X 10.9+

@@ -24,24 +24,27 @@
 ///     print(changeset.isEmpty)  // prints "false"
 public struct AnyDifferentiable: Differentiable {
     /// The value wrapped by this instance.
-    public let base: Any
-    /// A type-erased identifier value for difference calculation.
-    public let differenceIdentifier: AnyHashable
+    @inlinable
+    public var base: Any {
+        return box.base
+    }
 
-    private let isContentEqualTo: (AnyDifferentiable) -> Bool
+    /// A type-erased identifier value for difference calculation.
+    @inlinable
+    public var differenceIdentifier: AnyHashable {
+        return box.differenceIdentifier
+    }
+
+    @usableFromInline
+    internal let box: AnyDifferentiableBox
 
     /// Creates a type-erased differentiable value that wraps the given instance.
     ///
     /// - Parameters:
     ///   - base: A differentiable value to wrap.
+    @inlinable
     public init<D: Differentiable>(_ base: D) {
-        self.base = base
-        self.differenceIdentifier = AnyHashable(base.differenceIdentifier)
-
-        self.isContentEqualTo = { source in
-            guard let sourceBase = source.base as? D else { return false }
-            return base.isContentEqual(to: sourceBase)
-        }
+        box = DifferentiableBox(base)
     }
 
     /// Indicate whether the content of `base` is equals to the content of the given source value.
@@ -51,13 +54,51 @@ public struct AnyDifferentiable: Differentiable {
     ///
     /// - Returns: A Boolean value indicating whether the content of `base` is equals
     ///            to the content of `base` of the given source value.
+    @inlinable
     public func isContentEqual(to source: AnyDifferentiable) -> Bool {
-        return isContentEqualTo(source)
+        return box.isContentEqual(to: source.box)
     }
 }
 
 extension AnyDifferentiable: CustomDebugStringConvertible {
     public var debugDescription: String {
         return "AnyDifferentiable(\(String(reflecting: base))"
+    }
+}
+
+@usableFromInline
+internal protocol AnyDifferentiableBox {
+    var base: Any { get }
+    var differenceIdentifier: AnyHashable { get }
+
+    func isContentEqual(to source: AnyDifferentiableBox) -> Bool
+}
+
+@usableFromInline
+internal struct DifferentiableBox<Base: Differentiable>: AnyDifferentiableBox {
+    @usableFromInline
+    internal let baseComponent: Base
+
+    @inlinable
+    internal var base: Any {
+        return baseComponent
+    }
+
+    @inlinable
+    internal var differenceIdentifier: AnyHashable {
+        return AnyHashable(baseComponent.differenceIdentifier)
+    }
+
+    @inlinable
+    internal init(_ base: Base) {
+        baseComponent = base
+    }
+
+    @inlinable
+    internal func isContentEqual(to source: AnyDifferentiableBox) -> Bool {
+        guard let sourceBase = source.base as? Base else {
+            return false
+        }
+        return baseComponent.isContentEqual(to: sourceBase)
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6B2DF878210E2C12004D2D40 /* DifferenceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DF86E210E2C12004D2D40 /* DifferenceKit.framework */; };
+		6B444B392163312700AEE32B /* ContentEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B444B382163312700AEE32B /* ContentEquatable.swift */; };
 		6B5B409C211066BF00A931DB /* AlgorithmTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B4093211066BF00A931DB /* AlgorithmTest.swift */; };
 		6B5B409D211066BF00A931DB /* ArraySectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B4094211066BF00A931DB /* ArraySectionTest.swift */; };
 		6B5B409E211066BF00A931DB /* StagedChangesetTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5B4095211066BF00A931DB /* StagedChangesetTest.swift */; };
@@ -42,6 +43,7 @@
 		6B2DF86E210E2C12004D2D40 /* DifferenceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DifferenceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2DF877210E2C12004D2D40 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2DF88A210E39A8004D2D40 /* DifferenceKit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DifferenceKit.xcconfig; sourceTree = "<group>"; };
+		6B444B382163312700AEE32B /* ContentEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentEquatable.swift; sourceTree = "<group>"; };
 		6B5B4086211066B300A931DB /* Algorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
 		6B5B4088211066B300A931DB /* UIKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtension.swift; sourceTree = "<group>"; };
 		6B5B408A211066B300A931DB /* ArraySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArraySection.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				6B5B4086211066B300A931DB /* Algorithm.swift */,
 				6B5B408F211066B300A931DB /* Changeset.swift */,
 				6B5B408C211066B300A931DB /* StagedChangeset.swift */,
+				6B444B382163312700AEE32B /* ContentEquatable.swift */,
 				6B5B4091211066B300A931DB /* Differentiable.swift */,
 				6B5B408E211066B300A931DB /* DifferentiableSection.swift */,
 				6B5B408B211066B300A931DB /* AnyDifferentiable.swift */,
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B444B392163312700AEE32B /* ContentEquatable.swift in Sources */,
 				6B5B40A8211066EA00A931DB /* Changeset.swift in Sources */,
 				6B5B40AB211066EA00A931DB /* AnyDifferentiable.swift in Sources */,
 				755D649621514ECB0049A3C5 /* AppKitExtension.swift in Sources */,
@@ -358,7 +362,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -415,7 +419,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

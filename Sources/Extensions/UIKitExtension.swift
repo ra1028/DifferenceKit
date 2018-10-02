@@ -2,11 +2,6 @@
 import UIKit
 
 public extension UITableView {
-    #if swift(>=4.2)
-    #else
-    typealias RowAnimation = UITableViewRowAnimation
-    #endif
-
     /// Applies multiple animated updates in stages using `StagedChangeset`.
     ///
     /// - Note: There are combination of changes that crash when applied simultaneously in `performBatchUpdates`.

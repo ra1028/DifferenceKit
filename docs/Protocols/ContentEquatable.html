@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>UICollectionView Extension Reference</title>
+    <title>ContentEquatable Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/UICollectionView" class="dashAnchor"></a>
-    <a title="UICollectionView Extension Reference"></a>
+    <a name="//apple_ref/swift/Protocol/ContentEquatable" class="dashAnchor"></a>
+    <a title="ContentEquatable Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">DifferenceKit Docs</a> (100% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">DifferenceKit Reference</a>
         <img id="carat" src="../img/carat.png" />
-        UICollectionView Extension Reference
+        ContentEquatable Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -78,14 +78,15 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>UICollectionView</h1>
+            <h1>ContentEquatable</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">UICollectionView</span> <span class="p">:</span> <span class="kt">UIScrollView</span><span class="p">,</span> <span class="kt">UIDataSourceTranslating</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ContentEquatable</span></code></pre>
 
                 </div>
               </div>
-            
+            <p>Represents a value that can compare whether the content are equal.</p>
+
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -93,35 +94,34 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So16UICollectionViewC13DifferenceKitE6reload5using9interrupt7setDatayAC15StagedChangesetVyxG_SbAC0K0VyxGcSgyxXEtSlRzlF"></a>
-                    <a name="//apple_ref/swift/Method/reload(using:interrupt:setData:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So16UICollectionViewC13DifferenceKitE6reload5using9interrupt7setDatayAC15StagedChangesetVyxG_SbAC0K0VyxGcSgyxXEtSlRzlF">reload(using:interrupt:setData:)</a>
+                    <a name="/s:13DifferenceKit16ContentEquatableP02isC5Equal2toSbx_tF"></a>
+                    <a name="//apple_ref/swift/Method/isContentEqual(to:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit16ContentEquatableP02isC5Equal2toSbx_tF">isContentEqual(to:)</a>
                     </code>
+                      <span class="declaration-note">
+                        Default implementation
+                      </span>
                   </div>
                   <div class="height-container">
                     <div class="pointer-container"></div>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Applies multiple animated updates in stages using <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code>.</p>
-<div class="aside aside-note">
-    <p class="aside-title">Note</p>
-    <p>There are combination of changes that crash when applied simultaneously in <code>performBatchUpdates</code>.
-    Assumes that <code><a href="../Structs/StagedChangeset.html">StagedChangeset</a></code> has a minimum staged changesets to avoid it.
-    The data of the data-source needs to be updated synchronously before <code>performBatchUpdates</code> in every stages.</p>
+                        <p>Indicate whether the content of <code>self</code> is equals to the content of
+the given source value.</p>
 
-</div>
+                      </div>
+                      <h4>Default Implementation</h4>
+                      <div class="default_impl abstract">
+                        <p>Indicate whether the content of <code>self</code> is equals to the content of the given source value.
+Updates are compared using <code>==</code> operator of `Equatable&rsquo;.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="n">reload</span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">(</span>
-    <span class="n">using</span> <span class="nv">stagedChangeset</span><span class="p">:</span> <span class="kt"><a href="../Structs/StagedChangeset.html">StagedChangeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">,</span>
-    <span class="nv">interrupt</span><span class="p">:</span> <span class="p">((</span><span class="kt"><a href="../Structs/Changeset.html">Changeset</a></span><span class="o">&lt;</span><span class="kt">C</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">setData</span><span class="p">:</span> <span class="p">(</span><span class="kt">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
-    <span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -132,43 +132,22 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>stagedChangeset</em>
+                                <em>source</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A staged set of changes.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>interrupt</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A closure that takes an changeset as its argument and returns <code>true</code> if the animated
-       updates should be stopped and performed reloadData. Default is nil.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>setData</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A closure that takes the collection as a parameter.
-     The collection should be set to data-source of UICollectionView.</p>
+                                  <p>A source value to be compared.</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Boolean value indicating whether the content of <code>self</code> is equals
+       to the content of the given source value.</p>
                       </div>
                     </section>
                   </div>

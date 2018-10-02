@@ -43,6 +43,9 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/ContentEquatable.html">ContentEquatable</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Differentiable.html">Differentiable</a>
               </li>
               <li class="nav-group-task">
@@ -90,20 +93,20 @@ The comparisons of whether has updated is forwards to an underlying differentiab
 
 <p>You can store mixed-type elements in collection that require <code><a href="../Protocols/Differentiable.html">Differentiable</a></code> conformance by
 wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
-<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">String</span><span class="p">:</span> <span class="nf">Differentiable</span> <span class="p">{}</span>
-<span class="kd">extension</span> <span class="kt">Int</span><span class="p">:</span> <span class="nf">Differentiable</span> <span class="p">{}</span>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">String</span><span class="p">:</span> <span class="kt">Differentiable</span> <span class="p">{}</span>
+<span class="kd">extension</span> <span class="kt">Int</span><span class="p">:</span> <span class="kt">Differentiable</span> <span class="p">{}</span>
 
 <span class="k">let</span> <span class="nv">source</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="nf">AnyDifferentiable</span><span class="p">(</span><span class="s">"ABC"</span><span class="p">),</span>
-    <span class="nf">AnyDifferentiable</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="kt">AnyDifferentiable</span><span class="p">(</span><span class="s">"ABC"</span><span class="p">),</span>
+    <span class="kt">AnyDifferentiable</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="p">]</span>
 <span class="k">let</span> <span class="nv">target</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="nf">AnyDifferentiable</span><span class="p">(</span><span class="s">"ABC"</span><span class="p">),</span>
-    <span class="nf">AnyDifferentiable</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-    <span class="nf">AnyDifferentiable</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+    <span class="kt">AnyDifferentiable</span><span class="p">(</span><span class="s">"ABC"</span><span class="p">),</span>
+    <span class="kt">AnyDifferentiable</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+    <span class="kt">AnyDifferentiable</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="k">let</span> <span class="nv">changeset</span> <span class="o">=</span> <span class="nf">StagedChangeset</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="n">source</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="n">target</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">changeset</span> <span class="o">=</span> <span class="kt">StagedChangeset</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="n">source</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="n">target</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">changeset</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">)</span>  <span class="c1">// prints "false"</span>
 </code></pre>
 
@@ -131,7 +134,8 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">base</span><span class="p">:</span> <span class="kt">Any</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">base</span><span class="p">:</span> <span class="kt">Any</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -158,7 +162,8 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">differenceIdentifier</span><span class="p">:</span> <span class="kt">AnyHashable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="k">var</span> <span class="nv">differenceIdentifier</span><span class="p">:</span> <span class="kt">AnyHashable</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -185,7 +190,8 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">base</span><span class="p">:</span> <span class="kt">D</span><span class="p">)</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Differentiable.html">Differentiable</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">init</span><span class="o">&lt;</span><span class="kt">D</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">base</span><span class="p">:</span> <span class="kt">D</span><span class="p">)</span> <span class="k">where</span> <span class="kt">D</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/Differentiable.html">Differentiable</a></span></code></pre>
 
                         </div>
                       </div>
@@ -231,7 +237,8 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">AnyDifferentiable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">@inlinable</span>
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="kt">AnyDifferentiable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -285,7 +292,7 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="nf">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">debugDescription</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -297,7 +304,7 @@ wrapping mixed-type elements in <code>AnyDifferentiable</code>:</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-09-19)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2018-10-02)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
