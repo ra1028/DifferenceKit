@@ -170,7 +170,7 @@ collectionView.reload(using: changeset, interrupt: { $0.changeCount > 100 }) { d
 
 ## Comparison with Other Frameworks
 Made a fair comparison as much as possible in features and performance with other **popular** and **awesome** frameworks.  
-⚠️ This does `NOT` determine superiority or inferiority of the frameworks. I know that each framework has different benefits.  
+This does **NOT** determine superiority or inferiority of the frameworks. I know that each framework has different benefits.  
 The frameworks and its version that compared is below.  
 
 - [DifferenceKit](https://github.com/ra1028/DifferenceKit) - master
@@ -268,7 +268,7 @@ Use `Foundation.UUID` as an element.
 ---
 
 ## Requirements
-- Swift4.1+
+- Swift4.2+
 - iOS 9.0+
 - tvOS 9.0+
 - OS X 10.9+
