@@ -20,6 +20,7 @@ public extension ContentEquatable where Self: Equatable {
     ///
     /// - Returns: A Boolean value indicating whether the content of `self` is equals
     ///            to the content of the given source value.
+    @inlinable
     func isContentEqual(to source: Self) -> Bool {
         return self == source
     }

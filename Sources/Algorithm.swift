@@ -18,6 +18,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///   - target: A target collection to calculate differences.
     ///
     /// - Complexity: O(n)
+    @inlinable
     public init(source: Collection, target: Collection) {
         self.init(source: source, target: target, section: 0)
     }
@@ -42,6 +43,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///   - section: An Int value to use as section index (or offset) of element.
     ///
     /// - Complexity: O(n)
+    @inlinable
     public init(source: Collection, target: Collection, section: Int) {
         let sourceElements = ContiguousArray(source)
         let targetElements = ContiguousArray(target)
@@ -134,6 +136,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///   - target: A target sectioned collection to calculate differences.
     ///
     /// - Complexity: O(n)
+    @inlinable
     public init(source: Collection, target: Collection) {
         typealias Section = Collection.Element
         typealias SectionIdentifier = Collection.Element.DifferenceIdentifier
@@ -405,8 +408,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 }
 
 /// The shared algorithm to calculate differences between two linear collections.
+@inlinable
 @discardableResult
-private func differentiate<E: Differentiable, I>(
+internal func differentiate<E: Differentiable, I>(
     source: ContiguousArray<E>,
     target: ContiguousArray<E>,
     trackTargetIndexAsUpdated: Bool,
@@ -528,16 +532,23 @@ private func differentiate<E: Differentiable, I>(
 }
 
 /// A set of changes and metadata as a result of calculating differences in linear collection.
-private struct DifferentiateResult<Index> {
-    typealias Metadata = (sourceTraces: ContiguousArray<Trace<Int>>, targetReferences: ContiguousArray<Int?>)
+@usableFromInline
+internal struct DifferentiateResult<Index> {
+    @usableFromInline
+    internal typealias Metadata = (sourceTraces: ContiguousArray<Trace<Int>>, targetReferences: ContiguousArray<Int?>)
+    @usableFromInline
+    internal let deleted: [Index]
+    @usableFromInline
+    internal let inserted: [Index]
+    @usableFromInline
+    internal let updated: [Index]
+    @usableFromInline
+    internal let moved: [(source: Index, target: Index)]
+    @usableFromInline
+    internal let metadata: Metadata
 
-    let deleted: [Index]
-    let inserted: [Index]
-    let updated: [Index]
-    let moved: [(source: Index, target: Index)]
-    let metadata: Metadata
-
-    init(
+    @inlinable
+    internal init(
         deleted: [Index] = [],
         inserted: [Index] = [],
         updated: [Index] = [],
@@ -553,32 +564,46 @@ private struct DifferentiateResult<Index> {
 }
 
 /// A set of informations in middle of difference calculation.
-private struct Trace<Index> {
-    var reference: Index?
-    var deleteOffset = 0
-    var isTracked = false
+@usableFromInline
+internal struct Trace<Index> {
+    @usableFromInline
+    internal var reference: Index?
+    @usableFromInline
+    internal var deleteOffset = 0
+    @usableFromInline
+    internal var isTracked = false
+
+    @inlinable
+    init() {}
 }
 
 /// The occurrences of element.
-private enum Occurrence {
+@usableFromInline
+internal enum Occurrence {
     case unique(index: Int)
     case duplicate(reference: IndicesReference)
 }
 
 /// A mutable reference to indices of elements.
-private final class IndicesReference {
-    private var indices: ContiguousArray<Int>
-    private var position = 0
+@usableFromInline
+internal final class IndicesReference {
+    @usableFromInline
+    internal var indices: ContiguousArray<Int>
+    @usableFromInline
+    internal var position = 0
 
-    init(_ indices: ContiguousArray<Int>) {
+    @inlinable
+    internal init(_ indices: ContiguousArray<Int>) {
         self.indices = indices
     }
 
-    func push(_ index: Int) {
+    @inlinable
+    internal func push(_ index: Int) {
         indices.append(index)
     }
 
-    func next() -> Int? {
+    @inlinable
+    internal func next() -> Int? {
         guard position < indices.endIndex else {
             return nil
         }
@@ -588,23 +613,29 @@ private final class IndicesReference {
 }
 
 /// Dictionary key using UnsafePointer for performance optimization.
-private struct TableKey<T: Hashable>: Hashable {
-    let hashValue: Int
-    private let pointer: UnsafePointer<T>
+@usableFromInline
+internal struct TableKey<T: Hashable>: Hashable {
+    @usableFromInline
+    internal let hashValue: Int
+    @usableFromInline
+    internal let pointer: UnsafePointer<T>
 
-    init(pointer: UnsafePointer<T>) {
+    @inlinable
+    internal init(pointer: UnsafePointer<T>) {
         self.hashValue = pointer.pointee.hashValue
         self.pointer = pointer
     }
 
-    static func == (lhs: TableKey, rhs: TableKey) -> Bool {
+    @inlinable
+    internal static func == (lhs: TableKey, rhs: TableKey) -> Bool {
         return lhs.hashValue == rhs.hashValue
             && (lhs.pointer.distance(to: rhs.pointer) == 0 || lhs.pointer.pointee == rhs.pointer.pointee)
     }
 }
 
-private extension MutableCollection where Element: MutableCollection, Index == Int, Element.Index == Int {
-    subscript(path: ElementPath) -> Element.Element {
+internal extension MutableCollection where Element: MutableCollection, Index == Int, Element.Index == Int {
+    @inlinable
+    internal subscript(path: ElementPath) -> Element.Element {
         get { return self[path.section][path.element] }
         set { self[path.section][path.element] = newValue }
     }

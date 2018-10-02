@@ -38,6 +38,7 @@ public struct Changeset<Collection: Swift.Collection> {
     ///   - elementInserted: The paths of inserted elements.
     ///   - elementUpdated: The paths of updated elements.
     ///   - elementMoved: The pairs of source and target path of moved elements.
+    @inlinable
     public init(
         data: Collection,
         sectionDeleted: [Int] = [],
@@ -63,6 +64,7 @@ public struct Changeset<Collection: Swift.Collection> {
 
 public extension Changeset {
     /// The number of section changes.
+    @inlinable
     public var sectionChangeCount: Int {
         return sectionDeleted.count
             + sectionInserted.count
@@ -71,6 +73,7 @@ public extension Changeset {
     }
 
     /// The number of element changes.
+    @inlinable
     public var elementChangeCount: Int {
         return elementDeleted.count
             + elementInserted.count
@@ -79,21 +82,25 @@ public extension Changeset {
     }
 
     /// The number of all changes.
+    @inlinable
     public var changeCount: Int {
         return sectionChangeCount + elementChangeCount
     }
 
     /// A Boolean value indicating whether has section changes.
+    @inlinable
     public var hasSectionChanges: Bool {
         return sectionChangeCount > 0
     }
 
     /// A Boolean value indicating whether has element changes.
+    @inlinable
     public var hasElementChanges: Bool {
         return elementChangeCount > 0
     }
 
     /// A Boolean value indicating whether has changes.
+    @inlinable
     public var hasChanges: Bool {
         return changeCount > 0
     }
