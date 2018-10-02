@@ -26,23 +26,6 @@ public struct Changeset<Collection: Swift.Collection> {
     /// The pairs of source and target path of moved elements.
     public var elementMoved: [(source: ElementPath, target: ElementPath)]
 
-    /// The number of all changes.
-    public var changeCount: Int {
-        return sectionDeleted.count
-            + sectionInserted.count
-            + sectionUpdated.count
-            + sectionMoved.count
-            + elementDeleted.count
-            + elementInserted.count
-            + elementUpdated.count
-            + elementMoved.count
-    }
-
-    /// A Boolean value indicating whether has changes.
-    public var hasChanges: Bool {
-        return changeCount > 0
-    }
-
     /// Creates a new `Changeset`.
     ///
     /// - Parameters:
@@ -75,6 +58,44 @@ public struct Changeset<Collection: Swift.Collection> {
         self.elementInserted = elementInserted
         self.elementUpdated = elementUpdated
         self.elementMoved = elementMoved
+    }
+}
+
+public extension Changeset {
+    /// The number of section changes.
+    public var sectionChangeCount: Int {
+        return sectionDeleted.count
+            + sectionInserted.count
+            + sectionUpdated.count
+            + sectionMoved.count
+    }
+
+    /// The number of element changes.
+    public var elementChangeCount: Int {
+        return elementDeleted.count
+            + elementInserted.count
+            + elementUpdated.count
+            + elementMoved.count
+    }
+
+    /// The number of all changes.
+    public var changeCount: Int {
+        return sectionChangeCount + elementChangeCount
+    }
+
+    /// A Boolean value indicating whether has section changes.
+    public var hasSectionChanges: Bool {
+        return sectionChangeCount > 0
+    }
+
+    /// A Boolean value indicating whether has element changes.
+    public var hasElementChanges: Bool {
+        return elementChangeCount > 0
+    }
+
+    /// A Boolean value indicating whether has changes.
+    public var hasChanges: Bool {
+        return changeCount > 0
     }
 }
 

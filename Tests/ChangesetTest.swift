@@ -4,39 +4,55 @@ import DifferenceKit
 final class ChangesetTestCase: XCTestCase {
     func testchangeCount() {
         let c1 = Changeset(data: [()], sectionDeleted: [0, 1])
+        XCTAssertEqual(c1.sectionChangeCount, 2)
+        XCTAssertEqual(c1.elementChangeCount, 0)
         XCTAssertEqual(c1.changeCount, 2)
 
         let c2 = Changeset(data: [()], sectionInserted: [0, 1, 2])
+        XCTAssertEqual(c2.sectionChangeCount, 3)
+        XCTAssertEqual(c2.elementChangeCount, 0)
         XCTAssertEqual(c2.changeCount, 3)
 
         let c3 = Changeset(data: [()], sectionUpdated: [0, 1, 2, 3])
+        XCTAssertEqual(c3.sectionChangeCount, 4)
+        XCTAssertEqual(c3.elementChangeCount, 0)
         XCTAssertEqual(c3.changeCount, 4)
 
         let c4 = Changeset(data: [()], sectionMoved: [(source: 0, target: 1)])
+        XCTAssertEqual(c4.sectionChangeCount, 1)
+        XCTAssertEqual(c4.elementChangeCount, 0)
         XCTAssertEqual(c4.changeCount, 1)
 
         let c5 = Changeset(
             data: [()],
             elementDeleted: [ElementPath(element: 0, section: 0), ElementPath(element: 1, section: 1)]
         )
+        XCTAssertEqual(c5.sectionChangeCount, 0)
+        XCTAssertEqual(c5.elementChangeCount, 2)
         XCTAssertEqual(c5.changeCount, 2)
 
         let c6 = Changeset(
             data: [()],
             elementInserted: [ElementPath(element: 0, section: 0), ElementPath(element: 1, section: 1)]
         )
+        XCTAssertEqual(c6.sectionChangeCount, 0)
+        XCTAssertEqual(c6.elementChangeCount, 2)
         XCTAssertEqual(c6.changeCount, 2)
 
         let c7 = Changeset(
             data: [()],
             elementUpdated: [ElementPath(element: 0, section: 0), ElementPath(element: 1, section: 1)]
         )
+        XCTAssertEqual(c7.sectionChangeCount, 0)
+        XCTAssertEqual(c7.elementChangeCount, 2)
         XCTAssertEqual(c7.changeCount, 2)
 
         let c8 = Changeset(
             data: [()],
             elementMoved: [(source: ElementPath(element: 0, section: 0), target: ElementPath(element: 1, section: 1))]
         )
+        XCTAssertEqual(c8.sectionChangeCount, 0)
+        XCTAssertEqual(c8.elementChangeCount, 1)
         XCTAssertEqual(c8.changeCount, 1)
 
         let c9 = Changeset(
@@ -50,14 +66,20 @@ final class ChangesetTestCase: XCTestCase {
             elementUpdated: [ElementPath(element: 9, section: 10)],
             elementMoved: [(source: ElementPath(element: 11, section: 12), target: ElementPath(element: 13, section: 14))]
         )
+        XCTAssertEqual(c9.sectionChangeCount, 4)
+        XCTAssertEqual(c9.elementChangeCount, 4)
         XCTAssertEqual(c9.changeCount, 8)
     }
 
     func testHasChanges() {
         let c1 = Changeset(data: [()])
+        XCTAssertFalse(c1.hasSectionChanges)
+        XCTAssertFalse(c1.hasElementChanges)
         XCTAssertFalse(c1.hasChanges)
 
         let c2 = Changeset(data: [()], sectionDeleted: [0])
+        XCTAssertTrue(c2.hasSectionChanges)
+        XCTAssertFalse(c2.hasElementChanges)
         XCTAssertTrue(c2.hasChanges)
     }
 
