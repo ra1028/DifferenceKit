@@ -44,7 +44,7 @@ public struct AnyDifferentiable: Differentiable {
     ///   - base: A differentiable value to wrap.
     @inlinable
     public init<D: Differentiable>(_ base: D) {
-        box = ConcretDifferentiableBox(base)
+        box = DifferentiableBox(base)
     }
 
     /// Indicate whether the content of `base` is equals to the content of the given source value.
@@ -75,7 +75,7 @@ internal protocol AnyDifferentiableBox {
 }
 
 @usableFromInline
-internal struct ConcretDifferentiableBox<Base: Differentiable>: AnyDifferentiableBox {
+internal struct DifferentiableBox<Base: Differentiable>: AnyDifferentiableBox {
     @usableFromInline
     internal let baseComponent: Base
 
