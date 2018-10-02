@@ -87,16 +87,14 @@ In the case of definition above, `id` uniquely identifies the element and get to
 
 There are default implementations of `Differentiable` for the types that conformed to `Equatable` or `Hashable`：
 ```swift
-public extension Differentiable where Self: Equatable {
-    func isContentEqual(to source: Self) -> Bool {
-        return self == source
-    }
+// If `Self` conform to `Hashable`.
+var differenceIdentifier: Self {
+    return self
 }
 
-public extension Differentiable where Self: Hashable {
-    var differenceIdentifier: Self {
-        return self
-    }
+// If `Self` conform to `Equatable`.
+func isContentEqual(to source: Self) -> Bool {
+    return self == source
 }
 ```
 So, you can simply:
