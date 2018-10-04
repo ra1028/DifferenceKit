@@ -4,7 +4,7 @@ import DifferenceKit
 extension Int: Differentiable {}
 extension String: Differentiable {}
 
-enum D: Differentiable, CaseIterable {
+enum D: Differentiable, CaseIterable, Equatable {
     case a, b, c, d, e
 }
 
