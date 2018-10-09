@@ -62,7 +62,7 @@ public struct AnyDifferentiable: Differentiable {
 
 extension AnyDifferentiable: CustomDebugStringConvertible {
     public var debugDescription: String {
-        return "AnyDifferentiable(\(String(reflecting: base))"
+        return "AnyDifferentiable(\(String(reflecting: base)))"
     }
 }
 
