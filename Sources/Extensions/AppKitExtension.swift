@@ -64,6 +64,7 @@ public extension NSTableView {
                 setData(data)
                 return reloadData()
             }
+
             beginUpdates()
             setData(changeset.data)
 
@@ -82,6 +83,7 @@ public extension NSTableView {
             for (source, target) in changeset.elementMoved {
                 moveRow(at: source.element, to: target.element)
             }
+
             endUpdates()
         }
     }
