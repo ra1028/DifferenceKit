@@ -269,8 +269,8 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 // If the element target section is recorded as insertion, record its element path as deletion.
                 if let targetElementPath = sourceElementTraces[sourceElementPath].reference,
                     case .some = sectionResult.metadata.targetReferences[targetElementPath.section] {
-                    let sourceElement = contiguousSourceSections[sourceElementPath]
-                    firstStageElements.append(sourceElement)
+                    let targetElement = contiguousTargetSections[targetElementPath]
+                    firstStageElements.append(targetElement)
                     continue
                 }
 
@@ -322,10 +322,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 sourceElementTraces[sourceElementPath].isTracked = true
 
                 let sourceElement = contiguousSourceSections[sourceElementPath]
-                thirdStageElements.append(sourceElement)
+                thirdStageElements.append(targetElement)
 
                 if !targetElement.isContentEqual(to: sourceElement) {
-                    elementUpdated.append(targetElementPath)
+                    elementUpdated.append(sourceElementPath)
                 }
 
                 if sourceElementPath.section != sourceSectionIndex || sourceElementPath.element != untrackedSourceIndex {
@@ -345,17 +345,19 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         // - Includes:
         //   - section deletes
         //   - element deletes
-        if !sectionResult.deleted.isEmpty || !elementDeleted.isEmpty {
+        //   - element updates
+        if !sectionResult.deleted.isEmpty || !elementDeleted.isEmpty || !elementUpdated.isEmpty {
             changesets.append(
                 Changeset(
                     data: Collection(firstStageSections),
                     sectionDeleted: sectionResult.deleted,
-                    elementDeleted: elementDeleted
+                    elementDeleted: elementDeleted,
+                    elementUpdated: elementUpdated
                 )
             )
         }
 
-        // The 2st stage changeset.
+        // The 2nd stage changeset.
         // - Includes:
         //   - section inserts
         //   - section moves
@@ -369,7 +371,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 3st stage changeset.
+        // The 3rd stage changeset.
         // - Includes:
         //   - element inserts
         //   - element moves
@@ -383,16 +385,14 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             )
         }
 
-        // The 3st stage changeset.
+        // The 4th stage changeset.
         // - Includes:
         //   - section updates
-        //   - element updates
-        if !sectionResult.updated.isEmpty || !elementUpdated.isEmpty {
+        if !sectionResult.updated.isEmpty {
             changesets.append(
                 Changeset(
                     data: target,
-                    sectionUpdated: sectionResult.updated,
-                    elementUpdated: elementUpdated
+                    sectionUpdated: sectionResult.updated
                 )
             )
         }
