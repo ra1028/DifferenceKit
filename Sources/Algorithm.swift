@@ -67,32 +67,46 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         }
 
         var firstStageElements = ContiguousArray<Collection.Element>()
+        var secondStageElements = ContiguousArray<Collection.Element>()
+
+        firstStageElements.reserveCapacity(sourceElements.count)
 
         let result = differentiate(
             source: sourceElements,
             target: targetElements,
             trackTargetIndexAsUpdated: false,
             mapIndex: { ElementPath(element: $0, section: section) },
-            remainedInTarget: { firstStageElements.append($0) }
+            updatedElements: { firstStageElements.append($0) },
+            undeletedElements: { secondStageElements.append($0) }
         )
 
         var changesets = ContiguousArray<Changeset<Collection>>()
 
         // The 1st stage changeset.
         // - Includes:
-        //   - element deletes
         //   - element updates
-        if !result.deleted.isEmpty || !result.updated.isEmpty {
+        if !result.updated.isEmpty {
             changesets.append(
                 Changeset(
                     data: Collection(firstStageElements),
-                    elementDeleted: result.deleted,
                     elementUpdated: result.updated
                 )
             )
         }
 
-        // The 2st stage changeset.
+        // The 2nd stage changeset.
+        // - Includes:
+        //   - element deletes
+        if !result.deleted.isEmpty {
+            changesets.append(
+                Changeset(
+                    data: Collection(secondStageElements),
+                    elementDeleted: result.deleted
+                )
+            )
+        }
+
+        // The 3rd stage changeset.
         // - Includes:
         //   - element inserts
         //   - element moves
@@ -433,7 +447,8 @@ internal func differentiate<E: Differentiable, I>(
     target: ContiguousArray<E>,
     trackTargetIndexAsUpdated: Bool,
     mapIndex: (Int) -> I,
-    remainedInTarget: ((E) -> Void)? = nil
+    updatedElements: ((E) -> Void)? = nil,
+    undeletedElements: ((E) -> Void)? = nil
     ) -> DifferentiateResult<I> {
     var deleted = [I]()
     var inserted = [I]()
@@ -507,11 +522,15 @@ internal func differentiate<E: Differentiable, I>(
 
         if let targetIndex = sourceTraces[sourceIndex].reference {
             let targetElement = target[targetIndex]
-            remainedInTarget?(targetElement)
-        } else {
+            updatedElements?(targetElement)
+            undeletedElements?(targetElement)
+        }
+        else {
+            let sourceElement = source[sourceIndex]
             deleted.append(mapIndex(sourceIndex))
             sourceTraces[sourceIndex].isTracked = true
             offsetByDelete += 1
+            updatedElements?(sourceElement)
         }
     }
 
@@ -535,7 +554,8 @@ internal func differentiate<E: Differentiable, I>(
                 let deleteOffset = sourceTraces[sourceIndex].deleteOffset
                 moved.append((source: mapIndex(sourceIndex - deleteOffset), target: mapIndex(targetIndex)))
             }
-        } else {
+        }
+        else {
             inserted.append(mapIndex(targetIndex))
         }
     }

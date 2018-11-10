@@ -199,10 +199,17 @@ extension AlgorithmTestCase {
                 Changeset(
                     data: [
                         M(0, true),
+                        M(1, false),
                         M(2, false)
                     ],
-                    elementDeleted: [ElementPath(element: 1, section: section)],
                     elementUpdated: [ElementPath(element: 0, section: section)]
+                ),
+                Changeset(
+                    data: [
+                        M(0, true),
+                        M(2, false)
+                    ],
+                    elementDeleted: [ElementPath(element: 1, section: section)]
                 ),
                 Changeset(
                     data: target,
