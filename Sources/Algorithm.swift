@@ -67,32 +67,46 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         }
 
         var firstStageElements = ContiguousArray<Collection.Element>()
+        var secondStageElements = ContiguousArray<Collection.Element>()
+
+        firstStageElements.reserveCapacity(sourceElements.count)
 
         let result = differentiate(
             source: sourceElements,
             target: targetElements,
             trackTargetIndexAsUpdated: false,
             mapIndex: { ElementPath(element: $0, section: section) },
-            remainedInTarget: { firstStageElements.append($0) }
+            updatedElements: { firstStageElements.append($0) },
+            undeletedElements: { secondStageElements.append($0) }
         )
 
         var changesets = ContiguousArray<Changeset<Collection>>()
 
         // The 1st stage changeset.
         // - Includes:
-        //   - element deletes
         //   - element updates
-        if !result.deleted.isEmpty || !result.updated.isEmpty {
+        if !result.updated.isEmpty {
             changesets.append(
                 Changeset(
                     data: Collection(firstStageElements),
-                    elementDeleted: result.deleted,
                     elementUpdated: result.updated
                 )
             )
         }
 
-        // The 2st stage changeset.
+        // The 2nd stage changeset.
+        // - Includes:
+        //   - element deletes
+        if !result.deleted.isEmpty {
+            changesets.append(
+                Changeset(
+                    data: Collection(secondStageElements),
+                    elementDeleted: result.deleted
+                )
+            )
+        }
+
+        // The 3rd stage changeset.
         // - Includes:
         //   - element inserts
         //   - element moves
@@ -149,9 +163,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         let contiguousSourceSections = ContiguousArray(sourceSections.map { ContiguousArray($0.elements) })
         let contiguousTargetSections = ContiguousArray(targetSections.map { ContiguousArray($0.elements) })
 
-        var firstStageSections = ContiguousArray<Section>()
+        var firstStageSections = sourceSections
         var secondStageSections = ContiguousArray<Section>()
         var thirdStageSections = ContiguousArray<Section>()
+        var fourthStageSections = ContiguousArray<Section>()
 
         var sourceElementTraces = contiguousSourceSections.map { section in
             ContiguousArray(repeating: Trace<ElementPath>(), count: section.count)
@@ -164,8 +179,8 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         var flattenSourceIdentifiers = ContiguousArray<ElementIdentifier>()
         var flattenSourceElementPaths = ContiguousArray<ElementPath>()
 
-        secondStageSections.reserveCapacity(contiguousTargetSections.count)
         thirdStageSections.reserveCapacity(contiguousTargetSections.count)
+        fourthStageSections.reserveCapacity(contiguousTargetSections.count)
 
         flattenSourceIdentifiers.reserveCapacity(flattenSourceCount)
         flattenSourceElementPaths.reserveCapacity(flattenSourceCount)
@@ -252,43 +267,50 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
         // Record the element deletions.
         for sourceSectionIndex in contiguousSourceSections.indices {
-            // Should not calculate the element deletions in the deleted section.
-            guard case .some = sectionResult.metadata.sourceTraces[sourceSectionIndex].reference else {
-                continue
-            }
-
-            var offsetByDelete = 0
-            var firstStageElements = ContiguousArray<Element>()
+            let sourceSection = sourceSections[sourceSectionIndex]
             let sourceElements = contiguousSourceSections[sourceSectionIndex]
+            var firstStageElements = sourceElements
 
-            for sourceElementIndex in sourceElements.indices {
-                let sourceElementPath = ElementPath(element: sourceElementIndex, section: sourceSectionIndex)
+            // Should not calculate the element deletions in the deleted section.
+            if case .some = sectionResult.metadata.sourceTraces[sourceSectionIndex].reference {
+                var offsetByDelete = 0
 
-                sourceElementTraces[sourceElementPath].deleteOffset = offsetByDelete
+                var secondStageElements = ContiguousArray<Element>()
 
-                // If the element target section is recorded as insertion, record its element path as deletion.
-                if let targetElementPath = sourceElementTraces[sourceElementPath].reference,
-                    case .some = sectionResult.metadata.targetReferences[targetElementPath.section] {
-                    let targetElement = contiguousTargetSections[targetElementPath]
-                    firstStageElements.append(targetElement)
-                    continue
+                for sourceElementIndex in sourceElements.indices {
+                    let sourceElementPath = ElementPath(element: sourceElementIndex, section: sourceSectionIndex)
+
+                    sourceElementTraces[sourceElementPath].deleteOffset = offsetByDelete
+
+                    // If the element target section is recorded as insertion, record its element path as deletion.
+                    if let targetElementPath = sourceElementTraces[sourceElementPath].reference,
+                        case .some = sectionResult.metadata.targetReferences[targetElementPath.section] {
+                        let targetElement = contiguousTargetSections[targetElementPath]
+                        firstStageElements[sourceElementIndex] = targetElement
+                        secondStageElements.append(targetElement)
+                        continue
+                    }
+
+                    elementDeleted.append(sourceElementPath)
+                    sourceElementTraces[sourceElementPath].isTracked = true
+                    offsetByDelete += 1
                 }
 
-                elementDeleted.append(sourceElementPath)
-                sourceElementTraces[sourceElementPath].isTracked = true
-                offsetByDelete += 1
+                let secondStageSection = Section(source: sourceSection, elements: secondStageElements)
+                secondStageSections.append(secondStageSection)
+
             }
 
-            let firstStageSection = Section(source: sourceSections[sourceSectionIndex], elements: firstStageElements)
-            firstStageSections.append(firstStageSection)
+            let firstStageSection = Section(source: sourceSection, elements: firstStageElements)
+            firstStageSections[sourceSectionIndex] = firstStageSection
         }
 
         // Record the element updates/moves/insertions.
         for targetSectionIndex in contiguousTargetSections.indices {
             // Should not calculate the element updates/moves/insertions in the inserted section.
             guard let sourceSectionIndex = sectionResult.metadata.targetReferences[targetSectionIndex] else {
-                secondStageSections.append(targetSections[targetSectionIndex])
                 thirdStageSections.append(targetSections[targetSectionIndex])
+                fourthStageSections.append(targetSections[targetSectionIndex])
                 continue
             }
 
@@ -297,11 +319,11 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
             let sectionDeleteOffset = sectionResult.metadata.sourceTraces[sourceSectionIndex].deleteOffset
 
-            let secondStageSection = firstStageSections[sourceSectionIndex - sectionDeleteOffset]
-            secondStageSections.append(secondStageSection)
+            let thirdStageSection = secondStageSections[sourceSectionIndex - sectionDeleteOffset]
+            thirdStageSections.append(thirdStageSection)
 
-            var thirdStageElements = ContiguousArray<Element>()
-            thirdStageElements.reserveCapacity(targetElements.count)
+            var fourthStageElements = ContiguousArray<Element>()
+            fourthStageElements.reserveCapacity(targetElements.count)
 
             for targetElementIndex in targetElements.indices {
                 untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
@@ -314,7 +336,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 // If the element source section is recorded as deletion, record its element path as insertion.
                 guard let sourceElementPath = targetElementReferences[targetElementPath],
                     let movedSourceSectionIndex = sectionResult.metadata.sourceTraces[sourceElementPath.section].reference else {
-                        thirdStageElements.append(targetElement)
+                        fourthStageElements.append(targetElement)
                         elementInserted.append(targetElementPath)
                         continue
                 }
@@ -322,7 +344,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 sourceElementTraces[sourceElementPath].isTracked = true
 
                 let sourceElement = contiguousSourceSections[sourceElementPath]
-                thirdStageElements.append(targetElement)
+                fourthStageElements.append(targetElement)
 
                 if !targetElement.isContentEqual(to: sourceElement) {
                     elementUpdated.append(sourceElementPath)
@@ -335,23 +357,19 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 }
             }
 
-            let thirdStageSection = Section(source: secondStageSection, elements: thirdStageElements)
-            thirdStageSections.append(thirdStageSection)
+            let fourthStageSection = Section(source: thirdStageSection, elements: fourthStageElements)
+            fourthStageSections.append(fourthStageSection)
         }
 
         var changesets = ContiguousArray<Changeset<Collection>>()
 
         // The 1st stage changeset.
         // - Includes:
-        //   - section deletes
-        //   - element deletes
         //   - element updates
-        if !sectionResult.deleted.isEmpty || !elementDeleted.isEmpty || !elementUpdated.isEmpty {
+        if !elementUpdated.isEmpty {
             changesets.append(
                 Changeset(
                     data: Collection(firstStageSections),
-                    sectionDeleted: sectionResult.deleted,
-                    elementDeleted: elementDeleted,
                     elementUpdated: elementUpdated
                 )
             )
@@ -359,33 +377,47 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
         // The 2nd stage changeset.
         // - Includes:
-        //   - section inserts
-        //   - section moves
-        if !sectionResult.inserted.isEmpty || !sectionResult.moved.isEmpty {
+        //   - section deletes
+        //   - element deletes
+        if !sectionResult.deleted.isEmpty || !elementDeleted.isEmpty {
             changesets.append(
                 Changeset(
                     data: Collection(secondStageSections),
-                    sectionInserted: sectionResult.inserted,
-                    sectionMoved: sectionResult.moved
+                    sectionDeleted: sectionResult.deleted,
+                    elementDeleted: elementDeleted
                 )
             )
         }
 
         // The 3rd stage changeset.
         // - Includes:
+        //   - section inserts
+        //   - section moves
+        if !sectionResult.inserted.isEmpty || !sectionResult.moved.isEmpty {
+            changesets.append(
+                Changeset(
+                    data: Collection(thirdStageSections),
+                    sectionInserted: sectionResult.inserted,
+                    sectionMoved: sectionResult.moved
+                )
+            )
+        }
+
+        // The 4th stage changeset.
+        // - Includes:
         //   - element inserts
         //   - element moves
         if !elementInserted.isEmpty || !elementMoved.isEmpty {
             changesets.append(
                 Changeset(
-                    data: Collection(thirdStageSections),
+                    data: Collection(fourthStageSections),
                     elementInserted: elementInserted,
                     elementMoved: elementMoved
                 )
             )
         }
 
-        // The 4th stage changeset.
+        // The 5th stage changeset.
         // - Includes:
         //   - section updates
         if !sectionResult.updated.isEmpty {
@@ -415,7 +447,8 @@ internal func differentiate<E: Differentiable, I>(
     target: ContiguousArray<E>,
     trackTargetIndexAsUpdated: Bool,
     mapIndex: (Int) -> I,
-    remainedInTarget: ((E) -> Void)? = nil
+    updatedElements: ((E) -> Void)? = nil,
+    undeletedElements: ((E) -> Void)? = nil
     ) -> DifferentiateResult<I> {
     var deleted = [I]()
     var inserted = [I]()
@@ -489,11 +522,15 @@ internal func differentiate<E: Differentiable, I>(
 
         if let targetIndex = sourceTraces[sourceIndex].reference {
             let targetElement = target[targetIndex]
-            remainedInTarget?(targetElement)
-        } else {
+            updatedElements?(targetElement)
+            undeletedElements?(targetElement)
+        }
+        else {
+            let sourceElement = source[sourceIndex]
             deleted.append(mapIndex(sourceIndex))
             sourceTraces[sourceIndex].isTracked = true
             offsetByDelete += 1
+            updatedElements?(sourceElement)
         }
     }
 
@@ -517,7 +554,8 @@ internal func differentiate<E: Differentiable, I>(
                 let deleteOffset = sourceTraces[sourceIndex].deleteOffset
                 moved.append((source: mapIndex(sourceIndex - deleteOffset), target: mapIndex(targetIndex)))
             }
-        } else {
+        }
+        else {
             inserted.append(mapIndex(targetIndex))
         }
     }
