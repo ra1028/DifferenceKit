@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'DifferenceKit'
-  spec.version  = '0.7.2'
+  spec.version  = '0.8.0'
   spec.author = { 'ra1028' => 'r.fe51028.r@gmail.com' }
   spec.homepage = 'https://github.com/ra1028/DifferenceKit'
   spec.documentation_url = 'https://ra1028.github.io/DifferenceKit'
