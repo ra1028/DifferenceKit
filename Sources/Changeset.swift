@@ -123,7 +123,11 @@ extension Changeset: Equatable where Collection: Equatable {
 extension Changeset: CustomDebugStringConvertible {
     public var debugDescription: String {
         guard !data.isEmpty || hasChanges else {
-            return "Changeset(data: [])"
+            return """
+            Changeset(
+                data: []
+            )"
+            """
         }
 
         var description = """

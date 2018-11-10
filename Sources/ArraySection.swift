@@ -59,10 +59,6 @@ extension ArraySection: Equatable where Model: Equatable, Element: Equatable {
 
 extension ArraySection: CustomDebugStringConvertible {
     public var debugDescription: String {
-        guard !elements.isEmpty else {
-            return "ArraySection(model: \(model), elements: [])"
-        }
-
         return """
         ArraySection(
             model: \(model),
