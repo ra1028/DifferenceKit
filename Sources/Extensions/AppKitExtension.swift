@@ -15,11 +15,13 @@ public extension NSTableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
+    ///   - completion: A closure that was invoked when NSTableView reload completed, or nothing was changed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> NSTableView.AnimationOptions,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
         reload(
             using: stagedChangeset,
@@ -27,7 +29,8 @@ public extension NSTableView {
             insertRowsAnimation: animation,
             reloadRowsAnimation: animation,
             interrupt: interrupt,
-            setData: setData
+            setData: setData,
+            completion: completion
         )
     }
 
@@ -46,23 +49,38 @@ public extension NSTableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
+    ///   - completion: A closure that was invoked when NSTableView reload completed, or nothing was changed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         insertRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         reloadRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
+        if stagedChangeset.isEmpty {
+            completion?()
+            return
+        }
+        
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            reloadData()
+            DispatchQueue.main.async {
+                completion?()
+            }
+            return
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                reloadData()
+                DispatchQueue.main.async {
+                    completion?()
+                }
+                return
             }
 
             beginUpdates()
@@ -86,6 +104,10 @@ public extension NSTableView {
 
             endUpdates()
         }
+        
+        DispatchQueue.main.async {
+            completion?()
+        }
     }
 }
 
@@ -103,20 +125,35 @@ public extension NSCollectionView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSCollectionView.
+    ///   - completion: A closure that was invoked when NSCollectionView reload completed, or nothing was changed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
+        if stagedChangeset.isEmpty {
+            completion?()
+            return
+        }
+        
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            reloadData()
+            DispatchQueue.main.async {
+                completion?()
+            }
+            return
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                reloadData()
+                DispatchQueue.main.async {
+                    completion?()
+                }
+                return
             }
 
             animator().performBatchUpdates({
@@ -138,6 +175,10 @@ public extension NSCollectionView {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
             })
+        }
+        
+        DispatchQueue.main.async {
+            completion?()
         }
     }
 }

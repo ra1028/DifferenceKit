@@ -10,7 +10,7 @@ public final class TableViewController: UITableViewController {
         get { return data }
         set {
             let changeset = StagedChangeset(source: data, target: newValue)
-            tableView.reload(using: changeset, with: .fade) { data in
+            tableView?.reload(using: changeset, with: .fade) { data in
                 self.data = data
             }
         }
