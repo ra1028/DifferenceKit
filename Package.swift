@@ -11,12 +11,12 @@ let package = Package(
         .target(
             name: "DifferenceKit",
             path: "Sources",
-			exclude: ["Extensions"]
+            exclude: ["Extensions"]
         ),
         .testTarget(
             name: "DifferenceKitTests",
             dependencies: ["DifferenceKit"],
-			path: "Tests"
+            path: "Tests"
         )
     ]
 )
