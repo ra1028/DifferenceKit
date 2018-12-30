@@ -312,6 +312,26 @@ end
 There is no UI extension for watchOS.  
 You can use only the algorithm.  
 
+### [Swift Package Manager](https://swift.org/package-manager/)
+To use DifferenceKit in a project with SPM, add the following to your `Package.swift`:
+```swift
+import PackageDescription
+
+let package = Package(
+    name: "YourProjectName",
+    products: [
+        .executable(name: "yourexecutable", targets: ["yourexecutable"]),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/ra1028/DifferenceKit.git", from: "0.8.0")
+    ],
+    targets: [
+        .target(name: "yourexecutable", dependencies: ["DifferenceKit"])
+    ]
+)
+```
+The SPM version does not include the UIKit and AppKit extensions.
+
 ### [Carthage](https://github.com/Carthage/Carthage)
 Add the following to your `Cartfile`:
 ```ruby
