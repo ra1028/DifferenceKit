@@ -333,7 +333,7 @@ let package = Package(
         .executable(name: "yourexecutable", targets: ["yourexecutable"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/ra1028/DifferenceKit.git", from: "0.8.0")
+        .package(url: "https://github.com/ra1028/DifferenceKit.git", from: "any version")
     ],
     targets: [
         .target(name: "yourexecutable", dependencies: ["DifferenceKit"])

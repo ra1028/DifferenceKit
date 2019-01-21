@@ -9,3 +9,9 @@ lib-lint:
 
 pod-release:
 	bundle exec pod trunk push
+
+test-linux:
+	sh scripts/test-linux.sh
+
+generate-linuxmain:
+	swift test --generate-linuxmain
