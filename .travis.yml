@@ -31,4 +31,4 @@ matrix:
         - swift test
 
 notifications:
-email: false
+  email: false
