@@ -25,3 +25,6 @@ docs/undocumented.json
 ## Gems
 .bundle
 vendor/bundle
+
+## Swift Package build
+.build
