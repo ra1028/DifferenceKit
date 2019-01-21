@@ -12,3 +12,6 @@ pod-release:
 
 test-linux:
 	sh scripts/test-linux.sh
+
+generate-linuxmain:
+	swift test --generate-linuxmain
