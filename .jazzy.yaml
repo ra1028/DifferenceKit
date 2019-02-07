@@ -11,3 +11,5 @@ skip_undocumented: true
 xcodebuild_arguments:
   - -sdk
   - iphonesimulator
+  - -scheme
+  - DifferenceKit
