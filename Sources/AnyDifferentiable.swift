@@ -44,7 +44,12 @@ public struct AnyDifferentiable: Differentiable {
     ///   - base: A differentiable value to wrap.
     @inlinable
     public init<D: Differentiable>(_ base: D) {
-        box = DifferentiableBox(base)
+        if let anyDifferentiable = base as? AnyDifferentiable {
+            self = anyDifferentiable
+        }
+        else {
+            box = DifferentiableBox(base)
+        }
     }
 
     /// Indicate whether the content of `base` is equals to the content of the given source value.
@@ -86,7 +91,7 @@ internal struct DifferentiableBox<Base: Differentiable>: AnyDifferentiableBox {
 
     @inlinable
     internal var differenceIdentifier: AnyHashable {
-        return AnyHashable(baseComponent.differenceIdentifier)
+        return baseComponent.differenceIdentifier
     }
 
     @inlinable
