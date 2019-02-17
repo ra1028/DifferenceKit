@@ -15,7 +15,7 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 </br>
 <a href="https://travis-ci.org/ra1028/DifferenceKit"><img alt="Build Status" src="https://travis-ci.org/ra1028/DifferenceKit.svg?branch=master"/></a>
 <a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20OSX%20%7C%20tvOS%20%7C%20watchOS-green.svg"/></a>
-<a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/license-MIT-000000.svg"/></a>
+<a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/License-Apache%202.0-black.svg"/></a>
 </p>
 
 ---
@@ -351,5 +351,38 @@ If your pull request including new function, please write test cases for it.
 
 ---
 
+## Credit
+
+#### Bibliography
+DifferenceKit was developed with reference to the following excellent materials.  
+
+- [A technique for isolating differences between files](https://dl.acm.org/citation.cfm?id=359467) by [Paul Heckel](https://dl.acm.org/author_page.cfm?id=81100051772)
+- [DifferenceAlgorithmComparison](https://github.com/horita-yuya/DifferenceAlgorithmComparison) by [@horita-yuya](https://github.com/horita-yuya)
+- [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) by [@kzaher](https://github.com/kzaher), [RxSwift Community](https://github.com/RxSwiftCommunity)
+
+#### OSS using DifferenceKit
+The list of the awesome OSS which uses this library.  
+They also help to understanding how to use DifferenceKit.  
+
+- [Rocket.Chat.iOS](https://github.com/RocketChat/Rocket.Chat.iOS) by [RocketChat](https://github.com/RocketChat)
+- [wire-ios](https://github.com/wireapp/wire-ios) by [Wire Swiss GmbH](https://github.com/wireapp)
+- [ReactiveLists](https://github.com/plangrid/ReactiveLists) by [PlanGrid](https://github.com/plangrid)
+- [ReduxMovieDB](https://github.com/cardoso/ReduxMovieDB) by [@cardoso](https://github.com/cardoso)
+- [TetrisDiffingCompetition](https://github.com/skagedal/TetrisDiffingCompetition) by [@skagedal](https://github.com/skagedal)
+
+#### Other diffing libraries
+I respect and ️❤️ all libraries involved in diffing.  
+
+- [IGListKit](https://github.com/Instagram/IGListKit) by [Instagram](https://github.com/Instagram)
+- [FlexibleDiff](https://github.com/RACCommunity/FlexibleDiff) by [@andersio](https://github.com/andersio), [RACCommunity](https://github.com/RACCommunity)
+- [DeepDiff](https://github.com/onmyway133/DeepDiff) by [@onmyway133](https://github.com/onmyway133)
+- [Changeset](https://github.com/osteslag/Changeset) by [@osteslag](https://github.com/osteslag)
+- [Differ](https://github.com/tonyarnold/Differ) by [@tonyarnold](https://github.com/tonyarnold)
+- [Diff.swift](https://github.com/wokalski/Diff.swift) by [@wokalski](https://github.com/wokalski)
+- [Dwifft](https://github.com/jflinter/Dwifft) by [@jflinter](https://github.com/jflinter)
+- [ListDiff](https://github.com/lxcid/ListDiff) by [@lxcid](https://github.com/lxcid)
+
+---
+
 ## License
-DifferenceKit is released under the [MIT License](https://github.com/ra1028/DifferenceKit/blob/master/LICENSE).
+DifferenceKit is released under the [Apache 2.0 License](https://github.com/ra1028/DifferenceKit/blob/master/LICENSE).
