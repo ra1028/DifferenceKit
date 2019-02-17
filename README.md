@@ -358,7 +358,7 @@ DifferenceKit was developed with reference to the following excellent materials.
 
 - [A technique for isolating differences between files](https://dl.acm.org/citation.cfm?id=359467) by [Paul Heckel](https://dl.acm.org/author_page.cfm?id=81100051772)
 - [DifferenceAlgorithmComparison](https://github.com/horita-yuya/DifferenceAlgorithmComparison) by [@horita-yuya](https://github.com/horita-yuya)
-- [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) by [@kzaher](https://github.com/kzaher), [RxSwiftCommunity](https://github.com/RxSwiftCommunity)
+- [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) by [@kzaher](https://github.com/kzaher), [RxSwiftCommunity](https://github.com/RxSwiftCommunity)
 
 #### OSS using DifferenceKit
 The list of the awesome OSS which uses this library.  
