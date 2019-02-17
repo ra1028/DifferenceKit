@@ -15,7 +15,7 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 </br>
 <a href="https://travis-ci.org/ra1028/DifferenceKit"><img alt="Build Status" src="https://travis-ci.org/ra1028/DifferenceKit.svg?branch=master"/></a>
 <a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20OSX%20%7C%20tvOS%20%7C%20watchOS-green.svg"/></a>
-<a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/license-MIT-000000.svg"/></a>
+<a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/License-Apache%202.0-black.svg"/></a>
 </p>
 
 ---
@@ -352,4 +352,4 @@ If your pull request including new function, please write test cases for it.
 ---
 
 ## License
-DifferenceKit is released under the [MIT License](https://github.com/ra1028/DifferenceKit/blob/master/LICENSE).
+DifferenceKit is released under the [Apache 2.0 License](https://github.com/ra1028/DifferenceKit/blob/master/LICENSE).
