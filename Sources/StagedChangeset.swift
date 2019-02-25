@@ -43,6 +43,41 @@ public struct StagedChangeset<Collection: Swift.Collection> {
     }
 }
 
+#if compiler(>=5.0)
+/* Removes MutableCollection conformance as it is redundant. */
+extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection {
+    @inlinable
+    public init() {
+        self.init([])
+    }
+
+    @inlinable
+    public var startIndex: Int {
+        return changesets.startIndex
+    }
+
+    @inlinable
+    public var endIndex: Int {
+        return changesets.endIndex
+    }
+
+    @inlinable
+    public func index(after i: Int) -> Int {
+        return changesets.index(after: i)
+    }
+
+    @inlinable
+    public subscript(position: Int) -> Changeset<Collection> {
+        get { return changesets[position] }
+        set { changesets[position] = newValue }
+    }
+
+    @inlinable
+    public mutating func replaceSubrange<C: Swift.Collection, R: RangeExpression>(_ subrange: R, with newElements: C) where C.Element == Changeset<Collection>, R.Bound == Int {
+        changesets.replaceSubrange(subrange, with: newElements)
+    }
+}
+#else
 extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection, MutableCollection {
     @inlinable
     public init() {
@@ -75,6 +110,7 @@ extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection, M
         changesets.replaceSubrange(subrange, with: newElements)
     }
 }
+#endif
 
 extension StagedChangeset: Equatable where Collection: Equatable {
     @inlinable

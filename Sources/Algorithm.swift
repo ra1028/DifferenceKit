@@ -19,7 +19,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Complexity: O(n)
     @inlinable
-    public init(source: Collection, target: Collection) {
+    init(source: Collection, target: Collection) {
         self.init(source: source, target: target, section: 0)
     }
 
@@ -44,7 +44,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Complexity: O(n)
     @inlinable
-    public init(source: Collection, target: Collection, section: Int) {
+    init(source: Collection, target: Collection, section: Int) {
         let sourceElements = ContiguousArray(source)
         let targetElements = ContiguousArray(target)
 
@@ -151,7 +151,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Complexity: O(n)
     @inlinable
-    public init(source: Collection, target: Collection) {
+    init(source: Collection, target: Collection) {
         typealias Section = Collection.Element
         typealias SectionIdentifier = Collection.Element.DifferenceIdentifier
         typealias Element = Collection.Element.Collection.Element
@@ -326,9 +326,15 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             fourthStageElements.reserveCapacity(targetElements.count)
 
             for targetElementIndex in targetElements.indices {
+                #if swift(>=5.0)
+                untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
+                    sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
+                }
+                #else
                 untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
                     sourceElementTraces[sourceSectionIndex].suffix(from: index).index { !$0.isTracked }
                 }
+                #endif
 
                 let targetElementPath = ElementPath(element: targetElementIndex, section: targetSectionIndex)
                 let targetElement = contiguousTargetSections[targetElementPath]
@@ -536,9 +542,15 @@ internal func differentiate<E: Differentiable, I>(
 
     // Record the updates/moves/insertions.
     for targetIndex in target.indices {
+        #if swift(>=5.0)
+        untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
+            sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
+        }
+        #else
         untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
             sourceTraces.suffix(from: index).index { !$0.isTracked }
         }
+        #endif
 
         if let sourceIndex = targetReferences[targetIndex] {
             sourceTraces[sourceIndex].isTracked = true
@@ -654,13 +666,10 @@ internal final class IndicesReference {
 @usableFromInline
 internal struct TableKey<T: Hashable>: Hashable {
     @usableFromInline
-    internal let hashValue: Int
-    @usableFromInline
     internal let pointer: UnsafePointer<T>
 
     @inlinable
     internal init(pointer: UnsafePointer<T>) {
-        self.hashValue = pointer.pointee.hashValue
         self.pointer = pointer
     }
 
@@ -669,11 +678,15 @@ internal struct TableKey<T: Hashable>: Hashable {
         return lhs.hashValue == rhs.hashValue
             && (lhs.pointer.distance(to: rhs.pointer) == 0 || lhs.pointer.pointee == rhs.pointer.pointee)
     }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(pointer.pointee)
+    }
 }
 
 internal extension MutableCollection where Element: MutableCollection, Index == Int, Element.Index == Int {
     @inlinable
-    internal subscript(path: ElementPath) -> Element.Element {
+    subscript(path: ElementPath) -> Element.Element {
         get { return self[path.section][path.element] }
         set { self[path.section][path.element] = newValue }
     }

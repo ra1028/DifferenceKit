@@ -15,6 +15,23 @@ public extension NSTableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
+    #if swift(>=5.0)
+    func reload<C>(
+        using stagedChangeset: StagedChangeset<C>,
+        with animation: @autoclosure () -> NSTableView.AnimationOptions,
+        interrupt: ((Changeset<C>) -> Bool)? = nil,
+        setData: (C) -> Void
+        ) {
+        reload(
+            using: stagedChangeset,
+            deleteRowsAnimation: animation(),
+            insertRowsAnimation: animation(),
+            reloadRowsAnimation: animation(),
+            interrupt: interrupt,
+            setData: setData
+        )
+    }
+    #else
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> NSTableView.AnimationOptions,
@@ -30,6 +47,7 @@ public extension NSTableView {
             setData: setData
         )
     }
+    #endif
 
     /// Applies multiple animated updates in stages using `StagedChangeset`.
     ///
