@@ -44,6 +44,8 @@ public struct StagedChangeset<Collection: Swift.Collection> {
 }
 
 extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection, MutableCollection {
+    public typealias Element = Changeset<Collection>
+
     @inlinable
     public init() {
         self.init([])
