@@ -326,15 +326,13 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             fourthStageElements.reserveCapacity(targetElements.count)
 
             for targetElementIndex in targetElements.indices {
-                #if swift(>=5.0)
                 untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-                    sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
+                    #if swift(>=5.0)
+                    return sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
+                    #else
+                    return sourceElementTraces[sourceSectionIndex].suffix(from: index).index { !$0.isTracked }
+                    #endif
                 }
-                #else
-                untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-                    sourceElementTraces[sourceSectionIndex].suffix(from: index).index { !$0.isTracked }
-                }
-                #endif
 
                 let targetElementPath = ElementPath(element: targetElementIndex, section: targetSectionIndex)
                 let targetElement = contiguousTargetSections[targetElementPath]
@@ -542,15 +540,13 @@ internal func differentiate<E: Differentiable, I>(
 
     // Record the updates/moves/insertions.
     for targetIndex in target.indices {
-        #if swift(>=5.0)
         untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-            sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
+            #if swift(>=5.0)
+            return sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
+            #else
+            return sourceTraces.suffix(from: index).index { !$0.isTracked }
+            #endif
         }
-        #else
-        untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-            sourceTraces.suffix(from: index).index { !$0.isTracked }
-        }
-        #endif
 
         if let sourceIndex = targetReferences[targetIndex] {
             sourceTraces[sourceIndex].isTracked = true
