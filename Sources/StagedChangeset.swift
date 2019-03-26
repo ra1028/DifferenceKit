@@ -76,7 +76,7 @@ extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection {
     }
 }
 
-#if compiler(<5.0) && compiler(>=4.0)
+#if !compiler(>=5.0) && compiler(>=4.0)
 extension StagedChangeset: MutableCollection {}
 #endif
 
