@@ -21,7 +21,6 @@ public extension UITableView {
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
-        #if swift(>=5.0)
         reload(
             using: stagedChangeset,
             deleteSectionsAnimation: animation(),
@@ -33,19 +32,6 @@ public extension UITableView {
             interrupt: interrupt,
             setData: setData
         )
-        #else
-        reload(
-            using: stagedChangeset,
-            deleteSectionsAnimation: animation,
-            insertSectionsAnimation: animation,
-            reloadSectionsAnimation: animation,
-            deleteRowsAnimation: animation,
-            insertRowsAnimation: animation,
-            reloadRowsAnimation: animation,
-            interrupt: interrupt,
-            setData: setData
-        )
-        #endif
     }
 
     /// Applies multiple animated updates in stages using `StagedChangeset`.

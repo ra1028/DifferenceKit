@@ -245,11 +245,14 @@ extension AlgorithmTestCase {
 
     func testSameHashValue() {
         struct A: Hashable, Differentiable {
-            let hashValue = 0
             let actualValue: Int
 
             init(_ actualValue: Int) {
                 self.actualValue = actualValue
+            }
+
+            func hash(into hasher: inout Hasher) {
+                hasher.combine(0)
             }
 
             func isContentEqual(to source: A) -> Bool {

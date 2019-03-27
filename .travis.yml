@@ -1,34 +1,51 @@
-env:
-  global:
-    - LC_CTYPE=en_US.UTF-8
+aliases:
+  - &testing_xcode
+    os: osx
+    language: objective-c
+    script:
+      - set -o pipefail
+      - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release ENABLE_TESTABILITY=YES | xcpretty -c
+      - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X' ENABLE_TESTABILITY=YES | xcpretty - c
+      - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk appletvsimulator -destination 'platform=tvOS Simulator,name=Apple TV' ENABLE_TESTABILITY=YES | xcpretty -c
+      - xcodebuild build -scheme DifferenceKit -configuration Release -sdk watchsimulator -destination 'platform=watchOS Simulator,name=Apple Watch Series 4 - 40mm' ENABLE_TESTABILITY=YES | xcpretty -c
+
+  - &testing_spm_darwin
+    os: osx
+    language: generic
+    script:
+        - swift build
+        - swift test
+
+  - &testing_spm_linux
+    os: linux
+    language: generic
+    dist: trusty
+    sudo: required
+    before_install:
+      - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
+    script:
+      - swift build
+      - swift test
+
 matrix:
   include:
-    - os: osx
-      language: objective-c
-      osx_image: xcode10
-      script:
-        - set -o pipefail
-        - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release ENABLE_TESTABILITY=YES | xcpretty -c
-        - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' ENABLE_TESTABILITY=YES | xcpretty - c
-        - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk appletvsimulator -destination 'platform=tvOS Simulator,name=Apple TV' ENABLE_TESTABILITY=YES | xcpretty -c
-        - xcodebuild build -scheme DifferenceKit -configuration Release -sdk watchsimulator -destination 'platform=watchOS Simulator,name=Apple Watch - 38mm' ENABLE_TESTABILITY=YES | xcpretty -c
+    - <<: *testing_xcode
+      osx_image: xcode10.1
 
-    - os: osx
-      language: generic
-      osx_image: xcode10
-      script:
-        - swift build
-        - swift test
+    - <<: *testing_xcode
+      osx_image: xcode10.2
 
-    - os: linux
-      language: generic
-      dist: trusty
-      sudo: required
-      before_install:
-        - eval "$(curl -sL https://gist.githubusercontent.com/kylef/5c0475ff02b7c7671d2a/raw/9f442512a46d7a2af7b850d65a7e9bd31edfb09b/swiftenv-install.sh)"
-      script:
-        - swift build
-        - swift test
+    - <<: *testing_spm_darwin
+      osx_image: xcode10.1
+
+    - <<: *testing_spm_darwin
+      osx_image: xcode10.2
+
+    - <<: *testing_spm_linux
+      env: SWIFT_VERSION=4.2
+
+    - <<: *testing_spm_linux
+      env: SWIFT_VERSION=5.0
 
 notifications:
   email: false

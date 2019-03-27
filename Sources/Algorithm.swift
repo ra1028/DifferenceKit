@@ -327,11 +327,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
             for targetElementIndex in targetElements.indices {
                 untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-                    #if swift(>=5.0)
-                    return sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
-                    #else
-                    return sourceElementTraces[sourceSectionIndex].suffix(from: index).index { !$0.isTracked }
-                    #endif
+                    sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
                 }
 
                 let targetElementPath = ElementPath(element: targetElementIndex, section: targetSectionIndex)
@@ -541,11 +537,7 @@ internal func differentiate<E: Differentiable, I>(
     // Record the updates/moves/insertions.
     for targetIndex in target.indices {
         untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-            #if swift(>=5.0)
-            return sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
-            #else
-            return sourceTraces.suffix(from: index).index { !$0.isTracked }
-            #endif
+            sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
         }
 
         if let sourceIndex = targetReferences[targetIndex] {
@@ -662,20 +654,24 @@ internal final class IndicesReference {
 @usableFromInline
 internal struct TableKey<T: Hashable>: Hashable {
     @usableFromInline
+    internal let pointeeHashValue: Int
+    @usableFromInline
     internal let pointer: UnsafePointer<T>
 
     @inlinable
     internal init(pointer: UnsafePointer<T>) {
+        self.pointeeHashValue = pointer.pointee.hashValue
         self.pointer = pointer
     }
 
     @inlinable
     internal static func == (lhs: TableKey, rhs: TableKey) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        return lhs.pointeeHashValue == rhs.pointeeHashValue
             && (lhs.pointer.distance(to: rhs.pointer) == 0 || lhs.pointer.pointee == rhs.pointer.pointee)
     }
-    
-    public func hash(into hasher: inout Hasher) {
+
+    @inlinable
+    internal func hash(into hasher: inout Hasher) {
         hasher.combine(pointer.pointee)
     }
 }
