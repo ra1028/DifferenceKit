@@ -7,7 +7,7 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 </H4>
 
 <p align="center">
-<a href="https://developer.apple.com/swift"><img alt="Swift5" src="https://img.shields.io/badge/language-Swift4-orange.svg"/></a>
+<a href="https://developer.apple.com/swift"><img alt="Swift5" src="https://img.shields.io/badge/language-Swift5-orange.svg"/></a>
 <a href="https://github.com/ra1028/DifferenceKit/releases/latest"><img alt="Release" src="https://img.shields.io/github/release/ra1028/DifferenceKit.svg"/></a>
 <a href="https://cocoapods.org/pods/DifferenceKit"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/DifferenceKit.svg"/></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-yellow.svg"/></a>
