@@ -219,11 +219,11 @@
 				TargetAttributes = {
 					6B2DF86D210E2C12004D2D40 = {
 						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					6B2DF876210E2C12004D2D40 = {
 						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
