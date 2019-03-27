@@ -43,7 +43,9 @@ public struct StagedChangeset<Collection: Swift.Collection> {
     }
 }
 
-extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection {
+extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection, MutableCollection {
+    public typealias Element = Changeset<Collection>
+
     @inlinable
     public init() {
         self.init([])
@@ -75,10 +77,6 @@ extension StagedChangeset: RandomAccessCollection, RangeReplaceableCollection {
         changesets.replaceSubrange(subrange, with: newElements)
     }
 }
-
-#if !compiler(>=5.0) && compiler(>=4.0)
-extension StagedChangeset: MutableCollection {}
-#endif
 
 extension StagedChangeset: Equatable where Collection: Equatable {
     @inlinable
