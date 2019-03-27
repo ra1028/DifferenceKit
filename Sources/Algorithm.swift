@@ -666,8 +666,9 @@ internal struct TableKey<T: Hashable>: Hashable {
         return lhs.hashValue == rhs.hashValue
             && (lhs.pointer.distance(to: rhs.pointer) == 0 || lhs.pointer.pointee == rhs.pointer.pointee)
     }
-    
-    public func hash(into hasher: inout Hasher) {
+
+    @usableFromInline
+    internal func hash(into hasher: inout Hasher) {
         hasher.combine(pointer.pointee)
     }
 }
