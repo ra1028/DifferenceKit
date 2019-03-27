@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.license = { :type => 'MIT', :file => 'LICENSE' }
   spec.requires_arc = true
   spec.default_subspecs = 'Core', 'UIKitExtension'
-  spec.swift_version = "4.2"
+  spec.swift_version = '4.2'
 
   spec.ios.deployment_target = '9.0'
   spec.tvos.deployment_target = '9.0'
