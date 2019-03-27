@@ -1,7 +1,3 @@
-env:
-  global:
-    - LC_CTYPE=en_US.UTF-8
-
 aliases:
   - &testing_xcode
     os: osx
@@ -11,7 +7,7 @@ aliases:
       - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release ENABLE_TESTABILITY=YES | xcpretty -c
       - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X' ENABLE_TESTABILITY=YES | xcpretty - c
       - xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk appletvsimulator -destination 'platform=tvOS Simulator,name=Apple TV' ENABLE_TESTABILITY=YES | xcpretty -c
-      - xcodebuild build -scheme DifferenceKit -configuration Release -sdk watchsimulator -destination 'platform=watchOS Simulator,name=Apple Watch - 38mm' ENABLE_TESTABILITY=YES | xcpretty -c
+      - xcodebuild build -scheme DifferenceKit -configuration Release -sdk watchsimulator -destination 'platform=watchOS Simulator,name=Apple Watch Series 4 - 40mm' ENABLE_TESTABILITY=YES | xcpretty -c
 
   - &testing_spm_darwin
     os: osx
