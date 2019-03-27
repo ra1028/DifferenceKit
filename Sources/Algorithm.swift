@@ -654,20 +654,23 @@ internal final class IndicesReference {
 @usableFromInline
 internal struct TableKey<T: Hashable>: Hashable {
     @usableFromInline
+    internal let pointeeHashValue: Int
+    @usableFromInline
     internal let pointer: UnsafePointer<T>
 
     @inlinable
     internal init(pointer: UnsafePointer<T>) {
+        self.pointeeHashValue = pointer.pointee.hashValue
         self.pointer = pointer
     }
 
     @inlinable
     internal static func == (lhs: TableKey, rhs: TableKey) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        return lhs.pointeeHashValue == rhs.pointeeHashValue
             && (lhs.pointer.distance(to: rhs.pointer) == 0 || lhs.pointer.pointee == rhs.pointer.pointee)
     }
 
-    @usableFromInline
+    @inlinable
     internal func hash(into hasher: inout Hasher) {
         hasher.combine(pointer.pointee)
     }
