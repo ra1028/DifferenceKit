@@ -327,11 +327,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
             for targetElementIndex in targetElements.indices {
                 untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-                    #if swift(>=5.0)
-                    return sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
-                    #else
-                    return sourceElementTraces[sourceSectionIndex].suffix(from: index).index { !$0.isTracked }
-                    #endif
+                    sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
                 }
 
                 let targetElementPath = ElementPath(element: targetElementIndex, section: targetSectionIndex)
@@ -541,11 +537,7 @@ internal func differentiate<E: Differentiable, I>(
     // Record the updates/moves/insertions.
     for targetIndex in target.indices {
         untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-            #if swift(>=5.0)
-            return sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
-            #else
-            return sourceTraces.suffix(from: index).index { !$0.isTracked }
-            #endif
+            sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
         }
 
         if let sourceIndex = targetReferences[targetIndex] {
