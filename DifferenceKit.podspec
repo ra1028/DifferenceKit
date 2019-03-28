@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
                      The algorithm is optimized based on the Paul Heckel's algorithm.
                      DESC
   spec.source = { :git => 'https://github.com/ra1028/DifferenceKit.git', :tag => spec.version.to_s }
-  spec.license = { :type => 'MIT', :file => 'LICENSE' }
+  spec.license = { :type => 'Apache 2.0', :file => 'LICENSE' }
   spec.requires_arc = true
   spec.default_subspecs = 'Core', 'UIKitExtension'
   spec.swift_version = '4.2'
