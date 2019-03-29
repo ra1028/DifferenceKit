@@ -92,7 +92,7 @@
 			children = (
 				6B5B4085211066B300A931DB /* Sources */,
 				6B5B4092211066BF00A931DB /* Tests */,
-				6B2DF889210E39A8004D2D40 /* Configurations */,
+				6B2DF889210E39A8004D2D40 /* XCConfigs */,
 				6B2DF86F210E2C12004D2D40 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,12 +106,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6B2DF889210E39A8004D2D40 /* Configurations */ = {
+		6B2DF889210E39A8004D2D40 /* XCConfigs */ = {
 			isa = PBXGroup;
 			children = (
 				6B2DF88A210E39A8004D2D40 /* DifferenceKit.xcconfig */,
 			);
-			path = Configurations;
+			path = XCConfigs;
 			sourceTree = "<group>";
 		};
 		6B5B4085211066B300A931DB /* Sources */ = {
