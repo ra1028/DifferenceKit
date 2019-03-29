@@ -182,7 +182,8 @@ func XCTAssertReproducible<C: RangeReplaceableCollection & Equatable>(
         let targetElementPath: ElementPath
         if let movedTargetElementPath = elementMoveMap[sourceElementPath] {
             targetElementPath = movedTargetElementPath
-        } else {
+        }
+        else {
             let deleteOffset = elementDeletionMap[sourceElementPath.section].count(in: 0..<sourceElementPath.element)
             let insertOffset = elementInsertionMap[sourceElementPath.section].count(in: 0...sourceElementPath.element)
             targetElementPath = ElementPath(element: sourceElementPath.element - deleteOffset + insertOffset, section: sourceElementPath.section)
