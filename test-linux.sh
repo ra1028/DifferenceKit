@@ -9,7 +9,7 @@ if [[ `uname` == "Darwin" ]]; then
   fi
 
   if [[ ! $(docker info 2>/dev/null) ]]; then
-    echo "Is Docker running?"
+    echo "Launch docker-machine ahead."
     exit -1
   fi
 
