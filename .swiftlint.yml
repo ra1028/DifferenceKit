@@ -18,14 +18,11 @@ nesting:
 line_length:
   warning: 200
 
-file_length:
-  warning: 600
-
 type_body_length:
   warning: 400
 
-function_body_length:
-  warning: 50
+function_parameter_count:
+  warning: 8
 
 cyclomatic_complexity:
   warning: 12
