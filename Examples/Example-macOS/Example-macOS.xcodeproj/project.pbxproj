@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6BE7D4F5215225A600D2F8E9 /* String+Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7D4F4215225A600D2F8E9 /* String+Differentiable.swift */; };
+		6BAE817D227853360060866E /* ShuffleEmoticonCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE817C227853360060866E /* ShuffleEmoticonCollectionViewItem.swift */; };
+		6BE7D4F5215225A600D2F8E9 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE7D4F4215225A600D2F8E9 /* StringExtensions.swift */; };
 		750C1E6E21515AF800034704 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750C1E6D21515AF800034704 /* AppDelegate.swift */; };
 		750C1E7021515AFB00034704 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 750C1E6F21515AFB00034704 /* Assets.xcassets */; };
 		750C1E7321515AFB00034704 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 750C1E7121515AFB00034704 /* MainMenu.xib */; };
@@ -55,7 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6BE7D4F4215225A600D2F8E9 /* String+Differentiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Differentiable.swift"; sourceTree = "<group>"; };
+		6BAE817C227853360060866E /* ShuffleEmoticonCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleEmoticonCollectionViewItem.swift; sourceTree = "<group>"; };
+		6BE7D4F4215225A600D2F8E9 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		750C1E6A21515AF800034704 /* Example-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		750C1E6D21515AF800034704 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		750C1E6F21515AFB00034704 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,7 +101,8 @@
 			children = (
 				750C1E6D21515AF800034704 /* AppDelegate.swift */,
 				750C1E7B21515BCC00034704 /* ShuffleEmoticonViewController.swift */,
-				6BE7D4F4215225A600D2F8E9 /* String+Differentiable.swift */,
+				6BAE817C227853360060866E /* ShuffleEmoticonCollectionViewItem.swift */,
+				6BE7D4F4215225A600D2F8E9 /* StringExtensions.swift */,
 				750C1E6F21515AFB00034704 /* Assets.xcassets */,
 				750C1E7121515AFB00034704 /* MainMenu.xib */,
 				750C1E7421515AFB00034704 /* Info.plist */,
@@ -211,9 +214,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BE7D4F5215225A600D2F8E9 /* String+Differentiable.swift in Sources */,
+				6BE7D4F5215225A600D2F8E9 /* StringExtensions.swift in Sources */,
 				750C1E7C21515BCC00034704 /* ShuffleEmoticonViewController.swift in Sources */,
 				750C1E6E21515AF800034704 /* AppDelegate.swift in Sources */,
+				6BAE817D227853360060866E /* ShuffleEmoticonCollectionViewItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
