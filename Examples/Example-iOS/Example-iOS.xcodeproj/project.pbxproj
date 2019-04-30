@@ -7,17 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3363C4F821502C45008EEDE4 /* String+Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363C4F721502C44008EEDE4 /* String+Differentiable.swift */; };
 		6B2DF92F210E522F004D2D40 /* DifferenceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DF916210E4AF0004D2D40 /* DifferenceKit.framework */; };
 		6B2DF930210E522F004D2D40 /* DifferenceKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DF916210E4AF0004D2D40 /* DifferenceKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6B956B832110B38700DE3D29 /* HeaderFooterSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7A2110B38700DE3D29 /* HeaderFooterSectionViewController.swift */; };
-		6B956B842110B38700DE3D29 /* ShuffleEmoticonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7B2110B38700DE3D29 /* ShuffleEmoticonViewController.swift */; };
+		6B7EEDAD2251305400060872 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDAC2251305400060872 /* NibLoadable.swift */; };
+		6B7EEDAF2251309000060872 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDAE2251309000060872 /* Reusable.swift */; };
+		6B7EEDB12251315500060872 /* ReusableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDB02251315500060872 /* ReusableViewExtensions.swift */; };
+		6B7EEDB5225134F000060872 /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B7EEDB4225134F000060872 /* HomeCell.xib */; };
+		6B7EEDB7225134FA00060872 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDB6225134FA00060872 /* HomeCell.swift */; };
+		6B7EEDBA2251368700060872 /* EmojiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B7EEDB92251368700060872 /* EmojiViewController.xib */; };
+		6B7EEDBD2251393900060872 /* EmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B7EEDBB2251393900060872 /* EmojiCell.xib */; };
+		6B7EEDBE2251393900060872 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDBC2251393900060872 /* EmojiCell.swift */; };
+		6B7EEDC122513EA300060872 /* HeaderFooterSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDC022513EA300060872 /* HeaderFooterSectionModel.swift */; };
+		6B7EEDC7225142A500060872 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDC6225142A500060872 /* StringExtensions.swift */; };
+		6B7EEDC92251431B00060872 /* HeaderFooterMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7EEDC82251431B00060872 /* HeaderFooterMoreView.swift */; };
+		6B956B832110B38700DE3D29 /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7A2110B38700DE3D29 /* HeaderFooterViewController.swift */; };
+		6B956B842110B38700DE3D29 /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7B2110B38700DE3D29 /* EmojiViewController.swift */; };
 		6B956B852110B38700DE3D29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B956B7C2110B38700DE3D29 /* Assets.xcassets */; };
 		6B956B872110B38700DE3D29 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B7E2110B38700DE3D29 /* HomeViewController.swift */; };
 		6B956B882110B38700DE3D29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B956B7F2110B38700DE3D29 /* LaunchScreen.storyboard */; };
 		6B956B892110B38700DE3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B812110B38700DE3D29 /* AppDelegate.swift */; };
+		6BAE816E2278377E0060866E /* HeaderFooterMoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BAE816D2278377E0060866E /* HeaderFooterMoreView.xib */; };
+		6BAE81702278393B0060866E /* HeaderFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE816F2278393B0060866E /* HeaderFooterCell.swift */; };
+		6BAE817322783C130060866E /* RandomLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BAE817222783C130060866E /* RandomLabelView.xib */; };
+		6BAE817522783D1E0060866E /* RandomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE817422783D1E0060866E /* RandomModel.swift */; };
+		6BAE817722783D810060866E /* RandomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BAE817622783D810060866E /* RandomViewController.xib */; };
+		6BAE817922783EC80060866E /* RandomPlainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE817822783EC80060866E /* RandomPlainCell.swift */; };
 		6BD9445D2136EDC100093E7A /* RandomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9445C2136EDC100093E7A /* RandomViewController.swift */; };
-		6BD944602137062000093E7A /* TextCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9445F2137062000093E7A /* TextCollectionReusableView.swift */; };
+		6BD944602137062000093E7A /* RandomLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD9445F2137062000093E7A /* RandomLabelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,18 +75,34 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3363C4F721502C44008EEDE4 /* String+Differentiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Differentiable.swift"; sourceTree = "<group>"; };
 		6B2DF8FA210E4AE1004D2D40 /* Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2DF90F210E4AF0004D2D40 /* DifferenceKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DifferenceKit.xcodeproj; path = ../../DifferenceKit.xcodeproj; sourceTree = "<group>"; };
-		6B956B7A2110B38700DE3D29 /* HeaderFooterSectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterSectionViewController.swift; sourceTree = "<group>"; };
-		6B956B7B2110B38700DE3D29 /* ShuffleEmoticonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleEmoticonViewController.swift; sourceTree = "<group>"; };
+		6B7EEDAC2251305400060872 /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		6B7EEDAE2251309000060872 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		6B7EEDB02251315500060872 /* ReusableViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableViewExtensions.swift; sourceTree = "<group>"; };
+		6B7EEDB4225134F000060872 /* HomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCell.xib; sourceTree = "<group>"; };
+		6B7EEDB6225134FA00060872 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		6B7EEDB92251368700060872 /* EmojiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiViewController.xib; sourceTree = "<group>"; };
+		6B7EEDBB2251393900060872 /* EmojiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiCell.xib; sourceTree = "<group>"; };
+		6B7EEDBC2251393900060872 /* EmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
+		6B7EEDC022513EA300060872 /* HeaderFooterSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterSectionModel.swift; sourceTree = "<group>"; };
+		6B7EEDC6225142A500060872 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		6B7EEDC82251431B00060872 /* HeaderFooterMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterMoreView.swift; sourceTree = "<group>"; };
+		6B956B7A2110B38700DE3D29 /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
+		6B956B7B2110B38700DE3D29 /* EmojiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiViewController.swift; sourceTree = "<group>"; };
 		6B956B7C2110B38700DE3D29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6B956B7E2110B38700DE3D29 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6B956B802110B38700DE3D29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B956B812110B38700DE3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B956B822110B38700DE3D29 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BAE816D2278377E0060866E /* HeaderFooterMoreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderFooterMoreView.xib; sourceTree = "<group>"; };
+		6BAE816F2278393B0060866E /* HeaderFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderFooterCell.swift; sourceTree = "<group>"; };
+		6BAE817222783C130060866E /* RandomLabelView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RandomLabelView.xib; sourceTree = "<group>"; };
+		6BAE817422783D1E0060866E /* RandomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomModel.swift; sourceTree = "<group>"; };
+		6BAE817622783D810060866E /* RandomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RandomViewController.xib; sourceTree = "<group>"; };
+		6BAE817822783EC80060866E /* RandomPlainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPlainCell.swift; sourceTree = "<group>"; };
 		6BD9445C2136EDC100093E7A /* RandomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomViewController.swift; sourceTree = "<group>"; };
-		6BD9445F2137062000093E7A /* TextCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCollectionReusableView.swift; sourceTree = "<group>"; };
+		6BD9445F2137062000093E7A /* RandomLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomLabelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,21 +151,77 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6B956B792110B38700DE3D29 /* Sources */ = {
+		6B7EEDA722512CA300060872 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				6B956B7E2110B38700DE3D29 /* HomeViewController.swift */,
-				6B956B7B2110B38700DE3D29 /* ShuffleEmoticonViewController.swift */,
-				6B956B7A2110B38700DE3D29 /* HeaderFooterSectionViewController.swift */,
-				3363C4F721502C44008EEDE4 /* String+Differentiable.swift */,
-				6BD9445C2136EDC100093E7A /* RandomViewController.swift */,
-				6BD9445F2137062000093E7A /* TextCollectionReusableView.swift */,
+				6B7EEDB6225134FA00060872 /* HomeCell.swift */,
+				6B7EEDB4225134F000060872 /* HomeCell.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6B7EEDAB2251304C00060872 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6B7EEDAC2251305400060872 /* NibLoadable.swift */,
+				6B7EEDAE2251309000060872 /* Reusable.swift */,
+				6B7EEDB02251315500060872 /* ReusableViewExtensions.swift */,
+				6B7EEDC6225142A500060872 /* StringExtensions.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6B7EEDB82251366A00060872 /* ShuffleEmoticon */ = {
+			isa = PBXGroup;
+			children = (
+				6B956B7B2110B38700DE3D29 /* EmojiViewController.swift */,
+				6B7EEDB92251368700060872 /* EmojiViewController.xib */,
+				6B7EEDBC2251393900060872 /* EmojiCell.swift */,
+				6B7EEDBB2251393900060872 /* EmojiCell.xib */,
+			);
+			path = ShuffleEmoticon;
+			sourceTree = "<group>";
+		};
+		6B7EEDBF22513E6F00060872 /* HeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				6B956B7A2110B38700DE3D29 /* HeaderFooterViewController.swift */,
+				6B7EEDC82251431B00060872 /* HeaderFooterMoreView.swift */,
+				6BAE816D2278377E0060866E /* HeaderFooterMoreView.xib */,
+				6B7EEDC022513EA300060872 /* HeaderFooterSectionModel.swift */,
+				6BAE816F2278393B0060866E /* HeaderFooterCell.swift */,
+			);
+			path = HeaderFooter;
+			sourceTree = "<group>";
+		};
+		6B956B792110B38700DE3D29 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6B7EEDAB2251304C00060872 /* Common */,
+				6B7EEDA722512CA300060872 /* Home */,
+				6B7EEDB82251366A00060872 /* ShuffleEmoticon */,
+				6B7EEDBF22513E6F00060872 /* HeaderFooter */,
+				6BAE817122783BC40060866E /* Random */,
 				6B956B812110B38700DE3D29 /* AppDelegate.swift */,
 				6B956B7C2110B38700DE3D29 /* Assets.xcassets */,
 				6B956B7F2110B38700DE3D29 /* LaunchScreen.storyboard */,
 				6B956B822110B38700DE3D29 /* Info.plist */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		6BAE817122783BC40060866E /* Random */ = {
+			isa = PBXGroup;
+			children = (
+				6BD9445C2136EDC100093E7A /* RandomViewController.swift */,
+				6BAE817622783D810060866E /* RandomViewController.xib */,
+				6BAE817822783EC80060866E /* RandomPlainCell.swift */,
+				6BD9445F2137062000093E7A /* RandomLabelView.swift */,
+				6BAE817222783C130060866E /* RandomLabelView.xib */,
+				6BAE817422783D1E0060866E /* RandomModel.swift */,
+			);
+			path = Random;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +308,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B7EEDBD2251393900060872 /* EmojiCell.xib in Resources */,
+				6BAE817722783D810060866E /* RandomViewController.xib in Resources */,
+				6BAE816E2278377E0060866E /* HeaderFooterMoreView.xib in Resources */,
+				6BAE817322783C130060866E /* RandomLabelView.xib in Resources */,
+				6B7EEDBA2251368700060872 /* EmojiViewController.xib in Resources */,
 				6B956B852110B38700DE3D29 /* Assets.xcassets in Resources */,
+				6B7EEDB5225134F000060872 /* HomeCell.xib in Resources */,
 				6B956B882110B38700DE3D29 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,12 +326,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B956B842110B38700DE3D29 /* ShuffleEmoticonViewController.swift in Sources */,
-				6B956B832110B38700DE3D29 /* HeaderFooterSectionViewController.swift in Sources */,
+				6B956B842110B38700DE3D29 /* EmojiViewController.swift in Sources */,
+				6B7EEDAD2251305400060872 /* NibLoadable.swift in Sources */,
+				6B956B832110B38700DE3D29 /* HeaderFooterViewController.swift in Sources */,
+				6B7EEDB7225134FA00060872 /* HomeCell.swift in Sources */,
+				6B7EEDAF2251309000060872 /* Reusable.swift in Sources */,
 				6BD9445D2136EDC100093E7A /* RandomViewController.swift in Sources */,
+				6BAE817922783EC80060866E /* RandomPlainCell.swift in Sources */,
+				6B7EEDBE2251393900060872 /* EmojiCell.swift in Sources */,
+				6B7EEDB12251315500060872 /* ReusableViewExtensions.swift in Sources */,
 				6B956B892110B38700DE3D29 /* AppDelegate.swift in Sources */,
-				3363C4F821502C45008EEDE4 /* String+Differentiable.swift in Sources */,
-				6BD944602137062000093E7A /* TextCollectionReusableView.swift in Sources */,
+				6B7EEDC92251431B00060872 /* HeaderFooterMoreView.swift in Sources */,
+				6B7EEDC122513EA300060872 /* HeaderFooterSectionModel.swift in Sources */,
+				6BD944602137062000093E7A /* RandomLabelView.swift in Sources */,
+				6BAE81702278393B0060866E /* HeaderFooterCell.swift in Sources */,
+				6B7EEDC7225142A500060872 /* StringExtensions.swift in Sources */,
+				6BAE817522783D1E0060866E /* RandomModel.swift in Sources */,
 				6B956B872110B38700DE3D29 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

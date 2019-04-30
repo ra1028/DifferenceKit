@@ -1,31 +1,13 @@
 import UIKit
 import DifferenceKit
 
-private struct RandomModel: Differentiable {
-    var id: UUID
-    var isUpdated: Bool
-
-    var differenceIdentifier: UUID {
-        return id
-    }
-
-    init(_ id: UUID = UUID(), _ isUpdated: Bool = false) {
-        self.id = id
-        self.isUpdated = isUpdated
-    }
-
-    func isContentEqual(to source: RandomModel) -> Bool {
-        return isUpdated == source.isUpdated
-    }
-}
-
-private typealias RandomSection = ArraySection<RandomModel, RandomModel>
-
 final class RandomViewController: UIViewController {
-    private let collectionView: UICollectionView
-    private var data = [RandomSection]()
+    private typealias Section = ArraySection<RandomModel, RandomModel>
 
-    private var dataInput: [RandomSection] {
+    @IBOutlet private weak var collectionView: UICollectionView!
+
+    private var data = [Section]()
+    private var dataInput: [Section] {
         get { return data }
         set {
             let changeset = StagedChangeset(source: data, target: newValue)
@@ -33,6 +15,18 @@ final class RandomViewController: UIViewController {
                 self.data = data
             }
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        title = "Random"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Random", style: .plain, target: self, action: #selector(refresh))
+
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(cellType: RandomPlainCell.self)
+        collectionView.register(viewType: RandomLabelView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
     }
 
     @objc private func refresh() {
@@ -132,41 +126,6 @@ final class RandomViewController: UIViewController {
         super.viewWillAppear(animated)
         refresh()
     }
-
-    init() {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
-        flowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.size.width, height: 30)
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-
-        super.init(nibName: nil, bundle: nil)
-
-        title = "Random"
-        view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
-
-        collectionView.backgroundColor = .clear
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.reuseIdentifier)
-        collectionView.register(TextCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TextCollectionReusableView.reuseIdentifier)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(collectionView)
-
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ]
-
-        NSLayoutConstraint.activate(constraints)
-    }
-
-    @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 extension RandomViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -179,9 +138,9 @@ extension RandomViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.reuseIdentifier, for: indexPath)
+        let cell: RandomPlainCell = collectionView.dequeueReusableCell(for: indexPath)
         let model = data[indexPath.section].elements[indexPath.item]
-        cell.contentView.backgroundColor = model.isUpdated ? .yellow : .red
+        cell.contentView.backgroundColor = model.isUpdated ? .cyan : .orange
         return cell
     }
 
@@ -191,12 +150,9 @@ extension RandomViewController: UICollectionViewDataSource, UICollectionViewDele
         }
 
         let model = data[indexPath.section].model
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: TextCollectionReusableView.reuseIdentifier, for: indexPath) as! TextCollectionReusableView
-        view.text = "Section \(model.id)" + (model.isUpdated ? "+" : "")
+        let view: RandomLabelView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, for: indexPath)
+        view.label.text = "Section ID: \(model.id)"
+        view.label.textColor = model.isUpdated ? .red : .darkText
         return view
     }
-}
-
-private extension UICollectionViewCell {
-    static let reuseIdentifier = String(describing: self)
 }
