@@ -1,0 +1,70 @@
+PODS:
+  - DeepDiff (2.0.1)
+  - Differ (1.4.1)
+  - DifferenceKit (1.1.1):
+    - DifferenceKit/Core (= 1.1.1)
+    - DifferenceKit/UIKitExtension (= 1.1.1)
+  - DifferenceKit/Core (1.1.1)
+  - DifferenceKit/UIKitExtension (1.1.1):
+    - DifferenceKit/Core
+  - Differentiator (4.0.1)
+  - Dwifft (0.9)
+  - FlexibleDiff (0.0.8)
+  - IGListKit (3.4.0):
+    - IGListKit/Default (= 3.4.0)
+  - IGListKit/Default (3.4.0):
+    - IGListKit/Diffing
+  - IGListKit/Diffing (3.4.0)
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
+
+DEPENDENCIES:
+  - DeepDiff (= 2.0.1)
+  - Differ (= 1.4.1)
+  - DifferenceKit (from `../`)
+  - Dwifft (= 0.9)
+  - FlexibleDiff (= 0.0.8)
+  - IGListKit (= 3.4.0)
+  - RxDataSources (= 4.0.1)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - DeepDiff
+    - Differ
+    - Differentiator
+    - Dwifft
+    - FlexibleDiff
+    - IGListKit
+    - RxCocoa
+    - RxDataSources
+    - RxRelay
+    - RxSwift
+
+EXTERNAL SOURCES:
+  DifferenceKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DeepDiff: 1944bb2c841ab238a66b31de1faa7627f3ca84bd
+  Differ: ca4350872e32a1aeedf3d9e2d9e47127833bfa9c
+  DifferenceKit: cf1b84e2207ea45c3640381cb229cf46c1647466
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Dwifft: 42912068ed2a8146077d1a1404df18625bd086e1
+  FlexibleDiff: 4f487778bd152088a9528a0a9be06eba7952bb00
+  IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+
+PODFILE CHECKSUM: 551831665cc13a12570a723635fb39fa0aaab88b
+
+COCOAPODS: 1.6.1

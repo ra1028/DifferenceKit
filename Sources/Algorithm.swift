@@ -674,7 +674,7 @@ internal struct TableKey<T: Hashable>: Hashable {
 
     @inlinable
     internal func hash(into hasher: inout Hasher) {
-        hasher.combine(pointer.pointee)
+        hasher.combine(pointeeHashValue)
     }
 }
 
