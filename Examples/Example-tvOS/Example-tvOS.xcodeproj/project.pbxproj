@@ -9,12 +9,16 @@
 /* Begin PBXBuildFile section */
 		6B2DF96C210F1A0D004D2D40 /* DifferenceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DF95C210F185E004D2D40 /* DifferenceKit.framework */; };
 		6B2DF96D210F1A0D004D2D40 /* DifferenceKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DF95C210F185E004D2D40 /* DifferenceKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6B956B952110B4AA00DE3D29 /* HeaderFooterSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B8E2110B4AA00DE3D29 /* HeaderFooterSectionViewController.swift */; };
-		6B956B962110B4AA00DE3D29 /* ShuffleEmoticonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B8F2110B4AA00DE3D29 /* ShuffleEmoticonViewController.swift */; };
+		6B956B962110B4AA00DE3D29 /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B8F2110B4AA00DE3D29 /* EmojiViewController.swift */; };
 		6B956B972110B4AA00DE3D29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B956B902110B4AA00DE3D29 /* Assets.xcassets */; };
-		6B956B982110B4AA00DE3D29 /* String+Differentiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B912110B4AA00DE3D29 /* String+Differentiable.swift */; };
-		6B956B992110B4AA00DE3D29 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B922110B4AA00DE3D29 /* HomeViewController.swift */; };
 		6B956B9A2110B4AA00DE3D29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B956B932110B4AA00DE3D29 /* AppDelegate.swift */; };
+		6BAE8186227854C20060866E /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE8182227854C20060866E /* Reusable.swift */; };
+		6BAE8187227854C20060866E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE8183227854C20060866E /* StringExtensions.swift */; };
+		6BAE8188227854C20060866E /* ReusableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE8184227854C20060866E /* ReusableViewExtensions.swift */; };
+		6BAE8189227854C20060866E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE8185227854C20060866E /* NibLoadable.swift */; };
+		6BAE818F2278550C0060866E /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BAE818C2278550C0060866E /* EmojiCell.swift */; };
+		6BAE8195227855E90060866E /* EmojiViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BAE8194227855E90060866E /* EmojiViewController.xib */; };
+		6BAE8197227858440060866E /* EmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BAE8196227858440060866E /* EmojiCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,13 +62,17 @@
 /* Begin PBXFileReference section */
 		6B2DF943210F184A004D2D40 /* Example-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B2DF955210F185E004D2D40 /* DifferenceKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DifferenceKit.xcodeproj; path = ../../DifferenceKit.xcodeproj; sourceTree = "<group>"; };
-		6B956B8E2110B4AA00DE3D29 /* HeaderFooterSectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterSectionViewController.swift; sourceTree = "<group>"; };
-		6B956B8F2110B4AA00DE3D29 /* ShuffleEmoticonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShuffleEmoticonViewController.swift; sourceTree = "<group>"; };
+		6B956B8F2110B4AA00DE3D29 /* EmojiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiViewController.swift; sourceTree = "<group>"; };
 		6B956B902110B4AA00DE3D29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6B956B912110B4AA00DE3D29 /* String+Differentiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Differentiable.swift"; sourceTree = "<group>"; };
-		6B956B922110B4AA00DE3D29 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		6B956B932110B4AA00DE3D29 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B956B942110B4AA00DE3D29 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BAE8182227854C20060866E /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		6BAE8183227854C20060866E /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		6BAE8184227854C20060866E /* ReusableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableViewExtensions.swift; sourceTree = "<group>"; };
+		6BAE8185227854C20060866E /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		6BAE818C2278550C0060866E /* EmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
+		6BAE8194227855E90060866E /* EmojiViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiViewController.xib; sourceTree = "<group>"; };
+		6BAE8196227858440060866E /* EmojiCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +116,16 @@
 		6B956B8D2110B4AA00DE3D29 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				6B956B8E2110B4AA00DE3D29 /* HeaderFooterSectionViewController.swift */,
-				6B956B8F2110B4AA00DE3D29 /* ShuffleEmoticonViewController.swift */,
-				6B956B902110B4AA00DE3D29 /* Assets.xcassets */,
-				6B956B912110B4AA00DE3D29 /* String+Differentiable.swift */,
-				6B956B922110B4AA00DE3D29 /* HomeViewController.swift */,
+				6B956B8F2110B4AA00DE3D29 /* EmojiViewController.swift */,
+				6BAE8194227855E90060866E /* EmojiViewController.xib */,
+				6BAE818C2278550C0060866E /* EmojiCell.swift */,
+				6BAE8196227858440060866E /* EmojiCell.xib */,
+				6BAE8182227854C20060866E /* Reusable.swift */,
+				6BAE8183227854C20060866E /* StringExtensions.swift */,
+				6BAE8184227854C20060866E /* ReusableViewExtensions.swift */,
+				6BAE8185227854C20060866E /* NibLoadable.swift */,
 				6B956B932110B4AA00DE3D29 /* AppDelegate.swift */,
+				6B956B902110B4AA00DE3D29 /* Assets.xcassets */,
 				6B956B942110B4AA00DE3D29 /* Info.plist */,
 			);
 			path = Sources;
@@ -204,6 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B956B972110B4AA00DE3D29 /* Assets.xcassets in Resources */,
+				6BAE8195227855E90060866E /* EmojiViewController.xib in Resources */,
+				6BAE8197227858440060866E /* EmojiCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,11 +228,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B956B962110B4AA00DE3D29 /* ShuffleEmoticonViewController.swift in Sources */,
-				6B956B982110B4AA00DE3D29 /* String+Differentiable.swift in Sources */,
-				6B956B952110B4AA00DE3D29 /* HeaderFooterSectionViewController.swift in Sources */,
+				6BAE8186227854C20060866E /* Reusable.swift in Sources */,
+				6BAE818F2278550C0060866E /* EmojiCell.swift in Sources */,
+				6B956B962110B4AA00DE3D29 /* EmojiViewController.swift in Sources */,
+				6BAE8189227854C20060866E /* NibLoadable.swift in Sources */,
+				6BAE8187227854C20060866E /* StringExtensions.swift in Sources */,
 				6B956B9A2110B4AA00DE3D29 /* AppDelegate.swift in Sources */,
-				6B956B992110B4AA00DE3D29 /* HomeViewController.swift in Sources */,
+				6BAE8188227854C20060866E /* ReusableViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
