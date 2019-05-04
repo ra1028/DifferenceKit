@@ -27,8 +27,8 @@ let runner = BenchmarkRunner(
         }
     },
     Benchmark(name: "IGListKit") { data in
-        let oldArray = data.source.map(UUIDWrapper.init)
-        let newArray = data.target.map(UUIDWrapper.init)
+        let oldArray = data.source.map { $0 as NSUUID }
+        let newArray = data.target.map { $0 as NSUUID }
 
         return {
             _ = ListDiff(oldArray: oldArray, newArray: newArray, option: .equality)

@@ -21,23 +21,16 @@ extension UUID: DiffAware {
     }
 }
 
-final class UUIDWrapper: ListDiffable {
-    let uuid: UUID
-
-    init(uuid: UUID) {
-        self.uuid = uuid
+extension NSUUID: ListDiffable {
+    public func diffIdentifier() -> NSObjectProtocol {
+        return self
     }
 
-    func diffIdentifier() -> NSObjectProtocol {
-        return uuid as NSUUID
-    }
-
-    func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
-        guard let object = object as? UUIDWrapper else {
+    public func isEqual(toDiffableObject object: ListDiffable?) -> Bool {
+        guard let other = object as? NSUUID else {
             return false
         }
-
-        return uuid == object.uuid
+        return self == other
     }
 }
 
