@@ -90,13 +90,14 @@ struct BenchmarkRunner {
 
         let empty = String(repeating: " ", count: maxLength)
         let timeTitle = "Time(second)".padding(toLength: maxLength, withPad: " ", startingAt: 0)
-        let spacer = ":" + String(repeating: "-", count: maxLength - 1)
+        let leftAlignSpacer = ":" + String(repeating: "-", count: maxLength - 1)
+        let rightAlignSpacer = String(repeating: "-", count: maxLength - 1) + ":"
 
         print("#### - From \(sourceCount) elements to \(deleteCount) deleted and \(insertCount) inserted")
         print()
         print("""
             |\(empty)|\(timeTitle)|
-            |\(spacer)|\(spacer)|
+            |\(leftAlignSpacer)|\(rightAlignSpacer)|
             """)
 
         for benchmark in benchmarks {
