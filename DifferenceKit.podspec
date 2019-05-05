@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'DifferenceKit'
-  spec.version  = '1.1.1'
+  spec.version  = '1.1.2'
   spec.author = { 'ra1028' => 'r.fe51028.r@gmail.com' }
   spec.homepage = 'https://github.com/ra1028/DifferenceKit'
   spec.documentation_url = 'https://ra1028.github.io/DifferenceKit'
@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.license = { :type => 'Apache 2.0', :file => 'LICENSE' }
   spec.requires_arc = true
   spec.default_subspecs = 'Core', 'UIKitExtension'
-  spec.swift_version = '4.2'
+  spec.swift_versions = ['4.2', '5.0']
 
   spec.ios.deployment_target = '9.0'
   spec.tvos.deployment_target = '9.0'
