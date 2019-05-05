@@ -9,12 +9,8 @@ import Dwifft
 
 let runner = BenchmarkRunner(
     Benchmark(name: "DifferenceKit") { data in
-        let model = UUID()
-        let source = [ArraySection(model: model, elements: data.source)]
-        let target = [ArraySection(model: model, elements: data.target)]
-
         return {
-            _ = StagedChangeset(source: source, target: target)
+            _ = StagedChangeset(source: data.source, target: data.target)
         }
     },
     Benchmark(name: "RxDataSources") { data in
@@ -35,20 +31,8 @@ let runner = BenchmarkRunner(
         }
     },
     Benchmark(name: "FlexibleDiff") { data in
-        let model = UUID()
-        let previous = [ArraySection(model: model, elements: data.source)]
-        let current = [ArraySection(model: model, elements: data.target)]
-
         return {
-            _ = SectionedChangeset(
-                previous: previous,
-                current: current,
-                sectionIdentifier: { $0.model },
-                areMetadataEqual: { $0.model == $1.model },
-                items: { $0.elements },
-                itemIdentifier: { $0 },
-                areItemsEqual: ==
-            )
+            _ = FlexibleDiff.Changeset(previous: data.source, current: data.target, identifier: { $0 }, areEqual: ==)
         }
     },
     Benchmark(name: "DeepDiff") { data in
@@ -58,19 +42,26 @@ let runner = BenchmarkRunner(
     },
     Benchmark(name: "Differ") { data in
         return {
-            _ = data.source.extendedDiff(data.target)
+            _ = data.source.diff(data.target) as Differ.Diff
         }
     },
     Benchmark(name: "Dwifft") { data in
-        let section = UUID()
-        let lhs = SectionedValues([(section, data.source)])
-        let rhs = SectionedValues([(section, data.target)])
-
         return {
-            _ = Dwifft.diff(lhs: lhs, rhs: rhs)
+            _ = Dwifft.diff(data.source, data.target)
         }
     }
 )
 
-runner.run(with: BenchmarkData(count: 5000, deleteRange: 2000..<3000, insertRange: 3000..<4000))
-runner.run(with: BenchmarkData(count: 100000, deleteRange: 20000..<30000, insertRange: 30000..<40000))
+runner.run(with: BenchmarkData(
+    count: 5000,
+    deleteRange: 2000..<3000,
+    insertRange: 3000..<4000,
+    shuffleRange: 0..<1000
+))
+
+runner.run(with: BenchmarkData(
+    count: 100000,
+    deleteRange: 20000..<30000,
+    insertRange: 30000..<40000,
+    shuffleRange: 0..<10000
+))
