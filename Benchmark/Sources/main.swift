@@ -56,12 +56,12 @@ runner.run(with: BenchmarkData(
     count: 5000,
     deleteRange: 2000..<3000,
     insertRange: 3000..<4000,
-    shuffleRange: 0..<1000
+    shuffleRange: 0..<200
 ))
 
 runner.run(with: BenchmarkData(
     count: 100000,
     deleteRange: 20000..<30000,
     insertRange: 30000..<40000,
-    shuffleRange: 0..<10000
+    shuffleRange: 0..<2000
 ))
