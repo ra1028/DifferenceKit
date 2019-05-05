@@ -7,7 +7,7 @@ ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 target 'Benchmark' do
   pod 'DifferenceKit', path: '../'
-  pod 'RxDataSources', '4.0.1'
+  pod 'Differentiator', '4.0.1'
   pod 'FlexibleDiff', '0.0.8'
   pod 'IGListKit', '3.4.0'
   pod 'DeepDiff', '2.0.1'
