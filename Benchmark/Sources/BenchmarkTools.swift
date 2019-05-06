@@ -102,7 +102,7 @@ struct BenchmarkRunner {
             print("|\(paddingName)|", terminator: "")
 
             let result = benchmark.measure(with: data)
-            let paddingTime = String(format: "%.4f", result).padding(toLength: maxLength, withPad: " ", startingAt: 0)
+            let paddingTime = String(format: "`%.4f`", result).padding(toLength: maxLength, withPad: " ", startingAt: 0)
             print("\(paddingTime)|")
         }
 
