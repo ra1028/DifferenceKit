@@ -50,19 +50,19 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         let sourceElements = ContiguousArray(source)
         let targetElements = ContiguousArray(target)
 
-        // Returns the empty changesets if both are empty.
+        // Return empty changesets if both are empty.
         if sourceElements.isEmpty && targetElements.isEmpty {
             self.init()
             return
         }
 
-        // Returns the changesets that all deletions if source is not empty and target is empty.
+        // Return changesets that all deletions if source is not empty and target is empty.
         if !sourceElements.isEmpty && targetElements.isEmpty {
             self.init([Changeset(data: target, elementDeleted: sourceElements.indices.map { ElementPath(element: $0, section: section) })])
             return
         }
 
-        // Returns the changesets that all insertions if source is empty and target is not empty.
+        // Return changesets that all insertions if source is empty and target is not empty.
         if sourceElements.isEmpty && !targetElements.isEmpty {
             self.init([Changeset(data: target, elementInserted: targetElements.indices.map { ElementPath(element: $0, section: section) })])
             return
@@ -234,7 +234,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 }
             }
 
-             // Track an target and source indices of the elements having same identifier.
+            // Track target and source indices of the elements having same identifier.
             for targetSectionIndex in contiguousTargetSections.indices {
                 let targetElements = contiguousTargetSections[targetSectionIndex]
 
@@ -491,7 +491,7 @@ internal func differentiate<E: Differentiable, I>(
             }
         }
 
-        // Track an target and source indices of the elements having same identifier.
+        // Track target and source indices of the elements having same identifier.
         for targetIndex in target.indices {
             var targetIdentifier = target[targetIndex].differenceIdentifier
             let key = TableKey(pointer: &targetIdentifier)
