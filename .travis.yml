@@ -31,6 +31,7 @@ matrix:
   include:
     - <<: *testing_xcode
       osx_image: xcode10.1
+      install: gem install bundler -v 2.0.1
 
     - <<: *testing_xcode
       osx_image: xcode10.2
