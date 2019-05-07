@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/sample.gif" height="289" align="right">
+<img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/sample.gif" height="310" align="right">
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/logo.png" width="500">
@@ -20,6 +20,8 @@ The algorithm is optimized based on the Paul Heckel's algorithm.
 <a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20Linux-green.svg"/></a>
 <a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/License-Apache%202.0-black.svg"/></a>
 </p>
+
+<br>
 
 <p align="center">
 Made with ❤️ by <a href="https://github.com/ra1028">Ryo Aoyama</a> and <a href="https://github.com/ra1028/DifferenceKit/graphs/contributors">Contributors</a>
