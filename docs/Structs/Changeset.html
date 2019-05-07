@@ -4,83 +4,106 @@
     <title>Changeset Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
+
     <a name="//apple_ref/swift/Struct/Changeset" class="dashAnchor"></a>
+
     <a title="Changeset Structure Reference"></a>
-    <header>
-      <div class="content-wrapper">
-        <p><a href="../index.html">DifferenceKit Docs</a> (100% documented)</p>
-        <p class="header-right"><a href="https://github.com/ra1028/DifferenceKit"><img src="../img/gh.png"/>View on GitHub</a></p>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <p id="breadcrumbs">
-        <a href="../index.html">DifferenceKit Reference</a>
-        <img id="carat" src="../img/carat.png" />
-        Changeset Structure Reference
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          DifferenceKit Docs
+        </a>
+         (100% documented)
       </p>
-    </div>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/ra1028/DifferenceKit">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">DifferenceKit Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      Changeset Structure Reference
+    </p>
+
     <div class="content-wrapper">
-      <nav class="sidebar">
+      <nav class="navigation">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="../Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="../Diffing.html">Diffing</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Extensions/Optional.html">Optional</a>
+                <a class="nav-group-task-link" href="../Protocols/ContentEquatable.html">ContentEquatable</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/UICollectionView.html">UICollectionView</a>
+                <a class="nav-group-task-link" href="../Protocols/Differentiable.html">Differentiable</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Extensions/UITableView.html">UITableView</a>
+                <a class="nav-group-task-link" href="../Protocols/DifferentiableSection.html">DifferentiableSection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ArraySection.html">ArraySection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/ElementPath.html">ElementPath</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Optional.html">Optional</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Protocols.html">Protocols</a>
+            <a class="nav-group-name-link" href="../Changeset.html">Changeset</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Protocols/ContentEquatable.html">ContentEquatable</a>
+                <a class="nav-group-task-link" href="../Structs/StagedChangeset.html">StagedChangeset</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Protocols/Differentiable.html">Differentiable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Protocols/DifferentiableSection.html">DifferentiableSection</a>
+                <a class="nav-group-task-link" href="../Structs/Changeset.html">Changeset</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Structs.html">Structures</a>
+            <a class="nav-group-name-link" href="../UI Extensions.html">UI Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+                <a class="nav-group-task-link" href="../Extensions/UITableView.html">UITableView</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ArraySection.html">ArraySection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Changeset.html">Changeset</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ElementPath.html">ElementPath</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/StagedChangeset.html">StagedChangeset</a>
+                <a class="nav-group-task-link" href="../Extensions/UICollectionView.html">UICollectionView</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-        <section>
-          <section class="section">
+
+        <section class="section">
+          <div class="section-content">
             <h1>Changeset</h1>
               <div class="declaration">
                 <div class="language">
@@ -95,10 +118,13 @@
 <p>Notice that the value of the changes represents offsets of collection not index.
 Since offsets are unordered, order is ignored when comparing two <code>Changeset</code>s.</p>
 
-          </section>
-          <section class="section task-group-section">
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
             <div class="task-group">
-              <ul>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -498,7 +524,7 @@ Since offsets are unordered, order is ignored when comparing two <code>Changeset
               </ul>
             </div>
             <div class="task-group">
-              <ul>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -670,7 +696,7 @@ Since offsets are unordered, order is ignored when comparing two <code>Changeset
               </ul>
             </div>
             <div class="task-group">
-              <ul>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -700,7 +726,7 @@ Since offsets are unordered, order is ignored when comparing two <code>Changeset
               </ul>
             </div>
             <div class="task-group">
-              <ul>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -729,14 +755,15 @@ Since offsets are unordered, order is ignored when comparing two <code>Changeset
                 </li>
               </ul>
             </div>
-          </section>
+          </div>
         </section>
-        <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2019-03-29)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-        </section>
+
       </article>
     </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2019-05-07)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
   </body>
 </div>
 </html>
