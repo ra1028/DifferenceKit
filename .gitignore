@@ -9,6 +9,7 @@
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
+xcbaselines
 profile
 *.moved-aside
 DerivedData
@@ -24,7 +25,10 @@ docs/undocumented.json
 
 ## Gems
 .bundle
-vendor/bundle
+vendor
+
+## CocoaPods
+Pods
 
 ## Swift Package build
 .build

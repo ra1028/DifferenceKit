@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Changeset  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Section/Changeset" class="dashAnchor"></a>
+
+    <a title="Changeset  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          DifferenceKit Docs
+        </a>
+         (100% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/ra1028/DifferenceKit">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">DifferenceKit Reference</a>
+      <img class="carat" src="img/carat.png" />
+      Changeset  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Diffing.html">Diffing</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/ContentEquatable.html">ContentEquatable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/Differentiable.html">Differentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/DifferentiableSection.html">DifferentiableSection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ArraySection.html">ArraySection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ElementPath.html">ElementPath</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Optional.html">Optional</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Changeset.html">Changeset</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/StagedChangeset.html">StagedChangeset</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/Changeset.html">Changeset</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="UI Extensions.html">UI Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UITableView.html">UITableView</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/UICollectionView.html">UICollectionView</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>Changeset</h1>
+            
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit15StagedChangesetV"></a>
+                    <a name="//apple_ref/swift/Struct/StagedChangeset" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit15StagedChangesetV">StagedChangeset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An ordered collection of <code><a href="Structs/Changeset.html">Changeset</a></code> as staged set of changes in the sectioned collection.</p>
+
+<p>The order is representing the stages of changesets.</p>
+
+<p>We know that there are combination of changes that crash when applied simultaneously
+in batch-updates of UI such as UITableView or UICollectionView.
+The <code>StagedChangeset</code> created from the two collection is split at the minimal stages
+that can be perform batch-updates with no crashes.</p>
+
+<p>Example for calculating differences between the two linear collections.</p>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">String</span><span class="p">:</span> <span class="kt">Differentiable</span> <span class="p">{}</span>
+
+<span class="k">let</span> <span class="nv">source</span> <span class="o">=</span> <span class="p">[</span><span class="s">"A"</span><span class="p">,</span> <span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">]</span>
+<span class="k">let</span> <span class="nv">target</span> <span class="o">=</span> <span class="p">[</span><span class="s">"B"</span><span class="p">,</span> <span class="s">"C"</span><span class="p">,</span> <span class="s">"D"</span><span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">changeset</span> <span class="o">=</span> <span class="kt">StagedChangeset</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="n">source</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="n">target</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">changeset</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">)</span>  <span class="c1">// prints "false"</span>
+</code></pre>
+
+<p>Example for calculating differences between the two sectioned collections.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">source</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="kt">Section</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="s">"A"</span><span class="p">,</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">[</span><span class="s">"😉"</span><span class="p">]),</span>
+<span class="p">]</span>
+<span class="k">let</span> <span class="nv">target</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="kt">Section</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="s">"A"</span><span class="p">,</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">[</span><span class="s">"😉, 😺"</span><span class="p">]),</span>
+    <span class="kt">Section</span><span class="p">(</span><span class="nv">model</span><span class="p">:</span> <span class="s">"B"</span><span class="p">,</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">[</span><span class="s">"😪"</span><span class="p">])</span>
+<span class="p">]</span>
+
+<span class="k">let</span> <span class="nv">changeset</span> <span class="o">=</span> <span class="kt">StagedChangeset</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="n">sectionedSource</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="n">sectionedTarget</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">changeset</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">)</span>  <span class="c1">// prints "false"</span>
+</code></pre>
+
+                        <a href="Structs/StagedChangeset.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">StagedChangeset</span><span class="o">&lt;</span><span class="kt">Collection</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13DifferenceKit9ChangesetV"></a>
+                    <a name="//apple_ref/swift/Struct/Changeset" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13DifferenceKit9ChangesetV">Changeset</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A set of changes in the sectioned collection.</p>
+
+<p>Changes to the section of the linear collection should be empty.</p>
+
+<p>Notice that the value of the changes represents offsets of collection not index.
+Since offsets are unordered, order is ignored when comparing two <code>Changeset</code>s.</p>
+
+                        <a href="Structs/Changeset.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Changeset</span><span class="o">&lt;</span><span class="kt">Collection</span><span class="o">&gt;</span> <span class="k">where</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Collection</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2019-05-07)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

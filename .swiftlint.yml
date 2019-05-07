@@ -2,6 +2,7 @@
 
 excluded:
   - Tests/XCTestManifests.swift
+  - Benchmark
 
 disabled_rules:
   - type_name
