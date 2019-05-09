@@ -1,0 +1,70 @@
+trigger:
+- master
+
+jobs:
+
+- job: linux
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  strategy:
+    maxParallel: 10
+    matrix:
+      swift4_2:
+        containerImage: swift:4.2
+      swift5_0:
+        containerImage: swift:5.0
+  container: $[ variables['containerImage'] ]
+  steps:
+    - script: |
+        swift build
+        swift test
+      displayName: swift test on linux
+
+- job: macOS
+  pool:
+    vmImage: 'macOS 10.14'
+  strategy:
+    maxParallel: 10
+    matrix:
+      xcode10_1:
+        DEVELOPER_DIR: /Applications/Xcode_10.1.app
+      xcode10_2:
+        DEVELOPER_DIR: /Applications/Xcode_10.2.app
+  steps:
+    - script: |
+        swift build
+        swift test
+      displayName: swift test on macOS
+      condition: succeededOrFailed()
+    - script: xcodebuild -version
+      displayName: xcodebuild -version
+      condition: succeededOrFailed()
+    - script: |
+       set -o pipefail &&
+       xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release ENABLE_TESTABILITY=YES |
+       xcpretty -c -r junit -o build/reports/xcodebuild-macOS.xml
+      displayName: xcodebuild test maxOS
+      condition: succeededOrFailed()
+    - script: |
+        set -o pipefail &&
+        xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X' ENABLE_TESTABILITY=YES |
+        xcpretty -c -r junit -o build/reports/xcodebuild-iOS.xml
+      displayName: xcodebuild test iOS
+      condition: succeededOrFailed()
+    - script: |
+        set -o pipefail &&
+        xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk appletvsimulator -destination 'platform=tvOS Simulator,name=Apple TV' ENABLE_TESTABILITY=YES |
+        xcpretty -c -r junit -o build/reports/xcodebuild-tvOS.xml
+      displayName: xcodebuild test tvOS
+      condition: succeededOrFailed()
+    - script: |
+        set -o pipefail &&
+        xcodebuild build -scheme DifferenceKit -configuration Release -sdk watchsimulator -destination 'platform=watchOS Simulator,name=Apple Watch Series 4 - 40mm' ENABLE_TESTABILITY=YES |
+        xcpretty -c
+      displayName: xcodebuild test watchOS
+      condition: succeededOrFailed()
+    - task: PublishTestResults@2
+      inputs:
+        testRunner: JUnit
+        testResultsFiles: build/reports/**
+      condition: succeededOrFailed()
