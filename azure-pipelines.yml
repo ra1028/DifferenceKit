@@ -15,9 +15,7 @@ jobs:
         containerImage: swift:5.0
   container: $[ variables['containerImage'] ]
   steps:
-    - script: >
-        swift build
-        swift test
+    - script: swift build && swift test
       displayName: swift test on linux
 
 - job: macOS
@@ -31,13 +29,12 @@ jobs:
       xcode10_2:
         DEVELOPER_DIR: /Applications/Xcode_10.2.app
   steps:
-    - script: >
-        swift build
-        swift test
+    - script: swift build && swift test
       displayName: swift test on macOS
       condition: succeededOrFailed()
     - script: xcodebuild -version
       displayName: xcodebuild -version
+      condition: succeededOrFailed()
     - script: >
        set -o pipefail &&
        xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release ENABLE_TESTABILITY=YES |
@@ -59,7 +56,7 @@ jobs:
     - script: >
         set -o pipefail &&
         xcodebuild build -scheme DifferenceKit -configuration Release -sdk watchsimulator -destination 'platform=watchOS Simulator,name=Apple Watch Series 4 - 40mm' ENABLE_TESTABILITY=YES |
-        xcpretty -c -r junit -o build/reports/xcodebuild-watchOS.xml
+        xcpretty -c
       displayName: xcodebuild test watchOS
       condition: succeededOrFailed()
     - task: PublishTestResults@2
