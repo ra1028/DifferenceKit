@@ -71,15 +71,13 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         var firstStageElements = ContiguousArray<Collection.Element>()
         var secondStageElements = ContiguousArray<Collection.Element>()
 
-        firstStageElements.reserveCapacity(sourceElements.count)
-
-        let result = differentiate(
+        let result = diff(
             source: sourceElements,
             target: targetElements,
-            trackTargetIndexAsUpdated: false,
+            useTargetIndexForUpdated: false,
             mapIndex: { ElementPath(element: $0, section: section) },
-            updatedElements: { firstStageElements.append($0) },
-            undeletedElements: { secondStageElements.append($0) }
+            updatedElementsPointer: &firstStageElements,
+            notDeletedElementsPointer: &secondStageElements
         )
 
         var changesets = ContiguousArray<Changeset<Collection>>()
@@ -189,10 +187,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
         // Calculate section differences.
 
-        let sectionResult = differentiate(
+        let sectionResult = diff(
             source: sourceSections,
             target: targetSections,
-            trackTargetIndexAsUpdated: true,
+            useTargetIndexForUpdated: true,
             mapIndex: { $0 }
         )
 
@@ -441,28 +439,28 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     }
 }
 
-/// The shared algorithm to calculate differences between two linear collections.
+/// The shared algorithm to calculate diffs between two linear collections.
 @inlinable
 @discardableResult
-internal func differentiate<E: Differentiable, I>(
+internal func diff<E: Differentiable, I>(
     source: ContiguousArray<E>,
     target: ContiguousArray<E>,
-    trackTargetIndexAsUpdated: Bool,
+    useTargetIndexForUpdated: Bool,
     mapIndex: (Int) -> I,
-    updatedElements: ((E) -> Void)? = nil,
-    undeletedElements: ((E) -> Void)? = nil
-    ) -> DifferentiateResult<I> {
+    updatedElementsPointer: UnsafeMutablePointer<ContiguousArray<E>>? = nil,
+    notDeletedElementsPointer: UnsafeMutablePointer<ContiguousArray<E>>? = nil
+    ) -> DiffResult<I> {
     var deleted = [I]()
     var inserted = [I]()
     var updated = [I]()
     var moved = [(source: I, target: I)]()
 
     var sourceTraces = ContiguousArray<Trace<Int>>()
-    var targetReferences = ContiguousArray<Int?>(repeating: nil, count: target.count)
     var sourceIdentifiers = ContiguousArray<E.DifferenceIdentifier>()
+    var targetReferences = ContiguousArray<Int?>(repeating: nil, count: target.count)
 
-    sourceIdentifiers.reserveCapacity(source.count)
     sourceTraces.reserveCapacity(source.count)
+    sourceIdentifiers.reserveCapacity(source.count)
 
     for sourceElement in source {
         sourceTraces.append(Trace())
@@ -524,15 +522,15 @@ internal func differentiate<E: Differentiable, I>(
 
         if let targetIndex = sourceTraces[sourceIndex].reference {
             let targetElement = target[targetIndex]
-            updatedElements?(targetElement)
-            undeletedElements?(targetElement)
+            updatedElementsPointer?.pointee.append(targetElement)
+            notDeletedElementsPointer?.pointee.append(targetElement)
         }
         else {
             let sourceElement = source[sourceIndex]
             deleted.append(mapIndex(sourceIndex))
             sourceTraces[sourceIndex].isTracked = true
             offsetByDelete += 1
-            updatedElements?(sourceElement)
+            updatedElementsPointer?.pointee.append(sourceElement)
         }
     }
 
@@ -549,7 +547,7 @@ internal func differentiate<E: Differentiable, I>(
             let targetElement = target[targetIndex]
 
             if !targetElement.isContentEqual(to: sourceElement) {
-                updated.append(mapIndex(trackTargetIndexAsUpdated ? targetIndex : sourceIndex))
+                updated.append(mapIndex(useTargetIndexForUpdated ? targetIndex : sourceIndex))
             }
 
             if sourceIndex != untrackedSourceIndex {
@@ -562,7 +560,7 @@ internal func differentiate<E: Differentiable, I>(
         }
     }
 
-    return DifferentiateResult(
+    return DiffResult(
         deleted: deleted,
         inserted: inserted,
         updated: updated,
@@ -574,7 +572,7 @@ internal func differentiate<E: Differentiable, I>(
 
 /// A set of changes and metadata as a result of calculating differences in linear collection.
 @usableFromInline
-internal struct DifferentiateResult<Index> {
+internal struct DiffResult<Index> {
     @usableFromInline
     internal let deleted: [Index]
     @usableFromInline
