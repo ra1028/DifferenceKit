@@ -13,6 +13,10 @@ let package = Package(
             path: "Sources",
             exclude: ["Extensions"]
         ),
+        .target(
+            name: "DifferenceKitUIKit",
+            path: "Sources"
+        ),
         .testTarget(
             name: "DifferenceKitTests",
             dependencies: ["DifferenceKit"],
