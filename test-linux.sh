@@ -18,7 +18,7 @@ if [[ `uname` == "Darwin" ]]; then
 
   echo "Starting to running tests on Linux by Docker..."
   docker-machine create --driver virtualbox $DOCKER_HOST_NAME || true
-  docker run -v $WORKING_DIR:$WORKING_DIR -w $WORKING_DIR -it --privileged swift:latest bash -c "$0" || true
+  docker run -v $WORKING_DIR:$WORKING_DIR -w $WORKING_DIR -it --privileged swift:latest bash -c "bash $0" || true
   docker-machine stop $DOCKER_HOST_NAME || true
   docker-machine rm -f $DOCKER_HOST_NAME || true
   echo "Finish"
