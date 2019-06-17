@@ -10,8 +10,7 @@ let package = Package(
     targets: [
         .target(
             name: "DifferenceKit",
-            path: "Sources",
-            exclude: ["Extensions"]
+            path: "Sources"
         ),
         .testTarget(
             name: "DifferenceKitTests",
