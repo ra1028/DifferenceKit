@@ -313,7 +313,6 @@ github "ra1028/DifferenceKit"
 
 ### [Swift Package Manager](https://swift.org/package-manager/)
 
-The SwiftPM version does not include the extensions for UI.  
 Add the following to the dependencies of your `Package.swift`:
 ```swift
 .package(url: "https://github.com/ra1028/DifferenceKit.git", from: "version")
