@@ -68,15 +68,11 @@ Implementation is [here](https://github.com/ra1028/DifferenceKit/blob/master/Sou
 ## Basic Usage
 
 The type of the element that to take diffs must be conform to the `Differentiable` protocol.  
-The `differenceIdentifier`'s type is generic associated type:
+The `id`'s type is generic associated type:
 ```swift
 struct User: Differentiable {
     let id: Int
     let name: String
-
-    var differenceIdentifier: Int {
-        return id
-    }
 
     func isContentEqual(to source: User) -> Bool {
         return name == source.name
@@ -89,7 +85,7 @@ In the case of definition above, `id` uniquely identifies the element and get to
 There are default implementations of `Differentiable` for the types that conforming to `Equatable` or `Hashable`：
 ```swift
 // If `Self` conforming to `Hashable`.
-var differenceIdentifier: Self {
+var id: Self {
     return self
 }
 
