@@ -1,7 +1,7 @@
 /// A type-erased differentiable value.
 ///
 /// The `AnyDifferentiable` type hides the specific underlying types.
-/// Associated type `DifferenceIdentifier` is erased by `AnyHashable`.
+/// Associated type `ID` is erased by `AnyHashable`.
 /// The comparisons of whether has updated is forwards to an underlying differentiable value.
 ///
 /// You can store mixed-type elements in collection that require `Differentiable` conformance by
@@ -31,8 +31,8 @@ public struct AnyDifferentiable: Differentiable {
 
     /// A type-erased identifier value for difference calculation.
     @inlinable
-    public var differenceIdentifier: AnyHashable {
-        return box.differenceIdentifier
+    public var id: AnyHashable {
+        return box.id
     }
 
     @usableFromInline
@@ -74,7 +74,7 @@ extension AnyDifferentiable: CustomDebugStringConvertible {
 @usableFromInline
 internal protocol AnyDifferentiableBox {
     var base: Any { get }
-    var differenceIdentifier: AnyHashable { get }
+    var id: AnyHashable { get }
 
     func isContentEqual(to source: AnyDifferentiableBox) -> Bool
 }
@@ -90,8 +90,8 @@ internal struct DifferentiableBox<Base: Differentiable>: AnyDifferentiableBox {
     }
 
     @inlinable
-    internal var differenceIdentifier: AnyHashable {
-        return baseComponent.differenceIdentifier
+    internal var id: AnyHashable {
+        return baseComponent.id
     }
 
     @inlinable
