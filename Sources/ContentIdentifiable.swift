@@ -1,6 +1,6 @@
 /// A class of types whose instances hold the value of an entity with stable identity.
 public protocol ContentIdentifiable {
-    ///  A type representing the stable identity of the entity associated with `self`.
+    /// A type representing the stable identity of the entity associated with `self`.
     associatedtype ID: Hashable
 
     /// The stable identity of the entity associated with `self`.
