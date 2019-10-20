@@ -182,80 +182,102 @@ The frameworks and its version that compared is below.
 - [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) ([Differentiator](https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Sources/Differentiator)) - 4.0.1
 - [FlexibleDiff](https://github.com/RACCommunity/FlexibleDiff) - 0.0.8
 - [IGListKit](https://github.com/Instagram/IGListKit) - 3.4.0
-- [DeepDiff](https://github.com/onmyway133/DeepDiff) - 2.0.1
-- [Differ](https://github.com/tonyarnold/Differ) ([Diff.swift](https://github.com/wokalski/Diff.swift)) - 1.4.1
+- [DeepDiff](https://github.com/onmyway133/DeepDiff) - 2.2.0
+- [Differ](https://github.com/tonyarnold/Differ) ([Diff.swift](https://github.com/wokalski/Diff.swift)) - 1.4.3
 - [Dwifft](https://github.com/jflinter/Dwifft) - 0.9
+- [Swift.CollectionDifference](https://developer.apple.com/documentation/swift/collectiondifference) Swift 5.1
 
 ### Performance Comparison
 
 Benchmark project is [here](https://github.com/ra1028/DifferenceKit/blob/master/Benchmark).  
-Performance was mesured by code compiled using `Xcode10.2` and `Swift 5.0` with `-O -whole-module-optimization` and run on `iPhoneXs simulator`.  
+Performance was mesured by code compiled using `Xcode11.1` and `Swift 5.1` with `-O` optimization and run on `iPhone11 Pro simulator`.  
 Use `Foundation.UUID` as an element of collections.  
 
 #### - From 5,000 elements to 1,000 deleted, 1,000 inserted and 200 shuffled
 
-|             |Time(sec)    |
-|:------------|------------:|
-|DifferenceKit|`0.0021`     |
-|RxDataSources|`0.0067`     |
-|IGListKit    |`0.0490`     |
-|FlexibleDiff |`0.0117`     |
-|DeepDiff     |`0.0263`     |
-|Differ       |`1.2661`     |
-|Dwifft       |`0.4552`     |
+|                          |Time(sec)                 |
+|:-------------------------|-------------------------:|
+|DifferenceKit             |`0.0019`                  |
+|RxDataSources             |`0.0074`                  |
+|IGListKit                 |`0.0346`                  |
+|FlexibleDiff              |`0.0161`                  |
+|DeepDiff                  |`0.0373`                  |
+|Differ                    |`1.0581`                  |
+|Dwifft                    |`0.4732`                  |
+|Swift.CollectionDifference|`0.0620`                  |
 
 #### - From 100,000 elements to 10,000 deleted, 10,000 inserted and 2,000 shuffled
 
-|             |Time(sec)    |
-|:------------|------------:|
-|DifferenceKit|`0.0364`     |
-|RxDataSources|`0.1167`     |
-|IGListKit    |`1.0130`     |
-|FlexibleDiff |`0.2104`     |
-|DeepDiff     |`0.4180`     |
-|Differ       |`136.8958`   |
-|Dwifft       |`211.4457`   |
+|                          |Time(sec)                 |
+|:-------------------------|-------------------------:|
+|DifferenceKit             |`0.0348`                  |
+|RxDataSources             |`0.1024`                  |
+|IGListKit                 |`0.7002`                  |
+|FlexibleDiff              |`0.2189`                  |
+|DeepDiff                  |`0.5537`                  |
+|Differ                    |`153.8007`                |
+|Dwifft                    |`187.1341`                |
+|Swift.CollectionDifference|`5.0281`                  |
 
 ### Features Comparison
 
+#### - Algorithm
+
+|                          |Base algorithm|Order|
+|:-------------------------|-------------:|----:|
+|DifferenceKit             |Heckel        |O(N) |
+|RxDataSources             |Heckel        |O(N) |
+|FlexibleDiff              |Heckel        |O(N) |
+|IGListKit                 |Heckel        |O(N) |
+|DeepDiff                  |Heckel        |O(N) |
+|Differ                    |Myers         |O(ND)|
+|Dwifft                    |Myers         |O(ND)|
+|Swift.CollectionDifference|Myers         |O(ND)|
+
+\* [**Heckel algorithm**](https://dl.acm.org/citation.cfm?id=359467)  
+\* [**Myers algorithm**](http://www.xmailserver.org/diff2.pdf)  
+
 #### - Supported Collection
 
-|             |Linear|Sectioned|Duplicate element/section|
-|:------------|:----:|:-------:|:-----------------------:|
-|DifferenceKit|✅    |✅       |✅                      |
-|RxDataSources|❌    |✅       |❌                      |
-|FlexibleDiff |✅    |✅       |✅                      |
-|IGListKit    |✅    |❌       |✅                      |
-|DeepDiff     |✅    |❌       |✅                      |
-|Differ       |✅    |✅       |✅                      |
-|Dwifft       |✅    |✅       |✅                      |
+|                          |Linear|Sectioned|Duplicate element/section|
+|:-------------------------|:----:|:-------:|:-----------------------:|
+|DifferenceKit             |✅    |✅       |✅                      |
+|RxDataSources             |❌    |✅       |❌                      |
+|FlexibleDiff              |✅    |✅       |✅                      |
+|IGListKit                 |✅    |❌       |✅                      |
+|DeepDiff                  |✅    |❌       |✅                      |
+|Differ                    |✅    |✅       |✅                      |
+|Dwifft                    |✅    |✅       |✅                      |
+|Swift.CollectionDifference|✅    |❌       |✅                      |
 
 \* **Linear** means 1-dimensional collection  
 \* **Sectioned** means 2-dimensional collection  
 
 #### - Supported Element Diff
 
-|             |Delete|Insert|Move|Reload|Move across sections|
-|:------------|:----:|:----:|:--:|:----:|:------------------:|
-|DifferenceKit|✅    |✅    |✅ |✅    |✅                  |
-|RxDataSources|✅    |✅    |✅ |✅    |✅                  |
-|FlexibleDiff |✅    |✅    |✅ |✅    |❌                  |
-|IGListKit    |✅    |✅    |✅ |✅    |❌                  |
-|DeepDiff     |✅    |✅    |✅ |✅    |❌                  |
-|Differ       |✅    |✅    |✅ |❌    |❌                  |
-|Dwifft       |✅    |✅    |❌ |❌    |❌                  |
+|                          |Delete|Insert|Move|Reload|Move across sections|
+|:-------------------------|:----:|:----:|:--:|:----:|:------------------:|
+|DifferenceKit             |✅    |✅    |✅ |✅    |✅                  |
+|RxDataSources             |✅    |✅    |✅ |✅    |✅                  |
+|FlexibleDiff              |✅    |✅    |✅ |✅    |❌                  |
+|IGListKit                 |✅    |✅    |✅ |✅    |❌                  |
+|DeepDiff                  |✅    |✅    |✅ |✅    |❌                  |
+|Differ                    |✅    |✅    |✅ |❌    |❌                  |
+|Dwifft                    |✅    |✅    |❌ |❌    |❌                  |
+|Swift.CollectionDifference|✅    |✅    |✅ |❌    |❌                  |
 
 #### - Supported Section Diff
 
-|             |Delete|Insert|Move|Reload|
-|:------------|:----:|:----:|:--:|:----:|
-|DifferenceKit|✅    |✅    |✅ |✅    |
-|RxDataSources|✅    |✅    |✅ |❌    |
-|FlexibleDiff |✅    |✅    |✅ |✅    |
-|IGListKit    |❌    |❌    |❌ |❌    |
-|DeepDiff     |❌    |❌    |❌ |❌    |
-|Differ       |✅    |✅    |✅ |❌    |
-|Dwifft       |✅    |✅    |❌ |❌    |
+|                          |Delete|Insert|Move|Reload|
+|:-------------------------|:----:|:----:|:--:|:----:|
+|DifferenceKit             |✅    |✅    |✅ |✅    |
+|RxDataSources             |✅    |✅    |✅ |❌    |
+|FlexibleDiff              |✅    |✅    |✅ |✅    |
+|IGListKit                 |❌    |❌    |❌ |❌    |
+|DeepDiff                  |❌    |❌    |❌ |❌    |
+|Differ                    |✅    |✅    |✅ |❌    |
+|Dwifft                    |✅    |✅    |❌ |❌    |
+|Swift.CollectionDifference|❌    |❌    |❌ |❌    |
 
 ---
 
@@ -311,6 +333,13 @@ Add the following to your `Cartfile`:
 github "ra1028/DifferenceKit"
 ```
 
+### [Swift Package Manager for Apple platforms](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
+
+Select Xcode menu `File > Swift Packages > Add Package Dependency` and enter repository URL with GUI.  
+```
+Repository: https://github.com/ra1028/DifferenceKit
+```
+
 ### [Swift Package Manager](https://swift.org/package-manager/)
 
 Add the following to the dependencies of your `Package.swift`:
@@ -334,12 +363,12 @@ DifferenceKit was developed with reference to the following excellent materials 
 
 - [A technique for isolating differences between files](https://dl.acm.org/citation.cfm?id=359467) (by [Paul Heckel](https://dl.acm.org/author_page.cfm?id=81100051772))
 - [DifferenceAlgorithmComparison](https://github.com/horita-yuya/DifferenceAlgorithmComparison) (by [@horita-yuya](https://github.com/horita-yuya))
-- [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) (by [@kzaher](https://github.com/kzaher), [RxSwift Community](https://github.com/RxSwiftCommunity))
 
 #### OSS using DifferenceKit
 The list of the awesome OSS which uses this library. They also help to understanding how to use DifferenceKit.  
 
 - [Carbon](https://github.com/ra1028/Carbon) (by [@ra1028](https://github.com/ra1028))
+- [DiffableDataSources](https://github.com/ra1028/DiffableDataSources) (by [@ra1028](https://github.com/ra1028))
 - [Rocket.Chat.iOS](https://github.com/RocketChat/Rocket.Chat.iOS) (by [RocketChat](https://github.com/RocketChat))
 - [wire-ios](https://github.com/wireapp/wire-ios) (by [Wire Swiss GmbH](https://github.com/wireapp))
 - [ReactiveLists](https://github.com/plangrid/ReactiveLists) (by [PlanGrid](https://github.com/plangrid))
@@ -349,6 +378,7 @@ The list of the awesome OSS which uses this library. They also help to understan
 #### Other diffing libraries
 I respect and ️❤️ all libraries involved in diffing.  
 
+- [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) (by [@kzaher](https://github.com/kzaher), [RxSwift Community](https://github.com/RxSwiftCommunity))
 - [IGListKit](https://github.com/Instagram/IGListKit) (by [Instagram](https://github.com/Instagram))
 - [FlexibleDiff](https://github.com/RACCommunity/FlexibleDiff) (by [@andersio](https://github.com/andersio), [RACCommunity](https://github.com/RACCommunity))
 - [DeepDiff](https://github.com/onmyway133/DeepDiff) (by [@onmyway133](https://github.com/onmyway133))
