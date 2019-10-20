@@ -185,7 +185,7 @@ The frameworks and its version that compared is below.
 - [DeepDiff](https://github.com/onmyway133/DeepDiff) - 2.2.0
 - [Differ](https://github.com/tonyarnold/Differ) ([Diff.swift](https://github.com/wokalski/Diff.swift)) - 1.4.3
 - [Dwifft](https://github.com/jflinter/Dwifft) - 0.9
-- [Swift.CollectionDifference](https://developer.apple.com/documentation/swift/collectiondifference) Swift 5.1
+- [Swift.CollectionDifference](https://developer.apple.com/documentation/swift/collectiondifference) - Swift 5.1
 
 ### Performance Comparison
 
