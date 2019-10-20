@@ -49,6 +49,11 @@ let runner = BenchmarkRunner(
         return {
             _ = Dwifft.diff(data.source, data.target)
         }
+    },
+    Benchmark(name: "Swift.CollectionDifference") { data in
+        return {
+            _ = data.target.difference(from: data.source).inferringMoves()
+        }
     }
 )
 

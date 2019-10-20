@@ -63,7 +63,6 @@ struct Benchmark {
         let start = CFAbsoluteTimeGetCurrent()
         action()
         let end = CFAbsoluteTimeGetCurrent()
-
         return end - start
     }
 }
@@ -76,6 +75,7 @@ struct BenchmarkRunner {
     }
 
     func run(with data: BenchmarkData) {
+        let benchmarks = self.benchmarks
         let sourceCount = String.localizedStringWithFormat("%d", data.source.count)
         let deleteCount = String.localizedStringWithFormat("%d", data.deleteRange.count)
         let insertCount = String.localizedStringWithFormat("%d", data.insertRange.count)
@@ -97,12 +97,33 @@ struct BenchmarkRunner {
             |\(leftAlignSpacer)|\(rightAlignSpacer)|
             """)
 
-        for benchmark in benchmarks {
-            let paddingName = benchmark.name.padding(toLength: maxLength, withPad: " ", startingAt: 0)
-            print("|\(paddingName)|", terminator: "")
+        var results = ContiguousArray<CFAbsoluteTime?>(repeating: nil, count: benchmarks.count)
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: "Measure benchmark queue", attributes: .concurrent)
 
-            let result = benchmark.measure(with: data)
+        for (offset, benchmark) in benchmarks.enumerated() {
+            group.enter()
+
+            queue.async(group: group) {
+                let first = benchmark.measure(with: data)
+                let second = benchmark.measure(with: data)
+                let third = benchmark.measure(with: data)
+                results[offset] = min(first, second, third)
+                group.leave()
+            }
+        }
+
+        group.wait()
+
+        for (offset, benchmark) in benchmarks.enumerated() {
+            guard let result = results[offset] else {
+                fatalError("Measuring was not works correctly.")
+            }
+
+            let paddingName = benchmark.name.padding(toLength: maxLength, withPad: " ", startingAt: 0)
             let paddingTime = String(format: "`%.4f`", result).padding(toLength: maxLength, withPad: " ", startingAt: 0)
+
+            print("|\(paddingName)|", terminator: "")
             print("\(paddingTime)|")
         }
 
