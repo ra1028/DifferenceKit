@@ -87,7 +87,7 @@
             </ul>
           </li>
           <li class="nav-group-name">
-            <a class="nav-group-name-link" href="UI Extensions.html">UI Extensions</a>
+            <a class="nav-group-name-link" href="UI%20Extensions.html">UI Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Extensions/UITableView.html">UITableView</a>
@@ -122,7 +122,8 @@ The algorithm is optimized based on the Paul Heckel&rsquo;s algorithm.
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-yellow.svg"/></a>
 <a href="https://swift.org/package-manager"><img alt="Swift Package Manager" src="https://img.shields.io/badge/SwiftPM-compatible-yellowgreen.svg"/></a>
 </br>
-<a href="https://travis-ci.org/ra1028/DifferenceKit"><img alt="Build Status" src="https://travis-ci.org/ra1028/DifferenceKit.svg?branch=master"/></a>
+<a href="https://dev.azure.
+com/ra1028/GitHub/_build/latest?definitionId=1&branchName=master"><img alt="Build Status" src="https://dev.azure.com/ra1028/GitHub/_apis/build/status/ra1028.DifferenceKit?branchName=master"/></a>
 <a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20Linux-green.svg"/></a>
 <a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/License-Apache%202.0-black.svg"/></a>
 </p>
@@ -277,14 +278,15 @@ The frameworks and its version that compared is below.  </p>
 <li><a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> (<a href="https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Sources/Differentiator">Differentiator</a>) - 4.0.1</li>
 <li><a href="https://github.com/RACCommunity/FlexibleDiff">FlexibleDiff</a> - 0.0.8</li>
 <li><a href="https://github.com/Instagram/IGListKit">IGListKit</a> - 3.4.0</li>
-<li><a href="https://github.com/onmyway133/DeepDiff">DeepDiff</a> - 2.0.1</li>
-<li><a href="https://github.com/tonyarnold/Differ">Differ</a> (<a href="https://github.com/wokalski/Diff.swift">Diff.swift</a>) - 1.4.1</li>
+<li><a href="https://github.com/onmyway133/DeepDiff">DeepDiff</a> - 2.2.0</li>
+<li><a href="https://github.com/tonyarnold/Differ">Differ</a> (<a href="https://github.com/wokalski/Diff.swift">Diff.swift</a>) - 1.4.3</li>
 <li><a href="https://github.com/jflinter/Dwifft">Dwifft</a> - 0.9</li>
+<li><a href="https://developer.apple.com/documentation/swift/collectiondifference">Swift.CollectionDifference</a> Swift 5.1</li>
 </ul>
 <h3 id='performance-comparison' class='heading'>Performance Comparison</h3>
 
 <p>Benchmark project is <a href="https://github.com/ra1028/DifferenceKit/blob/master/Benchmark">here</a>.<br>
-Performance was mesured by code compiled using <code>Xcode10.2</code> and <code>Swift 5.0</code> with <code>-O -whole-module-optimization</code> and run on <code>iPhoneXs simulator</code>.<br>
+Performance was mesured by code compiled using <code>Xcode11.1</code> and <code>Swift 5.1</code> with <code>-O</code> optimization and run on <code>iPhone11 Pro simulator</code>.<br>
 Use <code>Foundation.UUID</code> as an element of collections.  </p>
 <h4 id='from-5-000-elements-to-1-000-deleted-1-000-inserted-and-200-shuffled' class='heading'>- From 5,000 elements to 1,000 deleted, 1,000 inserted and 200 shuffled</h4>
 
@@ -296,31 +298,35 @@ Use <code>Foundation.UUID</code> as an element of collections.  </p>
 </thead><tbody>
 <tr>
 <td style="text-align: left">DifferenceKit</td>
-<td style="text-align: right"><code>0.0021</code></td>
+<td style="text-align: right"><code>0.0019</code></td>
 </tr>
 <tr>
 <td style="text-align: left">RxDataSources</td>
-<td style="text-align: right"><code>0.0067</code></td>
+<td style="text-align: right"><code>0.0074</code></td>
 </tr>
 <tr>
 <td style="text-align: left">IGListKit</td>
-<td style="text-align: right"><code>0.0490</code></td>
+<td style="text-align: right"><code>0.0346</code></td>
 </tr>
 <tr>
 <td style="text-align: left">FlexibleDiff</td>
-<td style="text-align: right"><code>0.0117</code></td>
+<td style="text-align: right"><code>0.0161</code></td>
 </tr>
 <tr>
 <td style="text-align: left">DeepDiff</td>
-<td style="text-align: right"><code>0.0263</code></td>
+<td style="text-align: right"><code>0.0373</code></td>
 </tr>
 <tr>
 <td style="text-align: left">Differ</td>
-<td style="text-align: right"><code>1.2661</code></td>
+<td style="text-align: right"><code>1.0581</code></td>
 </tr>
 <tr>
 <td style="text-align: left">Dwifft</td>
-<td style="text-align: right"><code>0.4552</code></td>
+<td style="text-align: right"><code>0.4732</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: right"><code>0.0620</code></td>
 </tr>
 </tbody></table>
 <h4 id='from-100-000-elements-to-10-000-deleted-10-000-inserted-and-2-000-shuffled' class='heading'>- From 100,000 elements to 10,000 deleted, 10,000 inserted and 2,000 shuffled</h4>
@@ -333,34 +339,91 @@ Use <code>Foundation.UUID</code> as an element of collections.  </p>
 </thead><tbody>
 <tr>
 <td style="text-align: left">DifferenceKit</td>
-<td style="text-align: right"><code>0.0364</code></td>
+<td style="text-align: right"><code>0.0348</code></td>
 </tr>
 <tr>
 <td style="text-align: left">RxDataSources</td>
-<td style="text-align: right"><code>0.1167</code></td>
+<td style="text-align: right"><code>0.1024</code></td>
 </tr>
 <tr>
 <td style="text-align: left">IGListKit</td>
-<td style="text-align: right"><code>1.0130</code></td>
+<td style="text-align: right"><code>0.7002</code></td>
 </tr>
 <tr>
 <td style="text-align: left">FlexibleDiff</td>
-<td style="text-align: right"><code>0.2104</code></td>
+<td style="text-align: right"><code>0.2189</code></td>
 </tr>
 <tr>
 <td style="text-align: left">DeepDiff</td>
-<td style="text-align: right"><code>0.4180</code></td>
+<td style="text-align: right"><code>0.5537</code></td>
 </tr>
 <tr>
 <td style="text-align: left">Differ</td>
-<td style="text-align: right"><code>136.8958</code></td>
+<td style="text-align: right"><code>153.8007</code></td>
 </tr>
 <tr>
 <td style="text-align: left">Dwifft</td>
-<td style="text-align: right"><code>211.4457</code></td>
+<td style="text-align: right"><code>187.1341</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: right"><code>5.0281</code></td>
 </tr>
 </tbody></table>
 <h3 id='features-comparison' class='heading'>Features Comparison</h3>
+<h4 id='algorithm' class='heading'>- Algorithm</h4>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: right">Base algorithm</th>
+<th style="text-align: right">Order</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">DifferenceKit</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">RxDataSources</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">FlexibleDiff</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">IGListKit</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">DeepDiff</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">Differ</td>
+<td style="text-align: right">Myers</td>
+<td style="text-align: right">O(ND)</td>
+</tr>
+<tr>
+<td style="text-align: left">Dwifft</td>
+<td style="text-align: right">Myers</td>
+<td style="text-align: right">O(ND)</td>
+</tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: right">Myers</td>
+<td style="text-align: right">O(ND)</td>
+</tr>
+</tbody></table>
+
+<p>* <a href="https://dl.acm.org/citation.cfm?id=359467"><strong>Heckel algorithm</strong></a><br>
+* <a href="http://www.xmailserver.org/diff2.pdf"><strong>Myers algorithm</strong></a>  </p>
 <h4 id='supported-collection' class='heading'>- Supported Collection</h4>
 
 <table><thead>
@@ -411,6 +474,12 @@ Use <code>Foundation.UUID</code> as an element of collections.  </p>
 <td style="text-align: left">Dwifft</td>
 <td style="text-align: center">✅</td>
 <td style="text-align: center">✅</td>
+<td style="text-align: center">✅</td>
+</tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">❌</td>
 <td style="text-align: center">✅</td>
 </tr>
 </tbody></table>
@@ -485,6 +554,14 @@ Use <code>Foundation.UUID</code> as an element of collections.  </p>
 <td style="text-align: center">❌</td>
 <td style="text-align: center">❌</td>
 </tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
+</tr>
 </tbody></table>
 <h4 id='supported-section-diff' class='heading'>- Supported Section Diff</h4>
 
@@ -546,6 +623,13 @@ Use <code>Foundation.UUID</code> as an element of collections.  </p>
 <td style="text-align: center">❌</td>
 <td style="text-align: center">❌</td>
 </tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
+</tr>
 </tbody></table>
 
 <hr>
@@ -591,10 +675,14 @@ To use only algorithm without extensions for UI, add the following to your <code
 <p>Add the following to your <code>Cartfile</code>:</p>
 <pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"ra1028/DifferenceKit"</span>
 </code></pre>
+<h3 id='a-href-https-developer-apple-com-documentation-xcode-adding_package_dependencies_to_your_app-swift-package-manager-for-apple-platforms-a' class='heading'><a href="https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app">Swift Package Manager for Apple platforms</a></h3>
+
+<p>Select Xcode menu <code>File &gt; Swift Packages &gt; Add Package Dependency</code> and enter repository URL with GUI.  </p>
+<pre class="highlight plaintext"><code>Repository: https://github.com/ra1028/DifferenceKit
+</code></pre>
 <h3 id='a-href-https-swift-org-package-manager-swift-package-manager-a' class='heading'><a href="https://swift.org/package-manager/">Swift Package Manager</a></h3>
 
-<p>The SwiftPM version does not include the extensions for UI.<br>
-Add the following to the dependencies of your <code>Package.swift</code>:</p>
+<p>Add the following to the dependencies of your <code>Package.swift</code>:</p>
 <pre class="highlight swift"><code><span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/ra1028/DifferenceKit.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"version"</span><span class="p">)</span>
 </code></pre>
 
@@ -613,7 +701,6 @@ Please see the <a href="https://github.com/ra1028/DifferenceKit/blob/master/CONT
 <ul>
 <li><a href="https://dl.acm.org/citation.cfm?id=359467">A technique for isolating differences between files</a> (by <a href="https://dl.acm.org/author_page.cfm?id=81100051772">Paul Heckel</a>)</li>
 <li><a href="https://github.com/horita-yuya/DifferenceAlgorithmComparison">DifferenceAlgorithmComparison</a> (by <a href="https://github.com/horita-yuya">@horita-yuya</a>)</li>
-<li><a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> (by <a href="https://github.com/kzaher">@kzaher</a>, <a href="https://github.com/RxSwiftCommunity">RxSwift Community</a>)</li>
 </ul>
 <h4 id='oss-using-differencekit' class='heading'>OSS using DifferenceKit</h4>
 
@@ -621,6 +708,7 @@ Please see the <a href="https://github.com/ra1028/DifferenceKit/blob/master/CONT
 
 <ul>
 <li><a href="https://github.com/ra1028/Carbon">Carbon</a> (by <a href="https://github.com/ra1028">@ra1028</a>)</li>
+<li><a href="https://github.com/ra1028/DiffableDataSources">DiffableDataSources</a> (by <a href="https://github.com/ra1028">@ra1028</a>)</li>
 <li><a href="https://github.com/RocketChat/Rocket.Chat.iOS">Rocket.Chat.iOS</a> (by <a href="https://github.com/RocketChat">RocketChat</a>)</li>
 <li><a href="https://github.com/wireapp/wire-ios">wire-ios</a> (by <a href="https://github.com/wireapp">Wire Swiss GmbH</a>)</li>
 <li><a href="https://github.com/plangrid/ReactiveLists">ReactiveLists</a> (by <a href="https://github.com/plangrid">PlanGrid</a>)</li>
@@ -632,6 +720,7 @@ Please see the <a href="https://github.com/ra1028/DifferenceKit/blob/master/CONT
 <p>I respect and ️❤️ all libraries involved in diffing.  </p>
 
 <ul>
+<li><a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> (by <a href="https://github.com/kzaher">@kzaher</a>, <a href="https://github.com/RxSwiftCommunity">RxSwift Community</a>)</li>
 <li><a href="https://github.com/Instagram/IGListKit">IGListKit</a> (by <a href="https://github.com/Instagram">Instagram</a>)</li>
 <li><a href="https://github.com/RACCommunity/FlexibleDiff">FlexibleDiff</a> (by <a href="https://github.com/andersio">@andersio</a>, <a href="https://github.com/RACCommunity">RACCommunity</a>)</li>
 <li><a href="https://github.com/onmyway133/DeepDiff">DeepDiff</a> (by <a href="https://github.com/onmyway133">@onmyway133</a>)</li>
@@ -652,8 +741,8 @@ Please see the <a href="https://github.com/ra1028/DifferenceKit/blob/master/CONT
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2019-05-07)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2019 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2019-10-21)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
