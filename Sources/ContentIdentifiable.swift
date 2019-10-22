@@ -1,5 +1,5 @@
 /// Represents the value that identified for differentiate.
-public protocol ConntentIdentifiable {
+public protocol ContentIdentifiable {
     /// A type representing the identifier.
     associatedtype DifferenceIdentifier: Hashable
 
@@ -7,7 +7,7 @@ public protocol ConntentIdentifiable {
     var differenceIdentifier: DifferenceIdentifier { get }
 }
 
-public extension ConntentIdentifiable where Self: Hashable {
+public extension ContentIdentifiable where Self: Hashable {
     /// The `self` value as an identifier for difference calculation.
     @inlinable
     var differenceIdentifier: Self {
