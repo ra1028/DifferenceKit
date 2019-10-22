@@ -44,7 +44,7 @@ jobs:
           set -o pipefail && xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release ENABLE_TESTABILITY=YES | xcpretty -c
       - name: Xcode iOS
         run: |
-          set -o pipefail && xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X' ENABLE_TESTABILITY=YES | xcpretty -c
+          set -o pipefail && xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' ENABLE_TESTABILITY=YES | xcpretty -c
       - name: Xcode tvOS
         run: |
           set -o pipefail && xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk appletvsimulator -destination 'platform=tvOS Simulator,name=Apple TV' ENABLE_TESTABILITY=YES | xcpretty -c
