@@ -72,23 +72,23 @@ public extension UITableView {
             setData(data)
             return _reloadData(completion: completion)
         }
-        
+
         var count = stagedChangeset.count
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         dispatchGroup.notify(queue: .main, execute: { completion?() })
-        
+
         func decrementCountAndCheckIfCompletedReloading() {
-            count = count - 1
+            count -= 1
             if count == 0 { dispatchGroup.leave() }
         }
-        
+
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
                 return _reloadData(completion: { decrementCountAndCheckIfCompletedReloading() })
             }
-            
+
             _performBatchUpdates({
                 setData(changeset.data)
 
@@ -140,7 +140,7 @@ public extension UITableView {
             CATransaction.commit()
         }
     }
-    
+
     private func _reloadData(completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
@@ -173,14 +173,14 @@ public extension UICollectionView {
             setData(data)
             return _reloadData(completion: completion)
         }
-        
+
         var count = stagedChangeset.count
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
         dispatchGroup.notify(queue: .main, execute: { completion?() })
-        
+
         func decrementCountAndCheckIfCompletedReloading() {
-            count = count - 1
+            count -= 1
             if count == 0 { dispatchGroup.leave() }
         }
 
@@ -227,7 +227,7 @@ public extension UICollectionView {
             }, completion: { _ in decrementCountAndCheckIfCompletedReloading() })
         }
     }
-    
+
     private func _reloadData(completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
