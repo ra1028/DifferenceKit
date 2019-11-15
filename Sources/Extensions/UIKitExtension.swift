@@ -153,17 +153,18 @@ public extension UICollectionView {
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            return _reloadData(completion: completion)
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                return _reloadData(completion: completion)
             }
 
             performBatchUpdates({
@@ -200,8 +201,15 @@ public extension UICollectionView {
                 for (source, target) in changeset.elementMoved {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
-            })
+            }, completion: { _ in completion?() })
         }
+    }
+    
+    private func _reloadData(completion: (() -> Void)? = nil) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        reloadData()
+        CATransaction.commit()
     }
 }
 #endif
