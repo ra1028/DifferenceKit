@@ -19,7 +19,8 @@ public extension UITableView {
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
         reload(
             using: stagedChangeset,
@@ -30,7 +31,8 @@ public extension UITableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
-            setData: setData
+            setData: setData,
+            completion: completion
         )
     }
 
@@ -61,20 +63,21 @@ public extension UITableView {
         insertRowsAnimation: @autoclosure () -> RowAnimation,
         reloadRowsAnimation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            return _reloadData(completion: completion)
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                return _reloadData(completion: completion)
             }
-
-            _performBatchUpdates {
+            
+            _performBatchUpdates({
                 setData(changeset.data)
 
                 if !changeset.sectionDeleted.isEmpty {
@@ -108,19 +111,29 @@ public extension UITableView {
                 for (source, target) in changeset.elementMoved {
                     moveRow(at: IndexPath(row: source.element, section: source.section), to: IndexPath(row: target.element, section: target.section))
                 }
-            }
+            }, completion: completion)
         }
     }
 
-    private func _performBatchUpdates(_ updates: () -> Void) {
+    private func _performBatchUpdates(_ updates: () -> Void, completion: (() -> Void)? = nil) {
         if #available(iOS 11.0, tvOS 11.0, *) {
-            performBatchUpdates(updates)
+            performBatchUpdates(updates) { _ in completion?() }
         }
         else {
+            CATransaction.begin()
+            CATransaction.setCompletionBlock(completion)
             beginUpdates()
             updates()
             endUpdates()
+            CATransaction.commit()
         }
+    }
+    
+    private func _reloadData(completion: (() -> Void)? = nil) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock(completion)
+        reloadData()
+        CATransaction.commit()
     }
 }
 
