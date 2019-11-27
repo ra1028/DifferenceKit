@@ -73,20 +73,14 @@ public extension UITableView {
             return _reloadData(completion: completion)
         }
 
-        var count = stagedChangeset.count
         let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
+        (0..<stagedChangeset.count).forEach { dispatchGroup.enter() }
         dispatchGroup.notify(queue: .main, execute: { completion?() })
-
-        func decrementCountAndCheckIfCompletedReloading() {
-            count -= 1
-            if count == 0 { dispatchGroup.leave() }
-        }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return _reloadData(completion: { decrementCountAndCheckIfCompletedReloading() })
+                return _reloadData(completion: { dispatchGroup.leave() })
             }
 
             _performBatchUpdates({
@@ -123,7 +117,7 @@ public extension UITableView {
                 for (source, target) in changeset.elementMoved {
                     moveRow(at: IndexPath(row: source.element, section: source.section), to: IndexPath(row: target.element, section: target.section))
                 }
-            }, completion: { decrementCountAndCheckIfCompletedReloading() })
+            }, completion: { dispatchGroup.leave() })
         }
     }
 
@@ -174,20 +168,14 @@ public extension UICollectionView {
             return _reloadData(completion: completion)
         }
 
-        var count = stagedChangeset.count
         let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
+        (0..<stagedChangeset.count).forEach { dispatchGroup.enter() }
         dispatchGroup.notify(queue: .main, execute: { completion?() })
-
-        func decrementCountAndCheckIfCompletedReloading() {
-            count -= 1
-            if count == 0 { dispatchGroup.leave() }
-        }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return _reloadData(completion: { decrementCountAndCheckIfCompletedReloading() })
+                return _reloadData(completion: { dispatchGroup.leave() })
             }
 
             performBatchUpdates({
@@ -224,7 +212,7 @@ public extension UICollectionView {
                 for (source, target) in changeset.elementMoved {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
-            }, completion: { _ in decrementCountAndCheckIfCompletedReloading() })
+            }, completion: { _ in dispatchGroup.leave() })
         }
     }
 
