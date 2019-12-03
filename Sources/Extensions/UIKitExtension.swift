@@ -74,7 +74,7 @@ public extension UITableView {
         }
 
         let dispatchGroup = DispatchGroup()
-        (0..<stagedChangeset.count).forEach { dispatchGroup.enter() }
+        (0..<stagedChangeset.count).forEach { _ in dispatchGroup.enter() }
         dispatchGroup.notify(queue: .main, execute: { completion?() })
 
         for changeset in stagedChangeset {
@@ -169,7 +169,7 @@ public extension UICollectionView {
         }
 
         let dispatchGroup = DispatchGroup()
-        (0..<stagedChangeset.count).forEach { dispatchGroup.enter() }
+        (0..<stagedChangeset.count).forEach { _ in dispatchGroup.enter() }
         dispatchGroup.notify(queue: .main, execute: { completion?() })
 
         for changeset in stagedChangeset {
