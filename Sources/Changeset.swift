@@ -38,7 +38,6 @@ public struct Changeset<Collection: Swift.Collection> {
     ///   - elementInserted: The paths of inserted elements.
     ///   - elementUpdated: The paths of updated elements.
     ///   - elementMoved: The pairs of source and target path of moved elements.
-    @inlinable
     public init(
         data: Collection,
         sectionDeleted: [Int] = [],

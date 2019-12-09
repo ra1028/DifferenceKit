@@ -42,7 +42,6 @@ public struct AnyDifferentiable: Differentiable {
     ///
     /// - Parameters:
     ///   - base: A differentiable value to wrap.
-    @inlinable
     public init<D: Differentiable>(_ base: D) {
         if let anyDifferentiable = base as? AnyDifferentiable {
             self = anyDifferentiable
@@ -94,7 +93,7 @@ internal struct DifferentiableBox<Base: Differentiable>: AnyDifferentiableBox {
         return baseComponent.differenceIdentifier
     }
 
-    @inlinable
+    @usableFromInline
     internal init(_ base: Base) {
         baseComponent = base
     }
