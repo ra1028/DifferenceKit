@@ -37,7 +37,6 @@ public struct StagedChangeset<Collection: Swift.Collection> {
     ///
     /// - Parameters:
     ///   - changesets: The collection of `Changeset`.
-    @inlinable
     public init<C: Swift.Collection>(_ changesets: C) where C.Element == Changeset<Collection> {
         self.changesets = ContiguousArray(changesets)
     }

@@ -12,7 +12,6 @@ public struct ElementPath: Hashable {
     /// - Parameters:
     ///   - element: The element index (or offset).
     ///   - section: The section index (or offset).
-    @inlinable
     public init(element: Int, section: Int) {
         self.element = element
         self.section = section

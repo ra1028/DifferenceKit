@@ -586,7 +586,7 @@ internal struct DiffResult<Index> {
     @usableFromInline
     internal let targetReferences: ContiguousArray<Int?>
 
-    @inlinable
+    @usableFromInline
     internal init(
         deleted: [Index] = [],
         inserted: [Index] = [],
@@ -614,8 +614,8 @@ internal struct Trace<Index> {
     @usableFromInline
     internal var isTracked = false
 
-    @inlinable
-    init() {}
+    @usableFromInline
+    internal init() {}
 }
 
 /// The occurrences of element.
@@ -633,7 +633,7 @@ internal final class IndicesReference {
     @usableFromInline
     internal var position = 0
 
-    @inlinable
+    @usableFromInline
     internal init(_ indices: ContiguousArray<Int>) {
         self.indices = indices
     }
@@ -661,7 +661,7 @@ internal struct TableKey<T: Hashable>: Hashable {
     @usableFromInline
     internal let pointer: UnsafePointer<T>
 
-    @inlinable
+    @usableFromInline
     internal init(pointer: UnsafePointer<T>) {
         self.pointeeHashValue = pointer.pointee.hashValue
         self.pointer = pointer

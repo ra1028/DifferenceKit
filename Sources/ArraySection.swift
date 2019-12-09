@@ -19,7 +19,6 @@ public struct ArraySection<Model: Differentiable, Element: Differentiable>: Diff
     /// - Parameters:
     ///   - model: A differentiable model of section.
     ///   - elements: The collection of element in the section.
-    @inlinable
     public init<C: Collection>(model: Model, elements: C) where C.Element == Element {
         self.model = model
         self.elements = Array(elements)
