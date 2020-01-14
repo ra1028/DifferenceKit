@@ -17,5 +17,8 @@ test-linux:
 mod:
 	swift run -c release --package-path ./Packages swift-mod
 
+mod-check:
+	swift run -c release --package-path ./Packages swift-mod --check
+
 generate-linuxmain:
 	swift test --generate-linuxmain
