@@ -15,11 +15,15 @@ public extension UITableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UITableView.
+    ///   - completion: A completion handler block to execute when all of the operations are finished.
+    ///                 This block has no return value and takes the parameter indicating whether
+    ///                 the animations completed successfully or were interrupted for any reason.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: ((Bool) -> Void)? = nil
         ) {
         reload(
             using: stagedChangeset,
@@ -30,7 +34,8 @@ public extension UITableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
-            setData: setData
+            setData: setData,
+            completion: completion
         )
     }
 
@@ -52,6 +57,9 @@ public extension UITableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UITableView.
+    ///   - completion: A completion handler block to execute when all of the operations are finished.
+    ///                 This block has no return value and takes the parameter indicating whether
+    ///                 the animations completed successfully or were interrupted for any reason.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteSectionsAnimation: @autoclosure () -> RowAnimation,
@@ -61,20 +69,25 @@ public extension UITableView {
         insertRowsAnimation: @autoclosure () -> RowAnimation,
         reloadRowsAnimation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: ((Bool) -> Void)? = nil
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            reloadData()
+            completion?(true)
+            return
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                reloadData()
+                completion?(true)
+                return
             }
 
-            _performBatchUpdates {
+            _performBatchUpdates({
                 setData(changeset.data)
 
                 if !changeset.sectionDeleted.isEmpty {
@@ -108,18 +121,19 @@ public extension UITableView {
                 for (source, target) in changeset.elementMoved {
                     moveRow(at: IndexPath(row: source.element, section: source.section), to: IndexPath(row: target.element, section: target.section))
                 }
-            }
+            }, completion: completion)
         }
     }
 
-    private func _performBatchUpdates(_ updates: () -> Void) {
+    private func _performBatchUpdates(_ updates: () -> Void, completion: ((Bool) -> Void)? = nil) {
         if #available(iOS 11.0, tvOS 11.0, *) {
-            performBatchUpdates(updates)
+            performBatchUpdates(updates, completion: completion)
         }
         else {
             beginUpdates()
             updates()
             endUpdates()
+            completion?(true)
         }
     }
 }
@@ -137,20 +151,28 @@ public extension UICollectionView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UICollectionView.
+    ///   - completion: A completion handler block to execute when all of the operations are finished.
+    ///                 This block has no return value and takes the parameter indicating whether
+    ///                 the animations completed successfully or were interrupted for any reason.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: ((Bool) -> Void)? = nil
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            reloadData()
+            completion?(true)
+            return
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                reloadData()
+                completion?(true)
+                return
             }
 
             performBatchUpdates({
@@ -187,7 +209,7 @@ public extension UICollectionView {
                 for (source, target) in changeset.elementMoved {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
-            })
+            }, completion: completion)
         }
     }
 }
