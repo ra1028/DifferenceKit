@@ -23,12 +23,12 @@ public extension UITableView {
         ) {
         reload(
             using: stagedChangeset,
-            deleteSectionsAnimation: animation,
-            insertSectionsAnimation: animation,
-            reloadSectionsAnimation: animation,
-            deleteRowsAnimation: animation,
-            insertRowsAnimation: animation,
-            reloadRowsAnimation: animation,
+            deleteSectionsAnimation: animation(),
+            insertSectionsAnimation: animation(),
+            reloadSectionsAnimation: animation(),
+            deleteRowsAnimation: animation(),
+            insertRowsAnimation: animation(),
+            reloadRowsAnimation: animation(),
             interrupt: interrupt,
             setData: setData
         )
