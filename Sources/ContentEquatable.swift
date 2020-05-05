@@ -61,7 +61,7 @@ extension Array: ContentEquatable where Element: ContentEquatable {
     /// - Returns: A Boolean value indicating whether the content of `self` is equals
     ///            to the content of the given source value.
     @inlinable
-    public func isContentEqual(to source: Array<Element>) -> Bool {
+    public func isContentEqual(to source: [Element]) -> Bool {
         return count == source.count
             && zip(self, source).allSatisfy { $0.isContentEqual(to: $1) }
     }
