@@ -3,8 +3,8 @@ import DifferenceKit
 
 final class MeasurementTestCase: XCTestCase {
     func testMeasureAlgorithmForLinearCollection() {
-        let source = Array(1...10000)
-        let target = source.mutated(removeAt: IndexSet(1000..<2000), insertAt: IndexSet(3000..<4000))
+        let source = Array(1...100000)
+        let target = source.mutated(removeAt: IndexSet(10000..<20000), insertAt: IndexSet(30000..<40000))
 
         measure {
             _ = StagedChangeset(source: source, target: target)
@@ -13,14 +13,14 @@ final class MeasurementTestCase: XCTestCase {
 
     func testMeasureAlgorithmForSectionedCollection() {
         let source: [ArraySection<D, Int>] = D.allCases.enumerated().map { o, d in
-            let lowerBound = o * 3000 + 1
-            let upperBound = lowerBound + 2000
+            let lowerBound = o * 30000 + 1
+            let upperBound = lowerBound + 20000
             return ArraySection(model: d, elements: Array(lowerBound...upperBound))
         }
         let target = source.map { section in
             ArraySection(
                 model: section.model,
-                elements: section.elements.mutated(removeAt: IndexSet(200..<500), insertAt: IndexSet(500..<800))
+                elements: section.elements.mutated(removeAt: IndexSet(2000..<5000), insertAt: IndexSet(5000..<8000))
             )
         }
 

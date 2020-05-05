@@ -4,84 +4,109 @@
     <title>DifferenceKit  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
+
+
     <a title="DifferenceKit  Reference"></a>
-    <header>
-      <div class="content-wrapper">
-        <p><a href="index.html">DifferenceKit Docs</a> (100% documented)</p>
-        <p class="header-right"><a href="https://github.com/ra1028/DifferenceKit"><img src="img/gh.png"/>View on GitHub</a></p>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <p id="breadcrumbs">
-        <a href="index.html">DifferenceKit Reference</a>
-        <img id="carat" src="img/carat.png" />
-        DifferenceKit  Reference
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          DifferenceKit Docs
+        </a>
+         (100% documented)
       </p>
-    </div>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/ra1028/DifferenceKit">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">DifferenceKit Reference</a>
+      <img class="carat" src="img/carat.png" />
+      DifferenceKit  Reference
+    </p>
+
     <div class="content-wrapper">
-      <nav class="sidebar">
+      <nav class="navigation">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="Extensions.html">Extensions</a>
+            <a class="nav-group-name-link" href="Diffing.html">Diffing</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Extensions/Optional.html">Optional</a>
+                <a class="nav-group-task-link" href="Protocols/ContentEquatable.html">ContentEquatable</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/UICollectionView.html">UICollectionView</a>
+                <a class="nav-group-task-link" href="Protocols/Differentiable.html">Differentiable</a>
               </li>
               <li class="nav-group-task">
-                <a href="Extensions/UITableView.html">UITableView</a>
+                <a class="nav-group-task-link" href="Protocols/DifferentiableSection.html">DifferentiableSection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ArraySection.html">ArraySection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/ElementPath.html">ElementPath</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Optional.html">Optional</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Protocols.html">Protocols</a>
+            <a class="nav-group-name-link" href="Changeset.html">Changeset</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Protocols/ContentEquatable.html">ContentEquatable</a>
+                <a class="nav-group-task-link" href="Structs/StagedChangeset.html">StagedChangeset</a>
               </li>
               <li class="nav-group-task">
-                <a href="Protocols/Differentiable.html">Differentiable</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Protocols/DifferentiableSection.html">DifferentiableSection</a>
+                <a class="nav-group-task-link" href="Structs/Changeset.html">Changeset</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Structs.html">Structures</a>
+            <a class="nav-group-name-link" href="UI%20Extensions.html">UI Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Structs/AnyDifferentiable.html">AnyDifferentiable</a>
+                <a class="nav-group-task-link" href="Extensions/UITableView.html">UITableView</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/ArraySection.html">ArraySection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/Changeset.html">Changeset</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/ElementPath.html">ElementPath</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/StagedChangeset.html">StagedChangeset</a>
+                <a class="nav-group-task-link" href="Extensions/UICollectionView.html">UICollectionView</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-        <section>
-          <section class="section">
+
+        <section class="section">
+          <div class="section-content">
             
-            <p align="center">
+            <p><img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/sample.gif" height="310" align="right"></p>
+
+<p align="center">
 <img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/logo.png" width="500">
 </p>
 
@@ -91,70 +116,63 @@ The algorithm is optimized based on the Paul Heckel&rsquo;s algorithm.
 </H4>
 
 <p align="center">
-<a href="https://developer.apple.com/swift"><img alt="Swift4" src="https://img.shields.io/badge/language-Swift4-orange.svg"/></a>
+<a href="https://developer.apple.com/swift"><img alt="Swift5" src="https://img.shields.io/badge/language-Swift5-orange.svg"/></a>
 <a href="https://github.com/ra1028/DifferenceKit/releases/latest"><img alt="Release" src="https://img.shields.io/github/release/ra1028/DifferenceKit.svg"/></a>
 <a href="https://cocoapods.org/pods/DifferenceKit"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/DifferenceKit.svg"/></a>
 <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-yellow.svg"/></a>
 <a href="https://swift.org/package-manager"><img alt="Swift Package Manager" src="https://img.shields.io/badge/SwiftPM-compatible-yellowgreen.svg"/></a>
 </br>
-<a href="https://travis-ci.org/ra1028/DifferenceKit"><img alt="Build Status" src="https://travis-ci.org/ra1028/DifferenceKit.svg?branch=master"/></a>
-<a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20OSX%20%7C%20tvOS%20%7C%20watchOS-green.svg"/></a>
+<a href="https://dev.azure.
+com/ra1028/GitHub/_build/latest?definitionId=1&branchName=master"><img alt="Build Status" src="https://dev.azure.com/ra1028/GitHub/_apis/build/status/ra1028.DifferenceKit?branchName=master"/></a>
+<a href="https://developer.apple.com/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20Linux-green.svg"/></a>
 <a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE"><img alt="Lincense" src="http://img.shields.io/badge/License-Apache%202.0-black.svg"/></a>
+</p>
+
+<p><br></p>
+
+<p align="center">
+Made with ❤️ by <a href="https://github.com/ra1028">Ryo Aoyama</a> and <a href="https://github.com/ra1028/DifferenceKit/graphs/contributors">Contributors</a>
+<br clear="all">
 </p>
 
 <hr>
 <h2 id='features' class='heading'>Features</h2>
 
-<p>✅ Automate to calculate operations for batch-updates of UITableView, UICollectionView, NSTableView and NSCollectionView  </p>
+<p>💡 Fastest <strong>O(n)</strong> diffing algorithm optimized for Swift collection</p>
 
-<p>✅ <strong>O(n)</strong> difference algorithm optimized for performance in Swift  </p>
+<p>💡 Calculate diffs for batch updates of list UI in <code>UIKit</code>, <code>AppKit</code> and <a href="https://github.com/TextureGroup/Texture">Texture</a></p>
 
-<p>✅ Supports both linear and sectioned collection  </p>
+<p>💡 Supports both linear and sectioned collection even if contains duplicates</p>
 
-<p>✅ Supports calculating differences with best effort even if elements or section contains duplicates  </p>
-
-<p>✅ Supports <strong>all operations</strong> for animated UI batch-updates including section reloads  </p>
-
-<hr>
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/ra1028/DifferenceKit/master/assets/sample.gif" width="250">
-</p>
-
-<p align="right">
-Sample app is imitated from <a href="https://github.com/muukii/DataSources">DataSources</a> 💾
-</p>
+<p>💡 Supports <strong>all kind of diffs</strong> for animated UI batch updates</p>
 
 <hr>
 <h2 id='algorithm' class='heading'>Algorithm</h2>
 
-<p>The algorithm used in DifferenceKit is optimized based on the Paul Heckel&rsquo;s algorithm.<br>
+<p>This is a diffing algorithm developed for <a href="https://github.com/ra1028/Carbon">Carbon</a>, works stand alone.<br>
+The algorithm optimized based on the Paul Heckel&rsquo;s algorithm.<br>
 See also his paper <a href="https://dl.acm.org/citation.cfm?id=359467"><q>A technique for isolating differences between files</q></a> released in 1978.<br>
-<a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> and <a href="https://github.com/Instagram/IGListKit">IGListKit</a> are also implemented based on his algorithm.<br>
-This allows all types of differences to be computed in linear time <strong>O(n)</strong>.  </p>
+It allows all kind of diffs to be calculated in linear time <strong>O(n)</strong>.<br>
+<a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> and <a href="https://github.com/Instagram/IGListKit">IGListKit</a> are also implemented based on his algorithm.  </p>
 
-<p>However, in <code>performBatchUpdates</code> of <code>UITableView</code> and <code>UICollectionView</code>, there are combinations of operations that cause crash when applied simultaneously.<br>
-To solve this problem, <code>DifferenceKit</code> takes an approach of split the set of differences at the minimal stages that can be perform batch-updates with no crashes.</p>
+<p>However, in <code>performBatchUpdates</code> of <code>UITableView</code>, <code>UICollectionView</code>, etc, there are combinations of diffs that cause crash when applied simultaneously.<br>
+To solve this problem, <code>DifferenceKit</code> takes an approach of split the set of diffs at the minimal stages that can be perform batch updates with no crashes.</p>
 
 <p>Implementation is <a href="https://github.com/ra1028/DifferenceKit/blob/master/Sources/Algorithm.swift">here</a>.</p>
-
-<hr>
-<h2 id='documentation' class='heading'>Documentation</h2>
-
-<p>See docs in <a href="https://ra1028.github.io/DifferenceKit/">GitHub Pages</a>.<br>
-Documentation is generated by <a href="https://github.com/realm/jazzy">jazzy</a>.</p>
 
 <hr>
 <h2 id='getting-started' class='heading'>Getting Started</h2>
 
 <ul>
-<li><a href="https://github.com/ra1028/DifferenceKit/blob/master/Examples">Example app</a></li>
+<li><a href="https://ra1028.github.io/DifferenceKit">API Documentation</a></li>
+<li><a href="https://github.com/ra1028/DifferenceKit/blob/master/Examples">Example Apps</a></li>
+<li><a href="https://github.com/ra1028/DifferenceKit/blob/master/Benchmark">Benchmark</a></li>
 <li><a href="https://github.com/ra1028/DifferenceKit/blob/master/DifferenceKit.playground/Contents.swift">Playground</a></li>
 </ul>
-<h3 id='example-codes' class='heading'>Example codes</h3>
+<h2 id='basic-usage' class='heading'>Basic Usage</h2>
 
-<p>The type of the element that to take the differences must be conform to the <code><a href="Protocols/Differentiable.html">Differentiable</a></code> protocol.<br>
-The <code>differenceIdentifier</code>&lsquo;s type is determined generic by the associated type:</p>
+<p>The type of the element that to take diffs must be conform to the <code><a href="Protocols/Differentiable.html">Differentiable</a></code> protocol.<br>
+The <code>differenceIdentifier</code>&lsquo;s type is generic associated type:</p>
 <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">User</span><span class="p">:</span> <span class="kt">Differentiable</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">Int</span>
     <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
@@ -171,23 +189,23 @@ The <code>differenceIdentifier</code>&lsquo;s type is determined generic by the 
 
 <p>In the case of definition above, <code>id</code> uniquely identifies the element and get to know the user updated by comparing equality of <code>name</code> of the elements in source and target.</p>
 
-<p>There are default implementations of <code><a href="Protocols/Differentiable.html">Differentiable</a></code> for the types that conformed to <code>Equatable</code> or <code>Hashable</code>：</p>
-<pre class="highlight swift"><code><span class="c1">// If `Self` conform to `Hashable`.</span>
+<p>There are default implementations of <code><a href="Protocols/Differentiable.html">Differentiable</a></code> for the types that conforming to <code>Equatable</code> or <code>Hashable</code>：</p>
+<pre class="highlight swift"><code><span class="c1">// If `Self` conforming to `Hashable`.</span>
 <span class="k">var</span> <span class="nv">differenceIdentifier</span><span class="p">:</span> <span class="k">Self</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">self</span>
 <span class="p">}</span>
 
-<span class="c1">// If `Self` conform to `Equatable`.</span>
+<span class="c1">// If `Self` conforming to `Equatable`.</span>
 <span class="kd">func</span> <span class="nf">isContentEqual</span><span class="p">(</span><span class="n">to</span> <span class="nv">source</span><span class="p">:</span> <span class="k">Self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">self</span> <span class="o">==</span> <span class="n">source</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>So, you can simply:</p>
+<p>Therefore, you can simply:</p>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">String</span><span class="p">:</span> <span class="kt">Differentiable</span> <span class="p">{}</span>
 </code></pre>
 
-<p>Calculates the differences by creating <code><a href="Structs/StagedChangeset.html">StagedChangeset</a></code> from two collections of elements conforming to <code><a href="Protocols/Differentiable.html">Differentiable</a></code>:</p>
+<p>Calculate the diffs by creating <code><a href="Structs/StagedChangeset.html">StagedChangeset</a></code> from two collections of elements conforming to <code><a href="Protocols/Differentiable.html">Differentiable</a></code>:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">source</span> <span class="o">=</span> <span class="p">[</span>
     <span class="kt">User</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Vincent"</span><span class="p">),</span>
     <span class="kt">User</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Jules"</span><span class="p">)</span>
@@ -201,7 +219,7 @@ The <code>differenceIdentifier</code>&lsquo;s type is determined generic by the 
 <span class="k">let</span> <span class="nv">changeset</span> <span class="o">=</span> <span class="kt">StagedChangeset</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="n">source</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="n">target</span><span class="p">)</span>
 </code></pre>
 
-<p>If you want to include multiple types conformed to <code><a href="Protocols/Differentiable.html">Differentiable</a></code> in the collection, use <code><a href="Structs/AnyDifferentiable.html">AnyDifferentiable</a></code>:</p>
+<p>If you want to include multiple types conforming to <code><a href="Protocols/Differentiable.html">Differentiable</a></code> in the collection, use <code><a href="Structs/AnyDifferentiable.html">AnyDifferentiable</a></code>:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">source</span> <span class="o">=</span> <span class="p">[</span>
     <span class="kt">AnyDifferentiable</span><span class="p">(</span><span class="s">"A"</span><span class="p">),</span>
     <span class="kt">AnyDifferentiable</span><span class="p">(</span><span class="kt">User</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">name</span><span class="p">:</span> <span class="s">"Vincent"</span><span class="p">))</span>
@@ -209,8 +227,8 @@ The <code>differenceIdentifier</code>&lsquo;s type is determined generic by the 
 </code></pre>
 
 <p>In the case of sectioned collection, the section itself must have a unique identifier and be able to compare whether there is an update.<br>
-So each section must conform to <code><a href="Protocols/DifferentiableSection.html">DifferentiableSection</a></code> protocol, but in most cases you can use <code><a href="Structs/ArraySection.html">ArraySection</a></code> that general type conformed to it.<br>
-<code><a href="Structs/ArraySection.html">ArraySection</a></code> requires a model conforming to <code><a href="Protocols/Differentiable.html">Differentiable</a></code> for differentiate from other sections:</p>
+So each section must conforming to <code><a href="Protocols/DifferentiableSection.html">DifferentiableSection</a></code> protocol, but in most cases you can use <code><a href="Structs/ArraySection.html">ArraySection</a></code> that general type conforming to it.<br>
+<code><a href="Structs/ArraySection.html">ArraySection</a></code> requires a model conforming to <code><a href="Protocols/Differentiable.html">Differentiable</a></code> for diffing from other sections:</p>
 <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">Model</span><span class="p">:</span> <span class="kt">Differentiable</span> <span class="p">{</span>
     <span class="k">case</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
 <span class="p">}</span>
@@ -228,47 +246,192 @@ So each section must conform to <code><a href="Protocols/DifferentiableSection.h
 <span class="k">let</span> <span class="nv">changeset</span> <span class="o">=</span> <span class="kt">StagedChangeset</span><span class="p">(</span><span class="nv">source</span><span class="p">:</span> <span class="n">source</span><span class="p">,</span> <span class="nv">target</span><span class="p">:</span> <span class="n">target</span><span class="p">)</span>
 </code></pre>
 
-<p>You can perform incremental updates on <code>UITableView</code> and <code>UICollectionView</code> using the created <code><a href="Structs/StagedChangeset.html">StagedChangeset</a></code>.  </p>
+<p>You can perform diffing batch updates of <code>UITableView</code> and <code>UICollectionView</code> using the created <code><a href="Structs/StagedChangeset.html">StagedChangeset</a></code>.  </p>
 
-<p>⚠️ <strong>Don&rsquo;t forget</strong> to <strong>synchronously</strong> update the data referenced by the data-source, with the data passed in the <code>setData</code> closure. The differences are applied in stages, and failing to do so is bound to create a crash:</p>
+<p>⚠️ <strong>Don&rsquo;t forget</strong> to <strong>synchronously</strong> update the data referenced by the data-source, with the data passed in the <code>setData</code> closure. The diffs are applied in stages, and failing to do so is bound to create a crash:</p>
 <pre class="highlight swift"><code><span class="n">tableView</span><span class="o">.</span><span class="nf">reload</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="n">changeset</span><span class="p">,</span> <span class="nv">with</span><span class="p">:</span> <span class="o">.</span><span class="n">fade</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
     <span class="n">dataSource</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>Batch-updates using too large amount of differences may adversely affect to performance.<br>
+<p>Batch updates using too large amount of diffs may adversely affect to performance.<br>
 Returning <code>true</code> with <code>interrupt</code> closure then falls back to <code>reloadData</code>:</p>
 <pre class="highlight swift"><code><span class="n">collectionView</span><span class="o">.</span><span class="nf">reload</span><span class="p">(</span><span class="nv">using</span><span class="p">:</span> <span class="n">changeset</span><span class="p">,</span> <span class="nv">interrupt</span><span class="p">:</span> <span class="p">{</span> <span class="nv">$0</span><span class="o">.</span><span class="n">changeCount</span> <span class="o">&gt;</span> <span class="mi">100</span> <span class="p">})</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
     <span class="n">dataSource</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
 <span class="p">}</span>
 </code></pre>
 
+<H3 align="center">
+<a href="https://ra1028.github.io/DifferenceKit">[See More Usage]</a>
+</H3>
+
 <hr>
 <h2 id='comparison-with-other-frameworks' class='heading'>Comparison with Other Frameworks</h2>
 
-<p>Made a fair comparison as much as possible in features and performance with other <strong>popular</strong> and <strong>awesome</strong> frameworks.<br>
-This does <strong>NOT</strong> determine superiority or inferiority of the frameworks. I know that each framework has different benefits.<br>
+<p>Made a fair comparison as much as possible in performance and features with other <strong>popular</strong> and <strong>awesome</strong> frameworks.<br>
+This does <strong>NOT</strong> determine superiority or inferiority of the frameworks.<br>
+I know that each framework has different benefits.<br>
 The frameworks and its version that compared is below.  </p>
 
 <ul>
 <li><a href="https://github.com/ra1028/DifferenceKit">DifferenceKit</a> - master</li>
-<li><a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> (<a href="https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Sources/Differentiator">Differentiator</a>) - 3.0.2</li>
-<li><a href="https://github.com/RACCommunity/FlexibleDiff">FlexibleDiff</a> - 0.0.5</li>
+<li><a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> (<a href="https://github.com/RxSwiftCommunity/RxDataSources/tree/master/Sources/Differentiator">Differentiator</a>) - 4.0.1</li>
+<li><a href="https://github.com/RACCommunity/FlexibleDiff">FlexibleDiff</a> - 0.0.8</li>
 <li><a href="https://github.com/Instagram/IGListKit">IGListKit</a> - 3.4.0</li>
-<li><a href="https://github.com/lxcid/ListDiff">ListDiff</a> - 0.1.0</li>
-<li><a href="https://github.com/onmyway133/DeepDiff">DeepDiff</a> - 1.2.0</li>
-<li><a href="https://github.com/tonyarnold/Differ">Differ</a> (<a href="https://github.com/wokalski/Diff.swift">Diff.swift</a>) - 1.2.3</li>
-<li><a href="https://github.com/jflinter/Dwifft">Dwifft</a> - 0.8</li>
+<li><a href="https://github.com/onmyway133/DeepDiff">DeepDiff</a> - 2.2.0</li>
+<li><a href="https://github.com/tonyarnold/Differ">Differ</a> (<a href="https://github.com/wokalski/Diff.swift">Diff.swift</a>) - 1.4.3</li>
+<li><a href="https://github.com/jflinter/Dwifft">Dwifft</a> - 0.9</li>
+<li><a href="https://developer.apple.com/documentation/swift/collectiondifference">Swift.CollectionDifference</a> Swift 5.1</li>
 </ul>
-<h3 id='features-comparison' class='heading'>Features comparison</h3>
-<h4 id='supported-collection' class='heading'>- Supported collection</h4>
+<h3 id='performance-comparison' class='heading'>Performance Comparison</h3>
+
+<p>Benchmark project is <a href="https://github.com/ra1028/DifferenceKit/blob/master/Benchmark">here</a>.<br>
+Performance was mesured by code compiled using <code>Xcode11.1</code> and <code>Swift 5.1</code> with <code>-O</code> optimization and run on <code>iPhone11 Pro simulator</code>.<br>
+Use <code>Foundation.UUID</code> as an element of collections.  </p>
+<h4 id='from-5-000-elements-to-1-000-deleted-1-000-inserted-and-200-shuffled' class='heading'>- From 5,000 elements to 1,000 deleted, 1,000 inserted and 200 shuffled</h4>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: right">Time(sec)</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">DifferenceKit</td>
+<td style="text-align: right"><code>0.0019</code></td>
+</tr>
+<tr>
+<td style="text-align: left">RxDataSources</td>
+<td style="text-align: right"><code>0.0074</code></td>
+</tr>
+<tr>
+<td style="text-align: left">IGListKit</td>
+<td style="text-align: right"><code>0.0346</code></td>
+</tr>
+<tr>
+<td style="text-align: left">FlexibleDiff</td>
+<td style="text-align: right"><code>0.0161</code></td>
+</tr>
+<tr>
+<td style="text-align: left">DeepDiff</td>
+<td style="text-align: right"><code>0.0373</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Differ</td>
+<td style="text-align: right"><code>1.0581</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Dwifft</td>
+<td style="text-align: right"><code>0.4732</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: right"><code>0.0620</code></td>
+</tr>
+</tbody></table>
+<h4 id='from-100-000-elements-to-10-000-deleted-10-000-inserted-and-2-000-shuffled' class='heading'>- From 100,000 elements to 10,000 deleted, 10,000 inserted and 2,000 shuffled</h4>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: right">Time(sec)</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">DifferenceKit</td>
+<td style="text-align: right"><code>0.0348</code></td>
+</tr>
+<tr>
+<td style="text-align: left">RxDataSources</td>
+<td style="text-align: right"><code>0.1024</code></td>
+</tr>
+<tr>
+<td style="text-align: left">IGListKit</td>
+<td style="text-align: right"><code>0.7002</code></td>
+</tr>
+<tr>
+<td style="text-align: left">FlexibleDiff</td>
+<td style="text-align: right"><code>0.2189</code></td>
+</tr>
+<tr>
+<td style="text-align: left">DeepDiff</td>
+<td style="text-align: right"><code>0.5537</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Differ</td>
+<td style="text-align: right"><code>153.8007</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Dwifft</td>
+<td style="text-align: right"><code>187.1341</code></td>
+</tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: right"><code>5.0281</code></td>
+</tr>
+</tbody></table>
+<h3 id='features-comparison' class='heading'>Features Comparison</h3>
+<h4 id='algorithm' class='heading'>- Algorithm</h4>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: right">Base algorithm</th>
+<th style="text-align: right">Order</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">DifferenceKit</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">RxDataSources</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">FlexibleDiff</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">IGListKit</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">DeepDiff</td>
+<td style="text-align: right">Heckel</td>
+<td style="text-align: right">O(N)</td>
+</tr>
+<tr>
+<td style="text-align: left">Differ</td>
+<td style="text-align: right">Myers</td>
+<td style="text-align: right">O(ND)</td>
+</tr>
+<tr>
+<td style="text-align: left">Dwifft</td>
+<td style="text-align: right">Myers</td>
+<td style="text-align: right">O(ND)</td>
+</tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: right">Myers</td>
+<td style="text-align: right">O(ND)</td>
+</tr>
+</tbody></table>
+
+<p>* <a href="https://dl.acm.org/citation.cfm?id=359467"><strong>Heckel algorithm</strong></a><br>
+* <a href="http://www.xmailserver.org/diff2.pdf"><strong>Myers algorithm</strong></a>  </p>
+<h4 id='supported-collection' class='heading'>- Supported Collection</h4>
 
 <table><thead>
 <tr>
 <th style="text-align: left"></th>
 <th style="text-align: center">Linear</th>
 <th style="text-align: center">Sectioned</th>
-<th style="text-align: center">Duplicate Element/Section</th>
+<th style="text-align: center">Duplicate element/section</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -296,12 +459,6 @@ The frameworks and its version that compared is below.  </p>
 <td style="text-align: center">✅</td>
 </tr>
 <tr>
-<td style="text-align: left">ListDiff</td>
-<td style="text-align: center">✅</td>
-<td style="text-align: center">❌</td>
-<td style="text-align: center">✅</td>
-</tr>
-<tr>
 <td style="text-align: left">DeepDiff</td>
 <td style="text-align: center">✅</td>
 <td style="text-align: center">❌</td>
@@ -319,11 +476,17 @@ The frameworks and its version that compared is below.  </p>
 <td style="text-align: center">✅</td>
 <td style="text-align: center">✅</td>
 </tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">✅</td>
+</tr>
 </tbody></table>
 
-<p><code>Linear</code> means 1-dimensional collection.<br>
-<code>Sectioned</code> means 2-dimensional collection.  </p>
-<h4 id='supported-element-differences' class='heading'>- Supported element differences</h4>
+<p>* <strong>Linear</strong> means 1-dimensional collection<br>
+* <strong>Sectioned</strong> means 2-dimensional collection  </p>
+<h4 id='supported-element-diff' class='heading'>- Supported Element Diff</h4>
 
 <table><thead>
 <tr>
@@ -368,19 +531,11 @@ The frameworks and its version that compared is below.  </p>
 <td style="text-align: center">❌</td>
 </tr>
 <tr>
-<td style="text-align: left">ListDiff</td>
-<td style="text-align: center">✅</td>
-<td style="text-align: center">✅</td>
-<td style="text-align: center">✅</td>
-<td style="text-align: center">✅</td>
-<td style="text-align: center">❌</td>
-</tr>
-<tr>
 <td style="text-align: left">DeepDiff</td>
 <td style="text-align: center">✅</td>
 <td style="text-align: center">✅</td>
 <td style="text-align: center">✅</td>
-<td style="text-align: center">✅ / ❌</td>
+<td style="text-align: center">✅</td>
 <td style="text-align: center">❌</td>
 </tr>
 <tr>
@@ -399,8 +554,16 @@ The frameworks and its version that compared is below.  </p>
 <td style="text-align: center">❌</td>
 <td style="text-align: center">❌</td>
 </tr>
+<tr>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">✅</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
+</tr>
 </tbody></table>
-<h4 id='supported-section-differences' class='heading'>- Supported section differences</h4>
+<h4 id='supported-section-diff' class='heading'>- Supported Section Diff</h4>
 
 <table><thead>
 <tr>
@@ -440,13 +603,6 @@ The frameworks and its version that compared is below.  </p>
 <td style="text-align: center">❌</td>
 </tr>
 <tr>
-<td style="text-align: left">ListDiff</td>
-<td style="text-align: center">❌</td>
-<td style="text-align: center">❌</td>
-<td style="text-align: center">❌</td>
-<td style="text-align: center">❌</td>
-</tr>
-<tr>
 <td style="text-align: left">DeepDiff</td>
 <td style="text-align: center">❌</td>
 <td style="text-align: center">❌</td>
@@ -467,135 +623,12 @@ The frameworks and its version that compared is below.  </p>
 <td style="text-align: center">❌</td>
 <td style="text-align: center">❌</td>
 </tr>
-</tbody></table>
-<h3 id='performance-comparison' class='heading'>Performance comparison</h3>
-
-<p>Performance was measured using <code>XCTestCase.measure</code> on iPhoneX simulator with <code>-O -whole-module-optimization</code>.<br>
-Use <code>Foundation.UUID</code> as an element.  </p>
-
-<p>⚠️ If Move is included in the difference, performance may obviously decrease in some frameworks.<br>
-⚠️ <em>DeepDiff may had increased the processing speed by misuse of Hashable in algorithm.</em></p>
-<h4 id='from-5-000-elements-to-500-deleted-and-500-inserted' class='heading'>- From 5,000 elements to 500 deleted and 500 inserted</h4>
-
-<table><thead>
 <tr>
-<th style="text-align: left"></th>
-<th style="text-align: left">Time(second)</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">DifferenceKit</td>
-<td style="text-align: left">0.0022</td>
-</tr>
-<tr>
-<td style="text-align: left">RxDataSources</td>
-<td style="text-align: left">0.0078</td>
-</tr>
-<tr>
-<td style="text-align: left">FlexibleDiff</td>
-<td style="text-align: left">0.0168</td>
-</tr>
-<tr>
-<td style="text-align: left">IGListKit</td>
-<td style="text-align: left">0.0412</td>
-</tr>
-<tr>
-<td style="text-align: left">ListDiff</td>
-<td style="text-align: left">0.0388</td>
-</tr>
-<tr>
-<td style="text-align: left">DeepDiff</td>
-<td style="text-align: left">0.0150</td>
-</tr>
-<tr>
-<td style="text-align: left">Differ</td>
-<td style="text-align: left">0.3260</td>
-</tr>
-<tr>
-<td style="text-align: left">Dwifft</td>
-<td style="text-align: left">33.600</td>
-</tr>
-</tbody></table>
-<h4 id='from-10-000-elements-to-1-000-deleted-and-1-000-inserted' class='heading'>- From 10,000 elements to 1,000 deleted and 1,000 inserted</h4>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left">Time(second)</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">DifferenceKit</td>
-<td style="text-align: left">0.0049</td>
-</tr>
-<tr>
-<td style="text-align: left">RxDataSources</td>
-<td style="text-align: left">0.0143</td>
-</tr>
-<tr>
-<td style="text-align: left">FlexibleDiff</td>
-<td style="text-align: left">0.0305</td>
-</tr>
-<tr>
-<td style="text-align: left">IGListKit</td>
-<td style="text-align: left">0.0891</td>
-</tr>
-<tr>
-<td style="text-align: left">ListDiff</td>
-<td style="text-align: left">0.0802</td>
-</tr>
-<tr>
-<td style="text-align: left">DeepDiff</td>
-<td style="text-align: left">0.0300</td>
-</tr>
-<tr>
-<td style="text-align: left">Differ</td>
-<td style="text-align: left">1.3450</td>
-</tr>
-<tr>
-<td style="text-align: left">Dwifft</td>
-<td style="text-align: left">❌</td>
-</tr>
-</tbody></table>
-<h4 id='from-100-000-elements-to-10-000-deleted-and-10-000-inserted' class='heading'>- From 100,000 elements to 10,000 deleted and 10,000 inserted</h4>
-
-<table><thead>
-<tr>
-<th style="text-align: left"></th>
-<th style="text-align: left">Time(second)</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left">DifferenceKit</td>
-<td style="text-align: left">0.057</td>
-</tr>
-<tr>
-<td style="text-align: left">RxDataSources</td>
-<td style="text-align: left">0.179</td>
-</tr>
-<tr>
-<td style="text-align: left">FlexibleDiff</td>
-<td style="text-align: left">0.356</td>
-</tr>
-<tr>
-<td style="text-align: left">IGListKit</td>
-<td style="text-align: left">1.329</td>
-</tr>
-<tr>
-<td style="text-align: left">ListDiff</td>
-<td style="text-align: left">1.026</td>
-</tr>
-<tr>
-<td style="text-align: left">DeepDiff</td>
-<td style="text-align: left">0.334</td>
-</tr>
-<tr>
-<td style="text-align: left">Differ</td>
-<td style="text-align: left">❌</td>
-</tr>
-<tr>
-<td style="text-align: left">Dwifft</td>
-<td style="text-align: left">❌</td>
+<td style="text-align: left">Swift.CollectionDifference</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
+<td style="text-align: center">❌</td>
 </tr>
 </tbody></table>
 
@@ -603,7 +636,7 @@ Use <code>Foundation.UUID</code> as an element.  </p>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
 <ul>
-<li>Swift4.2+</li>
+<li>Swift 4.2+</li>
 <li>iOS 9.0+</li>
 <li>tvOS 9.0+</li>
 <li>OS X 10.9+</li>
@@ -614,84 +647,60 @@ Use <code>Foundation.UUID</code> as an element.  </p>
 <h2 id='installation' class='heading'>Installation</h2>
 <h3 id='a-href-https-cocoapods-org-cocoapods-a' class='heading'><a href="https://cocoapods.org/">CocoaPods</a></h3>
 
-<p>To use only algorithm without extensions for UI, add the following:</p>
-<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
-
-<span class="n">target</span> <span class="s1">'TargetName'</span> <span class="k">do</span>
-  <span class="n">pod</span> <span class="s1">'DifferenceKit/Core'</span>
-<span class="k">end</span>
+<p>To use only algorithm without extensions for UI, add the following to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'DifferenceKit/Core'</span>
 </code></pre>
-<h4 id='ios-tvos' class='heading'>iOS/tvOS</h4>
+<h4 id='ios-tvos' class='heading'>iOS / tvOS</h4>
 
 <p>To use DifferenceKit with UIKit extension, add the following to your <code>Podfile</code>:</p>
-<pre class="highlight ruby"><code><span class="n">target</span> <span class="s1">'TargetName'</span> <span class="k">do</span>
-  <span class="n">pod</span> <span class="s1">'DifferenceKit'</span>
-<span class="k">end</span>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'DifferenceKit'</span>
 </code></pre>
 
 <p>or</p>
-<pre class="highlight ruby"><code><span class="n">target</span> <span class="s1">'TargetName'</span> <span class="k">do</span>
-  <span class="n">pod</span> <span class="s1">'DifferenceKit/UIKitExtension'</span>
-<span class="k">end</span>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'DifferenceKit/UIKitExtension'</span>
 </code></pre>
 <h4 id='macos' class='heading'>macOS</h4>
 
 <p>To use DifferenceKit with AppKit extension, add the following to your <code>Podfile</code>:</p>
-<pre class="highlight ruby"><code><span class="n">target</span> <span class="s1">'TargetName'</span> <span class="k">do</span>
-  <span class="n">pod</span> <span class="s1">'DifferenceKit/AppKitExtension'</span>
-<span class="k">end</span>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'DifferenceKit/AppKitExtension'</span>
 </code></pre>
-<h3 id='watchos' class='heading'>watchOS</h3>
+<h4 id='watchos' class='heading'>watchOS</h4>
 
 <p>There is no UI extension for watchOS.<br>
-You can use only the algorithm.  </p>
+To use only algorithm without extensions for UI, add the following to your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s1">'DifferenceKit/Core'</span>
+</code></pre>
 <h3 id='a-href-https-github-com-carthage-carthage-carthage-a' class='heading'><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
 
 <p>Add the following to your <code>Cartfile</code>:</p>
 <pre class="highlight ruby"><code><span class="n">github</span> <span class="s2">"ra1028/DifferenceKit"</span>
 </code></pre>
+<h3 id='a-href-https-developer-apple-com-documentation-xcode-adding_package_dependencies_to_your_app-swift-package-manager-for-apple-platforms-a' class='heading'><a href="https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app">Swift Package Manager for Apple platforms</a></h3>
 
-<p>And run</p>
-<pre class="highlight shell"><code>carthage update
+<p>Select Xcode menu <code>File &gt; Swift Packages &gt; Add Package Dependency</code> and enter repository URL with GUI.  </p>
+<pre class="highlight plaintext"><code>Repository: https://github.com/ra1028/DifferenceKit
 </code></pre>
 <h3 id='a-href-https-swift-org-package-manager-swift-package-manager-a' class='heading'><a href="https://swift.org/package-manager/">Swift Package Manager</a></h3>
 
-<p>To use DifferenceKit in a project with SPM, add the following to your <code>Package.swift</code>:</p>
-<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
-
-<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
-    <span class="nv">name</span><span class="p">:</span> <span class="s">"YourProjectName"</span><span class="p">,</span>
-    <span class="nv">products</span><span class="p">:</span> <span class="p">[</span>
-        <span class="o">.</span><span class="nf">executable</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"yourexecutable"</span><span class="p">,</span> <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span><span class="s">"yourexecutable"</span><span class="p">]),</span>
-    <span class="p">],</span>
-    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-        <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/ra1028/DifferenceKit.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"version"</span><span class="p">)</span>
-    <span class="p">],</span>
-    <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span>
-        <span class="o">.</span><span class="nf">target</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"yourexecutable"</span><span class="p">,</span> <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span><span class="s">"DifferenceKit"</span><span class="p">])</span>
-    <span class="p">]</span>
-<span class="p">)</span>
+<p>Add the following to the dependencies of your <code>Package.swift</code>:</p>
+<pre class="highlight swift"><code><span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/ra1028/DifferenceKit.git"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"version"</span><span class="p">)</span>
 </code></pre>
-
-<p>The SPM version does not include the UIKit and AppKit extensions.</p>
 
 <hr>
 <h2 id='contribution' class='heading'>Contribution</h2>
 
-<p>Welcome to fork and submit pull requests.<br>
-Before submitting pull request, please ensure you have passed the included tests.<br>
-If your pull request including new function, please write test cases for it.  </p>
+<p>Pull requests, bug reports and feature requests are welcome 🚀<br>
+Please see the <a href="https://github.com/ra1028/DifferenceKit/blob/master/CONTRIBUTING.md">CONTRIBUTING</a> file for learn how to contribute to DifferenceKit. </p>
 
 <hr>
 <h2 id='credit' class='heading'>Credit</h2>
 <h4 id='bibliography' class='heading'>Bibliography</h4>
 
-<p>DifferenceKit was developed with reference to the following excellent materials.  </p>
+<p>DifferenceKit was developed with reference to the following excellent materials and framework.  </p>
 
 <ul>
 <li><a href="https://dl.acm.org/citation.cfm?id=359467">A technique for isolating differences between files</a> (by <a href="https://dl.acm.org/author_page.cfm?id=81100051772">Paul Heckel</a>)</li>
 <li><a href="https://github.com/horita-yuya/DifferenceAlgorithmComparison">DifferenceAlgorithmComparison</a> (by <a href="https://github.com/horita-yuya">@horita-yuya</a>)</li>
-<li><a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> (by <a href="https://github.com/kzaher">@kzaher</a>, <a href="https://github.com/RxSwiftCommunity">RxSwift Community</a>)</li>
 </ul>
 <h4 id='oss-using-differencekit' class='heading'>OSS using DifferenceKit</h4>
 
@@ -699,6 +708,7 @@ If your pull request including new function, please write test cases for it.  </
 
 <ul>
 <li><a href="https://github.com/ra1028/Carbon">Carbon</a> (by <a href="https://github.com/ra1028">@ra1028</a>)</li>
+<li><a href="https://github.com/ra1028/DiffableDataSources">DiffableDataSources</a> (by <a href="https://github.com/ra1028">@ra1028</a>)</li>
 <li><a href="https://github.com/RocketChat/Rocket.Chat.iOS">Rocket.Chat.iOS</a> (by <a href="https://github.com/RocketChat">RocketChat</a>)</li>
 <li><a href="https://github.com/wireapp/wire-ios">wire-ios</a> (by <a href="https://github.com/wireapp">Wire Swiss GmbH</a>)</li>
 <li><a href="https://github.com/plangrid/ReactiveLists">ReactiveLists</a> (by <a href="https://github.com/plangrid">PlanGrid</a>)</li>
@@ -710,14 +720,13 @@ If your pull request including new function, please write test cases for it.  </
 <p>I respect and ️❤️ all libraries involved in diffing.  </p>
 
 <ul>
+<li><a href="https://github.com/RxSwiftCommunity/RxDataSources">RxDataSources</a> (by <a href="https://github.com/kzaher">@kzaher</a>, <a href="https://github.com/RxSwiftCommunity">RxSwift Community</a>)</li>
 <li><a href="https://github.com/Instagram/IGListKit">IGListKit</a> (by <a href="https://github.com/Instagram">Instagram</a>)</li>
 <li><a href="https://github.com/RACCommunity/FlexibleDiff">FlexibleDiff</a> (by <a href="https://github.com/andersio">@andersio</a>, <a href="https://github.com/RACCommunity">RACCommunity</a>)</li>
 <li><a href="https://github.com/onmyway133/DeepDiff">DeepDiff</a> (by <a href="https://github.com/onmyway133">@onmyway133</a>)</li>
-<li><a href="https://github.com/osteslag/Changeset">Changeset</a> (by <a href="https://github.com/osteslag">@osteslag</a>)</li>
 <li><a href="https://github.com/tonyarnold/Differ">Differ</a> (by <a href="https://github.com/tonyarnold">@tonyarnold</a>)</li>
-<li><a href="https://github.com/wokalski/Diff.swift">Diff.swift</a> (by <a href="https://github.com/wokalski">@wokalski</a>)</li>
 <li><a href="https://github.com/jflinter/Dwifft">Dwifft</a> (by <a href="https://github.com/jflinter">@jflinter</a>)</li>
-<li><a href="https://github.com/lxcid/ListDiff">ListDiff</a> (by <a href="https://github.com/lxcid">@lxcid</a>)</li>
+<li><a href="https://github.com/osteslag/Changeset">Changeset</a> (by <a href="https://github.com/osteslag">@osteslag</a>)</li>
 </ul>
 
 <hr>
@@ -725,14 +734,16 @@ If your pull request including new function, please write test cases for it.  </
 
 <p>DifferenceKit is released under the <a href="https://github.com/ra1028/DifferenceKit/blob/master/LICENSE">Apache 2.0 License</a>.</p>
 
-          </section>
+          </div>
         </section>
-        <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2019-02-18)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-        </section>
+
+
       </article>
     </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://github.com/ra1028" target="_blank" rel="external">Ryo Aoyama</a>. All rights reserved. (Last updated: 2019-10-21)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.11.2</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
   </body>
 </div>
 </html>

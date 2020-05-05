@@ -5,7 +5,7 @@ module: DifferenceKit
 readme: README.md
 exclude: Sources/Extensions/AppKitExtension.swift
 output: docs
-theme: apple
+theme: fullwidth
 clean: true
 skip_undocumented: true
 xcodebuild_arguments:
@@ -13,3 +13,21 @@ xcodebuild_arguments:
   - iphonesimulator
   - -scheme
   - DifferenceKit
+custom_categories:
+  - name: Diffing
+    children:
+    - ContentEquatable
+    - Differentiable
+    - DifferentiableSection
+    - AnyDifferentiable
+    - ArraySection
+    - ElementPath
+    - Optional
+  - name: Changeset
+    children:
+    - StagedChangeset
+    - Changeset
+  - name: UI Extensions
+    children:
+    - UITableView
+    - UICollectionView

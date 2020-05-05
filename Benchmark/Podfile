@@ -1,0 +1,16 @@
+platform :ios, '13.0'
+
+use_frameworks!
+inhibit_all_warnings!
+
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+target 'Benchmark' do
+  pod 'DifferenceKit', path: '../'
+  pod 'Differentiator', '4.0.1'
+  pod 'FlexibleDiff', '0.0.8'
+  pod 'IGListKit', '3.4.0'
+  pod 'DeepDiff', '2.2.0'
+  pod 'Differ', '1.4.3'
+  pod 'Dwifft', '0.9'
+end

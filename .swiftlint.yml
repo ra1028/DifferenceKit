@@ -1,0 +1,32 @@
+# https://github.com/realm/SwiftLint
+
+excluded:
+  - Tests/XCTestManifests.swift
+  - Benchmark
+
+disabled_rules:
+  - type_name
+  - identifier_name
+  - force_cast
+  - xctfail_message
+  - function_body_length
+  - file_length
+
+nesting:
+  type_level:
+    warning: 2
+
+line_length:
+  warning: 200
+
+type_body_length:
+  warning: 400
+
+function_parameter_count:
+  warning: 8
+
+cyclomatic_complexity:
+  warning: 12
+
+statement_position:
+  statement_mode: uncuddled_else

@@ -188,7 +188,7 @@ extension AlgorithmTestCase {
             M(2, false),
             M(4, false),
             M(0, true),
-            M(3, false),
+            M(3, false)
         ]
 
         XCTAssertExactDifferences(
@@ -245,11 +245,14 @@ extension AlgorithmTestCase {
 
     func testSameHashValue() {
         struct A: Hashable, Differentiable {
-            let hashValue = 0
             let actualValue: Int
 
             init(_ actualValue: Int) {
                 self.actualValue = actualValue
+            }
+
+            func hash(into hasher: inout Hasher) {
+                hasher.combine(0)
             }
 
             func isContentEqual(to source: A) -> Bool {
@@ -317,7 +320,7 @@ extension AlgorithmTestCase {
         let source2 = [ArraySection<D, Int>]()
 
         let target2 = [
-            ArraySection(model: D.a, elements: [0]),
+            ArraySection(model: D.a, elements: [0])
         ]
 
         XCTAssertExactDifferences(
@@ -671,12 +674,12 @@ extension AlgorithmTestCase {
     func testComplicated8() {
         let source = [
             ArraySection(model: M(0, false), elements: [M(0, false), M(1, false)]),
-            ArraySection(model: M(1, false), elements: [M(2, false), M(3, false)]),
+            ArraySection(model: M(1, false), elements: [M(2, false), M(3, false)])
         ]
 
         let target = [
             ArraySection(model: M(0, false), elements: []),
-            ArraySection(model: M(1, false), elements: [M(1, true), M(3, false)]),
+            ArraySection(model: M(1, false), elements: [M(1, true), M(3, false)])
         ]
 
         XCTAssertReproducible(source: source, target: target)

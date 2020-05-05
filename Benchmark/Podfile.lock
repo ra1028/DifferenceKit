@@ -1,0 +1,52 @@
+PODS:
+  - DeepDiff (2.2.0)
+  - Differ (1.4.3)
+  - DifferenceKit (1.1.3):
+    - DifferenceKit/Core (= 1.1.3)
+    - DifferenceKit/UIKitExtension (= 1.1.3)
+  - DifferenceKit/Core (1.1.3)
+  - DifferenceKit/UIKitExtension (1.1.3):
+    - DifferenceKit/Core
+  - Differentiator (4.0.1)
+  - Dwifft (0.9)
+  - FlexibleDiff (0.0.8)
+  - IGListKit (3.4.0):
+    - IGListKit/Default (= 3.4.0)
+  - IGListKit/Default (3.4.0):
+    - IGListKit/Diffing
+  - IGListKit/Diffing (3.4.0)
+
+DEPENDENCIES:
+  - DeepDiff (= 2.2.0)
+  - Differ (= 1.4.3)
+  - DifferenceKit (from `../`)
+  - Differentiator (= 4.0.1)
+  - Dwifft (= 0.9)
+  - FlexibleDiff (= 0.0.8)
+  - IGListKit (= 3.4.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - DeepDiff
+    - Differ
+    - Differentiator
+    - Dwifft
+    - FlexibleDiff
+    - IGListKit
+
+EXTERNAL SOURCES:
+  DifferenceKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  DeepDiff: e329bc46dd14ca788d8ec08d34420799ba1d77f2
+  Differ: 6c7477d6187e8c36d02ec342a3c321061b85a0ea
+  DifferenceKit: e2c432b59833a7bae2a5cc3175950edbbbab40da
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Dwifft: 42912068ed2a8146077d1a1404df18625bd086e1
+  FlexibleDiff: 4f487778bd152088a9528a0a9be06eba7952bb00
+  IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
+
+PODFILE CHECKSUM: 2a95de47f8e05bd0b4653734f981d57cbc4395fb
+
+COCOAPODS: 1.8.4

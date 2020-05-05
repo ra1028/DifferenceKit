@@ -1,0 +1,8 @@
+swiftlint:
+  config_file: .swiftlint.yml
+
+ruby:
+  enabled: false
+
+javascript:
+  enabled: false

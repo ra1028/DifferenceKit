@@ -15,6 +15,7 @@ public extension NSTableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
+
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> NSTableView.AnimationOptions,
@@ -23,9 +24,9 @@ public extension NSTableView {
         ) {
         reload(
             using: stagedChangeset,
-            deleteRowsAnimation: animation,
-            insertRowsAnimation: animation,
-            reloadRowsAnimation: animation,
+            deleteRowsAnimation: animation(),
+            insertRowsAnimation: animation(),
+            reloadRowsAnimation: animation(),
             interrupt: interrupt,
             setData: setData
         )
@@ -77,7 +78,7 @@ public extension NSTableView {
             }
 
             if !changeset.elementUpdated.isEmpty {
-                reloadData(forRowIndexes: IndexSet(changeset.elementInserted.map { $0.element }), columnIndexes: IndexSet(changeset.elementInserted.map { $0.section }))
+                reloadData(forRowIndexes: IndexSet(changeset.elementUpdated.map { $0.element }), columnIndexes: IndexSet(changeset.elementUpdated.map { $0.section }))
             }
 
             for (source, target) in changeset.elementMoved {

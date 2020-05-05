@@ -1,3 +1,5 @@
+// swiftlint:disable cyclomatic_complexity
+
 public extension StagedChangeset where Collection: RangeReplaceableCollection, Collection.Element: Differentiable {
     /// Creates a new `StagedChangeset` from the two collections.
     ///
@@ -19,7 +21,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Complexity: O(n)
     @inlinable
-    public init(source: Collection, target: Collection) {
+    init(source: Collection, target: Collection) {
         self.init(source: source, target: target, section: 0)
     }
 
@@ -44,23 +46,23 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Complexity: O(n)
     @inlinable
-    public init(source: Collection, target: Collection, section: Int) {
+    init(source: Collection, target: Collection, section: Int) {
         let sourceElements = ContiguousArray(source)
         let targetElements = ContiguousArray(target)
 
-        // Returns the empty changesets if both are empty.
+        // Return empty changesets if both are empty.
         if sourceElements.isEmpty && targetElements.isEmpty {
             self.init()
             return
         }
 
-        // Returns the changesets that all deletions if source is not empty and target is empty
+        // Return changesets that all deletions if source is not empty and target is empty.
         if !sourceElements.isEmpty && targetElements.isEmpty {
             self.init([Changeset(data: target, elementDeleted: sourceElements.indices.map { ElementPath(element: $0, section: section) })])
             return
         }
 
-        // Returns the changesets that all insertions if source is empty and target is not empty
+        // Return changesets that all insertions if source is empty and target is not empty.
         if sourceElements.isEmpty && !targetElements.isEmpty {
             self.init([Changeset(data: target, elementInserted: targetElements.indices.map { ElementPath(element: $0, section: section) })])
             return
@@ -69,15 +71,13 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         var firstStageElements = ContiguousArray<Collection.Element>()
         var secondStageElements = ContiguousArray<Collection.Element>()
 
-        firstStageElements.reserveCapacity(sourceElements.count)
-
-        let result = differentiate(
+        let result = diff(
             source: sourceElements,
             target: targetElements,
-            trackTargetIndexAsUpdated: false,
+            useTargetIndexForUpdated: false,
             mapIndex: { ElementPath(element: $0, section: section) },
-            updatedElements: { firstStageElements.append($0) },
-            undeletedElements: { secondStageElements.append($0) }
+            updatedElementsPointer: &firstStageElements,
+            notDeletedElementsPointer: &secondStageElements
         )
 
         var changesets = ContiguousArray<Changeset<Collection>>()
@@ -151,7 +151,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     ///
     /// - Complexity: O(n)
     @inlinable
-    public init(source: Collection, target: Collection) {
+    init(source: Collection, target: Collection) {
         typealias Section = Collection.Element
         typealias SectionIdentifier = Collection.Element.DifferenceIdentifier
         typealias Element = Collection.Element.Collection.Element
@@ -185,16 +185,16 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
         flattenSourceIdentifiers.reserveCapacity(flattenSourceCount)
         flattenSourceElementPaths.reserveCapacity(flattenSourceCount)
 
-        // Calculate the section differences.
+        // Calculate section differences.
 
-        let sectionResult = differentiate(
+        let sectionResult = diff(
             source: sourceSections,
             target: targetSections,
-            trackTargetIndexAsUpdated: true,
+            useTargetIndexForUpdated: true,
             mapIndex: { $0 }
         )
 
-        // Calculate the element differences.
+        // Calculate element differences.
 
         var elementDeleted = [ElementPath]()
         var elementInserted = [ElementPath]()
@@ -212,9 +212,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
         flattenSourceIdentifiers.withUnsafeBufferPointer { bufferPointer in
             // The pointer and the table key are for optimization.
-            var sourceOccurrencesTable = [TableKey<ElementIdentifier>: Occurrence](minimumCapacity: flattenSourceCount * 2)
+            var sourceOccurrencesTable = [TableKey<ElementIdentifier>: Occurrence](minimumCapacity: flattenSourceCount)
 
-            // Record the index where the element was found in flatten source collection into occurrences table.
+            // Track indices of elements found in flatten source collection into occurrences table.
             for flattenSourceIndex in flattenSourceIdentifiers.indices {
                 let pointer = bufferPointer.baseAddress!.advanced(by: flattenSourceIndex)
                 let key = TableKey(pointer: pointer)
@@ -232,7 +232,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
                 }
             }
 
-            // Record the target index and the source index that the element having the same identifier.
+            // Track target and source indices of the elements having same identifier.
             for targetSectionIndex in contiguousTargetSections.indices {
                 let targetElements = contiguousTargetSections[targetSectionIndex]
 
@@ -265,14 +265,14 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             }
         }
 
-        // Record the element deletions.
+        // Track element deletes.
         for sourceSectionIndex in contiguousSourceSections.indices {
             let sourceSection = sourceSections[sourceSectionIndex]
             let sourceElements = contiguousSourceSections[sourceSectionIndex]
             var firstStageElements = sourceElements
 
-            // Should not calculate the element deletions in the deleted section.
-            if case .some = sectionResult.metadata.sourceTraces[sourceSectionIndex].reference {
+            // Should not track element deletes in the deleted section.
+            if case .some = sectionResult.sourceTraces[sourceSectionIndex].reference {
                 var offsetByDelete = 0
 
                 var secondStageElements = ContiguousArray<Element>()
@@ -282,9 +282,9 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
                     sourceElementTraces[sourceElementPath].deleteOffset = offsetByDelete
 
-                    // If the element target section is recorded as insertion, record its element path as deletion.
+                    // Track element deletes if target section is tracked as inserts.
                     if let targetElementPath = sourceElementTraces[sourceElementPath].reference,
-                        case .some = sectionResult.metadata.targetReferences[targetElementPath.section] {
+                        case .some = sectionResult.targetReferences[targetElementPath.section] {
                         let targetElement = contiguousTargetSections[targetElementPath]
                         firstStageElements[sourceElementIndex] = targetElement
                         secondStageElements.append(targetElement)
@@ -305,10 +305,10 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             firstStageSections[sourceSectionIndex] = firstStageSection
         }
 
-        // Record the element updates/moves/insertions.
+        // Track element updates / moves / inserts.
         for targetSectionIndex in contiguousTargetSections.indices {
-            // Should not calculate the element updates/moves/insertions in the inserted section.
-            guard let sourceSectionIndex = sectionResult.metadata.targetReferences[targetSectionIndex] else {
+            // Should not track element updates / moves / inserts in the inserted section.
+            guard let sourceSectionIndex = sectionResult.targetReferences[targetSectionIndex] else {
                 thirdStageSections.append(targetSections[targetSectionIndex])
                 fourthStageSections.append(targetSections[targetSectionIndex])
                 continue
@@ -317,7 +317,7 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
             var untrackedSourceIndex: Int? = 0
             let targetElements = contiguousTargetSections[targetSectionIndex]
 
-            let sectionDeleteOffset = sectionResult.metadata.sourceTraces[sourceSectionIndex].deleteOffset
+            let sectionDeleteOffset = sectionResult.sourceTraces[sourceSectionIndex].deleteOffset
 
             let thirdStageSection = secondStageSections[sourceSectionIndex - sectionDeleteOffset]
             thirdStageSections.append(thirdStageSection)
@@ -327,15 +327,15 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
 
             for targetElementIndex in targetElements.indices {
                 untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-                    sourceElementTraces[sourceSectionIndex].suffix(from: index).index { !$0.isTracked }
+                    sourceElementTraces[sourceSectionIndex].suffix(from: index).firstIndex { !$0.isTracked }
                 }
 
                 let targetElementPath = ElementPath(element: targetElementIndex, section: targetSectionIndex)
                 let targetElement = contiguousTargetSections[targetElementPath]
 
-                // If the element source section is recorded as deletion, record its element path as insertion.
+                // Track element inserts if source section is tracked as deletes.
                 guard let sourceElementPath = targetElementReferences[targetElementPath],
-                    let movedSourceSectionIndex = sectionResult.metadata.sourceTraces[sourceElementPath.section].reference else {
+                    let movedSourceSectionIndex = sectionResult.sourceTraces[sourceElementPath.section].reference else {
                         fourthStageElements.append(targetElement)
                         elementInserted.append(targetElementPath)
                         continue
@@ -439,28 +439,28 @@ public extension StagedChangeset where Collection: RangeReplaceableCollection, C
     }
 }
 
-/// The shared algorithm to calculate differences between two linear collections.
+/// The shared algorithm to calculate diffs between two linear collections.
 @inlinable
 @discardableResult
-internal func differentiate<E: Differentiable, I>(
+internal func diff<E: Differentiable, I>(
     source: ContiguousArray<E>,
     target: ContiguousArray<E>,
-    trackTargetIndexAsUpdated: Bool,
+    useTargetIndexForUpdated: Bool,
     mapIndex: (Int) -> I,
-    updatedElements: ((E) -> Void)? = nil,
-    undeletedElements: ((E) -> Void)? = nil
-    ) -> DifferentiateResult<I> {
+    updatedElementsPointer: UnsafeMutablePointer<ContiguousArray<E>>? = nil,
+    notDeletedElementsPointer: UnsafeMutablePointer<ContiguousArray<E>>? = nil
+    ) -> DiffResult<I> {
     var deleted = [I]()
     var inserted = [I]()
     var updated = [I]()
     var moved = [(source: I, target: I)]()
 
     var sourceTraces = ContiguousArray<Trace<Int>>()
-    var targetReferences = ContiguousArray<Int?>(repeating: nil, count: target.count)
     var sourceIdentifiers = ContiguousArray<E.DifferenceIdentifier>()
+    var targetReferences = ContiguousArray<Int?>(repeating: nil, count: target.count)
 
-    sourceIdentifiers.reserveCapacity(source.count)
     sourceTraces.reserveCapacity(source.count)
+    sourceIdentifiers.reserveCapacity(source.count)
 
     for sourceElement in source {
         sourceTraces.append(Trace())
@@ -469,9 +469,9 @@ internal func differentiate<E: Differentiable, I>(
 
     sourceIdentifiers.withUnsafeBufferPointer { bufferPointer in
         // The pointer and the table key are for optimization.
-        var sourceOccurrencesTable = [TableKey<E.DifferenceIdentifier>: Occurrence](minimumCapacity: source.count * 2)
+        var sourceOccurrencesTable = [TableKey<E.DifferenceIdentifier>: Occurrence](minimumCapacity: source.count)
 
-        // Record the index where the element was found in source collection into occurrences table.
+        // Track indices of elements found in source collection into occurrences table.
         for sourceIndex in sourceIdentifiers.indices {
             let pointer = bufferPointer.baseAddress!.advanced(by: sourceIndex)
             let key = TableKey(pointer: pointer)
@@ -489,7 +489,7 @@ internal func differentiate<E: Differentiable, I>(
             }
         }
 
-        // Record the target index and the source index that the element having the same identifier.
+        // Track target and source indices of the elements having same identifier.
         for targetIndex in target.indices {
             var targetIdentifier = target[targetIndex].differenceIdentifier
             let key = TableKey(pointer: &targetIdentifier)
@@ -516,28 +516,28 @@ internal func differentiate<E: Differentiable, I>(
     var offsetByDelete = 0
     var untrackedSourceIndex: Int? = 0
 
-    // Record the deletions.
+    // Track deletes.
     for sourceIndex in source.indices {
         sourceTraces[sourceIndex].deleteOffset = offsetByDelete
 
         if let targetIndex = sourceTraces[sourceIndex].reference {
             let targetElement = target[targetIndex]
-            updatedElements?(targetElement)
-            undeletedElements?(targetElement)
+            updatedElementsPointer?.pointee.append(targetElement)
+            notDeletedElementsPointer?.pointee.append(targetElement)
         }
         else {
             let sourceElement = source[sourceIndex]
             deleted.append(mapIndex(sourceIndex))
             sourceTraces[sourceIndex].isTracked = true
             offsetByDelete += 1
-            updatedElements?(sourceElement)
+            updatedElementsPointer?.pointee.append(sourceElement)
         }
     }
 
-    // Record the updates/moves/insertions.
+    // Track updates / moves / inserts.
     for targetIndex in target.indices {
         untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-            sourceTraces.suffix(from: index).index { !$0.isTracked }
+            sourceTraces.suffix(from: index).firstIndex { !$0.isTracked }
         }
 
         if let sourceIndex = targetReferences[targetIndex] {
@@ -547,7 +547,7 @@ internal func differentiate<E: Differentiable, I>(
             let targetElement = target[targetIndex]
 
             if !targetElement.isContentEqual(to: sourceElement) {
-                updated.append(mapIndex(trackTargetIndexAsUpdated ? targetIndex : sourceIndex))
+                updated.append(mapIndex(useTargetIndexForUpdated ? targetIndex : sourceIndex))
             }
 
             if sourceIndex != untrackedSourceIndex {
@@ -560,20 +560,19 @@ internal func differentiate<E: Differentiable, I>(
         }
     }
 
-    return DifferentiateResult(
+    return DiffResult(
         deleted: deleted,
         inserted: inserted,
         updated: updated,
         moved: moved,
-        metadata: (sourceTraces: sourceTraces, targetReferences: targetReferences)
+        sourceTraces: sourceTraces,
+        targetReferences: targetReferences
     )
 }
 
 /// A set of changes and metadata as a result of calculating differences in linear collection.
 @usableFromInline
-internal struct DifferentiateResult<Index> {
-    @usableFromInline
-    internal typealias Metadata = (sourceTraces: ContiguousArray<Trace<Int>>, targetReferences: ContiguousArray<Int?>)
+internal struct DiffResult<Index> {
     @usableFromInline
     internal let deleted: [Index]
     @usableFromInline
@@ -583,21 +582,25 @@ internal struct DifferentiateResult<Index> {
     @usableFromInline
     internal let moved: [(source: Index, target: Index)]
     @usableFromInline
-    internal let metadata: Metadata
+    internal let sourceTraces: ContiguousArray<Trace<Int>>
+    @usableFromInline
+    internal let targetReferences: ContiguousArray<Int?>
 
-    @inlinable
+    @usableFromInline
     internal init(
         deleted: [Index] = [],
         inserted: [Index] = [],
         updated: [Index] = [],
         moved: [(source: Index, target: Index)] = [],
-        metadata: Metadata
+        sourceTraces: ContiguousArray<Trace<Int>>,
+        targetReferences: ContiguousArray<Int?>
         ) {
         self.deleted = deleted
         self.inserted = inserted
         self.updated = updated
         self.moved = moved
-        self.metadata = metadata
+        self.sourceTraces = sourceTraces
+        self.targetReferences = targetReferences
     }
 }
 
@@ -611,8 +614,8 @@ internal struct Trace<Index> {
     @usableFromInline
     internal var isTracked = false
 
-    @inlinable
-    init() {}
+    @usableFromInline
+    internal init() {}
 }
 
 /// The occurrences of element.
@@ -630,7 +633,7 @@ internal final class IndicesReference {
     @usableFromInline
     internal var position = 0
 
-    @inlinable
+    @usableFromInline
     internal init(_ indices: ContiguousArray<Int>) {
         self.indices = indices
     }
@@ -654,26 +657,31 @@ internal final class IndicesReference {
 @usableFromInline
 internal struct TableKey<T: Hashable>: Hashable {
     @usableFromInline
-    internal let hashValue: Int
+    internal let pointeeHashValue: Int
     @usableFromInline
     internal let pointer: UnsafePointer<T>
 
-    @inlinable
+    @usableFromInline
     internal init(pointer: UnsafePointer<T>) {
-        self.hashValue = pointer.pointee.hashValue
+        self.pointeeHashValue = pointer.pointee.hashValue
         self.pointer = pointer
     }
 
     @inlinable
     internal static func == (lhs: TableKey, rhs: TableKey) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        return lhs.pointeeHashValue == rhs.pointeeHashValue
             && (lhs.pointer.distance(to: rhs.pointer) == 0 || lhs.pointer.pointee == rhs.pointer.pointee)
+    }
+
+    @inlinable
+    internal func hash(into hasher: inout Hasher) {
+        hasher.combine(pointeeHashValue)
     }
 }
 
 internal extension MutableCollection where Element: MutableCollection, Index == Int, Element.Index == Int {
     @inlinable
-    internal subscript(path: ElementPath) -> Element.Element {
+    subscript(path: ElementPath) -> Element.Element {
         get { return self[path.section][path.element] }
         set { self[path.section][path.element] = newValue }
     }

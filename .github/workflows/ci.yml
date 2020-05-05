@@ -1,0 +1,57 @@
+name: GitHub Actions
+on: push
+jobs:
+  linux:
+    name: Test on linux
+    runs-on: ubuntu-18.04
+    container:
+      image: swift:${{ matrix.swift_version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        swift_version: ["4.2", "5.0", "5.1"]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Show environments
+        run: |
+          swift --version
+      - name: Validate mod
+        if: matrix.swift_version == '5.1'
+        run: make mod-check
+      - name: Swift test
+        run: |
+          swift build
+          swift test
+
+  macOS:
+    name: Test on macOS
+    runs-on: macOS-10.14
+    strategy:
+      fail-fast: false
+      matrix:
+        # xcode_version: ["10.1", "10.2", "11.1"]
+        xcode_version: ["11.1"] # GitHub actions is now unsupported Xcode version 10.1 and 10.2.
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app
+    steps:
+      - uses: actions/checkout@v1
+      - name: Show environments
+        run: |
+          swift --version
+          xcodebuild -version
+      - name: Swift test
+        run: |
+          swift build
+          swift test
+      - name: Xcode maxOS
+        run: |
+          set -o pipefail && xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release ENABLE_TESTABILITY=YES | xcpretty -c
+      - name: Xcode iOS
+        run: |
+          set -o pipefail && xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8' ENABLE_TESTABILITY=YES | xcpretty -c
+      - name: Xcode tvOS
+        run: |
+          set -o pipefail && xcodebuild build-for-testing test-without-building -scheme DifferenceKit -configuration Release -sdk appletvsimulator -destination 'platform=tvOS Simulator,name=Apple TV' ENABLE_TESTABILITY=YES | xcpretty -c
+      - name: Xcode watchOS
+        run: |
+          set -o pipefail && xcodebuild build -scheme DifferenceKit -configuration Release -sdk watchsimulator -destination 'platform=watchOS Simulator,name=Apple Watch Series 4 - 40mm' ENABLE_TESTABILITY=YES | xcpretty -c
