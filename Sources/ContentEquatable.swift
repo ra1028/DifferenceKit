@@ -50,3 +50,19 @@ extension Optional: ContentEquatable where Wrapped: ContentEquatable {
         }
     }
 }
+
+extension Array: ContentEquatable where Element: ContentEquatable {
+    /// Indicate whether the content of `self` is equals to the content of
+    /// the given source value.
+    ///
+    /// - Parameters:
+    ///   - source: A source value to be compared.
+    ///
+    /// - Returns: A Boolean value indicating whether the content of `self` is equals
+    ///            to the content of the given source value.
+    @inlinable
+    public func isContentEqual(to source: [Element]) -> Bool {
+        return count == source.count
+            && zip(self, source).allSatisfy { $0.isContentEqual(to: $1) }
+    }
+}
