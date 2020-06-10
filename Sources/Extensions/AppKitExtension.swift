@@ -138,7 +138,7 @@ public extension NSCollectionView {
                 for (source, target) in changeset.sectionMoved {
                     moveSection(source, toSection: target)
                 }
-                
+
                 if !changeset.elementDeleted.isEmpty {
                     deleteItems(at: Set(changeset.elementDeleted.map { IndexPath(item: $0.element, section: $0.section) }))
                 }
