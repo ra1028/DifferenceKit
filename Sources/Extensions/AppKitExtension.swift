@@ -11,7 +11,7 @@ public extension NSTableView {
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
     ///   - animation: An option to animate the updates.
-    ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
+    ///   - interrupt: A closure that takes a changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
@@ -43,7 +43,7 @@ public extension NSTableView {
     ///   - deleteRowsAnimation: An option to animate the row deletion.
     ///   - insertRowsAnimation: An option to animate the row insertion.
     ///   - reloadRowsAnimation: An option to animate the row reload.
-    ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
+    ///   - interrupt: A closure that takes a changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
@@ -108,7 +108,7 @@ public extension NSCollectionView {
     ///
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
-    ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
+    ///   - interrupt: A closure that takes a changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSCollectionView.
