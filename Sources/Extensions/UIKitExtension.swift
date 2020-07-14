@@ -15,11 +15,13 @@ public extension UITableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UITableView.
+    ///   - completion: A closure that is called when the reload is completed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
         reload(
             using: stagedChangeset,
@@ -30,7 +32,8 @@ public extension UITableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
-            setData: setData
+            setData: setData,
+            completion: completion
         )
     }
 
@@ -52,6 +55,7 @@ public extension UITableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UITableView.
+    ///   - completion: A closure that is called when the reload is completed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteSectionsAnimation: @autoclosure () -> RowAnimation,
@@ -61,8 +65,14 @@ public extension UITableView {
         insertRowsAnimation: @autoclosure () -> RowAnimation,
         reloadRowsAnimation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
+        let group = DispatchGroup()
+        defer {
+            group.notify(queue: .main) { completion?() }
+        }
+
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
             return reloadData()
@@ -74,7 +84,8 @@ public extension UITableView {
                 return reloadData()
             }
 
-            _performBatchUpdates {
+            group.enter()
+            _performBatchUpdates({
                 setData(changeset.data)
 
                 if !changeset.sectionDeleted.isEmpty {
@@ -108,18 +119,21 @@ public extension UITableView {
                 for (source, target) in changeset.elementMoved {
                     moveRow(at: IndexPath(row: source.element, section: source.section), to: IndexPath(row: target.element, section: target.section))
                 }
-            }
+            }, completion: { group.leave() })
         }
     }
 
-    private func _performBatchUpdates(_ updates: () -> Void) {
+    private func _performBatchUpdates(_ updates: () -> Void, completion: (() -> Void)?) {
         if #available(iOS 11.0, tvOS 11.0, *) {
-            performBatchUpdates(updates)
+            performBatchUpdates(updates, completion: { _ in completion?() })
         }
         else {
+            CATransaction.begin()
+            CATransaction.setCompletionBlock(completion)
             beginUpdates()
             updates()
             endUpdates()
+            CATransaction.commit()
         }
     }
 }
@@ -137,11 +151,18 @@ public extension UICollectionView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UICollectionView.
+    ///   - completion: A closure that is called when the reload is completed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
+        let group = DispatchGroup()
+        defer {
+            group.notify(queue: .main) { completion?() }
+        }
+
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
             return reloadData()
@@ -153,6 +174,7 @@ public extension UICollectionView {
                 return reloadData()
             }
 
+            group.enter()
             performBatchUpdates({
                 setData(changeset.data)
 
@@ -187,7 +209,7 @@ public extension UICollectionView {
                 for (source, target) in changeset.elementMoved {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
-            })
+            }, completion: { _ in group.leave() })
         }
     }
 }
