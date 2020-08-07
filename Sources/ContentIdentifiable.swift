@@ -40,7 +40,7 @@ public extension MutableCollection where Element: ContentIdentifiable {
     ///
     /// - Complexity: O(1)
     @inlinable
-    subscript(id identifier: Element.DifferenceIdentifier) -> Optional<Element> {
+    subscript(id identifier: Element.DifferenceIdentifier) -> Element? {
         set {
             guard
                 let index = firstIndex(where: { $0.differenceIdentifier == identifier }),
