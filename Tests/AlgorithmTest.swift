@@ -266,7 +266,7 @@ extension AlgorithmTestCase {
 
         let source = [A(0, "a"), A(1, "b"), A(2, "c")]
         let target = [A(0, "a"), A(1, "c"), A(3, "c")]
-        
+
         XCTAssertExactDifferences(
             source: source,
             target: target,
