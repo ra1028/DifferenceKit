@@ -19,6 +19,7 @@ public extension UITableView {
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
+        reloadOnlyVisibleRows: Bool = false,
         setData: (C) -> Void
         ) {
         reload(
@@ -30,6 +31,7 @@ public extension UITableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
+            reloadOnlyVisibleRows: reloadOnlyVisibleRows,
             setData: setData
         )
     }
@@ -61,6 +63,7 @@ public extension UITableView {
         insertRowsAnimation: @autoclosure () -> RowAnimation,
         reloadRowsAnimation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
+        reloadOnlyVisibleRows: Bool = false,
         setData: (C) -> Void
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
@@ -102,7 +105,22 @@ public extension UITableView {
                 }
 
                 if !changeset.elementUpdated.isEmpty {
-                    reloadRows(at: changeset.elementUpdated.map { IndexPath(row: $0.element, section: $0.section) }, with: reloadRowsAnimation())
+                    let affectedIndexPaths: [IndexPath]
+
+                    if reloadOnlyVisibleRows {
+                        affectedIndexPaths = changeset.elementUpdated.compactMap { updated -> IndexPath? in
+                            let updatedIndexPath = IndexPath(row: updated.element, section: updated.section)
+                            guard let visibleIndexPaths = indexPathsForVisibleRows, visibleIndexPaths.contains(updatedIndexPath) else {
+                                return nil
+                            }
+
+                            return updatedIndexPath
+                        }
+                    } else {
+                        affectedIndexPaths = changeset.elementUpdated.map { IndexPath(row: $0.element, section: $0.section) }
+                    }
+
+                    reloadRows(at: affectedIndexPaths, with: reloadRowsAnimation())
                 }
 
                 for (source, target) in changeset.elementMoved {
