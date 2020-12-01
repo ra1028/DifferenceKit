@@ -15,11 +15,14 @@ public extension UITableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UITableView.
+    ///   - completion: An optional closure that is called once UIKit has finished the reload
+    ///
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: ((Bool) -> Void)? = nil
         ) {
         reload(
             using: stagedChangeset,
@@ -30,7 +33,8 @@ public extension UITableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
-            setData: setData
+            setData: setData,
+            completion: completion
         )
     }
 
@@ -52,6 +56,8 @@ public extension UITableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UITableView.
+    ///   - completion: An optional closure that is called once UIKit has finished the reload
+    ///
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteSectionsAnimation: @autoclosure () -> RowAnimation,
@@ -61,17 +67,22 @@ public extension UITableView {
         insertRowsAnimation: @autoclosure () -> RowAnimation,
         reloadRowsAnimation: @autoclosure () -> RowAnimation,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: ((Bool) -> Void)? = nil
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            reloadData()
+            completion?(true)
+            return
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                reloadData()
+                completion?(true)
+                return
             }
 
             _performBatchUpdates {
@@ -112,14 +123,15 @@ public extension UITableView {
         }
     }
 
-    private func _performBatchUpdates(_ updates: () -> Void) {
+    private func _performBatchUpdates(_ updates: () -> Void, completion: ((Bool) -> Void)? = nil) {
         if #available(iOS 11.0, tvOS 11.0, *) {
-            performBatchUpdates(updates)
+            performBatchUpdates(updates, completion: completion)
         }
         else {
             beginUpdates()
             updates()
             endUpdates()
+            completion?(true)
         }
     }
 }
