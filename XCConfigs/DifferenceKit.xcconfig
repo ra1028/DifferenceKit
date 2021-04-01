@@ -6,13 +6,13 @@ WATCHOS_DEPLOYMENT_TARGET = 2.0
 SDKROOT = 
 SUPPORTED_PLATFORMS = macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator
 TARGETED_DEVICE_FAMILY = 1,2,3,4
-VALID_ARCHS[sdk=macosx*] = i386 x86_64
+VALID_ARCHS[sdk=macosx*] = arm64 i386 x86_64
 VALID_ARCHS[sdk=iphoneos*] = arm64 armv7 armv7s
-VALID_ARCHS[sdk=iphonesimulator*] = i386 x86_64
+VALID_ARCHS[sdk=iphonesimulator*] = arm64 i386 x86_64
 VALID_ARCHS[sdk=appletv*] = arm64
-VALID_ARCHS[sdk=appletvsimulator*] = x86_64
+VALID_ARCHS[sdk=appletvsimulator*] = arm64 x86_64
 VALID_ARCHS[sdk=watchos*] = armv7k
-VALID_ARCHS[sdk=watchsimulator*] = i386
+VALID_ARCHS[sdk=watchsimulator*] = arm64 i386
 
 CODE_SIGN_IDENTITY =
 CODE_SIGN_STYLE = Manual
