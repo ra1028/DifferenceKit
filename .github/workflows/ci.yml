@@ -1,5 +1,5 @@
 name: GitHub Actions
-on: push
+on: [push, pull_request]
 jobs:
   linux:
     name: Test on linux
