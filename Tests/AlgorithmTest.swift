@@ -245,14 +245,16 @@ extension AlgorithmTestCase {
 
     func testSameHashValue() {
         struct A: Hashable, Differentiable {
-            let actualValue: Int
+            let id: Int
+            let actualValue: String
 
-            init(_ actualValue: Int) {
+            init(_ id: Int, _ actualValue: String) {
+                self.id = id
                 self.actualValue = actualValue
             }
 
             func hash(into hasher: inout Hasher) {
-                hasher.combine(0)
+                hasher.combine(id)
             }
 
             func isContentEqual(to source: A) -> Bool {
@@ -262,8 +264,8 @@ extension AlgorithmTestCase {
 
         let section = 0
 
-        let source = [A(0), A(1)]
-        let target = [A(0), A(2)]
+        let source = [A(0, "a"), A(1, "b"), A(2, "c")]
+        let target = [A(0, "a"), A(1, "c"), A(3, "c")]
 
         XCTAssertExactDifferences(
             source: source,
@@ -271,12 +273,16 @@ extension AlgorithmTestCase {
             section: section,
             expected: [
                 Changeset(
-                    data: [A(0)],
-                    elementDeleted: [ElementPath(element: 1, section: section)]
+                    data: [A(0, "a"), A(1, "c"), A(2, "c")],
+                    elementUpdated: [ElementPath(element: 1, section: 0)]
+                ),
+                Changeset(
+                    data: [A(0, "a"), A(1, "c")],
+                    elementDeleted: [ElementPath(element: 2, section: 0)]
                 ),
                 Changeset(
                     data: target,
-                    elementInserted: [ElementPath(element: 1, section: section)]
+                    elementInserted: [ElementPath(element: 2, section: 0)]
                 )
             ]
         )
