@@ -15,12 +15,14 @@ public extension NSTableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
+    ///   - completion: A closure that is called when the reload is completed.
 
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> NSTableView.AnimationOptions,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
         reload(
             using: stagedChangeset,
@@ -28,7 +30,8 @@ public extension NSTableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
-            setData: setData
+            setData: setData,
+            completion: completion
         )
     }
 
@@ -47,14 +50,21 @@ public extension NSTableView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
+    ///   - completion: A closure that is called when the reload is completed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         insertRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         reloadRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
+        let group = DispatchGroup()
+        defer {
+            group.notify(queue: .main) { completion?() }
+        }
+
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
             return reloadData()
@@ -66,6 +76,9 @@ public extension NSTableView {
                 return reloadData()
             }
 
+            group.enter()
+            CATransaction.begin()
+            CATransaction.setCompletionBlock({ group.leave() })
             beginUpdates()
             setData(changeset.data)
 
@@ -86,6 +99,7 @@ public extension NSTableView {
             }
 
             endUpdates()
+            CATransaction.commit()
         }
     }
 }
@@ -104,11 +118,18 @@ public extension NSCollectionView {
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSCollectionView.
+    ///   - completion: A closure that is called when the reload is completed.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
-        setData: (C) -> Void
+        setData: (C) -> Void,
+        completion: (() -> Void)? = nil
         ) {
+        let group = DispatchGroup()
+        defer {
+            group.notify(queue: .main) { completion?() }
+        }
+
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
             return reloadData()
@@ -120,6 +141,7 @@ public extension NSCollectionView {
                 return reloadData()
             }
 
+            group.enter()
             animator().performBatchUpdates({
                 setData(changeset.data)
 
@@ -138,7 +160,7 @@ public extension NSCollectionView {
                 for (source, target) in changeset.elementMoved {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
-            })
+            }, completionHandler: { _ in group.leave() })
         }
     }
 }
