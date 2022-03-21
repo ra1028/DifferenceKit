@@ -78,7 +78,7 @@ public extension NSTableView {
             }
 
             if !changeset.elementUpdated.isEmpty {
-                reloadData(forRowIndexes: IndexSet(changeset.elementUpdated.map { $0.element }), columnIndexes: IndexSet(changeset.elementUpdated.map { $0.section }))
+                reloadData(forRowIndexes: IndexSet(changeset.elementUpdated.map { $0.element }), columnIndexes: IndexSet(0..<tableColumns.count))
             }
 
             for (source, target) in changeset.elementMoved {
