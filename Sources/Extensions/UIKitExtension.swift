@@ -72,6 +72,7 @@ public extension UITableView {
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UITableView.
     @available(iOS 11.0, tvOS 11.0, *)
+    // swiftlint:disable:next function_parameter_count
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteSectionsAnimation: @autoclosure () -> RowAnimation,
@@ -174,6 +175,7 @@ public extension UITableView {
         )
     }
 
+    // swiftlint:disable:next function_parameter_count
     private func _reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         deleteSectionsAnimation: () -> RowAnimation,
@@ -237,14 +239,14 @@ public extension UITableView {
                         moveRow(at: IndexPath(row: source.element, section: source.section), to: IndexPath(row: target.element, section: target.section))
                     }
                 },
-                completion: changesetCompleted.flatMap { completion -> ((Bool)->Void) in
+                completion: changesetCompleted.flatMap { completion -> ((Bool) -> Void) in
                     return { finished in completion(changeset, finished ? .completed : .interrupted) }
                 }
             )
         }
     }
 
-    private func _performBatch(updates: () -> Void, completion: ((Bool)->Void)?) {
+    private func _performBatch(updates: () -> Void, completion: ((Bool) -> Void)?) {
         if #available(iOS 11.0, tvOS 11.0, *) {
             performBatchUpdates(updates, completion: completion)
         }
