@@ -66,6 +66,9 @@ public extension NSTableView {
                 return reloadData()
             }
 
+            assert(changeset.sectionChangeCount < 1,
+                   "NSTableView group rows are not yet supported, sorry.")
+
             beginUpdates()
             setData(changeset.data)
 
@@ -127,6 +130,9 @@ public extension NSCollectionView {
                 setData(data)
                 return reloadData()
             }
+
+            assert(changeset.sectionChangeCount < 1,
+                   "NSCollectionView sections are not yet supported, sorry.")
 
             animator().performBatchUpdates({
                 setData(changeset.data)
