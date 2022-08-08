@@ -11,8 +11,10 @@ public extension NSTableView {
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
     ///   - animation: An option to animate the updates.
-    ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
+    ///   - interrupt: A closure that takes a changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
+    ///   - completion: A closure that is called when the animated updates have finished.
+    ///                 The argument is` true` if the animation ran to completion before it stopped or `false` if it did not.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
 
@@ -20,6 +22,7 @@ public extension NSTableView {
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> NSTableView.AnimationOptions,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
+        completion: ((Bool) -> Void)? = nil,
         setData: (C) -> Void
         ) {
         reload(
@@ -28,6 +31,7 @@ public extension NSTableView {
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
             interrupt: interrupt,
+            completion: completion,
             setData: setData
         )
     }
@@ -43,8 +47,10 @@ public extension NSTableView {
     ///   - deleteRowsAnimation: An option to animate the row deletion.
     ///   - insertRowsAnimation: An option to animate the row insertion.
     ///   - reloadRowsAnimation: An option to animate the row reload.
-    ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
+    ///   - interrupt: A closure that takes a changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
+    ///   - completion: A closure that is called when the animated updates have finished.
+    ///                 The argument is` true` if the animation ran to completion before it stopped or `false` if it did not.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSTableView.
     func reload<C>(
@@ -53,17 +59,22 @@ public extension NSTableView {
         insertRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         reloadRowsAnimation: @autoclosure () -> NSTableView.AnimationOptions,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
+        completion: ((Bool) -> Void)? = nil,
         setData: (C) -> Void
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            reloadData()
+            completion?(false)
+            return
         }
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                reloadData()
+                completion?(false)
+                return
             }
 
             beginUpdates()
@@ -95,6 +106,8 @@ public extension NSTableView {
 
             endUpdates()
         }
+
+        completion?(true)
     }
 }
 
@@ -108,28 +121,43 @@ public extension NSCollectionView {
     ///
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
-    ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
+    ///   - interrupt: A closure that takes a changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
+    ///   - completion: A closure that is called when the animated updates have finished.
+    ///                 The argument is` true` if the animation ran to completion before it stopped or `false` if it did not.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of NSCollectionView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
+        completion: ((Bool) -> Void)? = nil,
         setData: (C) -> Void
         ) {
         if case .none = window, let data = stagedChangeset.last?.data {
             setData(data)
-            return reloadData()
+            reloadData()
+            completion?(false)
+            return
         }
+
+        let dispatchGroup: DispatchGroup? = completion != nil
+            ? DispatchGroup()
+            : nil
+        let completionHandler: ((Bool) -> Void)? = completion != nil
+            ? { _ in dispatchGroup!.leave() }
+            : nil
 
         for changeset in stagedChangeset {
             if let interrupt = interrupt, interrupt(changeset), let data = stagedChangeset.last?.data {
                 setData(data)
-                return reloadData()
+                reloadData()
+                completion?(false)
+                return
             }
 
             animator().performBatchUpdates({
                 setData(changeset.data)
+                dispatchGroup?.enter()
 
                 if !changeset.elementDeleted.isEmpty {
                     deleteItems(at: Set(changeset.elementDeleted.map { IndexPath(item: $0.element, section: $0.section) }))
@@ -146,7 +174,10 @@ public extension NSCollectionView {
                 for (source, target) in changeset.elementMoved {
                     moveItem(at: IndexPath(item: source.element, section: source.section), to: IndexPath(item: target.element, section: target.section))
                 }
-            })
+            }, completionHandler: completionHandler)
+        }
+        dispatchGroup?.notify(queue: .main) {
+            completion!(true)
         }
     }
 }
