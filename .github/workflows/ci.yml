@@ -1,5 +1,5 @@
 name: GitHub Actions
-on: push
+on: [push, pull_request]
 jobs:
   linux:
     name: Test on linux
@@ -25,12 +25,11 @@ jobs:
 
   macOS:
     name: Test on macOS
-    runs-on: macOS-10.14
+    runs-on: macOS-10.15
     strategy:
       fail-fast: false
       matrix:
-        # xcode_version: ["10.1", "10.2", "11.1"]
-        xcode_version: ["11.1"] # GitHub actions is now unsupported Xcode version 10.1 and 10.2.
+        xcode_version: ["11.7", "12.4"] # GitHub actions is now unsupported Xcode version 10.x.
     env:
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode_version }}.app
     steps:

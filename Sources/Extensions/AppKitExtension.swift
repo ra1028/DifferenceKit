@@ -73,16 +73,24 @@ public extension NSTableView {
                 removeRows(at: IndexSet(changeset.elementDeleted.map { $0.element }), withAnimation: deleteRowsAnimation())
             }
 
+            if !changeset.elementUpdated.isEmpty {
+                reloadData(forRowIndexes: IndexSet(changeset.elementUpdated.map { $0.element }), columnIndexes: IndexSet(0..<tableColumns.count))
+            }
+
+            if !changeset.elementMoved.isEmpty {
+                let insertionIndices = IndexSet(changeset.elementInserted.map { $0.element })
+                var movedSourceIndices = IndexSet()
+
+                for (source, target) in changeset.elementMoved {
+                    let sourceElementOffset = movedSourceIndices.count(in: source.element...)
+                    let targetElementOffset = insertionIndices.count(in: 0..<target.element)
+                    moveRow(at: source.element + sourceElementOffset, to: target.element - targetElementOffset)
+                    movedSourceIndices.insert(source.element)
+                }
+            }
+
             if !changeset.elementInserted.isEmpty {
                 insertRows(at: IndexSet(changeset.elementInserted.map { $0.element }), withAnimation: insertRowsAnimation())
-            }
-
-            if !changeset.elementUpdated.isEmpty {
-                reloadData(forRowIndexes: IndexSet(changeset.elementUpdated.map { $0.element }), columnIndexes: IndexSet(changeset.elementUpdated.map { $0.section }))
-            }
-
-            for (source, target) in changeset.elementMoved {
-                moveRow(at: source.element, to: target.element)
             }
 
             endUpdates()
