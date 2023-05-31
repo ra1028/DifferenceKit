@@ -159,6 +159,22 @@ public extension NSCollectionView {
                 setData(changeset.data)
                 dispatchGroup?.enter()
 
+                if !changeset.sectionDeleted.isEmpty {
+                     deleteSections(IndexSet(changeset.sectionDeleted))
+                 }
+
+                 if !changeset.sectionInserted.isEmpty {
+                     insertSections(IndexSet(changeset.sectionInserted))
+                 }
+
+                 if !changeset.sectionUpdated.isEmpty {
+                     reloadSections(IndexSet(changeset.sectionUpdated))
+                 }
+
+                 for (source, target) in changeset.sectionMoved {
+                     moveSection(source, toSection: target)
+                 }
+
                 if !changeset.elementDeleted.isEmpty {
                     deleteItems(at: Set(changeset.elementDeleted.map { IndexPath(item: $0.element, section: $0.section) }))
                 }
