@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -13,7 +13,8 @@ let package = Package(
     targets: [
         .target(
             name: "DifferenceKit",
-            path: "Sources"
+            path: "Sources",
+            resources: [.copy("PrivacyInfo.xcprivacy")]
         ),
         .testTarget(
             name: "DifferenceKitTests",
