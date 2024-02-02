@@ -11,6 +11,7 @@ public extension UITableView {
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
     ///   - animation: An option to animate the updates.
+    ///   - reconfigure: A closure that takes an index path as its argument and returns true if the cell for that index path can be reconfigured instead of reloading
     ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
@@ -18,6 +19,7 @@ public extension UITableView {
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
         with animation: @autoclosure () -> RowAnimation,
+        reconfigure: ((IndexPath) -> Bool)? = nil,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -29,6 +31,7 @@ public extension UITableView {
             deleteRowsAnimation: animation(),
             insertRowsAnimation: animation(),
             reloadRowsAnimation: animation(),
+            reconfigure: reconfigure,
             interrupt: interrupt,
             setData: setData
         )
@@ -48,6 +51,7 @@ public extension UITableView {
     ///   - deleteRowsAnimation: An option to animate the row deletion.
     ///   - insertRowsAnimation: An option to animate the row insertion.
     ///   - reloadRowsAnimation: An option to animate the row reload.
+    ///   - reconfigure: A closure that takes an index path as its argument and returns true if the cell for that index path can be reconfigured instead of reloading
     ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
@@ -60,6 +64,7 @@ public extension UITableView {
         deleteRowsAnimation: @autoclosure () -> RowAnimation,
         insertRowsAnimation: @autoclosure () -> RowAnimation,
         reloadRowsAnimation: @autoclosure () -> RowAnimation,
+        reconfigure: ((IndexPath) -> Bool)? = nil,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -102,7 +107,18 @@ public extension UITableView {
                 }
 
                 if !changeset.elementUpdated.isEmpty {
-                    reloadRows(at: changeset.elementUpdated.map { IndexPath(row: $0.element, section: $0.section) }, with: reloadRowsAnimation())
+                    var indexPaths = changeset.elementUpdated.map { IndexPath(row: $0.element, section: $0.section) }
+                    if #available(iOS 15.0, tvOS 15.0, *), let reconfigure {
+                        let partitioned = indexPaths.partitionReconfigurable(by: reconfigure)
+                        if !partitioned.reconfiguredIndexPaths.isEmpty {
+                            reconfigureRows(at: partitioned.reconfiguredIndexPaths)
+                        }
+                        if !partitioned.reloadedIndexPaths.isEmpty {
+                            reloadRows(at: partitioned.reloadedIndexPaths, with: reloadRowsAnimation())
+                        }
+                    } else {
+                        reloadRows(at: indexPaths, with: reloadRowsAnimation())
+                    }
                 }
 
                 for (source, target) in changeset.elementMoved {
@@ -133,12 +149,14 @@ public extension UICollectionView {
     ///
     /// - Parameters:
     ///   - stagedChangeset: A staged set of changes.
+    ///   - reconfigure: A closure that takes an index path as its argument and returns true if the cell for that index path can be reconfigured instead of reloading
     ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     ///   - setData: A closure that takes the collection as a parameter.
     ///              The collection should be set to data-source of UICollectionView.
     func reload<C>(
         using stagedChangeset: StagedChangeset<C>,
+        reconfigure: ((IndexPath) -> Bool)? = nil,
         interrupt: ((Changeset<C>) -> Bool)? = nil,
         setData: (C) -> Void
         ) {
@@ -181,7 +199,19 @@ public extension UICollectionView {
                 }
 
                 if !changeset.elementUpdated.isEmpty {
-                    reloadItems(at: changeset.elementUpdated.map { IndexPath(item: $0.element, section: $0.section) })
+                    var indexPaths = changeset.elementUpdated.map { IndexPath(row: $0.element, section: $0.section) }
+
+                    if #available(iOS 15.0, tvOS 15.0, *), let reconfigure {
+                        let partitioned = indexPaths.partitionReconfigurable(by: reconfigure)
+                        if !partitioned.reconfiguredIndexPaths.isEmpty {
+                            reconfigureItems(at: partitioned.reconfiguredIndexPaths)
+                        }
+                        if !partitioned.reloadedIndexPaths.isEmpty {
+                            reloadItems(at: partitioned.reloadedIndexPaths)
+                        }
+                    } else {
+                        reloadItems(at: indexPaths)
+                    }
                 }
 
                 for (source, target) in changeset.elementMoved {
@@ -191,4 +221,12 @@ public extension UICollectionView {
         }
     }
 }
+
+private extension Array where Element == IndexPath {
+    mutating func partitionReconfigurable(by reconfigurable: (Element) -> Bool) -> (reloadedIndexPaths: [Element], reconfiguredIndexPaths: [Element]) {
+        let reconfigureFirstIndex = partition(by: reconfigurable)
+        return (Array(self[..<reconfigureFirstIndex]), Array(self[reconfigureFirstIndex...]))
+    }
+}
+
 #endif
